@@ -44,91 +44,63 @@
     nav a:hover {
       text-decoration: underline;
     }
-
     .content {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 2rem;
-      position: relative;
     }
-
     .content h1 {
       color: #ff4ac2;
-      margin-bottom: 1rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
-
-    .gallery-wrapper {
-      position: relative;
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
     }
-
-    .scroll-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(13, 246, 227, 0.1);
-      border: 1px solid #0df6e3;
-      color: #0df6e3;
-      font-size: 2rem;
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-      z-index: 10;
-      transition: background 0.3s;
-    }
-
-    .scroll-arrow:hover {
-      background: rgba(13, 246, 227, 0.3);
-    }
-
-    .scroll-arrow.left {
-      left: 0;
-    }
-
-    .scroll-arrow.right {
-      right: 0;
-    }
-
-    .gallery-container {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 1rem 0;
-      scroll-behavior: smooth;
-    }
-
     .story-card {
-      display: inline-block;
-      vertical-align: top;
       background-color: #1c1e2f;
       border-radius: 8px;
-      margin-right: 1rem;
-      width: 280px;
       padding: 1rem;
     }
-
     .story-card img {
       width: 100%;
       border-radius: 6px;
       margin-bottom: 1rem;
     }
-
     .story-card h3 {
       color: #0df6e3;
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
-
     .story-card p {
       font-size: 0.9rem;
       color: #ccc;
       margin-bottom: 0.5rem;
       line-height: 1.4;
     }
-
     .story-card small {
       color: #777;
       font-size: 0.8rem;
     }
-
+    .load-more-container {
+      text-align: center;
+      margin: 3rem 0 5rem;
+    }
+    .load-more-btn {
+      background-color: #0df6e3;
+      border: none;
+      color: #0f0f1c;
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .load-more-btn:hover {
+      background-color: #0ad3c6;
+    }
     /* Footer */
     footer {
       background: #0f0f1c;
@@ -136,7 +108,6 @@
       color: #ccc;
       margin-top: 4rem;
     }
-
     .footer-container {
       display: flex;
       flex-wrap: wrap;
@@ -145,17 +116,14 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .footer-column {
       flex: 1;
       min-width: 220px;
     }
-
     .footer-logo {
       width: 80px;
       margin-bottom: 1rem;
     }
-
     .newsletter-input {
       padding: 0.5rem;
       width: 80%;
@@ -163,7 +131,6 @@
       border-radius: 4px;
       border: none;
     }
-
     .newsletter-button {
       padding: 0.5rem 1rem;
       background-color: #0df6e3;
@@ -173,19 +140,16 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     .footer-bottom {
       text-align: center;
       margin-top: 2rem;
       color: #777;
       font-size: 0.85rem;
     }
-
     a {
       color: #0df6e3;
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
@@ -207,71 +171,48 @@
 
   <section class="content">
     <h1>Original Fiction</h1>
-    <div class="gallery-wrapper">
-      <div class="scroll-arrow left" onclick="scrollGallery(-300)">&#10094;</div>
-      <div class="gallery-container" id="gallery">
-        <div class="story-card">
-          <img src="NM Art.png" alt="Story 1 Art">
-          <h3>Redemption Song</h3>
-          <p>The ancient myth of Pandora’s box reimagined in a haunting, post-apocalyptic future.</p>
-          <small>By Quan Barry<br>July 16, 2025</small>
-        </div>
-        <div class="story-card">
-          <img src="AL Cover.png" alt="Story 2 Art">
-          <h3>Rapport</h3>
-          <p>A new mission on a corporate-controlled orbital tests the boundaries of loyalty and love.</p>
-          <small>By Martha Wells<br>July 10, 2025</small>
-        </div>
-        <div class="story-card">
-          <img src="Test Cover 1.png" alt="Story 3 Art">
-          <h3>The Sack of Burley Cottage</h3>
-          <p>A caper tale of high-tech heists, AIs, and the ghosts of revolutionaries past.</p>
-          <small>By Rich Larson<br>June 25, 2025</small>
-        </div>
-        <div class="story-card">
-          <img src="Test Cover 2.png" alt="Story 4 Art">
-          <h3>Pulsewave</h3>
-          <p>A teenage courier decodes a forbidden signal echoing through the underground zones.</p>
-          <small>By Jae Lin<br>June 12, 2025</small>
-        </div>
-        <div class="story-card">
-          <img src="Test Cover 3.png" alt="Story 5 Art">
-          <h3>Soft Reboot</h3>
-          <p>An old hacker returns to the mesh to settle a debt—only to find himself rewritten.</p>
-          <small>By Amir Soto<br>May 30, 2025</small>
-        </div>
-        <div class="story-card">
-          <img src="Test Cover 4.png" alt="Story 6 Art">
-          <h3>Glass Path</h3>
-          <p>In a mirrored city above the clouds, a girl searches for her twin lost in the grid.</p>
-          <small>By Aiko Tanaka<br>May 12, 2025</small>
-        </div>
+    <div class="story-grid" id="storyGrid">
+      <!-- Initial 3 Stories -->
+      <div class="story-card">
+        <img src="NM Art.png" alt="Story Art">
+        <h3>Redemption Song</h3>
+        <p>The ancient myth of Pandora’s box reimagined in a haunting, post-apocalyptic future.</p>
+        <small>By Quan Barry — July 16, 2025</small>
       </div>
-      <div class="scroll-arrow right" onclick="scrollGallery(300)">&#10095;</div>
+      <div class="story-card">
+        <img src="AL Cover.png" alt="Story Art">
+        <h3>Rapport</h3>
+        <p>Perihelion and its crew embark on a dangerous mission at a corporate-controlled station.</p>
+        <small>By Martha Wells — July 10, 2025</small>
+      </div>
+      <div class="story-card">
+        <img src="Test Cover 1.png" alt="Story Art">
+        <h3>The Sack of Burley Cottage</h3>
+        <p>A futuristic caper about a thief who plans a job that may destroy his entire past.</p>
+        <small>By Rich Larson — June 25, 2025</small>
+      </div>
+    </div>
+    <div class="load-more-container">
+      <button class="load-more-btn" onclick="loadMore()">Load More</button>
     </div>
   </section>
 
   <footer>
     <div class="footer-container">
-      <!-- Newsletter -->
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
-        <form style="margin-top: 1rem;">
+        <p>Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
+        <form>
           <input type="email" placeholder="Email Address" class="newsletter-input">
           <br>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
-      <!-- Contact Info -->
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>Burnline Magazine<br>PO Box 404<br>Neo SF, CA 94101</p>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
-
-      <!-- Read -->
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
         <p><a href="#">Neon Dystopia</a></p>
@@ -285,8 +226,45 @@
   </footer>
 
   <script>
-    function scrollGallery(distance) {
-      document.getElementById('gallery').scrollBy({ left: distance, behavior: 'smooth' });
+    const moreStories = [
+      {
+        img: "Test Cover 2.png",
+        title: "Pulsewave",
+        desc: "A teenage courier decodes a forbidden signal echoing through the underground zones.",
+        by: "Jae Lin — June 12, 2025"
+      },
+      {
+        img: "Test Cover 3.png",
+        title: "Soft Reboot",
+        desc: "An old hacker returns to the mesh to settle a debt—only to find himself rewritten.",
+        by: "Amir Soto — May 30, 2025"
+      },
+      {
+        img: "Test Cover 4.png",
+        title: "Glass Path",
+        desc: "In a mirrored city above the clouds, a girl searches for her twin lost in the grid.",
+        by: "Aiko Tanaka — May 12, 2025"
+      }
+    ];
+
+    let storyIndex = 0;
+    function loadMore() {
+      const grid = document.getElementById("storyGrid");
+      for (let i = 0; i < 3 && storyIndex < moreStories.length; i++, storyIndex++) {
+        const story = moreStories[storyIndex];
+        const card = document.createElement("div");
+        card.className = "story-card";
+        card.innerHTML = `
+          <img src="${story.img}" alt="Story Art">
+          <h3>${story.title}</h3>
+          <p>${story.desc}</p>
+          <small>${story.by}</small>
+        `;
+        grid.appendChild(card);
+      }
+      if (storyIndex >= moreStories.length) {
+        document.querySelector(".load-more-container").style.display = "none";
+      }
     }
   </script>
 </body>
