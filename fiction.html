@@ -49,6 +49,7 @@
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 2rem;
+      position: relative;
     }
 
     .content h1 {
@@ -57,10 +58,41 @@
       text-align: center;
     }
 
+    .gallery-wrapper {
+      position: relative;
+    }
+
+    .scroll-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(13, 246, 227, 0.1);
+      border: 1px solid #0df6e3;
+      color: #0df6e3;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+
+    .scroll-arrow:hover {
+      background: rgba(13, 246, 227, 0.3);
+    }
+
+    .scroll-arrow.left {
+      left: 0;
+    }
+
+    .scroll-arrow.right {
+      right: 0;
+    }
+
     .gallery-container {
       overflow-x: auto;
       white-space: nowrap;
       padding: 1rem 0;
+      scroll-behavior: smooth;
     }
 
     .story-card {
@@ -175,25 +207,47 @@
 
   <section class="content">
     <h1>Original Fiction</h1>
-    <div class="gallery-container">
-      <div class="story-card">
-        <img src="NM Art.png" alt="Story 1 Art">
-        <h3>Redemption Song</h3>
-        <p>The ancient myth of Pandora’s box reimagined in a haunting, post-apocalyptic future.</p>
-        <small>By Quan Barry<br>July 16, 2025</small>
+    <div class="gallery-wrapper">
+      <div class="scroll-arrow left" onclick="scrollGallery(-300)">&#10094;</div>
+      <div class="gallery-container" id="gallery">
+        <div class="story-card">
+          <img src="NM Art.png" alt="Story 1 Art">
+          <h3>Redemption Song</h3>
+          <p>The ancient myth of Pandora’s box reimagined in a haunting, post-apocalyptic future.</p>
+          <small>By Quan Barry<br>July 16, 2025</small>
+        </div>
+        <div class="story-card">
+          <img src="AL Cover.png" alt="Story 2 Art">
+          <h3>Rapport</h3>
+          <p>A new mission on a corporate-controlled orbital tests the boundaries of loyalty and love.</p>
+          <small>By Martha Wells<br>July 10, 2025</small>
+        </div>
+        <div class="story-card">
+          <img src="Test Cover 1.png" alt="Story 3 Art">
+          <h3>The Sack of Burley Cottage</h3>
+          <p>A caper tale of high-tech heists, AIs, and the ghosts of revolutionaries past.</p>
+          <small>By Rich Larson<br>June 25, 2025</small>
+        </div>
+        <div class="story-card">
+          <img src="Test Cover 2.png" alt="Story 4 Art">
+          <h3>Pulsewave</h3>
+          <p>A teenage courier decodes a forbidden signal echoing through the underground zones.</p>
+          <small>By Jae Lin<br>June 12, 2025</small>
+        </div>
+        <div class="story-card">
+          <img src="Test Cover 3.png" alt="Story 5 Art">
+          <h3>Soft Reboot</h3>
+          <p>An old hacker returns to the mesh to settle a debt—only to find himself rewritten.</p>
+          <small>By Amir Soto<br>May 30, 2025</small>
+        </div>
+        <div class="story-card">
+          <img src="Test Cover 4.png" alt="Story 6 Art">
+          <h3>Glass Path</h3>
+          <p>In a mirrored city above the clouds, a girl searches for her twin lost in the grid.</p>
+          <small>By Aiko Tanaka<br>May 12, 2025</small>
+        </div>
       </div>
-      <div class="story-card">
-        <img src="AL Cover.png" alt="Story 2 Art">
-        <h3>Rapport</h3>
-        <p>A new mission on a corporate-controlled orbital tests the boundaries of loyalty and love.</p>
-        <small>By Martha Wells<br>July 10, 2025</small>
-      </div>
-      <div class="story-card">
-        <img src="Test Cover 1.png" alt="Story 3 Art">
-        <h3>The Sack of Burley Cottage</h3>
-        <p>A caper tale of high-tech heists, AIs, and the ghosts of revolutionaries past.</p>
-        <small>By Rich Larson<br>June 25, 2025</small>
-      </div>
+      <div class="scroll-arrow right" onclick="scrollGallery(300)">&#10095;</div>
     </div>
   </section>
 
@@ -225,10 +279,15 @@
         <p><a href="#">HackDust</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
   </footer>
+
+  <script>
+    function scrollGallery(distance) {
+      document.getElementById('gallery').scrollBy({ left: distance, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
