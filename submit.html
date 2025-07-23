@@ -11,15 +11,49 @@
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #0f0f1c, #1b1e35);
       color: #f0f0f0;
+    }
+
+    h1, h2, h3, h4, h5, h6, nav a, header {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1.5rem 2rem;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      margin: 0;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      text-decoration: none;
+      color: #0f0f1c;
+      font-weight: 600;
+      transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    main {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: calc(100vh - 100px);
       text-align: center;
+      padding: 2rem;
     }
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
+
+    .message {
+      font-size: 1.75rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -27,6 +61,20 @@
   </style>
 </head>
 <body>
-  <h1>Page still under construction</h1>
+
+  <header>
+    <h1>Burnline</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="fiction.html">Fiction</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="message">Page still under construction</div>
+  </main>
+
 </body>
 </html>
+
