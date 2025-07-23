@@ -26,7 +26,17 @@
       padding: 1.5rem 2rem;
     }
 
-    header h1 {
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 36px;
+      margin-right: 0.75rem;
+    }
+
+    .logo-container h1 {
       font-size: 1.75rem;
       margin: 0;
     }
@@ -63,7 +73,10 @@
 <body>
 
   <header>
-    <h1>Burnline</h1>
+    <div class="logo-container">
+      <img src="flame-logo.png" alt="Burnline Flame Logo" />
+      <h1>Burnline</h1>
+    </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="fiction.html">Fiction</a>
@@ -77,4 +90,3 @@
 
 </body>
 </html>
-
