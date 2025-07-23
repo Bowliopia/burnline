@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submit – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -12,81 +12,159 @@
       background: linear-gradient(135deg, #0f0f1c, #1b1e35);
       color: #f0f0f0;
     }
-
-    h1, h2, h3, h4, h5, h6, nav a, header {
+    h1, h2, h3, h4, nav a, header {
       font-family: 'Orbitron', sans-serif;
     }
-
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: center;
       background: #0df6e3;
       color: #0f0f1c;
-      padding: 1.5rem 2rem;
+      padding: 1.5rem;
+      font-size: 2rem;
+      gap: 1rem;
     }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
+    header img {
+      height: 60px;
+      width: auto;
     }
-
-    .logo-container img {
-      height: 36px;
-      margin-right: 0.75rem;
-    }
-
-    .logo-container h1 {
-      font-size: 1.75rem;
-      margin: 0;
-    }
-
-    nav a {
-      margin-left: 2rem;
-      text-decoration: none;
-      color: #0f0f1c;
-      font-weight: 600;
-      transition: opacity 0.3s;
-    }
-
-    nav a:hover {
-      opacity: 0.7;
-    }
-
-    main {
+    nav {
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: calc(100vh - 100px);
+      gap: 2rem;
+      background-color: #131625;
+      padding: 1rem;
+    }
+    nav a {
+      color: #0df6e3;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .content {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 2rem;
       text-align: center;
-      padding: 2rem;
+    }
+    .content h1 {
+      color: #ff4ac2;
+      margin-bottom: 1rem;
+    }
+    .content p {
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 1.2rem;
     }
 
-    .message {
-      font-size: 1.75rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    /* Footer Styles */
+    footer {
+      background: #0f0f1c;
+      padding: 2rem 1rem;
+      color: #ccc;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+      margin: 1rem;
+    }
+    .footer-logo {
+      width: 60px;
+      margin-bottom: 1rem;
+    }
+    .newsletter-input {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 250px;
+      margin-bottom: 0.5rem;
+    }
+    .newsletter-button {
+      padding: 0.5rem 1rem;
+      background-color: #0df6e3;
+      border: none;
+      border-radius: 4px;
+      color: #0f0f1c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .newsletter-button:hover {
+      background-color: #0bc2b7;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .footer-column a:hover {
+      text-decoration: underline;
+      color: #0df6e3;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <div class="logo-container">
-      <img src="Flame logo-1.png.png" alt="Burnline Flame Logo" />
-      <h1>Burnline</h1>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="fiction.html">Fiction</a>
-      <a href="submit.html">Submit</a>
-    </nav>
+    <img src="Flame logo-1.png.png" alt="Burnline logo">
+    BURNLINE
   </header>
 
-  <main>
-    <div class="message">Page still under construction</div>
-  </main>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="fiction.html">Fiction</a>
+    <a href="art.html">Art</a>
+    <a href="https://bowliopia.github.io/burnline/about.html">About</a>
+    <a href="submit.html">Submit</a>
+  </nav>
 
+  <section class="content">
+    <h1>Page still under construction</h1>
+    <p>Thanks for checking out our submissions page. We’re almost ready to start accepting your weird, glitchy, cybernetic creations. Check back soon.</p>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Newsletter -->
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input">
+          <br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+
+      <!-- Read -->
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Read</h4>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
 </body>
 </html>
