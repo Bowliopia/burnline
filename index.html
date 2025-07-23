@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Burnline – The Latest Issue</title>
+  <title>Burnline – The Cyberpunk Magazine</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -12,69 +12,174 @@
       background: linear-gradient(135deg, #0f0f1c, #1b1e35);
       color: #f0f0f0;
     }
-    h1, h2, h3, h4, nav a, header {
+    html {
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, h4, h5, h6, nav a, header {
       font-family: 'Orbitron', sans-serif;
     }
     header {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f9008e;
-      color: #fff;
-      padding: 2rem;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1.5rem;
       font-size: 2rem;
-      text-transform: uppercase;
+      letter-spacing: 1px;
+      gap: 1rem;
     }
-    main {
-      padding: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
+    header img {
+      height: 60px;
+      width: auto;
     }
-    section {
-      margin-bottom: 2rem;
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: #131625;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #0df6e3;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ff4ac2;
+    }
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      padding: 4rem 2rem;
+      background: linear-gradient(to right, #1b1e35, #2d2b4a);
+      text-align: left;
+      flex-wrap: wrap;
+    }
+    .hero-text {
+      max-width: 600px;
     }
     .hero-text h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
+      color: #ff4ac2;
       margin-bottom: 1rem;
     }
     .hero-text p {
-      font-size: 1.1rem;
-      line-height: 1.6;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
     }
-    .btn-pink {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #f9008e;
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
+    .hero img {
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+    }
+    .card {
+      background: #22253e;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px rgba(13, 246, 227, 0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      color: #0df6e3;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #bbb;
+    }
+    footer {
+      background: #0f0f1c;
+      padding: 4rem 2rem 2rem;
+      color: #aaa;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+    }
+    footer a:hover {
+      color: #0df6e3;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column {
+      flex: 1 1 250px;
+      min-width: 200px;
+    }
+    .footer-logo {
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+      color: #555;
+    }
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: background-color 0.3s ease;
+      width: 70%;
+      margin-bottom: 0.8rem;
     }
-    .btn-pink:hover {
-      background-color: #d10078;
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <header>The Latest Issue</header>
+  <header>
+    <img src="Flame logo-1.png.png" alt="Burnline logo">
+    BURNLINE
+  </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-text">
-        <h1>The Latest Issue</h1>
-        <p>This issue features stories from cutting-edge cyberpunk voices including Ava Mendez, Riku Takano, Lena Grey, and Omar Vega. You'll find tales of synthetic memory trafficking, chrome cults, and a fractured future haunted by luminous ghosts. Also in this issue: glitch art spreads by KX-07 and essays exploring techno-spirituality and the collapse of reality simulation systems.</p>
-        <button class="btn-pink">Read this Issue</button>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#fiction">Fiction</a>
+    <a href="#art">Art</a>
+    <a href="#about">About</a>
+    <a href="#submit">Submit</a>
+  </nav>
 
+  <section class="hero">
+    <div class="hero-text">
+      <h1>The Pulse of Cyberpunk</h1>
+      <p>Burnline is a digital magazine dedicated to showcasing boundary-pushing stories and visuals that reflect the fractured, luminous, and ever-evolving spirit of cyberpunk.</p>
+      <p style="color:#0df6e3; font-weight:bold;">Our Latest Issue</p>
+      <p>This issue features stories from cutting-edge cyberpunk voices including Ava Mendez, Riku Takano, Lena Grey, and Omar Vega. You'll find tales of synthetic memory trafficking, chrome cults, and a fractured future haunted by luminous ghosts. Also in this issue: glitch art spreads by KX-07 and essays exploring techno-spirituality and the collapse of reality simulation systems.</p>
+    </div>
     <img src="Test Cover 1.png" alt="Latest issue cover">
   </section>
 
