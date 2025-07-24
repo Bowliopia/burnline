@@ -12,66 +12,119 @@
       background: linear-gradient(135deg, #0f0f1c, #1b1e35);
       color: #f0f0f0;
     }
+
     h1, h2, h3, h4, nav a, header {
       font-family: 'Orbitron', sans-serif;
     }
-    header {
+
+    .site-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
       background: #0df6e3;
       color: #0f0f1c;
-      padding: 1.5rem;
+      padding: 1rem 2rem;
       font-size: 2rem;
+      font-family: 'Orbitron', sans-serif;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
       gap: 1rem;
     }
-            .gradient-heading {
+
+    .logo-title img {
+      height: 60px;
+      width: auto;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 2rem;
+      font-size: 1rem;
+    }
+
+    .site-nav a {
+      color: #0f0f1c;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .site-nav a:hover {
+      color: #ff4ac2;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      background: #0f0f1c;
+      height: 4px;
+      width: 100%;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #0df6e3;
+        padding: 1rem 0;
+        margin-top: 1rem;
+      }
+
+      .site-nav.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .gradient-heading {
       font-size: 2rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
-    header img {
-      height: 60px;
-      width: auto;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      background-color: #131625;
-      padding: 1rem;
-    }
-    nav a {
-      color: #0df6e3;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
+
     .content {
       max-width: 800px;
       margin: 4rem auto;
       padding: 0 2rem;
     }
+
     .content h1 {
       color: #ff4ac2;
       margin-bottom: 1rem;
     }
+
     .content p {
       line-height: 1.7;
       color: #ccc;
       margin-bottom: 1.2rem;
     }
 
-    /* Footer Styles */
     footer {
       background: #0f0f1c;
       padding: 2rem 1rem;
       color: #ccc;
     }
+
     .footer-container {
       display: flex;
       flex-wrap: wrap;
@@ -79,15 +132,18 @@
       max-width: 1200px;
       margin: auto;
     }
+
     .footer-column {
       flex: 1;
       min-width: 250px;
       margin: 1rem;
     }
+
     .footer-logo {
       width: 60px;
       margin-bottom: 1rem;
     }
+
     .newsletter-input {
       padding: 0.5rem;
       border: none;
@@ -96,6 +152,7 @@
       max-width: 250px;
       margin-bottom: 0.5rem;
     }
+
     .newsletter-button {
       padding: 0.5rem 1rem;
       background-color: #0df6e3;
@@ -105,15 +162,18 @@
       cursor: pointer;
       font-weight: bold;
     }
+
     .newsletter-button:hover {
       background-color: #0bc2b7;
     }
+
     .footer-bottom {
       text-align: center;
       margin-top: 2rem;
       font-size: 0.8rem;
       color: #666;
     }
+
     .footer-column a:hover {
       text-decoration: underline;
       color: #0df6e3;
@@ -121,23 +181,30 @@
   </style>
 </head>
 <body>
-  <header>
-    <img src="Flame logo-1.png.png" alt="Burnline logo">
-    BURNLINE
-  </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="features.html">Features</a>
-    <a href="fiction.html">Fiction</a>
-    <a href="art.html">Art</a>
-    <a href="https://bowliopia.github.io/burnline/about.html">About</a>
-    <a href="submit.html">Submit</a>
-  </nav>
+  <header class="site-header">
+    <div class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="fiction.html">Fiction</a>
+      <a href="art.html">Art</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
 
   <section class="content">
     <h1 class="gradient-heading">About Burnline</h1>
-    <p><strong>Burnline</strong> is a digital magazine run by a small crew who's tried our best to make a hub for all things cyberpunk.We publish stories, art, and commentary that reflects the weirdness of whatever the hell cyberpunk is supposed to be. Feel like the real world is folding in on itself? Us too. Let's make some art about it.</p>
+    <p><strong>Burnline</strong> is a digital magazine run by a small crew who's tried our best to make a hub for all things cyberpunk. We publish stories, art, and commentary that reflects the weirdness of whatever the hell cyberpunk is supposed to be. Feel like the real world is folding in on itself? Us too. Let's make some art about it.</p>
     <p>If you’d like to submit, collaborate, or just say hi, head over to our <a href="submit.html" style="color:#0df6e3;">Submit</a> page or reach out at <em>contact@burnline.net</em>. If there's anything we don't express on this site that you think belongs here, we'd love to hear about it.</p>
   </section>
 
@@ -173,5 +240,12 @@
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
