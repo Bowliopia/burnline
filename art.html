@@ -147,24 +147,33 @@
     }
 
     .modal {
-      display: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
       position: fixed;
       z-index: 999;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.9);
+      background-color: rgba(0, 0, 0, 0.9);
+      transition: opacity 0.4s ease, transform 0.3s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
     }
 
     .modal-content {
-      margin: 5% auto;
-      display: block;
       max-width: 90%;
       max-height: 80vh;
       border-radius: 10px;
       box-shadow: 0 0 30px rgba(13, 246, 227, 0.2);
+      transition: transform 0.3s ease;
     }
 
     .close {
@@ -190,6 +199,26 @@
 
     .modal-caption p {
       margin: 0.5rem 0 0;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: #0df6e3;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .nav-arrow.left {
+      left: 2%;
+    }
+
+    .nav-arrow.right {
+      right: 2%;
     }
 
     footer {
@@ -274,42 +303,43 @@
     <p>Visual transmissions from a fractured future. Explore our curated gallery of cyberpunk artwork from emerging and established creators. Submit your own vision to be featured in the next issue.</p>
   </section>
 
-  <section class="gallery-grid">
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+  <section class="gallery-grid" id="artGrid">
+    <!-- Tiles (each must include data-title and data-artist) -->
+    <div class="art-tile" onclick="openModal(0)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 1.png" alt="Art 1">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(1)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 2.png" alt="Art 2">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(2)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 3.png" alt="Art 3">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(3)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 4.png" alt="Art 4">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(4)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 5.png" alt="Art 5">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(5)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 6.png" alt="Art 6">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(6)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 7.png" alt="Art 7">
     </div>
-    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(7)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 8.png" alt="Art 8">
     </div>
   </section>
 
   <!-- Modal -->
-  <div id="imageModal" class="modal" onclick="closeModal()">
-    <span class="close">&times;</span>
-    <div style="text-align: center; max-width: 90%; margin: auto;">
-      <img class="modal-content" id="modalImage" alt="Expanded artwork">
-      <div class="modal-caption">
-        <h3 id="modalTitle"></h3>
-        <p id="modalArtist"></p>
-      </div>
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <button class="nav-arrow left" onclick="changeSlide(-1)">&#10094;</button>
+    <img class="modal-content" id="modalImage" alt="Expanded artwork">
+    <button class="nav-arrow right" onclick="changeSlide(1)">&#10095;</button>
+    <div class="modal-caption">
+      <h3 id="modalTitle"></h3>
+      <p id="modalArtist"></p>
     </div>
   </div>
 
@@ -324,12 +354,10 @@
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
-
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
         <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
@@ -337,35 +365,48 @@
         <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
   </footer>
 
   <script>
+    let currentIndex = 0;
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalArtist = document.getElementById('modalArtist');
+    const tiles = document.querySelectorAll('.art-tile');
+
+    function openModal(index) {
+      currentIndex = index;
+      const tile = tiles[index];
+      modal.classList.add('show');
+      modalImg.src = tile.querySelector('img').src;
+      modalTitle.textContent = tile.dataset.title || '';
+      modalArtist.textContent = tile.dataset.artist || '';
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + tiles.length) % tiles.length;
+      openModal(currentIndex);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!modal.classList.contains('show')) return;
+      if (e.key === 'ArrowRight') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'Escape') closeModal();
+    });
+
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
-
-    function openModal(tile) {
-      const imgSrc = tile.querySelector('img').src;
-      const title = tile.getAttribute('data-title') || '';
-      const artist = tile.getAttribute('data-artist') || '';
-
-      document.getElementById('modalImage').src = imgSrc;
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalArtist').textContent = artist;
-
-      document.getElementById('imageModal').style.display = 'block';
-    }
-
-    function closeModal() {
-      document.getElementById('imageModal').style.display = 'none';
-    }
-
-    document.querySelector('.close').addEventListener('click', closeModal);
   </script>
 </body>
 </html>
