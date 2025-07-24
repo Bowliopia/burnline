@@ -65,18 +65,13 @@
 
     .hamburger {
       display: none;
-      flex-direction: column;
+      background: none;
+      border: none;
+      color: #0df6e3;
+      font-size: 2rem;
       cursor: pointer;
-      gap: 5px;
     }
 
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #0df6e3;
-    }
-
-    /* Mobile Styles */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -94,7 +89,7 @@
       }
 
       .hamburger {
-        display: flex;
+        display: block;
       }
     }
 
@@ -256,11 +251,7 @@
 
   <nav>
     <div class="nav-container">
-      <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
       <div class="nav-links" id="navLinks">
         <a href="#features">Features</a>
         <a href="https://bowliopia.github.io/burnline/fiction.html">Fiction</a>
@@ -328,7 +319,10 @@
 
   <script>
     function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
+      const nav = document.getElementById('navLinks');
+      const button = document.getElementById('hamburger');
+      nav.classList.toggle('active');
+      button.textContent = nav.classList.contains('active') ? '×' : '☰';
     }
   </script>
 </body>
