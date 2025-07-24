@@ -146,22 +146,6 @@
       display: block;
     }
 
-    .caption {
-      padding: 1rem;
-      color: #ccc;
-    }
-
-    .caption h4 {
-      margin: 0 0 0.3rem;
-      color: #0df6e3;
-    }
-
-    .caption p {
-      font-size: 0.9rem;
-      margin: 0;
-    }
-
-    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
@@ -191,6 +175,21 @@
       font-size: 40px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    .modal-caption {
+      color: #ccc;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .modal-caption h3 {
+      margin: 0;
+      color: #0df6e3;
+    }
+
+    .modal-caption p {
+      margin: 0.5rem 0 0;
     }
 
     footer {
@@ -276,76 +275,42 @@
   </section>
 
   <section class="gallery-grid">
-    <!-- Tile Template -->
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 1.png" alt="Art 1">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 2.png" alt="Art 2">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 3.png" alt="Art 3">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 4.png" alt="Art 4">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 5.png" alt="Art 5">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 6.png" alt="Art 6">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 7.png" alt="Art 7">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
-
-    <div class="art-tile" onclick="openModal(this)">
+    <div class="art-tile" onclick="openModal(this)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="Placeholder Image 8.png" alt="Art 8">
-      <div class="caption">
-        <h4>Title or short description here</h4>
-        <p>Artist Name Here</p>
-      </div>
     </div>
   </section>
 
   <!-- Modal -->
   <div id="imageModal" class="modal" onclick="closeModal()">
     <span class="close">&times;</span>
-    <img class="modal-content" id="modalImage" alt="Expanded artwork">
+    <div style="text-align: center; max-width: 90%; margin: auto;">
+      <img class="modal-content" id="modalImage" alt="Expanded artwork">
+      <div class="modal-caption">
+        <h3 id="modalTitle"></h3>
+        <p id="modalArtist"></p>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -386,18 +351,21 @@
 
     function openModal(tile) {
       const imgSrc = tile.querySelector('img').src;
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      modal.style.display = "block";
-      modalImg.src = imgSrc;
+      const title = tile.getAttribute('data-title') || '';
+      const artist = tile.getAttribute('data-artist') || '';
+
+      document.getElementById('modalImage').src = imgSrc;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalArtist').textContent = artist;
+
+      document.getElementById('imageModal').style.display = 'block';
     }
 
     function closeModal() {
-      document.getElementById('imageModal').style.display = "none";
+      document.getElementById('imageModal').style.display = 'none';
     }
 
     document.querySelector('.close').addEventListener('click', closeModal);
   </script>
-
 </body>
 </html>
