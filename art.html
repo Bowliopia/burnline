@@ -276,6 +276,14 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .gradient-blue-text {
+  background: linear-gradient(90deg, #0df6e3, #56ccf2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
@@ -300,7 +308,9 @@
 
   <section class="gallery-hero">
     <h1>Featured Cyberpunk Art</h1>
-    <p>Interested in having your art featured in the next issue? Visit our Submit page.</p>
+<p>Interested in having your art featured in the next issue? 
+  <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
+</p>
   </section>
 
   <section class="gallery-grid" id="artGrid">
