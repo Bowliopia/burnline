@@ -12,13 +12,10 @@
       background: linear-gradient(135deg, #0f0f1c, #1b1e35);
       color: #f0f0f0;
     }
-    .content img {
-  transition: transform 0.3s ease;
-}
 
-.content img:hover {
-  transform: scale(1.05);
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
     h1, h2, h3, h4, nav a, header {
       font-family: 'Orbitron', sans-serif;
@@ -32,7 +29,6 @@
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
-      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
       position: relative;
     }
@@ -41,8 +37,8 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-        text-decoration: none;
-  color: inherit;
+      text-decoration: none;
+      color: inherit;
     }
 
     .logo-title img {
@@ -103,151 +99,150 @@
       }
     }
 
-    .content {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
+    .gallery-hero {
       text-align: center;
+      padding: 4rem 2rem 2rem;
     }
 
-    .gradient-heading {
-      font-size: 2rem;
+    .gallery-hero h1 {
+      font-size: 2.5rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
 
-    .gradient-pink {
-      background: linear-gradient(90deg, #ff4ac2, #c52bd9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .gradient-blue {
-      background: linear-gradient(90deg, #0df6e3, #2abfff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .content p {
-      line-height: 1.7;
+    .gallery-hero p {
+      font-size: 1.1rem;
       color: #ccc;
-      margin-bottom: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+    }
+
+    .art-tile {
+      background: #1a1c30;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .art-tile:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.15);
+    }
+
+    .art-tile img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
     }
 
     footer {
       background: #0f0f1c;
-      padding: 2rem 1rem;
-      color: #ccc;
+      padding: 4rem 2rem 2rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    footer a:hover {
+      color: #0df6e3;
     }
 
     .footer-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      gap: 3rem;
       max-width: 1200px;
       margin: auto;
     }
 
     .footer-column {
-      flex: 1;
-      min-width: 250px;
-      margin: 1rem;
+      flex: 1 1 250px;
+      min-width: 200px;
     }
 
     .footer-logo {
-      width: 60px;
+      height: 100px;
       margin-bottom: 1rem;
-    }
-
-    .newsletter-input {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 4px;
-      width: 100%;
-      max-width: 250px;
-      margin-bottom: 0.5rem;
-    }
-
-    .newsletter-button {
-      padding: 0.5rem 1rem;
-      background-color: #0df6e3;
-      border: none;
-      border-radius: 4px;
-      color: #0f0f1c;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .newsletter-button:hover {
-      background-color: #0bc2b7;
     }
 
     .footer-bottom {
       text-align: center;
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #666;
+      margin-top: 3rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+      color: #555;
     }
 
-    .footer-column a:hover {
-      text-decoration: underline;
-      color: #0df6e3;
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: none;
+      width: 70%;
+      margin-bottom: 0.8rem;
+    }
+
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
   <header class="site-header">
-<a href="index.html" class="logo-title">
-  <img src="Flame logo-1.png.png" alt="Burnline logo">
-  <span>BURNLINE</span>
-</a>
+    <a href="index.html" class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
       <div></div>
       <div></div>
     </div>
-    <nav class="site-nav" id="site-nav"> 
-      <a href="index.html">Home</a>
+    <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Fiction</a>
       <a href="art.html">Art</a>
-      <a href="https://bowliopia.github.io/burnline/about.html">About</a>
+      <a href="about.html">About</a>
       <a href="submit.html">Submit</a>
     </nav>
   </header>
 
-  <section class="content">
-  <section class="content">
-  <h1 class="gradient-heading">Featured Artwork</h1>
-  <p>Browse some of the latest submissions and featured visuals in Burnline’s gallery of cybernetic beauty and apocalyptic decay.</p>
+  <section class="gallery-hero">
+    <h1>Featured Cyberpunk Art</h1>
+    <p>Visual transmissions from a fractured future. Explore our curated gallery of cyberpunk artwork from emerging and established creators. Submit your own vision to be featured in the next issue.</p>
+  </section>
 
-  <!-- Gallery Row 1 -->
-  <div style="overflow-x: auto; white-space: nowrap; padding: 1rem 0;">
-    <img src="CBA1.jpg" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Art 1" />
-    <img src="CBA2.jpg" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Art 2" />
-    <img src="CBA3.jpg" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Art 3" />
-    <img src="CBA4.jpg" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Art 4" />
-    <img src="CBA5.jpg" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Art 5" />
-    <img src="CBA6.jpg" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Art 6" />
-  </div>
-
-  <!-- Gallery Row 2 -->
-  <div style="overflow-x: auto; white-space: nowrap; padding: 1rem 0;">
-    <img src="Placeholder Image 1.png" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Landscape Art 1" />
-    <img src="Placeholder Image 2.png" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Landscape Art 2" />
-    <img src="Placeholder Image 3.png" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Landscape Art 3" />
-    <img src="Placeholder Image 6.png" style="height: 320px; margin-right: 1rem; border-radius: 10px;" alt="Landscape Art 4" />
-  </div>
-</section>
+  <section class="gallery-grid">
+    <div class="art-tile"><img src="Placeholder Image 1.png" alt="Cyberpunk Art 1"></div>
+    <div class="art-tile"><img src="Placeholder Image 2.png" alt="Cyberpunk Art 2"></div>
+    <div class="art-tile"><img src="Placeholder Image 3.png" alt="Cyberpunk Art 3"></div>
+    <div class="art-tile"><img src="Placeholder Image 4.png" alt="Cyberpunk Art 4"></div>
+    <div class="art-tile"><img src="Placeholder Image 5.png" alt="Cyberpunk Art 5"></div>
+    <div class="art-tile"><img src="Placeholder Image 6.png" alt="Cyberpunk Art 6"></div>
+    <div class="art-tile"><img src="Placeholder Image 7.png" alt="Cyberpunk Art 7"></div>
+    <div class="art-tile"><img src="Placeholder Image 8.png" alt="Cyberpunk Art 8"></div>
+  </section>
 
   <footer>
     <div class="footer-container">
-      <!-- Newsletter -->
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p style="line-height: 1.6;">Sign up to our <span class="gradient-pink">newsletter</span> to get the latest stories, art, and neon-lit news from Burnline.</p>
+        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
         <form style="margin-top: 1rem;">
           <input type="email" placeholder="Email Address" class="newsletter-input">
           <br>
@@ -255,15 +250,13 @@
         </form>
       </div>
 
-      <!-- Contact Info -->
       <div class="footer-column">
-        <h4 class="gradient-blue">Get In Touch</h4>
+        <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
 
-      <!-- Read -->
       <div class="footer-column">
-        <h4 class="gradient-blue">Read</h4>
+        <h4 style="color: #0df6e3;">Read</h4>
         <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
         <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
         <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
