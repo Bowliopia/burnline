@@ -120,24 +120,13 @@
     }
 
     .gallery-grid {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       padding: 3rem 2rem;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x;
-    }
-
-    .gallery-grid::-webkit-scrollbar {
-      display: none;
     }
 
     .art-tile {
-      flex: 0 0 auto;
-      width: 300px;
-      scroll-snap-align: start;
       background: #1a1c30;
       border-radius: 10px;
       overflow: hidden;
@@ -232,24 +221,82 @@
       right: 2%;
     }
 
-    .gradient-blue-text {
-      background: linear-gradient(90deg, #0df6e3, #56ccf2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      font-weight: bold;
+    footer {
+      background: #0f0f1c;
+      padding: 4rem 2rem 2rem;
+      color: #aaa;
+      font-size: 0.9rem;
     }
+
+    footer a:hover {
+      color: #0df6e3;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-column {
+      flex: 1 1 250px;
+      min-width: 200px;
+    }
+
+    .footer-logo {
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+      color: #555;
+    }
+
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: none;
+      width: 70%;
+      margin-bottom: 0.8rem;
+    }
+
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .gradient-blue-text {
+  background: linear-gradient(90deg, #0df6e3, #56ccf2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
+
   <header class="site-header">
     <a href="index.html" class="logo-title">
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div><div></div><div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Fiction</a>
@@ -261,19 +308,46 @@
 
   <section class="gallery-hero">
     <h1>Featured Cyberpunk Art</h1>
-    <p>Interested in having your art featured in the next issue? 
-      <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
-    </p>
+<p>Interested in having your art featured in the next issue? 
+  <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
+</p>
   </section>
 
   <section class="gallery-grid" id="artGrid">
-    <!-- Add your art-tile blocks here -->
-    <div class="art-tile" onclick="openModal(0)" data-title="Title" data-artist="Artist">
-      <img src="CBA6.jpg" alt="Art">
+    <!-- Tiles (each must include data-title and data-artist) -->
+        <div class="art-tile" onclick="openModal(0)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="CBA6.jpg" alt="Art 1">
     </div>
-    <!-- ... more tiles -->
+        <div class="art-tile" onclick="openModal(1)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="CBA5.jpg" alt="Art 1">
+    </div>
+    <div class="art-tile" onclick="openModal(2)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 1.png" alt="Art 1">
+    </div>
+    <div class="art-tile" onclick="openModal(3)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 2.png" alt="Art 2">
+    </div>
+    <div class="art-tile" onclick="openModal(4)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 3.png" alt="Art 3">
+    </div>
+    <div class="art-tile" onclick="openModal(5)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 4.png" alt="Art 4">
+    </div>
+    <div class="art-tile" onclick="openModal(6)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 5.png" alt="Art 5">
+    </div>
+    <div class="art-tile" onclick="openModal(7)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 6.png" alt="Art 6">
+    </div>
+    <div class="art-tile" onclick="openModal(8)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 7.png" alt="Art 7">
+    </div>
+    <div class="art-tile" onclick="openModal(9)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="Placeholder Image 8.png" alt="Art 8">
+    </div>
   </section>
 
+  <!-- Modal -->
   <div id="imageModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
     <button class="nav-arrow left" onclick="changeSlide(-1)">&#10094;</button>
@@ -285,6 +359,33 @@
     </div>
   </div>
 
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input">
+          <br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Read</h4>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
   <script>
     let currentIndex = 0;
     const modal = document.getElementById('imageModal');
@@ -292,7 +393,6 @@
     const modalTitle = document.getElementById('modalTitle');
     const modalArtist = document.getElementById('modalArtist');
     const tiles = document.querySelectorAll('.art-tile');
-    const scrollContainer = document.querySelector('.gallery-grid');
 
     function openModal(index) {
       currentIndex = index;
@@ -323,17 +423,6 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
-
-    // Auto-scroll logic
-    let scrollAmount = 1;
-    function autoScrollGallery() {
-      if (!scrollContainer) return;
-      scrollContainer.scrollLeft += scrollAmount;
-      if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth || scrollContainer.scrollLeft <= 0) {
-        scrollAmount *= -1;
-      }
-    }
-    setInterval(autoScrollGallery, 25);
   </script>
 </body>
 </html>
