@@ -33,25 +33,74 @@
       height: 60px;
       width: auto;
     }
+
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
       background-color: #131625;
-      padding: 1rem;
       position: sticky;
       top: 0;
       z-index: 1000;
+      padding: 1rem;
     }
-    nav a {
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
       color: #0df6e3;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
-    nav a:hover {
+
+    .nav-links a:hover {
       color: #ff4ac2;
     }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #0df6e3;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #131625;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 1rem 2rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
     .hero {
       display: flex;
       flex-direction: row;
@@ -63,36 +112,43 @@
       text-align: left;
       flex-wrap: wrap;
     }
+
     .hero-text {
       max-width: 600px;
     }
+
     .hero-text h1 {
       font-size: 2.2rem;
       color: #ff4ac2;
       margin-bottom: 1rem;
     }
+
     .hero-text p {
       font-size: 1.2rem;
       color: #ccc;
       margin-bottom: 1.5rem;
     }
+
     .hero img {
       max-width: 300px;
       border-radius: 8px;
       box-shadow: 0 0 15px rgba(0,0,0,0.4);
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       padding: 3rem 2rem;
     }
+
     .card {
       background: #22253e;
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 0 0 20px rgba(13, 246, 227, 0.1);
     }
+
     .card img {
       width: 100%;
       height: 180px;
@@ -100,21 +156,25 @@
       border-radius: 8px;
       margin-bottom: 1rem;
     }
+
     .card h3 {
       color: #0df6e3;
       margin-bottom: 0.5rem;
     }
+
     .card p {
       font-size: 0.95rem;
       color: #bbb;
     }
-      .gradient-heading {
+
+    .gradient-heading {
       font-size: 2rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
+
     footer {
       background: #0f0f1c;
       padding: 4rem 2rem 2rem;
@@ -122,9 +182,11 @@
       font-size: 0.9rem;
       font-family: 'Inter', sans-serif;
     }
+
     footer a:hover {
       color: #0df6e3;
     }
+
     .footer-container {
       display: flex;
       flex-wrap: wrap;
@@ -133,14 +195,17 @@
       max-width: 1200px;
       margin: auto;
     }
+
     .footer-column {
       flex: 1 1 250px;
       min-width: 200px;
     }
+
     .footer-logo {
       height: 100px;
       margin-bottom: 1rem;
     }
+
     .footer-bottom {
       text-align: center;
       margin-top: 3rem;
@@ -148,6 +213,7 @@
       padding-top: 1rem;
       color: #555;
     }
+
     .newsletter-input {
       padding: 0.6rem 1rem;
       border-radius: 4px;
@@ -155,6 +221,7 @@
       width: 70%;
       margin-bottom: 0.8rem;
     }
+
     .newsletter-button {
       padding: 0.6rem 1.2rem;
       background-color: #0df6e3;
@@ -164,23 +231,24 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .read-issue-btn {
-  background-color: #0df6e3;
-  border: none;
-  color: #0f0f1c;
-  padding: 0.75rem 2rem;
-  font-weight: bold;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 1rem;
-  transition: background-color 0.3s;
-}
 
-.read-issue-btn:hover {
-  background-color: #0ad3c6;
-}
+    .read-issue-btn {
+      background-color: #0df6e3;
+      border: none;
+      color: #0f0f1c;
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .read-issue-btn:hover {
+      background-color: #0ad3c6;
+    }
   </style>
 </head>
 <body>
@@ -190,22 +258,31 @@
   </header>
 
   <nav>
-    <a href="#features">Features</a>
-    <a href="https://bowliopia.github.io/burnline/fiction.html">Fiction</a>
-    <a href="https://bowliopia.github.io/burnline/art.html">Art</a>
-    <a href="https://bowliopia.github.io/burnline/about.html">About</a>
-    <a href="https://bowliopia.github.io/burnline/submit.html">Submit</a>
+    <div class="nav-container">
+      <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#features">Features</a>
+        <a href="https://bowliopia.github.io/burnline/fiction.html">Fiction</a>
+        <a href="https://bowliopia.github.io/burnline/art.html">Art</a>
+        <a href="https://bowliopia.github.io/burnline/about.html">About</a>
+        <a href="https://bowliopia.github.io/burnline/submit.html">Submit</a>
+      </div>
+    </div>
   </nav>
 
-<section class="hero">
-  <div class="hero-text">
-    <h1 class="gradient-heading">The Latest Issue</h1>
-    <p>This issue features stories from cutting-edge cyberpunk voices including [author], [author], [author], and [author]. You'll find tales of [theme], [theme], and [theam].</p>
-    <p>Also in this issue: art spreads by [artist], and [artist] and essays exploring [themes and other weird shit].</p>
-    <a href="fiction.html" class="read-issue-btn">Read this Issue</a>
-  </div>
-  <img src="Test Cover 1.png" alt="Latest issue cover">
-</section>
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="gradient-heading">The Latest Issue</h1>
+      <p>This issue features stories from cutting-edge cyberpunk voices including [author], [author], [author], and [author]. You'll find tales of [theme], [theme], and [theam].</p>
+      <p>Also in this issue: art spreads by [artist], and [artist] and essays exploring [themes and other weird shit].</p>
+      <a href="fiction.html" class="read-issue-btn">Read this Issue</a>
+    </div>
+    <img src="Test Cover 1.png" alt="Latest issue cover">
+  </section>
 
   <section class="grid" id="features">
     <div class="card">
@@ -227,7 +304,6 @@
 
   <footer>
     <div class="footer-container">
-      <!-- Newsletter -->
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
         <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
@@ -237,14 +313,10 @@
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
-      <!-- Contact Info -->
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
-
-      <!-- Read -->
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
         <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
@@ -252,10 +324,15 @@
         <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
