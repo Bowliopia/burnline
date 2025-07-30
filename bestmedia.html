@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Cyberpunk Media – Burnline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
+      color: #f0f0f0;
+    }
+
+    h1, h2, h3, h4, nav a, header {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      font-family: 'Orbitron', sans-serif;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-title img {
+      height: 60px;
+      width: auto;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 2rem;
+      font-size: 1rem;
+    }
+
+    .site-nav a {
+      color: #0f0f1c;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .site-nav a:hover {
+      color: #ff4ac2;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      background: #0f0f1c;
+      height: 4px;
+      width: 100%;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #0df6e3;
+        padding: 1rem 0;
+        margin-top: 1rem;
+      }
+
+      .site-nav.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .gradient-heading {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .content h1 {
+      color: #ff4ac2;
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 1.2rem;
+    }
+
+    footer {
+      background: #0f0f1c;
+      padding: 2rem 1rem;
+      color: #ccc;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+      margin: 1rem;
+    }
+
+    .footer-logo {
+      width: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-input {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 250px;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-button {
+      padding: 0.5rem 1rem;
+      background-color: #0df6e3;
+      border: none;
+      border-radius: 4px;
+      color: #0f0f1c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .newsletter-button:hover {
+      background-color: #0bc2b7;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .footer-column a:hover {
+      text-decoration: underline;
+      color: #0df6e3;
+    }
+
+    .gradient-blue-text {
+      background: linear-gradient(90deg, #0df6e3, #56ccf2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+
+    .gradient-pink-text {
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html">Home</a>
+      <a href="fiction.html">Fiction</a>
+      <a href="art.html">Art</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
+
+  <section class="content">
+    <h1 class="gradient-heading">Best Cyberpunk Media</h1>
+    <p>Welcome to Burnline's hub for celebrating the finest in cyberpunk storytelling. From neon-drenched anime to gritty novels and immersive games, cyberpunk has always challenged our ideas of technology, identity, and rebellion.</p>
+    <p>We’re building an interactive space where you can vote for your favorite works across categories like film, TV, literature, and games. Stay tuned—soon, you'll be able to make your voice heard and help us crown the best of the genre.</p>
+    <p>Until then, take a moment to reflect: what cyberpunk media left its mark on you?</p>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest neon-lit stories and art from Burnline.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input">
+          <br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Read</h4>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
