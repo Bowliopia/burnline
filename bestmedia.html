@@ -26,9 +26,7 @@
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
-      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
-      position: relative;
     }
 
     .logo-title {
@@ -123,9 +121,6 @@
     }
 
     #ranking-chart {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem;
       margin-bottom: 2rem;
     }
 
@@ -323,28 +318,36 @@
           data: {
             labels: labels,
             datasets: [{
-              label: 'Votes',
               data: data,
               backgroundColor: '#0df6e3',
-              borderColor: '#00c2b2',
-              borderWidth: 1
+              borderRadius: 5
             }]
           },
           options: {
+            indexAxis: 'y',
+            responsive: true,
             plugins: {
-              legend: { display: false }
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.parsed.x} votes`
+                }
+              }
             },
             scales: {
-              y: {
-                beginAtZero: true,
-                ticks: { color: '#333' },
-                grid: { color: '#ddd' }
-              },
               x: {
-                ticks: { color: '#333' },
-                grid: { color: '#eee' }
+                display: false,
+                grid: { display: false }
+              },
+              y: {
+                ticks: { color: '#f0f0f0' },
+                grid: { display: false }
               }
-            }
+            },
+            layout: {
+              padding: { top: 10, bottom: 10 }
+            },
+            backgroundColor: 'transparent'
           }
         });
       }
