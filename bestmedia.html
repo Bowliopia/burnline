@@ -25,6 +25,7 @@
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
+      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
       position: relative;
     }
@@ -120,26 +121,27 @@
       margin-bottom: 1.2rem;
     }
 
-    .poll-container {
+    .poll-list {
       margin-top: 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(13, 246, 227, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .poll-item {
+      background: #1f223c;
+      padding: 1rem;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.5rem;
-      border-radius: 8px;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      position: relative;
     }
 
     .poll-title {
       font-weight: bold;
+      font-size: 1.1rem;
       color: #0df6e3;
     }
 
@@ -150,25 +152,34 @@
     }
 
     .vote-button {
-      background: #0df6e3;
-      color: #0f0f1c;
+      background: none;
       border: none;
-      padding: 0.3rem 0.6rem;
-      font-weight: bold;
+      color: #ff4ac2;
+      font-size: 1.2rem;
       cursor: pointer;
-      border-radius: 4px;
-      transition: background 0.2s ease;
     }
 
     .vote-button:hover {
-      background: #0bc2b7;
+      color: #0df6e3;
     }
 
-    .vote-count {
-      font-family: 'Orbitron', sans-serif;
-      color: #ff4ac2;
-      min-width: 2rem;
-      text-align: center;
+    .vote-count.animate {
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     footer {
@@ -275,9 +286,7 @@
     <h1 class="gradient-heading">Best Cyberpunk Media</h1>
     <p>Tell us, what are your favorite pieces of cyberpunk content? Upvote content that stuck with you, downvote anything that you think is overrated.</p>
 
-    <div class="poll-container" id="poll-list">
-      <!-- Voting options injected by JS -->
-    </div>
+    <div id="poll-list" class="poll-list"></div>
   </section>
 
   <footer>
@@ -291,10 +300,12 @@
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
+
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
+
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
         <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
@@ -302,6 +313,7 @@
         <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
       </div>
     </div>
+
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
@@ -325,24 +337,60 @@
 
     function renderPoll() {
       const pollList = document.getElementById("poll-list");
+
+      const positions = Array.from(pollList.children).map(child => ({
+        element: child,
+        top: child.getBoundingClientRect().top
+      }));
+
       pollList.innerHTML = "";
       items.sort((a, b) => b.votes - a.votes);
+
       items.forEach((item, index) => {
         const div = document.createElement("div");
         div.className = "poll-item";
+        div.dataset.title = item.title;
         div.innerHTML = `
           <span class="poll-title">${index + 1}. ${item.title}</span>
           <div class="vote-controls">
-            <button class="vote-button" onclick="vote(${index}, 1)">▲</button>
+            <button class="vote-button" onclick="vote('${item.title}', 1)">▲</button>
             <span class="vote-count">${item.votes}</span>
-            <button class="vote-button" onclick="vote(${index}, -1)">▼</button>
+            <button class="vote-button" onclick="vote('${item.title}', -1)">▼</button>
           </div>`;
         pollList.appendChild(div);
       });
+
+      const newItems = Array.from(pollList.children);
+      newItems.forEach(newEl => {
+        const old = positions.find(p => p.element.dataset.title === newEl.dataset.title);
+        if (!old) return;
+        const deltaY = old.top - newEl.getBoundingClientRect().top;
+        if (deltaY) {
+          newEl.style.transform = `translateY(${deltaY}px)`;
+          newEl.style.opacity = '0.6';
+          requestAnimationFrame(() => {
+            newEl.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+            newEl.style.transform = '';
+            newEl.style.opacity = '1';
+          });
+        }
+      });
     }
 
-    function vote(index, change) {
-      items[index].votes += change;
+    function vote(title, change) {
+      const item = items.find(i => i.title === title);
+      if (!item) return;
+      item.votes += change;
+
+      const pollList = document.getElementById("poll-list");
+      const currentDiv = Array.from(pollList.children).find(div => div.dataset.title === title);
+      if (currentDiv) {
+        const countSpan = currentDiv.querySelector(".vote-count");
+        countSpan.classList.remove("animate");
+        void countSpan.offsetWidth;
+        countSpan.classList.add("animate");
+      }
+
       renderPoll();
     }
 
