@@ -25,7 +25,6 @@
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
-      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
       position: relative;
     }
@@ -119,6 +118,57 @@
       line-height: 1.7;
       color: #ccc;
       margin-bottom: 1.2rem;
+    }
+
+    .poll-container {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(13, 246, 227, 0.1);
+    }
+
+    .poll-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+    }
+
+    .poll-title {
+      font-weight: bold;
+      color: #0df6e3;
+    }
+
+    .vote-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .vote-button {
+      background: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .vote-button:hover {
+      background: #0bc2b7;
+    }
+
+    .vote-count {
+      font-family: 'Orbitron', sans-serif;
+      color: #ff4ac2;
+      min-width: 2rem;
+      text-align: center;
     }
 
     footer {
@@ -224,6 +274,10 @@
   <section class="content">
     <h1 class="gradient-heading">Best Cyberpunk Media</h1>
     <p>Tell us, what are your favorite pieces of cyberpunk content? Upvote content that stuck with you, downvote anything that you think is overrated.</p>
+
+    <div class="poll-container" id="poll-list">
+      <!-- Voting options injected by JS -->
+    </div>
   </section>
 
   <footer>
@@ -237,12 +291,10 @@
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
-
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
         <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
@@ -250,7 +302,6 @@
         <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
@@ -261,8 +312,41 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
+
+    const items = [
+      { title: "Neuromancer", votes: 12 },
+      { title: "Akira", votes: 15 },
+      { title: "Blade Runner", votes: 18 },
+      { title: "Ghost in the Shell", votes: 14 },
+      { title: "Cyberpunk 2077", votes: 10 },
+      { title: "The Matrix", votes: 17 },
+      { title: "Snow Crash", votes: 9 }
+    ];
+
+    function renderPoll() {
+      const pollList = document.getElementById("poll-list");
+      pollList.innerHTML = "";
+      items.sort((a, b) => b.votes - a.votes);
+      items.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "poll-item";
+        div.innerHTML = `
+          <span class="poll-title">${index + 1}. ${item.title}</span>
+          <div class="vote-controls">
+            <button class="vote-button" onclick="vote(${index}, 1)">▲</button>
+            <span class="vote-count">${item.votes}</span>
+            <button class="vote-button" onclick="vote(${index}, -1)">▼</button>
+          </div>`;
+        pollList.appendChild(div);
+      });
+    }
+
+    function vote(index, change) {
+      items[index].votes += change;
+      renderPoll();
+    }
+
+    renderPoll();
   </script>
 </body>
 </html>
-
-
