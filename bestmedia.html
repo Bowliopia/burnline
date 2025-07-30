@@ -26,7 +26,9 @@
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
+      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
+      position: relative;
     }
 
     .logo-title {
@@ -120,60 +122,41 @@
       margin-bottom: 1.2rem;
     }
 
-    #ranking-chart {
+    canvas {
       margin-bottom: 2rem;
     }
 
-    .poll-list {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    .chart-container {
+      margin-top: 3rem;
+      background: none;
     }
 
-    .poll-item {
-      background: #1f223c;
-      padding: 1rem;
-      border-radius: 8px;
+    .vote-list {
+      margin-top: 2rem;
+    }
+
+    .vote-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-      position: relative;
+      background: #2c2c3e;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      font-family: 'Inter', sans-serif;
     }
 
-    .poll-title {
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: #0df6e3;
-    }
-
-    .vote-controls {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .vote-button {
+    .vote-buttons button {
       background: none;
       border: none;
-      color: #ff4ac2;
+      color: #0df6e3;
       font-size: 1.2rem;
       cursor: pointer;
+      margin-left: 0.5rem;
     }
 
-    .vote-button:hover {
-      color: #0df6e3;
-    }
-
-    .vote-count.animate {
-      animation: pop 0.3s ease;
-    }
-
-    @keyframes pop {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0.8; }
-      100% { transform: scale(1); opacity: 1; }
+    .vote-buttons button:hover {
+      color: #f72585;
     }
 
     footer {
@@ -230,6 +213,11 @@
       font-size: 0.8rem;
       color: #666;
     }
+
+    .footer-column a:hover {
+      text-decoration: underline;
+      color: #0df6e3;
+    }
   </style>
 </head>
 <body>
@@ -239,7 +227,9 @@
       <span>BURNLINE</span>
     </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div><div></div><div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="index.html">Home</a>
@@ -254,8 +244,11 @@
     <h1 class="gradient-heading">Best Cyberpunk Media</h1>
     <p>Tell us, what are your favorite pieces of cyberpunk content? Upvote content that stuck with you, downvote anything that you think is overrated.</p>
 
-    <canvas id="ranking-chart" height="300"></canvas>
-    <div id="poll-list" class="poll-list"></div>
+    <div class="chart-container">
+      <canvas id="ranking-chart" height="250"></canvas>
+    </div>
+
+    <div class="vote-list" id="vote-list"></div>
   </section>
 
   <footer>
@@ -269,44 +262,45 @@
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
+
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
+
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
-        <p><a href="#">Neon Dystopia</a></p>
-        <p><a href="#">Future//Tense</a></p>
-        <p><a href="#">HackDust</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
+        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
       </div>
     </div>
+
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
   </footer>
 
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
-    }
-
     const items = [
-      { title: "Neuromancer", votes: 12 },
-      { title: "Akira", votes: 15 },
-      { title: "Blade Runner", votes: 18 },
-      { title: "Ghost in the Shell", votes: 14 },
-      { title: "Cyberpunk 2077", votes: 10 },
-      { title: "The Matrix", votes: 17 },
-      { title: "Snow Crash", votes: 9 }
+      { title: "Blade Runner", votes: 32 },
+      { title: "Ghost in the Shell", votes: 28 },
+      { title: "Akira", votes: 22 },
+      { title: "Cyberpunk 2077", votes: 35 },
+      { title: "Neuromancer", votes: 18 }
     ];
 
     let chart;
+
     function renderChart() {
       const ctx = document.getElementById('ranking-chart').getContext('2d');
       const sorted = [...items].sort((a, b) => b.votes - a.votes);
       const labels = sorted.map(i => i.title);
       const data = sorted.map(i => i.votes);
+
+      const gradient = ctx.createLinearGradient(0, 0, 300, 0);
+      gradient.addColorStop(0, '#f72585');
+      gradient.addColorStop(1, '#7209b7');
 
       if (chart) {
         chart.data.labels = labels;
@@ -316,11 +310,12 @@
         chart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: labels,
+            labels,
             datasets: [{
-              data: data,
-              backgroundColor: '#0df6e3',
-              borderRadius: 5
+              data,
+              backgroundColor: gradient,
+              borderRadius: 4,
+              barThickness: 12
             }]
           },
           options: {
@@ -335,85 +330,49 @@
               }
             },
             scales: {
-              x: {
-                display: false,
-                grid: { display: false }
-              },
-              y: {
-                ticks: { color: '#f0f0f0' },
-                grid: { display: false }
-              }
+              x: { display: false, grid: { display: false } },
+              y: { ticks: { color: '#f0f0f0' }, grid: { display: false } }
             },
             layout: {
               padding: { top: 10, bottom: 10 }
-            },
-            backgroundColor: 'transparent'
+            }
           }
         });
       }
     }
 
-    function renderPoll() {
-      const pollList = document.getElementById("poll-list");
-      const positions = Array.from(pollList.children).map(child => ({
-        element: child,
-        top: child.getBoundingClientRect().top
-      }));
-
-      pollList.innerHTML = "";
-      items.sort((a, b) => b.votes - a.votes);
-
-      items.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.className = "poll-item";
-        div.dataset.title = item.title;
+    function renderList() {
+      const list = document.getElementById('vote-list');
+      list.innerHTML = '';
+      const sorted = [...items].sort((a, b) => b.votes - a.votes);
+      sorted.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'vote-item';
         div.innerHTML = `
-          <span class="poll-title">${index + 1}. ${item.title}</span>
-          <div class="vote-controls">
-            <button class="vote-button" onclick="vote('${item.title}', 1)">▲</button>
-            <span class="vote-count">${item.votes}</span>
-            <button class="vote-button" onclick="vote('${item.title}', -1)">▼</button>
-          </div>`;
-        pollList.appendChild(div);
+          <span>${item.title}</span>
+          <span class="vote-buttons">
+            ${item.votes}
+            <button onclick="vote(${index}, 1)">\u25B2</button>
+            <button onclick="vote(${index}, -1)">\u25BC</button>
+          </span>
+        `;
+        list.appendChild(div);
       });
+    }
 
-      const newItems = Array.from(pollList.children);
-      newItems.forEach(newEl => {
-        const old = positions.find(p => p.element.dataset.title === newEl.dataset.title);
-        if (!old) return;
-        const deltaY = old.top - newEl.getBoundingClientRect().top;
-        if (deltaY) {
-          newEl.style.transform = `translateY(${deltaY}px)`;
-          newEl.style.opacity = '0.6';
-          requestAnimationFrame(() => {
-            newEl.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-            newEl.style.transform = '';
-            newEl.style.opacity = '1';
-          });
-        }
-      });
-
+    function vote(index, delta) {
+      items[index].votes += delta;
+      renderList();
       renderChart();
     }
 
-    function vote(title, change) {
-      const item = items.find(i => i.title === title);
-      if (!item) return;
-      item.votes += change;
-
-      const pollList = document.getElementById("poll-list");
-      const currentDiv = Array.from(pollList.children).find(div => div.dataset.title === title);
-      if (currentDiv) {
-        const countSpan = currentDiv.querySelector(".vote-count");
-        countSpan.classList.remove("animate");
-        void countSpan.offsetWidth;
-        countSpan.classList.add("animate");
-      }
-
-      renderPoll();
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('active');
     }
 
-    renderPoll();
+    renderList();
+    renderChart();
   </script>
 </body>
 </html>
