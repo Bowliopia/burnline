@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Best Cyberpunk Media – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
@@ -121,6 +122,13 @@
       margin-bottom: 1.2rem;
     }
 
+    #ranking-chart {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+
     .poll-list {
       margin-top: 2rem;
       display: flex;
@@ -168,18 +176,9 @@
     }
 
     @keyframes pop {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     footer {
@@ -236,42 +235,16 @@
       font-size: 0.8rem;
       color: #666;
     }
-
-    .footer-column a:hover {
-      text-decoration: underline;
-      color: #0df6e3;
-    }
-
-    .gradient-blue-text {
-      background: linear-gradient(90deg, #0df6e3, #56ccf2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      font-weight: bold;
-    }
-
-    .gradient-pink-text {
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
-
   <header class="site-header">
     <a href="index.html" class="logo-title">
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="index.html">Home</a>
@@ -286,6 +259,7 @@
     <h1 class="gradient-heading">Best Cyberpunk Media</h1>
     <p>Tell us, what are your favorite pieces of cyberpunk content? Upvote content that stuck with you, downvote anything that you think is overrated.</p>
 
+    <canvas id="ranking-chart" height="300"></canvas>
     <div id="poll-list" class="poll-list"></div>
   </section>
 
@@ -300,20 +274,17 @@
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
-
       <div class="footer-column">
         <h4 style="color: #0df6e3;">Read</h4>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+        <p><a href="#">Neon Dystopia</a></p>
+        <p><a href="#">Future//Tense</a></p>
+        <p><a href="#">HackDust</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
@@ -335,9 +306,52 @@
       { title: "Snow Crash", votes: 9 }
     ];
 
+    let chart;
+    function renderChart() {
+      const ctx = document.getElementById('ranking-chart').getContext('2d');
+      const sorted = [...items].sort((a, b) => b.votes - a.votes);
+      const labels = sorted.map(i => i.title);
+      const data = sorted.map(i => i.votes);
+
+      if (chart) {
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = data;
+        chart.update();
+      } else {
+        chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Votes',
+              data: data,
+              backgroundColor: '#0df6e3',
+              borderColor: '#00c2b2',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { color: '#333' },
+                grid: { color: '#ddd' }
+              },
+              x: {
+                ticks: { color: '#333' },
+                grid: { color: '#eee' }
+              }
+            }
+          }
+        });
+      }
+    }
+
     function renderPoll() {
       const pollList = document.getElementById("poll-list");
-
       const positions = Array.from(pollList.children).map(child => ({
         element: child,
         top: child.getBoundingClientRect().top
@@ -375,6 +389,8 @@
           });
         }
       });
+
+      renderChart();
     }
 
     function vote(title, change) {
