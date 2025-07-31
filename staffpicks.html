@@ -98,11 +98,10 @@
     .story-card h3 {
       color: #0df6e3;
       font-size: 1.1rem;
+      margin-bottom: 0.5rem;
     }
     .story-card p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-bottom: 0.5rem;
+      display: none;
     }
     .story-card small {
       color: #777;
@@ -132,9 +131,10 @@
       <button class="filter-btn" data-filter="games">Games</button>
       <button class="filter-btn" data-filter="books">Books</button>
       <button class="filter-btn" data-filter="film">Film and TV</button>
+      <button class="filter-btn" data-filter="other">Other</button>
     </div>
     <div class="story-grid" id="picks">
-      <!-- Games -->
+      <!-- GAMES -->
       <div class="story-card active" data-category="games">
         <img src="https://via.placeholder.com/400x250?text=Citizen+Sleeper">
         <h3>Citizen Sleeper</h3>
@@ -176,7 +176,7 @@
         <small>Ubisoft</small>
       </div>
 
-      <!-- Books -->
+      <!-- BOOKS -->
       <div class="story-card active" data-category="books">
         <img src="https://via.placeholder.com/400x250?text=Neuromancer">
         <h3>Neuromancer</h3>
@@ -203,7 +203,7 @@
         <small>Pat Cadigan</small>
       </div>
 
-      <!-- Film and TV -->
+      <!-- FILM & TV -->
       <div class="story-card active" data-category="film">
         <img src="https://via.placeholder.com/400x250?text=Cyberpunk+Edgerunners">
         <h3>Cyberpunk: Edgerunners</h3>
@@ -218,6 +218,13 @@
         <img src="https://via.placeholder.com/400x250?text=PLUTO">
         <h3>PLUTO</h3>
         <small>Netflix</small>
+      </div>
+
+      <!-- OTHER -->
+      <div class="story-card active" data-category="other">
+        <img src="https://via.placeholder.com/400x250?text=Neon_Rising">
+        <h3>Neon_Rising</h3>
+        <small>The_Future_is_Now</small>
       </div>
     </div>
   </section>
