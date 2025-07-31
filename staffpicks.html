@@ -86,8 +86,6 @@
       border-radius: 8px;
       padding: 1rem;
       display: none;
-      position: relative;
-      overflow: hidden;
     }
     .story-card.active {
       display: block;
@@ -108,27 +106,6 @@
     .story-card small {
       color: #777;
       font-size: 0.8rem;
-    }
-    .card-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(15, 15, 28, 0.85);
-      color: #f0f0f0;
-      padding: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    .story-card:hover .card-overlay {
-      opacity: 1;
     }
   </style>
 </head>
@@ -157,11 +134,97 @@
       <button class="filter-btn" data-filter="other">Other</button>
     </div>
     <div class="story-grid" id="picks">
+      <!-- GAMES -->
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Citizen+Sleeper">
+        <h3>Citizen Sleeper</h3>
+        <small>Jump Over the Age</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=The+Ascent">
+        <h3>The Ascent</h3>
+        <small>Neon Giant</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Ruiner">
+        <h3>Ruiner</h3>
+        <small>Reikon Games</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Ghostrunner">
+        <h3>Ghostrunner</h3>
+        <small>One More Level</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Cyberpunk+2077">
+        <h3>Cyberpunk 2077</h3>
+        <small>CD Projekt Red</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Cloudpunk">
+        <h3>Cloudpunk</h3>
+        <small>ION LANDS</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Transistor">
+        <h3>Transistor</h3>
+        <small>Supergiant Games</small>
+      </div>
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Blood+Dragon">
+        <h3>Far Cry 3: Blood Dragon</h3>
+        <small>Ubisoft</small>
+      </div>
+
+      <!-- BOOKS -->
+      <div class="story-card active" data-category="books">
+        <img src="https://via.placeholder.com/400x250?text=Neuromancer">
+        <h3>Neuromancer</h3>
+        <small>William Gibson</small>
+      </div>
+      <div class="story-card active" data-category="books">
+        <img src="https://via.placeholder.com/400x250?text=Mirrorshades">
+        <h3>Mirrorshades</h3>
+        <small>Edited by Bruce Sterling</small>
+      </div>
+      <div class="story-card active" data-category="books">
+        <img src="https://via.placeholder.com/400x250?text=Pattern+Recognition">
+        <h3>Pattern Recognition</h3>
+        <small>William Gibson</small>
+      </div>
+      <div class="story-card active" data-category="books">
+        <img src="https://via.placeholder.com/400x250?text=Cryptonomicon">
+        <h3>Cryptonomicon</h3>
+        <small>Neal Stephenson</small>
+      </div>
+      <div class="story-card active" data-category="books">
+        <img src="https://via.placeholder.com/400x250?text=Synners">
+        <h3>Synners</h3>
+        <small>Pat Cadigan</small>
+      </div>
+
+      <!-- FILM & TV -->
+      <div class="story-card active" data-category="film">
+        <img src="https://via.placeholder.com/400x250?text=Cyberpunk+Edgerunners">
+        <h3>Cyberpunk: Edgerunners</h3>
+        <small>Netflix / Studio Trigger</small>
+      </div>
+      <div class="story-card active" data-category="film">
+        <img src="https://via.placeholder.com/400x250?text=Ghost+in+the+Shell">
+        <h3>Ghost in the Shell (1995)</h3>
+        <small>Mamoru Oshii</small>
+      </div>
+      <div class="story-card active" data-category="film">
+        <img src="https://via.placeholder.com/400x250?text=PLUTO">
+        <h3>PLUTO</h3>
+        <small>Netflix</small>
+      </div>
+
+      <!-- OTHER -->
       <div class="story-card active" data-category="other">
         <img src="https://via.placeholder.com/400x250?text=Neon_Rising">
         <h3>Neon_Rising</h3>
         <small>The_Future_is_Now</small>
-        <div class="card-overlay">A cyberpunk narrative art book blending visuals and lore.</div>
       </div>
     </div>
   </section>
