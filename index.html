@@ -219,6 +219,17 @@
     .read-issue-btn:hover {
       background-color: #0ad3c6;
     }
+    .card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.card-link:hover .card {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
+}
   </style>
 </head>
 <body>
@@ -268,11 +279,13 @@
       <h3>Featured Stories</h3>
       <p>Explore high-voltage fiction from the neon edge — a curated selection of our boldest, strangest, and most unforgettable tales.</p>
     </div>
-    <div class="card">
-      <img src="NM Art.png" alt="Poll image">
-      <h3>Poll: Best Cyberpunk Media</h3>
-      <p>We asked readers to weigh in on the most iconic games, movies, books, and art that define the cyberpunk canon. Here’s what they said.</p>
-    </div>
+<a href="https://bowliopia.github.io/burnline/bestmedia.html" class="card-link">
+  <div class="card">
+    <img src="NM Art.png" alt="Poll image">
+    <h3>Poll: Best Cyberpunk Media</h3>
+    <p>We asked readers to weigh in on the most iconic games, movies, books, and art that define the cyberpunk canon. Here’s what they said.</p>
+  </div>
+</a>
     <div class="card">
       <img src="CS2 Keyart.jpg" alt="Stuff We Like image">
       <h3>Stuff We Like</h3>
