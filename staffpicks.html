@@ -12,10 +12,9 @@
       background: linear-gradient(135deg, #0f0f1c, #1b1e35);
       color: #f0f0f0;
     }
-    h1, h2, h3, h4, nav a, header {
+    h1, h2, h3, nav a, header {
       font-family: 'Orbitron', sans-serif;
     }
-
     .site-header {
       display: flex;
       justify-content: space-between;
@@ -25,9 +24,7 @@
       padding: 1rem 2rem;
       font-size: 2rem;
       flex-wrap: wrap;
-      position: relative;
     }
-
     .logo-title {
       display: flex;
       align-items: center;
@@ -35,186 +32,91 @@
       text-decoration: none;
       color: inherit;
     }
-
     .logo-title img {
       height: 60px;
       width: auto;
     }
-
     .site-nav {
       display: flex;
       gap: 2rem;
       font-size: 1rem;
     }
-
     .site-nav a {
       color: #0f0f1c;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s;
     }
-
-    .site-nav a:hover {
-      color: #ff4ac2;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
-
-    .hamburger div {
-      background: #0f0f1c;
-      height: 4px;
-      width: 100%;
-      border-radius: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .site-nav {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        background-color: #0df6e3;
-        padding: 1rem 0;
-        margin-top: 1rem;
-      }
-
-      .site-nav.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-    }
-
     .content {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 2rem;
     }
-
     .content h1 {
       color: #ff4ac2;
       text-align: center;
       margin-bottom: 2rem;
     }
-
-    .section-title {
-      font-size: 1.8rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 3rem 0 1rem;
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
-
+    .filters button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background: #0df6e3;
+      color: #0f0f1c;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .filters button.active {
+      background: #ff4ac2;
+      color: #fff;
+    }
     .story-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
     }
-
     .story-card {
       background-color: #1c1e2f;
       border-radius: 8px;
       padding: 1rem;
+      display: none;
     }
-
+    .story-card.active {
+      display: block;
+    }
     .story-card img {
       width: 100%;
       border-radius: 6px;
       margin-bottom: 1rem;
     }
-
     .story-card h3 {
       color: #0df6e3;
       font-size: 1.1rem;
-      margin-bottom: 0.5rem;
     }
-
     .story-card p {
       font-size: 0.9rem;
       color: #ccc;
       margin-bottom: 0.5rem;
-      line-height: 1.4;
     }
-
     .story-card small {
       color: #777;
       font-size: 0.8rem;
     }
-
-    footer {
-      background: #0f0f1c;
-      padding: 2rem;
-      color: #ccc;
-      margin-top: 4rem;
-    }
-
-    .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-column {
-      flex: 1;
-      min-width: 220px;
-    }
-
-    .footer-logo {
-      width: 80px;
-      margin-bottom: 1rem;
-    }
-
-    .newsletter-input {
-      padding: 0.5rem;
-      width: 80%;
-      margin-bottom: 0.5rem;
-      border-radius: 4px;
-      border: none;
-    }
-
-    .newsletter-button {
-      padding: 0.5rem 1rem;
-      background-color: #0df6e3;
-      border: none;
-      color: #0f0f1c;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      margin-top: 2rem;
-      color: #777;
-      font-size: 0.85rem;
-    }
   </style>
 </head>
 <body>
-
   <header class="site-header">
     <a href="index.html" class="logo-title">
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <nav class="site-nav" id="site-nav">
+    <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="fiction.html">Fiction</a>
       <a href="art.html">Art</a>
@@ -225,129 +127,61 @@
 
   <section class="content">
     <h1>Staff Picks</h1>
-
-    <h2 class="section-title">Video Games</h2>
-    <div class="story-grid">
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Cyberpunk+2077" alt="Game">
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="games">Games</button>
+      <button class="filter-btn" data-filter="books">Books</button>
+      <button class="filter-btn" data-filter="tv">TV</button>
+      <button class="filter-btn" data-filter="other">Other</button>
+    </div>
+    <div class="story-grid" id="picks">
+      <div class="story-card active" data-category="games">
+        <img src="https://via.placeholder.com/400x250?text=Cyberpunk+2077">
         <h3>Cyberpunk 2077</h3>
-        <p>A neon-drenched RPG where the city is alive, broken, and unforgettable.</p>
+        <p>Night City is yours to burn or save in this open-world RPG.</p>
         <small>CD Projekt Red</small>
       </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Deus+Ex" alt="Game">
-        <h3>Deus Ex: Human Revolution</h3>
-        <p>Augment your body. Question your morals. Hack the system.</p>
-        <small>Eidos Montréal</small>
-      </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Ruiner" alt="Game">
-        <h3>Ruiner</h3>
-        <p>Fast-paced action set in a cyber-future where revenge is your only goal.</p>
-        <small>Reikon Games</small>
-      </div>
-    </div>
-
-    <h2 class="section-title">Books</h2>
-    <div class="story-grid">
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Neuromancer" alt="Book">
+      <div class="story-card active" data-category="books">
+        <img src="https://via.placeholder.com/400x250?text=Neuromancer">
         <h3>Neuromancer</h3>
-        <p>The hacker classic that launched a genre—slick, dense, and prophetic.</p>
+        <p>The genre-defining novel of hackers and megacorps.</p>
         <small>By William Gibson</small>
       </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Snow+Crash" alt="Book">
-        <h3>Snow Crash</h3>
-        <p>A pizza-delivering swordfighter navigates the early metaverse—and a digital virus.</p>
-        <small>By Neal Stephenson</small>
-      </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Altered+Carbon" alt="Book">
-        <h3>Altered Carbon</h3>
-        <p>Immortality, murder, and identity in a world where bodies are disposable.</p>
-        <small>By Richard K. Morgan</small>
-      </div>
-    </div>
-
-    <h2 class="section-title">TV</h2>
-    <div class="story-grid">
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Black+Mirror" alt="TV">
+      <div class="story-card active" data-category="tv">
+        <img src="https://via.placeholder.com/400x250?text=Black+Mirror">
         <h3>Black Mirror</h3>
-        <p>A dystopian anthology that reflects the dark edge of digital innovation.</p>
+        <p>Each episode a chilling future—too close for comfort.</p>
         <small>Netflix</small>
       </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Ghost+in+the+Shell" alt="TV">
-        <h3>Ghost in the Shell: SAC</h3>
-        <p>A philosophical dive into consciousness, memory, and cyberterrorism.</p>
-        <small>Production I.G</small>
+      <div class="story-card active" data-category="other">
+        <img src="https://via.placeholder.com/400x250?text=Blade+Runner">
+        <h3>Blade Runner</h3>
+        <p>The visual blueprint of cyberpunk cinema.</p>
+        <small>Ridley Scott</small>
       </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Mr.+Robot" alt="TV">
-        <h3>Mr. Robot</h3>
-        <p>A brilliant but unstable hacker aims to reset the system—and himself.</p>
-        <small>USA Network</small>
-      </div>
-    </div>
-
-    <h2 class="section-title">Other</h2>
-    <div class="story-grid">
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Blade+Runner" alt="Other">
-        <h3>Blade Runner (1982)</h3>
-        <p>The film that defined the cyberpunk aesthetic—haunting, rain-slick, unforgettable.</p>
-        <small>Directed by Ridley Scott</small>
-      </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Love+Death+Robots" alt="Other">
-        <h3>Love, Death & Robots</h3>
-        <p>Animated shorts full of neon-lit despair, strange machines, and wonder.</p>
-        <small>Netflix</small>
-      </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Cyberpunk+Red" alt="Other">
-        <h3>Cyberpunk Red (TTRPG)</h3>
-        <p>Grab your dice and hack the grid—this tabletop reboot bridges classic and future.</p>
-        <small>R. Talsorian Games</small>
-      </div>
+      <!-- Add more entries with proper data-category -->
     </div>
   </section>
 
-  <footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
-        <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input">
-          <br>
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-column">
-        <h4 style="color: #0df6e3;">Get In Touch</h4>
-        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
-      </div>
-      <div class="footer-column">
-        <h4 style="color: #0df6e3;">Read</h4>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 Burnline Magazine — All rights reserved
-    </div>
-  </footer>
-
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
-    }
-  </script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.story-card');
 
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelector('.filter-btn.active').classList.remove('active');
+        button.classList.add('active');
+
+        const category = button.getAttribute('data-filter');
+
+        cards.forEach(card => {
+          card.classList.remove('active');
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
