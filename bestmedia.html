@@ -630,14 +630,14 @@
       mediaItems.forEach((item, index) => {
         const container = document.createElement('div');
         container.className = 'media-item';
-        container.innerHTML = `
+        container.innerHTML = 
           <div class="media-title">${item.title}</div>
           <div class="vote-buttons">
             <button class="upvote" data-index="${index}">▲</button>
             <span>${item.votes}</span>
             <button class="downvote" data-index="${index}">▼</button>
           </div>
-        `;
+        ;
         mediaList.appendChild(container);
       });
 
