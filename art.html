@@ -119,89 +119,39 @@
       margin: auto;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 3rem 2rem;
-    }
-
-    .art-tile {
-      background: #1a1c30;
-      border-radius: 10px;
+    .horizontal-gallery-container {
+      position: relative;
+      padding: 3rem 0;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
     }
 
-    .art-tile:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 25px rgba(13, 246, 227, 0.15);
-    }
-
-    .art-tile img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .modal {
+    .horizontal-gallery {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      opacity: 0;
-      visibility: hidden;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      transition: opacity 0.4s ease, transform 0.3s ease;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      gap: 2rem;
+      padding: 0 5%;
+      scroll-padding: 0 5%;
     }
 
-    .modal.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal-content {
-      max-width: 90%;
-      max-height: 80vh;
-      border-radius: 10px;
-      box-shadow: 0 0 30px rgba(13, 246, 227, 0.2);
+    .gallery-slide {
+      flex: 0 0 80%;
+      scroll-snap-align: center;
+      border-radius: 12px;
+      overflow: hidden;
       transition: transform 0.3s ease;
     }
 
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #0df6e3;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
+    .gallery-slide img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
     }
 
-    .modal-caption {
-      color: #ccc;
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    .modal-caption h3 {
-      margin: 0;
-      color: #0df6e3;
-    }
-
-    .modal-caption p {
-      margin: 0.5rem 0 0;
-    }
-
-    .nav-arrow {
+    .scroll-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -211,14 +161,19 @@
       border: none;
       cursor: pointer;
       z-index: 1000;
+      padding: 0 1rem;
     }
 
-    .nav-arrow.left {
-      left: 2%;
+    .scroll-arrow.left {
+      left: 0;
     }
 
-    .nav-arrow.right {
-      right: 2%;
+    .scroll-arrow.right {
+      right: 0;
+    }
+
+    .scroll-arrow:hover {
+      color: #ff4ac2;
     }
 
     footer {
@@ -276,14 +231,15 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .gradient-blue-text {
-  background: linear-gradient(90deg, #0df6e3, #56ccf2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  font-weight: bold;
-}
+      background: linear-gradient(90deg, #0df6e3, #56ccf2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -308,56 +264,27 @@
 
   <section class="gallery-hero">
     <h1>Featured Cyberpunk Art</h1>
-<p>Interested in having your art featured in the next issue? 
-  <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
-</p>
+    <p>Interested in having your art featured in the next issue? 
+      <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
+    </p>
   </section>
 
-  <section class="gallery-grid" id="artGrid">
-    <!-- Tiles (each must include data-title and data-artist) -->
-        <div class="art-tile" onclick="openModal(0)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="CBA6.jpg" alt="Art 1">
+  <section class="horizontal-gallery-container">
+    <button class="scroll-arrow left" onclick="scrollGallery(-1)">&#10094;</button>
+    <div class="horizontal-gallery" id="scrollGallery">
+      <div class="gallery-slide"><img src="CBA6.jpg" alt="Art 1"></div>
+      <div class="gallery-slide"><img src="CBA5.jpg" alt="Art 2"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 1.png" alt="Art 3"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 2.png" alt="Art 4"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 3.png" alt="Art 5"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 4.png" alt="Art 6"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 5.png" alt="Art 7"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 6.png" alt="Art 8"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 7.png" alt="Art 9"></div>
+      <div class="gallery-slide"><img src="Placeholder Image 8.png" alt="Art 10"></div>
     </div>
-        <div class="art-tile" onclick="openModal(1)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="CBA5.jpg" alt="Art 1">
-    </div>
-    <div class="art-tile" onclick="openModal(2)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 1.png" alt="Art 1">
-    </div>
-    <div class="art-tile" onclick="openModal(3)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 2.png" alt="Art 2">
-    </div>
-    <div class="art-tile" onclick="openModal(4)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 3.png" alt="Art 3">
-    </div>
-    <div class="art-tile" onclick="openModal(5)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 4.png" alt="Art 4">
-    </div>
-    <div class="art-tile" onclick="openModal(6)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 5.png" alt="Art 5">
-    </div>
-    <div class="art-tile" onclick="openModal(7)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 6.png" alt="Art 6">
-    </div>
-    <div class="art-tile" onclick="openModal(8)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 7.png" alt="Art 7">
-    </div>
-    <div class="art-tile" onclick="openModal(9)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 8.png" alt="Art 8">
-    </div>
+    <button class="scroll-arrow right" onclick="scrollGallery(1)">&#10095;</button>
   </section>
-
-  <!-- Modal -->
-  <div id="imageModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <button class="nav-arrow left" onclick="changeSlide(-1)">&#10094;</button>
-    <img class="modal-content" id="modalImage" alt="Expanded artwork">
-    <button class="nav-arrow right" onclick="changeSlide(1)">&#10095;</button>
-    <div class="modal-caption">
-      <h3 id="modalTitle"></h3>
-      <p id="modalArtist"></p>
-    </div>
-  </div>
 
   <footer>
     <div class="footer-container">
@@ -387,37 +314,18 @@
   </footer>
 
   <script>
-    let currentIndex = 0;
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalArtist = document.getElementById('modalArtist');
-    const tiles = document.querySelectorAll('.art-tile');
+    let currentSlide = 0;
+    const gallery = document.getElementById('scrollGallery');
+    const slides = document.querySelectorAll('.gallery-slide');
 
-    function openModal(index) {
-      currentIndex = index;
-      const tile = tiles[index];
-      modal.classList.add('show');
-      modalImg.src = tile.querySelector('img').src;
-      modalTitle.textContent = tile.dataset.title || '';
-      modalArtist.textContent = tile.dataset.artist || '';
+    function scrollGallery(direction) {
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      const slide = slides[currentSlide];
+      gallery.scrollTo({
+        left: slide.offsetLeft - gallery.offsetLeft,
+        behavior: 'smooth'
+      });
     }
-
-    function closeModal() {
-      modal.classList.remove('show');
-    }
-
-    function changeSlide(direction) {
-      currentIndex = (currentIndex + direction + tiles.length) % tiles.length;
-      openModal(currentIndex);
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (!modal.classList.contains('show')) return;
-      if (e.key === 'ArrowRight') changeSlide(1);
-      if (e.key === 'ArrowLeft') changeSlide(-1);
-      if (e.key === 'Escape') closeModal();
-    });
 
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
