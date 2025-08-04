@@ -1,3 +1,5 @@
+Best Media Page FUNCTIONAL 8/4
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -661,40 +663,44 @@
     }
 
     const ctx = document.getElementById('rankingChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 400, 0);
+    gradient.addColorStop(0, '#f72585');
+    gradient.addColorStop(1, '#7209b7');
 
     const chart = new Chart(ctx, {
-  type: 'doughnut',
-  data: {
-    labels: mediaItems.map(item => item.title),
-    datasets: [{
-      data: mediaItems.map(item => item.votes),
-      backgroundColor: [
-        '#f72585',
-        '#7209b7',
-        '#3a0ca3',
-        '#4361ee',
-        '#4cc9f0'
-      ],
-      borderWidth: 2,
-      borderColor: '#0f0f1c',
-      hoverOffset: 10
-    }]
-  },
-  options: {
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          color: '#f0f0f0',
-          font: { family: 'Orbitron' }
+      type: 'bar',
+      data: {
+        labels: mediaItems.map(item => item.title),
+        datasets: [{
+          label: '',
+          data: mediaItems.map(item => item.votes),
+          backgroundColor: gradient,
+          borderRadius: 4,
+          barThickness: 12
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { display: false },
+            border: { display: false }
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              color: '#f0f0f0',
+              font: { family: 'Orbitron', size: 12 }
+            },
+            border: { display: false }
+          }
         }
       }
-    },
-    cutout: '60%', // size of the donut hole
-    responsive: true
-  }
-});
-
+    });
 
     function updateChart() {
       chart.data.datasets[0].data = mediaItems.map(item => item.votes);
