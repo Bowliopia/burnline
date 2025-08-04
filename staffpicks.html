@@ -102,36 +102,52 @@
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
-    .story-card p {
-      display: none;
-    }
     .story-card small {
       color: #777;
       font-size: 0.8rem;
     }
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(15, 15, 28, 0.85);
-  color: #f0f0f0;
-  padding: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  white-space: normal;
-  box-sizing: border-box;
-}
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 15, 28, 0.85);
+      color: #f0f0f0;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
+      box-sizing: border-box;
+    }
+
+    .card-overlay .overlay-content {
+      max-width: 90%;
+    }
+
+    .card-overlay a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #0df6e3;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+
+    .card-overlay a:hover {
+      color: #ff4ac2;
+      text-decoration: underline;
+    }
+
     .story-card:hover .card-overlay {
       opacity: 1;
     }
@@ -161,107 +177,132 @@
       <button class="filter-btn" data-filter="other">Other</button>
     </div>
     <div class="story-grid" id="picks">
+
       <!-- Games -->
-  <div class="story-card" data-category="games">
-  <img src="CS Keyart.png">
-  <h3>Citizen Sleeper</h3>
-  <small>Jump Over the Age / Fellow Traveller</small>
-  <div class="card-overlay">
-    Cyberpunk on a spacestation with a vibe as good as any. This is one of our all-time favorite pieces of cyberpunk media. The gameplay loop might not be for everyone, but the story and dialogue is as good as it gets.
-    <br><br><a href="https://store.steampowered.com/app/1578650/Citizen_Sleeper/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="CS Keyart.png">
+        <h3>Citizen Sleeper</h3>
+        <small>Jump Over the Age / Fellow Traveller</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            Cyberpunk on a spacestation with a vibe as good as any. This is one of our all-time favorite pieces of cyberpunk media. The gameplay loop might not be for everyone, but the story and dialogue is as good as it gets.
+            <a href="https://store.steampowered.com/app/1578650/Citizen_Sleeper/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games">
-  <img src="Ruiner Keyart.jpg">
-  <h3>Ruiner</h3>
-  <small>Reikon Games</small>
-  <div class="card-overlay">
-    If you like cyberpunk stuff and you like top-down shooters, it's pretty can't miss. Don't overthink the story; it's guns + gritty setting.
-    <br><br><a href="https://store.steampowered.com/app/464060/RUINER/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="Ruiner Keyart.jpg">
+        <h3>Ruiner</h3>
+        <small>Reikon Games</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            If you like cyberpunk stuff and you like top-down shooters, it's pretty can't miss. Don't overthink the story; it's guns + gritty setting.
+            <a href="https://store.steampowered.com/app/464060/RUINER/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games">
-  <img src="Ghostrunner Keyart.jpg">
-  <h3>Ghostrunner</h3>
-  <small>One More Level</small>
-  <div class="card-overlay">
-    Like the sword parts of cyberpunk? Place this game.
-    <br><br><a href="https://store.steampowered.com/app/1139900/Ghostrunner/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="Ghostrunner Keyart.jpg">
+        <h3>Ghostrunner</h3>
+        <small>One More Level</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            Like the sword parts of cyberpunk? Place this game.
+            <a href="https://store.steampowered.com/app/1139900/Ghostrunner/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games">
-  <img src="CP2077 Keyart.jpg">
-  <h3>Cyberpunk 2077</h3>
-  <small>CD Projekt Red</small>
-  <div class="card-overlay">
-    We'd love to have a clickier take, but it really is as good as advertised. We'd also imagine you wouldn't be on this website without already having played this game.
-    <br><br><a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="CP2077 Keyart.jpg">
+        <h3>Cyberpunk 2077</h3>
+        <small>CD Projekt Red</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            We'd love to have a clickier take, but it really is as good as advertised. We'd also imagine you wouldn't be on this website without already having played this game.
+            <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games">
-  <img src="Cloudpunk Keyart.jpg">
-  <h3>Cloudpunk</h3>
-  <small>ION Lands</small>
-  <div class="card-overlay">
-    Live out your cyberpunk delivery boy fantasy. Something about pixel art and neon works really, really well, too.
-    <br><br><a href="https://store.steampowered.com/app/746850/Cloudpunk/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="Cloudpunk Keyart.jpg">
+        <h3>Cloudpunk</h3>
+        <small>ION Lands</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            Live out your cyberpunk delivery boy fantasy. Something about pixel art and neon works really, really well, too.
+            <a href="https://store.steampowered.com/app/746850/Cloudpunk/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games">
-  <img src="Transistor Keyart.jpg">
-  <h3>Transistor</h3>
-  <small>Supergiant Games</small>
-  <div class="card-overlay">
-    You like Hades? Great news: those folks made a cyberpunk game.
-    <br><br><a href="https://store.steampowered.com/app/237930/Transistor/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="Transistor Keyart.jpg">
+        <h3>Transistor</h3>
+        <small>Supergiant Games</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            You like Hades? Great news: those folks made a cyberpunk game.
+            <a href="https://store.steampowered.com/app/237930/Transistor/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games">
-  <img src="FC3 Blood Dragon.jpg">
-  <h3>Far Cry 3: Blood Dragon</h3>
-  <small>Ubisoft</small>
-  <div class="card-overlay">
-    Everyone knows Far Cry 3 was the best Far Cry, and the retro-futuristic '80s action parody dlc matches that speed.
-    <br><br><a href="https://store.steampowered.com/app/233270/Far_Cry_3_Blood_Dragon/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-  </div>
-</div>
+      <div class="story-card" data-category="games">
+        <img src="FC3 Blood Dragon.jpg">
+        <h3>Far Cry 3: Blood Dragon</h3>
+        <small>Ubisoft</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            Everyone knows Far Cry 3 was the best Far Cry, and the retro-futuristic '80s action parody dlc matches that speed.
+            <a href="https://store.steampowered.com/app/233270/Far_Cry_3_Blood_Dragon/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+          </div>
+        </div>
+      </div>
 
       <!-- Books -->
       <div class="story-card" data-category="books">
         <img src="Neuromancer.png">
         <h3>Neuromancer</h3>
         <small>William Gibson</small>
-        <div class="card-overlay">The definitive cyberpunk novel that launched a genre.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">The definitive cyberpunk novel that launched a genre.</div>
+        </div>
       </div>
       <div class="story-card" data-category="books">
         <img src="Mirrorshades.jpg">
         <h3>Mirrorshades</h3>
         <small>Edited by Bruce Sterling</small>
-        <div class="card-overlay">An anthology that defined the cyberpunk movement.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">An anthology that defined the cyberpunk movement.</div>
+        </div>
       </div>
       <div class="story-card" data-category="books">
         <img src="Pattern Recognition.jpg">
         <h3>Pattern Recognition</h3>
         <small>William Gibson</small>
-        <div class="card-overlay">A post-9/11 exploration of identity, branding, and connection.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">A post-9/11 exploration of identity, branding, and connection.</div>
+        </div>
       </div>
       <div class="story-card" data-category="books">
         <img src="Cryptonomicon.jpg">
         <h3>Cryptonomicon</h3>
         <small>Neal Stephenson</small>
-        <div class="card-overlay">A sprawling tale of code, war, and information age power.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">A sprawling tale of code, war, and information age power.</div>
+        </div>
       </div>
       <div class="story-card" data-category="books">
         <img src="Synners.jpg">
         <h3>Synners</h3>
         <small>Pat Cadigan</small>
-        <div class="card-overlay">A prescient look at digital identity and networked consciousness.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">A prescient look at digital identity and networked consciousness.</div>
+        </div>
       </div>
 
       <!-- Film and TV -->
@@ -269,19 +310,25 @@
         <img src="CP Edgerunners.jpg">
         <h3>Cyberpunk Edgerunners</h3>
         <small>Studio Trigger / CD Projekt</small>
-        <div class="card-overlay">An anime spinoff of Cyberpunk 2077 with heart and style.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">An anime spinoff of Cyberpunk 2077 with heart and style.</div>
+        </div>
       </div>
       <div class="story-card" data-category="film">
         <img src="Ghost in the Shell.jpg">
         <h3>Ghost in the Shell</h3>
         <small>Mamoru Oshii</small>
-        <div class="card-overlay">A philosophical dive into cybernetic identity.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">A philosophical dive into cybernetic identity.</div>
+        </div>
       </div>
       <div class="story-card" data-category="film">
         <img src="PLUTO.jpg">
         <h3>PLUTO</h3>
         <small>Naoki Urasawa / Netflix</small>
-        <div class="card-overlay">A noir robot drama reimagining Astro Boy's greatest story arc.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">A noir robot drama reimagining Astro Boy's greatest story arc.</div>
+        </div>
       </div>
 
       <!-- Other -->
@@ -289,7 +336,9 @@
         <img src="Neon Rising.png">
         <h3>Neon_Rising</h3>
         <small>The_Future_is_Now</small>
-        <div class="card-overlay">A cyberpunk narrative art book blending visuals and lore.</div>
+        <div class="card-overlay">
+          <div class="overlay-content">A cyberpunk narrative art book blending visuals and lore.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -311,12 +360,10 @@
       });
     }
 
-    // Set default to "games" on page load
     document.addEventListener('DOMContentLoaded', () => {
       filterCategory('games');
     });
 
-    // Handle click events
     buttons.forEach(button => {
       button.addEventListener('click', () => {
         const category = button.getAttribute('data-filter');
