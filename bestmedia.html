@@ -26,9 +26,10 @@
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
+      position: relative;
       flex-wrap: wrap;
     }
-        
+
     .hamburger {
       display: none;
       flex-direction: column;
@@ -38,13 +39,14 @@
       height: 25px;
       gap: 5px;
     }
+
     .hamburger div {
       background: #0f0f1c;
       height: 4px;
       width: 100%;
       border-radius: 2px;
-  }
-    
+    }
+
     .logo-title {
       display: flex;
       align-items: center;
@@ -181,6 +183,33 @@
       font-size: 0.8rem;
       color: #666;
     }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .site-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #0df6e3;
+        padding: 1rem 2rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+      }
+
+      .site-nav.show {
+        display: flex;
+      }
+
+      .site-nav a {
+        color: #0f0f1c;
+        padding: 0.5rem 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -190,7 +219,12 @@
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
-    <nav class="site-nav">
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Fiction</a>
       <a href="art.html">Art</a>
       <a href="about.html">About</a>
@@ -328,6 +362,14 @@
     }
 
     renderMediaList();
+
+    // Hamburger toggle logic
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('site-nav');
+
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
   </script>
 </body>
 </html>
