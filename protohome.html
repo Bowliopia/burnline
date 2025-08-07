@@ -121,15 +121,12 @@
       color: #444;
       margin-bottom: 1.2rem;
     }
-    .hero img {
-      max-width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    .hero a img {
+      cursor: pointer;
+      transition: opacity 0.2s ease;
     }
-    .hero-button-container {
-      width: 100%;
-      text-align: center;
-      margin-top: 1rem;
+    .hero a img:hover {
+      opacity: 0.9;
     }
 
     .grid {
@@ -154,10 +151,6 @@
     .card h3 {
       color: #0df6e3;
       margin-bottom: 0.5rem;
-    }
-    .card p {
-      font-size: 0.95rem;
-      color: #444;
     }
 
     .gradient-heading {
@@ -264,43 +257,41 @@
     </nav>
   </header>
 
-<section class="hero" style="flex-wrap: wrap; background: #ffffff;">
-  <img src="Asimov Test Cover.jpg" alt="Latest issue cover" style="max-width: 300px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
+  <section class="hero">
+    <a href="#latest-issue" onclick="openFlipbook(event)">
+      <img src="Asimov Test Cover.jpg" alt="Latest issue cover" style="max-width: 300px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
+    </a>
 
-<div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
+    <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
+      <h1 class="gradient-heading">Issue 01 – October 2025</h1>
 
-  <h1 class="gradient-heading">Issue 01 – October 2025</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
+        <div style="flex: 1 1 300px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;"><strong>Neon Ashes</strong> by J. M. Caldwell</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Chrome Dreams</strong> by Riko Ahn</li>
+            <li style="margin-bottom: 0.75rem;"><strong>The Memory Blackout</strong> by Dex Silva</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Smog Season</strong> by Aliya Zhang</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Datalace</strong> by T.J. Krow</li>
+          </ul>
+        </div>
 
-  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
-    <div style="flex: 1 1 300px;">
-      <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        <li style="margin-bottom: 0.75rem;"><strong>Neon Ashes</strong> by J. M. Caldwell</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Chrome Dreams</strong> by Riko Ahn</li>
-        <li style="margin-bottom: 0.75rem;"><strong>The Memory Blackout</strong> by Dex Silva</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Smog Season</strong> by Aliya Zhang</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Datalace</strong> by T.J. Krow</li>
-      </ul>
+        <div style="flex: 1 1 300px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;"><strong>Neural Bloom</strong> by Keira Vonn</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Ghost Signal</strong> by M. Reyes</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Synth Skin</strong> by ARTI.FX</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="width: 100%; text-align: center; margin-top: 2.5rem;">
+        <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
+      </div>
     </div>
-
-    <div style="flex: 1 1 300px;">
-      <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        <li style="margin-bottom: 0.75rem;"><strong>Neural Bloom</strong> by Keira Vonn</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Ghost Signal</strong> by M. Reyes</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Synth Skin</strong> by ARTI.FX</li>
-      </ul>
-    </div>
-  </div>
-
-  <div style="width: 100%; text-align: center; margin-top: 2.5rem;">
-    <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
-  </div>
-</div>
-
-</section>
-
-
+  </section>
 
   <section id="latest-issue" style="padding: 4rem 2rem; text-align: center; display: none;">
     <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/055f81b30b.html" style="border: 1px solid lightgray; width: 100%; max-width: 900px; height: 600px; margin: 0 auto; display: block;"></iframe>
@@ -336,7 +327,7 @@
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p>Get stories, art, and updates from Burnline straigt to your inbox.</p>
+        <p>Get stories, art, and updates from Burnline straight to your inbox.</p>
         <form style="margin-top: 1rem;">
           <input type="email" placeholder="Email Address" class="newsletter-input"><br>
           <button type="submit" class="newsletter-button">Subscribe</button>
@@ -364,9 +355,22 @@
       nav.classList.toggle('active');
     }
 
+    function openFlipbook(event) {
+      event.preventDefault();
+      const section = document.getElementById('latest-issue');
+      const button = document.getElementById('toggle-flipbook');
+
+      if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+        if (button) button.textContent = 'Hide Issue';
+      }
+
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+
     document.getElementById('toggle-flipbook').addEventListener('click', function () {
       const section = document.getElementById('latest-issue');
-      if (section.style.display === 'none') {
+      if (section.style.display === 'none' || section.style.display === '') {
         section.style.display = 'block';
         this.textContent = 'Hide Issue';
       } else {
