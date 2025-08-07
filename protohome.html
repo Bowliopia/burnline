@@ -368,16 +368,7 @@
       section.scrollIntoView({ behavior: 'smooth' });
     }
 
-    document.getElementById('toggle-flipbook').addEventListener('click', function () {
-      const section = document.getElementById('latest-issue');
-      if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-        this.textContent = 'Hide Issue';
-      } else {
-        section.style.display = 'none';
-        this.textContent = 'Read This Issue';
-      }
-    });
+document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
   </script>
 </body>
 </html>
