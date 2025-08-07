@@ -349,26 +349,30 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
-    }
+ <script>
+  function toggleMenu() {
+    const nav = document.getElementById('site-nav');
+    nav.classList.toggle('active');
+  }
 
-    function openFlipbook(event) {
-      event.preventDefault();
-      const section = document.getElementById('latest-issue');
-      const button = document.getElementById('toggle-flipbook');
+  function openFlipbook(event) {
+    event.preventDefault();
+    const section = document.getElementById('latest-issue');
+    const button = document.getElementById('toggle-flipbook');
 
-      if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-        if (button) button.textContent = 'Hide Issue';
-      }
+    const isHidden = section.style.display === 'none' || section.style.display === '';
 
+    if (isHidden) {
+      section.style.display = 'block';
+      if (button) button.textContent = 'Hide Issue';
       section.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      section.style.display = 'none';
+      if (button) button.textContent = 'Read This Issue';
     }
+  }
 
-document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
-  </script>
+  document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
+</script>
 </body>
 </html>
