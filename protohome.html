@@ -5,264 +5,238 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Burnline – The Cyberpunk Magazine</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #e6e6e6;
-    color: #222;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  h1, h2, h3, nav a, header {
-    font-family: 'Orbitron', sans-serif;
-    line-height: 1.4;
-  }
-  h1 {
-    font-size: 2.8rem;
-  }
-  h2 {
-    font-size: 2.2rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, nav a, header {
+      font-family: 'Orbitron', sans-serif;
+      line-height: 1.4;
+    }
+    h1 {
+      font-size: 2.8rem;
+    }
+    h2 {
+      font-size: 2.2rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
 
-  .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #0df6e3;
-    color: #0f0f1c;
-    padding: 1rem 2rem;
-    flex-wrap: wrap;
-  }
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
 
-  .logo-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: inherit;
-  }
-  .logo-title img {
-    height: 60px;
-    width: auto;
-  }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-title img {
+      height: 60px;
+      width: auto;
+    }
 
-  .site-nav {
-    display: flex;
-    gap: 2rem;
-    font-size: 1rem;
-  }
-  .site-nav a {
-    color: #0f0f1c;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  .site-nav a:hover {
-    color: #ff4ac2;
-  }
-
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    gap: 5px;
-  }
-  .hamburger div {
-    background: #0f0f1c;
-    height: 4px;
-    width: 100%;
-    border-radius: 2px;
-  }
-  @media (max-width: 768px) {
     .site-nav {
-      flex-direction: column;
-      width: 100%;
-      display: none;
-      background-color: #0df6e3;
-      padding: 1rem 0;
-      margin-top: 1rem;
-    }
-    .site-nav.active {
       display: flex;
+      gap: 2rem;
+      font-size: 1rem;
     }
+    .site-nav a {
+      color: #0f0f1c;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .site-nav a:hover {
+      color: #ff4ac2;
+    }
+
     .hamburger {
-      display: flex;
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      gap: 5px;
     }
-  }
+    .hamburger div {
+      background: #0f0f1c;
+      height: 4px;
+      width: 100%;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .site-nav {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #0df6e3;
+        padding: 1rem 0;
+        margin-top: 1rem;
+      }
+      .site-nav.active {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
 
-  .hero {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    padding: 6rem 2rem;
-    background: #e6e6e6;
-    flex-wrap: wrap;
-    border-bottom: 1px solid #ccc;
-  }
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      padding: 6rem 2rem;
+      background: #ffffff;
+      flex-wrap: wrap;
+    }
+    .hero-text {
+      max-width: 600px;
+    }
+    .hero-text h1 {
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 1.2rem;
+    }
+    .hero a img {
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .hero a img:hover {
+      opacity: 0.9;
+    }
 
-  .hero-text {
-    max-width: 600px;
-  }
-  .hero-text h1 {
-    background: linear-gradient(90deg, #f72585, #7209b7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-  }
-  .hero-text p {
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 1.2rem;
-  }
-  .hero a img {
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-  }
-  .hero a img:hover {
-    opacity: 0.9;
-  }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      padding: 6rem 2rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      color: #0df6e3;
+      margin-bottom: 0.5rem;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-  padding: 6rem 2rem;
-  background-color: #e6e6e6;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4'><rect width='1' height='1' fill='%23999' /><rect x='2' y='2' width='1' height='1' fill='%23bbb' /></svg>");
-  background-repeat: repeat;
-  background-attachment: fixed;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+    .gradient-heading {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
 
-  .card {
-    background: #e6e6e6;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  }
-  .card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
-  .card h3 {
-    color: #0df6e3;
-    margin-bottom: 0.5rem;
-  }
+    footer {
+      background: #0f0f1c;
+      padding: 5rem 2rem 3rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    footer a:hover {
+      color: #0df6e3;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column {
+      flex: 1 1 250px;
+      min-width: 200px;
+    }
+    .footer-logo {
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+      color: #555;
+    }
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: none;
+      width: 70%;
+      margin-bottom: 0.8rem;
+    }
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-  #latest-issue {
-    padding: 4rem 2rem;
-    text-align: center;
-    display: none;
-    background: repeating-linear-gradient(
-      0deg,
-      #e6e6e6,
-      #e6e6e6 40px,
-      #ebebeb 40px,
-      #ebebeb 80px
-    );
-    background-attachment: fixed;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-  }
+    .read-issue-btn {
+      background-color: #0df6e3;
+      border: none;
+      color: #0f0f1c;
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+    .read-issue-btn:hover {
+      background-color: #0ad3c6;
+    }
 
-  .gradient-heading {
-    font-size: 2.2rem;
-    background: linear-gradient(90deg, #f72585, #7209b7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-  }
-
-  footer {
-    background: #d9d9d9;
-    padding: 5rem 2rem 3rem;
-    color: #444;
-    font-size: 0.9rem;
-    border-top: 1px solid #bbb;
-  }
-  footer a:hover {
-    color: #0df6e3;
-  }
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: auto;
-  }
-  .footer-column {
-    flex: 1 1 250px;
-    min-width: 200px;
-  }
-  .footer-logo {
-    height: 100px;
-    margin-bottom: 1rem;
-  }
-  .footer-bottom {
-    text-align: center;
-    margin-top: 3rem;
-    border-top: 1px solid #222;
-    padding-top: 1rem;
-    color: #555;
-  }
-  .newsletter-input {
-    padding: 0.6rem 1rem;
-    border-radius: 4px;
-    border: none;
-    width: 70%;
-    margin-bottom: 0.8rem;
-  }
-  .newsletter-button {
-    padding: 0.6rem 1.2rem;
-    background-color: #0df6e3;
-    color: #0f0f1c;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .read-issue-btn {
-    background-color: #0df6e3;
-    border: none;
-    color: #0f0f1c;
-    padding: 0.75rem 2rem;
-    font-weight: bold;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
-  }
-  .read-issue-btn:hover {
-    background-color: #0ad3c6;
-  }
-
-  .card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.2s ease;
-  }
-  .card-link:hover .card {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
-  }
-</style>
-
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .card-link:hover .card {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -375,30 +349,30 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
+ <script>
+  function toggleMenu() {
+    const nav = document.getElementById('site-nav');
+    nav.classList.toggle('active');
+  }
+
+  function openFlipbook(event) {
+    event.preventDefault();
+    const section = document.getElementById('latest-issue');
+    const button = document.getElementById('toggle-flipbook');
+
+    const isHidden = section.style.display === 'none' || section.style.display === '';
+
+    if (isHidden) {
+      section.style.display = 'block';
+      if (button) button.textContent = 'Hide Issue';
+      section.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      section.style.display = 'none';
+      if (button) button.textContent = 'Read This Issue';
     }
+  }
 
-    function openFlipbook(event) {
-      event.preventDefault();
-      const section = document.getElementById('latest-issue');
-      const button = document.getElementById('toggle-flipbook');
-
-      const isHidden = section.style.display === 'none' || section.style.display === '';
-
-      if (isHidden) {
-        section.style.display = 'block';
-        if (button) button.textContent = 'Hide Issue';
-        section.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        section.style.display = 'none';
-        if (button) button.textContent = 'Read This Issue';
-      }
-    }
-
-    document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
-  </script>
+  document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
+</script>
 </body>
 </html>
