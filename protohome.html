@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burnline – The Cyberpunk Magazine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, nav a, header {
+      font-family: 'Orbitron', sans-serif;
+      line-height: 1.4;
+    }
+    h1 {
+      font-size: 2.8rem;
+    }
+    h2 {
+      font-size: 2.2rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-title img {
+      height: 60px;
+      width: auto;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 2rem;
+      font-size: 1rem;
+    }
+    .site-nav a {
+      color: #0f0f1c;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .site-nav a:hover {
+      color: #ff4ac2;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      gap: 5px;
+    }
+    .hamburger div {
+      background: #0f0f1c;
+      height: 4px;
+      width: 100%;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .site-nav {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #0df6e3;
+        padding: 1rem 0;
+        margin-top: 1rem;
+      }
+      .site-nav.active {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      padding: 6rem 2rem;
+      background: #ffffff;
+      flex-wrap: wrap;
+    }
+    .hero-text {
+      max-width: 600px;
+    }
+    .hero-text h1 {
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 1.2rem;
+    }
+    .hero img {
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .hero-button-container {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      padding: 6rem 2rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      color: #0df6e3;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .gradient-heading {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background: #0f0f1c;
+      padding: 5rem 2rem 3rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    footer a:hover {
+      color: #0df6e3;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column {
+      flex: 1 1 250px;
+      min-width: 200px;
+    }
+    .footer-logo {
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+      color: #555;
+    }
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: none;
+      width: 70%;
+      margin-bottom: 0.8rem;
+    }
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .read-issue-btn {
+      background-color: #0df6e3;
+      border: none;
+      color: #0f0f1c;
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+    .read-issue-btn:hover {
+      background-color: #0ad3c6;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .card-link:hover .card {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="site-nav" id="site-nav">
+      <a href="fiction.html">Fiction</a>
+      <a href="art.html">Art</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="gradient-heading">The Latest Issue</h1>
+      <p>Fiction from console cowboys and renegade minds. Themes this month: live, laugh, love (but darker).</p>
+      <p>Also: spreads from artistpoop and farthouse. Essays, if we remember to add them.</p>
+    </div>
+    <img src="Asimov Test Cover.jpg" alt="Latest issue cover">
+    <div class="hero-button-container">
+      <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
+    </div>
+  </section>
+
+  <section id="latest-issue" style="padding: 4rem 2rem; text-align: center; display: none;">
+    <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/055f81b30b.html" style="border: 1px solid lightgray; width: 100%; max-width: 900px; height: 600px; margin: 0 auto; display: block;"></iframe>
+    <p style="margin-top: 1rem;">
+      <a href="https://heyzine.com/flip-book/055f81b30b.html" target="_blank" style="color: #0df6e3; text-decoration: underline;">
+        Open in Fullscreen
+      </a>
+    </p>
+  </section>
+
+  <section class="grid" id="features">
+    <a href="fiction.html" class="card-link">
+      <div class="card">
+        <img src="AL Cover.png" alt="Featured Stories image">
+        <h3>Featured Stories</h3>
+        <p>High-voltage fiction from the neon edge. Our boldest, weirdest tales.</p>
+      </div>
+    </a>
+    <a href="bestmedia.html" class="card-link">
+      <div class="card">
+        <img src="NM Art.png" alt="Poll image">
+        <h3>Poll: Best Cyberpunk Media</h3>
+        <p>The genre's defining films, books, and games — ranked by you.</p>
+      </div>
+    </a>
+    <a href="staffpicks.html" class="card-link">
+      <div class="card">
+        <img src="CS2 Keyart.jpg" alt="Staff Picks image">
+        <h3>Staff Picks</h3>
+        <p>Weird and wired media we keep coming back to.</p>
+      </div>
+    </a>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p>Get stories, art, and neon-lit updates from Burnline.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Read</h4>
+        <p><a href="#">Neon Dystopia</a></p>
+        <p><a href="#">Future//Tense</a></p>
+        <p><a href="#">HackDust</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('active');
+    }
+
+    document.getElementById('toggle-flipbook').addEventListener('click', function () {
+      const section = document.getElementById('latest-issue');
+      if (section.style.display === 'none') {
+        section.style.display = 'block';
+        this.textContent = 'Hide Issue';
+      } else {
+        section.style.display = 'none';
+        this.textContent = 'Read This Issue';
+      }
+    });
+  </script>
+</body>
+</html>
