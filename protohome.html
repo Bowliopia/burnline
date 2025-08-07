@@ -129,7 +129,59 @@
       opacity: 0.9;
     }
 
+.glitch-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: glitch-flicker 1.5s infinite;
+  z-index: 0;
+}
+
+@keyframes glitch-flicker {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: 0.15;
+  }
+  20% {
+    transform: translate(-1px, 1px);
+    opacity: 0.12;
+  }
+  40% {
+    transform: translate(1px, -1px);
+    opacity: 0.2;
+  }
+  60% {
+    transform: translate(0.5px, 1px);
+    opacity: 0.1;
+  }
+  80% {
+    transform: translate(-0.5px, -0.5px);
+    opacity: 0.13;
+  }
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 0.15;
+  }
+}
+
+.grid-wrapper {
+  position: relative;
+  z-index: 0;
+}
+
 .grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
@@ -141,6 +193,7 @@
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
+
     .card {
       background: #ffffff;
       border-radius: 12px;
@@ -308,6 +361,8 @@
     </p>
   </section>
 
+  <div class="grid-wrapper">
+  <div class="glitch-overlay"></div>
   <section class="grid" id="features">
     <a href="fiction.html" class="card-link">
       <div class="card">
@@ -328,6 +383,7 @@
       </div>
     </a>
   </section>
+  </div>
 
   <footer>
     <div class="footer-container">
