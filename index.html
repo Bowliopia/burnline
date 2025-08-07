@@ -251,17 +251,41 @@
     </nav>
   </header>
 
-<section class="hero">
-  <div class="hero-text">
-    <h1 class="gradient-heading">The Latest Issue</h1>
-    <p>This issue features stories from console cowboys like Beevis, Butthead, and Your Mom. Core themes in this one include live, laugh, and love.</p>
-    <p>Also in this issue: art spreads by artistpoop and farthouse, as well as essays exploring (idk, are we putting essays in this b?)</p>
-  </div>
-  <img src="Asimov Test Cover.jpg" alt="Latest issue cover">
-  <div class="hero-button-container">
-    <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
-  </div>
-</section>
+  <section class="hero">
+    <a href="#latest-issue" onclick="openFlipbook(event)">
+      <img src="Asimov Test Cover.jpg" alt="Latest issue cover" style="max-width: 300px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
+    </a>
+
+    <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
+      <h1 class="gradient-heading">The Latest Issue</h1>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
+        <div style="flex: 1 1 300px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;"><strong>Neon Ashes</strong> by J. M. Caldwell</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Chrome Dreams</strong> by Riko Ahn</li>
+            <li style="margin-bottom: 0.75rem;"><strong>The Memory Blackout</strong> by Dex Silva</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Smog Season</strong> by Aliya Zhang</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Datalace</strong> by T.J. Krow</li>
+          </ul>
+        </div>
+
+        <div style="flex: 1 1 300px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;"><strong>Neural Bloom</strong> by Keira Vonn</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Ghost Signal</strong> by M. Reyes</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Synth Skin</strong> by ARTI.FX</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="width: 100%; text-align: center; margin-top: 2.5rem;">
+        <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
+      </div>
+    </div>
+  </section>
 
   <section id="latest-issue" style="padding: 2rem; text-align: center; display: none;">
     <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/055f81b30b.html" style="border: 1px solid lightgray; width: 100%; max-width: 900px; height: 600px; margin: 0 auto; display: block;"></iframe>
@@ -342,5 +366,6 @@
   </script>
 </body>
 </html>
+
 
 
