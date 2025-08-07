@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #e6e6e6;
+      background: #f7f7f7;
       color: #222;
     }
     html {
@@ -19,9 +19,15 @@
       font-family: 'Orbitron', sans-serif;
       line-height: 1.4;
     }
-    h1 { font-size: 2.8rem; }
-    h2 { font-size: 2.2rem; }
-    h3 { font-size: 1.5rem; }
+    h1 {
+      font-size: 2.8rem;
+    }
+    h2 {
+      font-size: 2.2rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
 
     .site-header {
       display: flex;
@@ -98,11 +104,9 @@
       justify-content: center;
       gap: 3rem;
       padding: 6rem 2rem;
-      background: #e6e6e6;
+      background: #ffffff;
       flex-wrap: wrap;
-      border-bottom: 1px solid #ccc;
     }
-
     .hero-text {
       max-width: 600px;
     }
@@ -125,55 +129,20 @@
       opacity: 0.9;
     }
 
-    .grid-wrapper {
-      position: relative;
-      z-index: 0;
-    }
-
-    .glitch-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background-image: repeating-linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.03) 0px,
-        rgba(0, 0, 0, 0.03) 2px,
-        transparent 2px,
-        transparent 4px
-      );
-      animation: glitch-flicker 1.5s infinite;
-      z-index: 0;
-    }
-
-    @keyframes glitch-flicker {
-      0% { transform: translate(0px, 0px); opacity: 0.15; }
-      20% { transform: translate(-1px, 1px); opacity: 0.12; }
-      40% { transform: translate(1px, -1px); opacity: 0.2; }
-      60% { transform: translate(0.5px, 1px); opacity: 0.1; }
-      80% { transform: translate(-0.5px, -0.5px); opacity: 0.13; }
-      100% { transform: translate(0px, 0px); opacity: 0.15; }
-    }
-
-    .grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      padding: 6rem 2rem;
-      background-color: #e6e6e6;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect x='0' y='0' width='10' height='10' fill='%23ccc' /><rect x='30' y='30' width='10' height='10' fill='%23ccc' /></svg>");
-      background-repeat: repeat;
-      background-attachment: fixed;
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-    }
-
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 6rem 2rem;
+  background-color: #e6e6e6;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect x='0' y='0' width='10' height='10' fill='%23ccc' /><rect x='30' y='30' width='10' height='10' fill='%23ccc' /></svg>");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
     .card {
-      background: #e6e6e6;
+      background: #ffffff;
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -196,6 +165,82 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+    }
+
+    footer {
+      background: #0f0f1c;
+      padding: 5rem 2rem 3rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    footer a:hover {
+      color: #0df6e3;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column {
+      flex: 1 1 250px;
+      min-width: 200px;
+    }
+    .footer-logo {
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+      color: #555;
+    }
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: none;
+      width: 70%;
+      margin-bottom: 0.8rem;
+    }
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: #0df6e3;
+      color: #0f0f1c;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .read-issue-btn {
+      background-color: #0df6e3;
+      border: none;
+      color: #0f0f1c;
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+    .read-issue-btn:hover {
+      background-color: #0ad3c6;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .card-link:hover .card {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
   </style>
 </head>
@@ -225,79 +270,115 @@
 
     <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
       <h1 class="gradient-heading">Issue 01 – October 2025</h1>
+
       <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
         <div style="flex: 1 1 300px;">
           <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
           <ul style="list-style: none; padding: 0; margin: 0;">
-            <li><strong>Neon Ashes</strong> by J. M. Caldwell</li>
-            <li><strong>Chrome Dreams</strong> by Riko Ahn</li>
-            <li><strong>The Memory Blackout</strong> by Dex Silva</li>
-            <li><strong>Smog Season</strong> by Aliya Zhang</li>
-            <li><strong>Datalace</strong> by T.J. Krow</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Neon Ashes</strong> by J. M. Caldwell</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Chrome Dreams</strong> by Riko Ahn</li>
+            <li style="margin-bottom: 0.75rem;"><strong>The Memory Blackout</strong> by Dex Silva</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Smog Season</strong> by Aliya Zhang</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Datalace</strong> by T.J. Krow</li>
           </ul>
         </div>
+
         <div style="flex: 1 1 300px;">
           <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
           <ul style="list-style: none; padding: 0; margin: 0;">
-            <li><strong>Neural Bloom</strong> by Keira Vonn</li>
-            <li><strong>Ghost Signal</strong> by M. Reyes</li>
-            <li><strong>Synth Skin</strong> by ARTI.FX</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Neural Bloom</strong> by Keira Vonn</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Ghost Signal</strong> by M. Reyes</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Synth Skin</strong> by ARTI.FX</li>
           </ul>
         </div>
       </div>
+
       <div style="width: 100%; text-align: center; margin-top: 2.5rem;">
         <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
       </div>
     </div>
   </section>
 
-  <div class="grid-wrapper">
-    <div class="glitch-overlay"></div>
-    <section class="grid" id="features">
-      <a href="fiction.html" class="card-link">
-        <div class="card">
-          <img src="AL Cover.png" alt="Featured Stories image">
-          <h3>Featured Stories</h3>
-        </div>
+  <section id="latest-issue" style="padding: 4rem 2rem; text-align: center; display: none;">
+    <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/055f81b30b.html" style="border: 1px solid lightgray; width: 100%; max-width: 900px; height: 600px; margin: 0 auto; display: block;"></iframe>
+    <p style="margin-top: 1rem;">
+      <a href="https://heyzine.com/flip-book/055f81b30b.html" target="_blank" style="color: #0df6e3; text-decoration: underline;">
+        Open in Fullscreen
       </a>
-      <a href="bestmedia.html" class="card-link">
-        <div class="card">
-          <img src="NM Art.png" alt="Poll image">
-          <h3>Cyberpunk Media Ranked</h3>
-        </div>
-      </a>
-      <a href="staffpicks.html" class="card-link">
-        <div class="card">
-          <img src="CS2 Keyart.jpg" alt="Staff Picks image">
-          <h3>Staff Picks</h3>
-        </div>
-      </a>
-    </section>
-  </div>
+    </p>
+  </section>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
+  <section class="grid" id="features">
+    <a href="fiction.html" class="card-link">
+      <div class="card">
+        <img src="AL Cover.png" alt="Featured Stories image">
+        <h3>Featured Stories</h3>
+      </div>
+    </a>
+    <a href="bestmedia.html" class="card-link">
+      <div class="card">
+        <img src="NM Art.png" alt="Poll image">
+        <h3>Cyberpunk Media Ranked</h3>
+      </div>
+    </a>
+    <a href="staffpicks.html" class="card-link">
+      <div class="card">
+        <img src="CS2 Keyart.jpg" alt="Staff Picks image">
+        <h3>Staff Picks</h3>
+      </div>
+    </a>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p>Get stories, art, and updates from Burnline straight to your inbox.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: #0df6e3;">Read</h4>
+        <p><a href="#">Neon Dystopia</a></p>
+        <p><a href="#">Future//Tense</a></p>
+        <p><a href="#">HackDust</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
+ <script>
+  function toggleMenu() {
+    const nav = document.getElementById('site-nav');
+    nav.classList.toggle('active');
+  }
+
+  function openFlipbook(event) {
+    event.preventDefault();
+    const section = document.getElementById('latest-issue');
+    const button = document.getElementById('toggle-flipbook');
+
+    const isHidden = section.style.display === 'none' || section.style.display === '';
+
+    if (isHidden) {
+      section.style.display = 'block';
+      if (button) button.textContent = 'Hide Issue';
+      section.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      section.style.display = 'none';
+      if (button) button.textContent = 'Read This Issue';
     }
+  }
 
-    function openFlipbook(event) {
-      event.preventDefault();
-      const section = document.getElementById('latest-issue');
-      const button = document.getElementById('toggle-flipbook');
-
-      const isHidden = section.style.display === 'none' || section.style.display === '';
-      if (isHidden) {
-        section.style.display = 'block';
-        if (button) button.textContent = 'Hide Issue';
-        section.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        section.style.display = 'none';
-        if (button) button.textContent = 'Read This Issue';
-      }
-    }
-
-    document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
-  </script>
+  document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
+</script>
 </body>
 </html>
