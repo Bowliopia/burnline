@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #f7f7f7;
+      background: #f2f8fa;
       color: #222;
     }
     html {
@@ -104,7 +104,7 @@
       justify-content: center;
       gap: 3rem;
       padding: 6rem 2rem;
-      background: #ffffff;
+      background: #f2f8fa;
       flex-wrap: wrap;
     }
     .hero-text {
@@ -136,7 +136,7 @@
       padding: 6rem 2rem;
     }
     .card {
-      background: #ffffff;
+      background: #f2f8fa;
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -162,9 +162,9 @@
     }
 
     footer {
-      background: #0f0f1c;
+      background: #e2eff1;
       padding: 5rem 2rem 3rem;
-      color: #aaa;
+      color: #444;
       font-size: 0.9rem;
     }
     footer a:hover {
@@ -349,30 +349,30 @@
     </div>
   </footer>
 
- <script>
-  function toggleMenu() {
-    const nav = document.getElementById('site-nav');
-    nav.classList.toggle('active');
-  }
-
-  function openFlipbook(event) {
-    event.preventDefault();
-    const section = document.getElementById('latest-issue');
-    const button = document.getElementById('toggle-flipbook');
-
-    const isHidden = section.style.display === 'none' || section.style.display === '';
-
-    if (isHidden) {
-      section.style.display = 'block';
-      if (button) button.textContent = 'Hide Issue';
-      section.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      section.style.display = 'none';
-      if (button) button.textContent = 'Read This Issue';
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('active');
     }
-  }
 
-  document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
-</script>
+    function openFlipbook(event) {
+      event.preventDefault();
+      const section = document.getElementById('latest-issue');
+      const button = document.getElementById('toggle-flipbook');
+
+      const isHidden = section.style.display === 'none' || section.style.display === '';
+
+      if (isHidden) {
+        section.style.display = 'block';
+        if (button) button.textContent = 'Hide Issue';
+        section.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        section.style.display = 'none';
+        if (button) button.textContent = 'Read This Issue';
+      }
+    }
+
+    document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
+  </script>
 </body>
 </html>
