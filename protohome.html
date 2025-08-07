@@ -129,12 +129,18 @@
       opacity: 0.9;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      padding: 6rem 2rem;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 6rem 2rem;
+  background-color: #e6e6e6;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect x='0' y='0' width='10' height='10' fill='%23ccc' /><rect x='30' y='30' width='10' height='10' fill='%23ccc' /></svg>");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
     .card {
       background: #ffffff;
       border-radius: 12px;
