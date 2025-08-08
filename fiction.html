@@ -6,29 +6,39 @@
   <title>Fiction – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root{
+      --bg-start:#0f0f1c;
+      --bg-end:#1b1e35;
+      --neon:#0df6e3;
+      --pink:#ff4ac2;
+      --card:#14172a;
+      --card-2:#1c1e2f;
+      --text:#f0f0f0;
+      --muted:#b7b7c7;
+    }
+    *{box-sizing:border-box}
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      color: var(--text);
     }
     h1, h2, h3, h4, nav a, header {
       font-family: 'Orbitron', sans-serif;
     }
 
+    /* Header */
     .site-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #0df6e3;
+      background: var(--neon);
       color: #0f0f1c;
       padding: 1rem 2rem;
       font-size: 2rem;
-      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
       position: relative;
     }
-
     .logo-title {
       display: flex;
       align-items: center;
@@ -36,148 +46,150 @@
       text-decoration: none;
       color: inherit;
     }
-
-    .logo-title img {
-      height: 60px;
-      width: auto;
+    .logo-title img {height: 60px; width: auto;}
+    .site-nav {display: flex; gap: 2rem; font-size: 1rem;}
+    .site-nav a {color:#0f0f1c; text-decoration:none; font-weight:bold; transition: color .3s;}
+    .site-nav a:hover {color: var(--pink);}
+    .hamburger {display:none; flex-direction:column; justify-content:center; cursor:pointer; width:30px; height:25px; gap:5px;}
+    .hamburger div {background:#0f0f1c; height:4px; width:100%; border-radius:2px;}
+    @media (max-width: 768px){
+      .site-nav{flex-direction:column; width:100%; display:none; background:var(--neon); padding:1rem 0; margin-top:1rem;}
+      .site-nav.active{display:flex;}
+      .hamburger{display:flex;}
     }
 
-    .site-nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 1rem;
-    }
-
-    .site-nav a {
-      color: #0f0f1c;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    .site-nav a:hover {
-      color: #ff4ac2;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
-
-    .hamburger div {
-      background: #0f0f1c;
-      height: 4px;
-      width: 100%;
-      border-radius: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .site-nav {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        background-color: #0df6e3;
-        padding: 1rem 0;
-        margin-top: 1rem;
-      }
-
-      .site-nav.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-    }
-
+    /* Shared styles */
+    a {color: var(--neon); text-decoration:none;}
+    a:hover{text-decoration:none;}
     .gradient-heading {
-      font-size: 2rem;
+      font-size: 2.2rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem 0;
     }
-
     .content {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 2rem auto 4rem;
       padding: 0 2rem;
     }
-
-    .content h1 {
-      color: #ff4ac2;
-      text-align: center;
-      margin-bottom: 2rem;
+    .section-intro {
+      text-align:center;
+      margin: 2rem 0 3rem;
     }
 
-    .story-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* Issue Library */
+    .issue-section{
+      display:grid;
+      grid-template-columns: 380px 1fr;
       gap: 2rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      margin-bottom: 2.5rem;
+    }
+    .issue-cover{
+      background: var(--card-2);
+      border-radius: 12px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+    .issue-cover img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .issue-meta{
+      padding: 0 1rem 1rem 1rem;
+      display:flex; 
+      flex-direction:column; 
+      gap:.5rem;
+    }
+    .issue-tag{
+      display:inline-block;
+      background: rgba(13,246,227,0.15);
+      color: var(--neon);
+      border: 1px solid rgba(13,246,227,0.35);
+      padding:.25rem .5rem;
+      border-radius: 999px;
+      font-size:.8rem;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+    .issue-title{
+      margin:.25rem 0 0 0;
+      font-size:1.6rem;
+      line-height:1.2;
+      color:#fff;
+    }
+    .issue-sub{
+      color: var(--muted);
+      font-size:.95rem;
+      line-height:1.5;
+    }
+    .issue-actions{
+      display:flex; 
+      gap:.75rem; 
+      flex-wrap:wrap; 
+      margin-top:.5rem;
+    }
+    .btn{
+      background: var(--neon);
+      color:#0f0f1c;
+      border:none;
+      font-weight:800;
+      padding:.65rem 1rem;
+      border-radius:8px;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background: transparent;
+      color: var(--neon);
+      border:1px solid rgba(13,246,227,0.45);
     }
 
-    .story-card {
-      background-color: #1c1e2f;
-      border-radius: 8px;
-      padding: 1rem;
+    .issue-details{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-content:start;
+    }
+    .toc-section h3{
+      margin:0 0 .5rem 0;
+      font-size:1rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#b6b9ff;
+    }
+    .toc-section ul{
+      list-style:none; 
+      padding:0; 
+      margin:0;
+      color:#d8d8e5;
+    }
+    .toc-section li{
+      margin:.6rem 0;
+    }
+    .toc-section li strong{color:#fff;}
+    .toc-section small{color:#8e90a6;}
+
+    @media (max-width: 980px){
+      .issue-section{grid-template-columns:1fr; }
+      .issue-details{grid-template-columns:1fr;}
     }
 
-    .story-card img {
-      width: 100%;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
-
-    .story-card h3 {
-      color: #0df6e3;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .story-card p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-
-    .story-card small {
-      color: #777;
-      font-size: 0.8rem;
-    }
-
-    .load-more-container {
-      text-align: center;
-      margin: 3rem 0 5rem;
-    }
-
-    .load-more-btn {
-      background-color: #0df6e3;
-      border: none;
-      color: #0f0f1c;
-      padding: 0.75rem 2rem;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .load-more-btn:hover {
-      background-color: #0ad3c6;
-    }
-
+    /* Footer */
     footer {
       background: #0f0f1c;
       padding: 2rem;
       color: #ccc;
       margin-top: 4rem;
     }
-
     .footer-container {
       display: flex;
       flex-wrap: wrap;
@@ -186,63 +198,29 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
-    .footer-column {
-      flex: 1;
-      min-width: 220px;
-    }
-
-    .footer-logo {
-      width: 80px;
-      margin-bottom: 1rem;
-    }
-
+    .footer-column {flex:1; min-width:220px;}
+    .footer-logo {width: 80px; margin-bottom: 1rem;}
     .newsletter-input {
-      padding: 0.5rem;
-      width: 80%;
-      margin-bottom: 0.5rem;
-      border-radius: 4px;
-      border: none;
+      padding: 0.5rem; width: 80%; margin-bottom: 0.5rem;
+      border-radius: 4px; border: none;
     }
-
     .newsletter-button {
-      padding: 0.5rem 1rem;
-      background-color: #0df6e3;
-      border: none;
-      color: #0f0f1c;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
+      padding: 0.5rem 1rem; background-color: var(--neon);
+      border: none; color: #0f0f1c; font-weight: bold;
+      border-radius: 4px; cursor: pointer;
     }
-
-    .footer-bottom {
-      text-align: center;
-      margin-top: 2rem;
-      color: #777;
-      font-size: 0.85rem;
-    }
-
-    a {
-      color: #0df6e3;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: none;
-    }
+    .footer-bottom {text-align: center; margin-top: 2rem; color: #777; font-size: 0.85rem;}
   </style>
 </head>
 <body>
 
   <header class="site-header">
-<a href="index.html" class="logo-title">
-  <img src="Flame logo-1.png.png" alt="Burnline logo">
-  <span>BURNLINE</span>
-</a>
+    <a href="index.html" class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Fiction</a>
@@ -252,59 +230,144 @@
     </nav>
   </header>
 
-  <section class="content">
-    <h1 class="gradient-heading">Original Fiction</h1>
-    <div class="story-grid" id="storyGrid">
-      <!-- Placeholder Stories -->
-      <div class="story-card">
-        <img src="Placeholder Image 1.png" alt="Story Art">
-        <h3>The Parallax Scar</h3>
-        <p>A memory broker wakes to find one of his own memories missing—and selling fast.</p>
-        <small>By Cal Venn — July 2025</small>
-      </div>
-      <div class="story-card">
-        <img src="Placeholder Image 3.png" alt="Story Art">
-        <h3>Glass Static</h3>
-        <p>What happens when the last analogue signal bleeds back into the mesh?</p>
-        <small>By El Harker — July 2025</small>
-      </div>
-      <div class="story-card">
-        <img src="Placeholder Image 6.png" alt="Story Art">
-        <h3>Vanta Drip</h3>
-        <p>Reality bends when a thief injects a prototype neural dye stolen from the spire labs.</p>
-        <small>By Xue Ren — July 2025</small>
-      </div>
+  <main class="content">
+    <div class="section-intro">
+      <h1 class="gradient-heading">Issue Library</h1>
+      <p style="color:var(--muted)">Browse past Burnline issues. Each section mirrors the homepage’s “The Latest Issue” layout—swap in your actual covers, descriptions, and tables of contents.</p>
     </div>
-    <div class="load-more-container">
-      <button class="load-more-btn" onclick="loadMore()">Load More</button>
-    </div>
-  </section>
+
+    <!-- Issue 003 -->
+    <section class="issue-section" id="issue-003">
+      <div class="issue-cover">
+        <img src="Placeholder Cover 1.png" alt="Issue 003 Cover">
+        <div class="issue-meta">
+          <span class="issue-tag">Issue 003</span>
+          <h2 class="issue-title">The Latest Issue</h2>
+          <p class="issue-sub">A curated set of fiction, art, and essays exploring chrome dreams, city ghosts, and the meshes that bind us.</p>
+          <div class="issue-actions">
+            <a class="btn" href="#">Read Issue</a>
+            <a class="btn secondary" href="#">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="issue-details">
+        <div class="toc-section">
+          <h3>Fiction</h3>
+          <ul>
+            <li><strong>Neon Ashes</strong> <small>by J. M. Caldwell</small></li>
+            <li><strong>Chrome Ghosts</strong> <small>by A. Rivera</small></li>
+            <li><strong>Signal Bloom</strong> <small>by K. A. Wong</small></li>
+            <li><strong>Blackout City</strong> <small>by P. Okoye</small></li>
+          </ul>
+        </div>
+        <div class="toc-section">
+          <h3>Art</h3>
+          <ul>
+            <li><strong>Hotline District</strong> <small>by S. Ito</small></li>
+            <li><strong>Subway Aurora</strong> <small>by M. Torres</small></li>
+            <li><strong>Vanta Lines</strong> <small>by R. Kaur</small></li>
+            <li><strong>Grid/Grief</strong> <small>by D. Park</small></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Issue 002 -->
+    <section class="issue-section" id="issue-002">
+      <div class="issue-cover">
+        <img src="Placeholder Cover 2.png" alt="Issue 002 Cover">
+        <div class="issue-meta">
+          <span class="issue-tag">Issue 002</span>
+          <h2 class="issue-title">The Latest Issue</h2>
+          <p class="issue-sub">A curated set of fiction, art, and essays exploring chrome dreams, city ghosts, and the meshes that bind us.</p>
+          <div class="issue-actions">
+            <a class="btn" href="#">Read Issue</a>
+            <a class="btn secondary" href="#">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="issue-details">
+        <div class="toc-section">
+          <h3>Fiction</h3>
+          <ul>
+            <li><strong>Neon Ashes</strong> <small>by J. M. Caldwell</small></li>
+            <li><strong>Chrome Ghosts</strong> <small>by A. Rivera</small></li>
+            <li><strong>Signal Bloom</strong> <small>by K. A. Wong</small></li>
+            <li><strong>Blackout City</strong> <small>by P. Okoye</small></li>
+          </ul>
+        </div>
+        <div class="toc-section">
+          <h3>Art</h3>
+          <ul>
+            <li><strong>Hotline District</strong> <small>by S. Ito</small></li>
+            <li><strong>Subway Aurora</strong> <small>by M. Torres</small></li>
+            <li><strong>Vanta Lines</strong> <small>by R. Kaur</small></li>
+            <li><strong>Grid/Grief</strong> <small>by D. Park</small></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Issue 001 -->
+    <section class="issue-section" id="issue-001">
+      <div class="issue-cover">
+        <img src="Placeholder Cover 3.png" alt="Issue 001 Cover">
+        <div class="issue-meta">
+          <span class="issue-tag">Issue 001</span>
+          <h2 class="issue-title">The Latest Issue</h2>
+          <p class="issue-sub">A curated set of fiction, art, and essays exploring chrome dreams, city ghosts, and the meshes that bind us.</p>
+          <div class="issue-actions">
+            <a class="btn" href="#">Read Issue</a>
+            <a class="btn secondary" href="#">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="issue-details">
+        <div class="toc-section">
+          <h3>Fiction</h3>
+          <ul>
+            <li><strong>Neon Ashes</strong> <small>by J. M. Caldwell</small></li>
+            <li><strong>Chrome Ghosts</strong> <small>by A. Rivera</small></li>
+            <li><strong>Signal Bloom</strong> <small>by K. A. Wong</small></li>
+            <li><strong>Blackout City</strong> <small>by P. Okoye</small></li>
+          </ul>
+        </div>
+        <div class="toc-section">
+          <h3>Art</h3>
+          <ul>
+            <li><strong>Hotline District</strong> <small>by S. Ito</small></li>
+            <li><strong>Subway Aurora</strong> <small>by M. Torres</small></li>
+            <li><strong>Vanta Lines</strong> <small>by R. Kaur</small></li>
+            <li><strong>Grid/Grief</strong> <small>by D. Park</small></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
-        <form style="margin-top: 1rem;">
+        <p style="line-height:1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
+        <form style="margin-top:1rem;">
           <input type="email" placeholder="Email Address" class="newsletter-input">
           <br>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
       <div class="footer-column">
-        <h4 style="color: #0df6e3;">Get In Touch</h4>
-        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+        <h4 style="color: var(--neon);">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size:0.8rem;">(no story submissions by email)</span></p>
       </div>
-
       <div class="footer-column">
-        <h4 style="color: #0df6e3;">Read</h4>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+        <h4 style="color: var(--neon);">Read</h4>
+        <p><a href="#" style="color:#ccc; text-decoration:none;">Neon Dystopia</a></p>
+        <p><a href="#" style="color:#ccc; text-decoration:none;">Future//Tense</a></p>
+        <p><a href="#" style="color:#ccc; text-decoration:none;">HackDust</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
@@ -314,47 +377,6 @@
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
-    }
-
-    const moreStories = [
-      {
-        img: "https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Pulsewave",
-        title: "Pulsewave",
-        desc: "A teenage courier decodes a forbidden signal echoing through the underground zones.",
-        by: "Jae Lin — June 12, 2025"
-      },
-      {
-        img: "https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Soft+Reboot",
-        title: "Soft Reboot",
-        desc: "An old hacker returns to the mesh to settle a debt—only to find himself rewritten.",
-        by: "Amir Soto — May 30, 2025"
-      },
-      {
-        img: "https://via.placeholder.com/400x250/0df6e3/0f0f1c?text=Glass+Path",
-        title: "Glass Path",
-        desc: "In a mirrored city above the clouds, a girl searches for her twin lost in the grid.",
-        by: "Aiko Tanaka — May 12, 2025"
-      }
-    ];
-
-    let storyIndex = 0;
-    function loadMore() {
-      const grid = document.getElementById("storyGrid");
-      for (let i = 0; i < 3 && storyIndex < moreStories.length; i++, storyIndex++) {
-        const story = moreStories[storyIndex];
-        const card = document.createElement("div");
-        card.className = "story-card";
-        card.innerHTML = `
-          <img src="${story.img}" alt="Story Art">
-          <h3>${story.title}</h3>
-          <p>${story.desc}</p>
-          <small>${story.by}</small>
-        `;
-        grid.appendChild(card);
-      }
-      if (storyIndex >= moreStories.length) {
-        document.querySelector(".load-more-container").style.display = "none";
-      }
     }
   </script>
 </body>
