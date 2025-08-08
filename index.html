@@ -4,32 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Burnline – The Cyberpunk Magazine</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root{
+      --bg-deep-1:#0f0f1c;
+      --bg-deep-2:#1b1e35;
+      --bg-hero-2:#2d2b4a;
+      --card:#22253e;
+      --text:#f0f0f0;
+      --text-muted:#cccccc;
+      --text-muted-2:#bbbbbb;
+      --footer-muted:#aaaaaa;
+      --footer-subtle:#555555;
+      --ink-dark:#0f0f1c;
+      --cyan:#0df6e3;
+      --cyan-hover:#0ad3c6;
+      --magenta:#f72585;
+      --purple:#7209b7;
+      --border-dark:#222;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
+      background: linear-gradient(135deg, var(--bg-deep-1), var(--bg-deep-2));
+      color: var(--text);
     }
-    html {
-      scroll-behavior: smooth;
-    }
-    h1, h2, h3, h4, h5, h6, nav a, header {
+    html { scroll-behavior: smooth; }
+
+    h1, h2, h3, nav a, header {
       font-family: 'Orbitron', sans-serif;
+      line-height: 1.4;
     }
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.2rem; }
+    h3 { font-size: 1.5rem; }
+
+    /* Header */
     .site-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #0df6e3;
-      color: #0f0f1c;
+      background: var(--cyan);
+      color: var(--ink-dark);
       padding: 1rem 2rem;
-      font-size: 2rem;
-      font-family: 'Orbitron', sans-serif;
       flex-wrap: wrap;
-      position: relative;
     }
+
     .logo-title {
       display: flex;
       align-items: center;
@@ -41,31 +62,30 @@
       height: 60px;
       width: auto;
     }
+
     .site-nav {
       display: flex;
       gap: 2rem;
       font-size: 1rem;
     }
     .site-nav a {
-      color: #0f0f1c;
+      color: var(--ink-dark);
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
-    .site-nav a:hover {
-      color: #ff4ac2;
-    }
+    .site-nav a:hover { color: #ff4ac2; }
+
     .hamburger {
       display: none;
       flex-direction: column;
-      justify-content: center;
       cursor: pointer;
       width: 30px;
       height: 25px;
       gap: 5px;
     }
     .hamburger div {
-      background: #0f0f1c;
+      background: var(--ink-dark);
       height: 4px;
       width: 100%;
       border-radius: 2px;
@@ -75,62 +95,83 @@
         flex-direction: column;
         width: 100%;
         display: none;
-        background-color: #0df6e3;
+        background-color: var(--cyan);
         padding: 1rem 0;
         margin-top: 1rem;
       }
-      .site-nav.active {
-        display: flex;
-      }
-      .hamburger {
-        display: flex;
-      }
+      .site-nav.active { display: flex; }
+      .hamburger { display: flex; }
     }
+
+    /* Hero */
     .hero {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 3rem;
-      padding: 4rem 2rem;
-      background: linear-gradient(to right, #1b1e35, #2d2b4a);
-      text-align: left;
+      padding: 6rem 2rem;
+      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       flex-wrap: wrap;
     }
-    .hero-text {
-      max-width: 600px;
-    }
+    .hero-text { max-width: 600px; }
     .hero-text h1 {
-      font-size: 2.2rem;
-      color: #ff4ac2;
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
     .hero-text p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
     }
-    .hero img {
-      max-width: 300px;
+    .hero a img {
+      cursor: pointer;
+      transition: opacity 0.2s ease, box-shadow .2s ease;
       border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      max-width: 300px;
     }
-    .hero-button-container {
-  width: 100%;
-  text-align: center;
-  margin-top: 0rem;
-}
+    .hero a img:hover { opacity: 0.9; }
+
+    /* Latest issue section */
+    #latest-issue {
+      padding: 4rem 2rem;
+      text-align: center;
+      display: none;
+    }
+    #latest-issue .fp-iframe {
+      border: 1px solid var(--border-dark);
+      width: 100%;
+      height: 400px;
+      background: #000;
+    }
+    #latest-issue a {
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+
+    /* Grid band (keep spacing from light version, switch to dark w/ cyan stripes) */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 3rem 2rem;
+      gap: 2.5rem;
+      padding: 6rem 2rem;
+      background-color: var(--bg-deep-1);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
+      background-repeat: repeat;
+      background-attachment: fixed;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
     }
+
     .card {
-      background: #22253e;
+      background: var(--card);
       border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 0 20px rgba(13, 246, 227, 0.1);
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(13, 246, 227, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .card img {
       width: 100%;
@@ -140,30 +181,79 @@
       margin-bottom: 1rem;
     }
     .card h3 {
-      color: #0df6e3;
+      color: var(--cyan);
       margin-bottom: 0.5rem;
     }
-    .card p {
-      font-size: 0.95rem;
-      color: #bbb;
-    }
+    .card p { color: var(--text-muted-2); }
+
     .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card-link:hover .card {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
+    }
+
+    /* Buttons/inputs */
+    .read-issue-btn {
+      background-color: var(--cyan);
+      border: none;
+      color: var(--ink-dark);
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+    .read-issue-btn:hover { background-color: var(--cyan-hover); }
+
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-dark);
+      width: 70%;
+      margin-bottom: 0.8rem;
+      background: var(--bg-deep-2);
+      color: var(--text);
+    }
+    .newsletter-input::placeholder { color: var(--footer-muted); }
+
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: var(--cyan);
+      color: var(--ink-dark);
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .newsletter-button:hover { background: var(--cyan-hover); }
+
+    /* Footer */
     footer {
-      background: #0f0f1c;
-      padding: 4rem 2rem 2rem;
-      color: #aaa;
+      background: var(--bg-deep-1);
+      padding: 5rem 2rem 3rem;
+      color: var(--footer-muted);
       font-size: 0.9rem;
-      font-family: 'Inter', sans-serif;
     }
-    footer a:hover {
-      color: #0df6e3;
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
     }
+    footer a:hover { color: var(--cyan); }
+
     .footer-container {
       display: flex;
       flex-wrap: wrap;
@@ -183,53 +273,10 @@
     .footer-bottom {
       text-align: center;
       margin-top: 3rem;
-      border-top: 1px solid #222;
+      border-top: 1px solid var(--border-dark);
       padding-top: 1rem;
-      color: #555;
+      color: var(--footer-subtle);
     }
-    .newsletter-input {
-      padding: 0.6rem 1rem;
-      border-radius: 4px;
-      border: none;
-      width: 70%;
-      margin-bottom: 0.8rem;
-    }
-    .newsletter-button {
-      padding: 0.6rem 1.2rem;
-      background-color: #0df6e3;
-      color: #0f0f1c;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .read-issue-btn {
-      background-color: #0df6e3;
-      border: none;
-      color: #0f0f1c;
-      padding: 0.75rem 2rem;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-block;
-      margin-top: 1rem;
-      transition: background-color 0.3s;
-    }
-    .read-issue-btn:hover {
-      background-color: #0ad3c6;
-    }
-    .card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  transition: transform 0.2s ease;
-}
-
-.card-link:hover .card {
-  transform: scale(1.02);
-  box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
-}
   </style>
 </head>
 <body>
@@ -244,16 +291,16 @@
       <div></div>
     </div>
     <nav class="site-nav" id="site-nav">
-      <a href="https://bowliopia.github.io/burnline/fiction.html">Fiction</a>
-      <a href="https://bowliopia.github.io/burnline/art.html">Art</a>
-      <a href="https://bowliopia.github.io/burnline/about.html">About</a>
-      <a href="https://bowliopia.github.io/burnline/submit.html">Submit</a>
+      <a href="fiction.html">Fiction</a>
+      <a href="art.html">Art</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit</a>
     </nav>
   </header>
 
   <section class="hero">
     <a href="#latest-issue" onclick="openFlipbook(event)">
-      <img src="Asimov Test Cover.jpg" alt="Latest issue cover" style="max-width: 300px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" />
+      <img src="Asimov Test Cover.jpg" alt="Latest issue cover" />
     </a>
 
     <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
@@ -262,7 +309,7 @@
       <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
         <div style="flex: 1 1 300px;">
           <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
-          <ul style="list-style: none; padding: 0; margin: 0;">
+          <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
             <li style="margin-bottom: 0.75rem;"><strong>Neon Ashes</strong> by J. M. Caldwell</li>
             <li style="margin-bottom: 0.75rem;"><strong>Chrome Dreams</strong> by Riko Ahn</li>
             <li style="margin-bottom: 0.75rem;"><strong>The Memory Blackout</strong> by Dex Silva</li>
@@ -273,7 +320,7 @@
 
         <div style="flex: 1 1 300px;">
           <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
-          <ul style="list-style: none; padding: 0; margin: 0;">
+          <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
             <li style="margin-bottom: 0.75rem;"><strong>Neural Bloom</strong> by Keira Vonn</li>
             <li style="margin-bottom: 0.75rem;"><strong>Ghost Signal</strong> by M. Reyes</li>
             <li style="margin-bottom: 0.75rem;"><strong>Synth Skin</strong> by ARTI.FX</li>
@@ -287,36 +334,34 @@
     </div>
   </section>
 
-  <section id="latest-issue" style="padding: 2rem; text-align: center; display: none;">
-    <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/055f81b30b.html" style="border: 1px solid lightgray; width: 100%; max-width: 900px; height: 600px; margin: 0 auto; display: block;"></iframe>
+  <section id="latest-issue">
+    <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
     <p style="margin-top: 1rem;">
-      <a href="https://heyzine.com/flip-book/055f81b30b.html" target="_blank" style="color: #0df6e3; text-decoration: underline; font-family: 'Inter', sans-serif;">
-        Open in Fullscreen
-      </a>
+      <a href="https://heyzine.com/flip-book/055f81b30b.html" target="_blank">Open in Fullscreen</a>
     </p>
   </section>
 
   <section class="grid" id="features">
-    <a href="https://bowliopia.github.io/burnline/fiction.html" class="card-link">
-    <div class="card">
-      <img src="AL Cover.png" alt="Featured Stories image">
-      <h3>Featured Stories</h3>
-      <p>Explore high-voltage fiction from the neon edge — a curated selection of our boldest, strangest, and most unforgettable tales.</p>
-    </div>
+    <a href="fiction.html" class="card-link">
+      <div class="card">
+        <img src="AL Cover.png" alt="Featured Stories image">
+        <h3>Featured Stories</h3>
+        <p>Explore high-voltage fiction from the neon edge — a curated selection of our boldest, strangest, and most unforgettable tales.</p>
+      </div>
     </a>
-<a href="https://bowliopia.github.io/burnline/bestmedia.html" class="card-link">
-  <div class="card">
-    <img src="NM Art.png" alt="Poll image">
-    <h3>Poll: Best Cyberpunk Media</h3>
-    <p>We asked readers to weigh in on the most iconic games, movies, books, and art that define the cyberpunk genre.</p>
-  </div>
-</a>
-    <a href="https://bowliopia.github.io/burnline/staffpicks.html" class="card-link">
-    <div class="card">
-      <img src="CS2 Keyart.jpg" alt="Stuff We Like image">
-      <h3>Staff Picks</h3>
-      <p>From games to text, we've rounded up our favorite weird and wired media in the genre. These are the ones that stuck. </p>
-    </div>
+    <a href="bestmedia.html" class="card-link">
+      <div class="card">
+        <img src="NM Art.png" alt="Poll image">
+        <h3>Cyberpunk Media Ranked</h3>
+        <p>We asked readers to weigh in on the most iconic games, movies, books, and art that define the cyberpunk genre.</p>
+      </div>
+    </a>
+    <a href="staffpicks.html" class="card-link">
+      <div class="card">
+        <img src="CS2 Keyart.jpg" alt="Staff Picks image">
+        <h3>Staff Picks</h3>
+        <p>From games to text, we've rounded up our favorite weird and wired media in the genre. These are the ones that stuck.</p>
+      </div>
     </a>
   </section>
 
@@ -324,22 +369,21 @@
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
+        <p>Get stories, art, and updates from Burnline straight to your inbox.</p>
         <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input">
-          <br>
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
       <div class="footer-column">
-        <h4 style="color: #0df6e3;">Get In Touch</h4>
+        <h4 style="color: var(--cyan);">Get In Touch</h4>
         <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
       </div>
       <div class="footer-column">
-        <h4 style="color: #0df6e3;">Read</h4>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+        <h4 style="color: var(--cyan);">Read</h4>
+        <p><a href="#">Neon Dystopia</a></p>
+        <p><a href="#">Future//Tense</a></p>
+        <p><a href="#">HackDust</a></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -353,19 +397,24 @@
       nav.classList.toggle('active');
     }
 
-    document.getElementById('toggle-flipbook').addEventListener('click', function() {
+    function openFlipbook(event) {
+      event.preventDefault();
       const section = document.getElementById('latest-issue');
-      if (section.style.display === 'none') {
+      const button = document.getElementById('toggle-flipbook');
+
+      const isHidden = section.style.display === 'none' || section.style.display === '';
+
+      if (isHidden) {
         section.style.display = 'block';
-        this.textContent = 'Hide Issue';
+        if (button) button.textContent = 'Hide Issue';
+        section.scrollIntoView({ behavior: 'smooth' });
       } else {
         section.style.display = 'none';
-        this.textContent = 'Read This Issue';
+        if (button) button.textContent = 'Read This Issue';
       }
-    });
+    }
+
+    document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
   </script>
 </body>
 </html>
-
-
-
