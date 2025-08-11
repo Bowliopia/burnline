@@ -5,189 +5,189 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Staff Picks – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
-    }
-    h1, h2, h3, nav a, header {
-      font-family: 'Orbitron', sans-serif;
-    }
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0df6e3;
-      color: #0f0f1c;
-      padding: 1rem 2rem;
-      font-size: 2rem;
-      flex-wrap: wrap;
-      position: relative;
-    }
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: inherit;
-    }
-    .logo-title img {
-      height: 60px;
-      width: auto;
-    }
-    .hamburger {
+ <style>
+  /* ===== Base ===== */
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f0f1c, #1b1e35);
+    color: #f0f0f0;
+  }
+  h1, h2, h3, nav a, header {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /* ===== Header (match homepage) ===== */
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0df6e3;
+    color: #0f0f1c;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .logo-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .logo-title img {
+    height: 60px;
+    width: auto;
+  }
+  /* No font-size set for the wordmark span — inherits like homepage */
+
+  .site-nav {
+    display: flex;
+    gap: 2rem;
+    font-size: 1rem;
+  }
+  .site-nav a {
+    color: #0f0f1c;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  .site-nav a:hover {
+    color: #ff4ac2;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    gap: 5px;
+  }
+  .hamburger div {
+    background: #0f0f1c;
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .site-nav {
       display: none;
       flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
-    .hamburger div {
-      background: #0f0f1c;
-      height: 4px;
       width: 100%;
-      border-radius: 2px;
-    }
-    .site-nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 1rem;
-    }
-    .site-nav a {
-      color: #0f0f1c;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .content {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-    }
-    .content h1 {
-      color: #ff4ac2;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-    .filters button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 4px;
-      background: #0df6e3;
-      color: #0f0f1c;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .filters button.active {
-      background: #ff4ac2;
-      color: #fff;
-    }
-    .story-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .story-card {
-      background-color: #1c1e2f;
-      border-radius: 8px;
-      padding: 1rem;
-      display: none;
-      position: relative;
-      overflow: hidden;
-    }
-    .story-card.active {
-      display: block;
-    }
-    .story-card img {
-      width: 100%;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
-    .story-card h3 {
-      color: #0df6e3;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-    .story-card small {
-      color: #777;
-      font-size: 0.8rem;
-    }
-    .card-overlay {
+      background-color: #0df6e3;
+      padding: 1rem 2rem;
       position: absolute;
-      top: 0;
+      top: 100%;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(15, 15, 28, 0.85);
-      color: #f0f0f0;
-      padding: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      white-space: normal;
-      box-sizing: border-box;
+      z-index: 999;
     }
-    .card-overlay .overlay-content {
-      max-width: 90%;
-    }
-    .card-overlay a {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #0df6e3;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.2s ease;
-    }
-    .card-overlay a:hover {
-      color: #ff4ac2;
-      text-decoration: underline;
-    }
-    .story-card:hover .card-overlay {
-      opacity: 1;
-    }
+    .site-nav.show { display: flex; }
+    .site-nav a { color: #0f0f1c; padding: 0.5rem 0; }
+  }
 
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-      .site-nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #0df6e3;
-        padding: 1rem 2rem;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 999;
-      }
-      .site-nav.show {
-        display: flex;
-      }
-      .site-nav a {
-        color: #0f0f1c;
-        padding: 0.5rem 0;
-      }
-    }
-  </style>
+  /* ===== Page Content ===== */
+  .content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+  }
+  .content h1 {
+    color: #ff4ac2;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .filters button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background: #0df6e3;
+    color: #0f0f1c;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .filters button.active {
+    background: #ff4ac2;
+    color: #fff;
+  }
+
+  /* ===== Cards ===== */
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .story-card {
+    background-color: #1c1e2f;
+    border-radius: 8px;
+    padding: 1rem;
+    display: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-card.active { display: block; }
+
+  .story-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  .story-card h3 {
+    color: #0df6e3;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .story-card small {
+    color: #777;
+    font-size: 0.8rem;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(15, 15, 28, 0.85);
+    color: #f0f0f0;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    box-sizing: border-box;
+  }
+  .card-overlay .overlay-content { max-width: 90%; }
+  .card-overlay a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #0df6e3;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+  .card-overlay a:hover {
+    color: #ff4ac2;
+    text-decoration: underline;
+  }
+  .story-card:hover .card-overlay { opacity: 1; }
+</style>
 </head>
 <body>
   <header class="site-header">
