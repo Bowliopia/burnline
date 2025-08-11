@@ -17,84 +17,57 @@
       font-family: 'Orbitron', sans-serif;
     }
 
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0df6e3;
-      color: #0f0f1c;
-      padding: 1rem 2rem;
-      font-size: 2rem;
-      font-family: 'Orbitron', sans-serif;
-      flex-wrap: wrap;
-      position: relative;
-    }
+   /* Header (match homepage exactly) */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0df6e3;
+  color: #0f0f1c;
+  padding: 1rem 2rem;
+  font-family: 'Orbitron', sans-serif;
+  flex-wrap: wrap;
+  position: relative;
+}
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-        text-decoration: none;
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
   color: inherit;
-    }
+}
+.logo-title img { height: 60px; width: auto; }
+/* Note: no font-size on .logo-title span — inherits default like homepage */
 
-    .logo-title img {
-      height: 60px;
-      width: auto;
-    }
+.site-nav { display: flex; gap: 2rem; font-size: 1rem; }
+.site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+.site-nav a:hover { color: #ff4ac2; }
 
-    .site-nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 1rem;
-    }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+  gap: 5px;
+}
+.hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
 
-    .site-nav a {
-      color: #0f0f1c;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+@media (max-width: 768px) {
+  .site-nav{
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    background-color: #0df6e3;
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
+  .site-nav.active { display: flex; }
+  .hamburger { display: flex; }
+}
 
-    .site-nav a:hover {
-      color: #ff4ac2;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
-
-    .hamburger div {
-      background: #0f0f1c;
-      height: 4px;
-      width: 100%;
-      border-radius: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .site-nav {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        background-color: #0df6e3;
-        padding: 1rem 0;
-        margin-top: 1rem;
-      }
-
-      .site-nav.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-    }
 
     .gradient-heading {
       font-size: 2rem;
