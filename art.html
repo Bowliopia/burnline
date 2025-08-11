@@ -21,7 +21,6 @@
       font-family: 'Orbitron', sans-serif;
     }
 
-/* Header (match homepage exactly) */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -41,7 +40,6 @@
   color: inherit;
 }
 .logo-title img { height: 60px; width: auto; }
-/* Note: no font-size on .logo-title span — inherits default like homepage */
 
 .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
 .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
@@ -71,6 +69,21 @@
   .hamburger{ display: flex; }
 }
     }
+    
+    .gradient-heading {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .gradient-heading-blue {
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #0df6e3, #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
 
     .gallery-hero {
       text-align: center;
