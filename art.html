@@ -21,55 +21,62 @@
       font-family: 'Orbitron', sans-serif;
     }
 
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0df6e3;
-  color: #0f0f1c;
-  padding: 1rem 2rem;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.logo-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  color: inherit;
-}
-.logo-title img { height: 60px; width: auto; }
-
-.site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-.site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-.site-nav a:hover { color: #ff4ac2; }
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  cursor: pointer;
-  width: 30px;
-  height: 25px;
-  gap: 5px;
-}
-.hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
-
-@media (max-width: 768px){
-  .site-nav{
-    flex-direction: column;
-    width: 100%;
-    display: none;
-    background: #0df6e3;
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-  .site-nav.active{ display: flex; }
-  .hamburger{ display: flex; }
-}
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      position: relative;
     }
-    
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-title img { height: 60px; width: auto; }
+
+    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
+    .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+    .site-nav a:hover { color: #ff4ac2; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      gap: 5px;
+    }
+    .hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
+
+    @media (max-width: 768px){
+      .site-nav{
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background: #0df6e3;
+        padding: 1rem 0;
+        margin-top: 1rem;
+      }
+      .site-nav.active{ display: flex; }
+      .hamburger{ display: flex; }
+    }
+
+    /* Match the Submit page header + paragraph block */
+    .content {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
     .gradient-heading {
       font-size: 2rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
@@ -77,13 +84,20 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
+
     .gradient-heading-blue {
-  font-size: 1.5rem;
-  background: linear-gradient(90deg, #0df6e3, #1e90ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #0df6e3, #1e90ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 1.2rem;
+    }
 
     .gallery-hero {
       text-align: center;
@@ -199,13 +213,8 @@
       z-index: 1000;
     }
 
-    .nav-arrow.left {
-      left: 2%;
-    }
-
-    .nav-arrow.right {
-      right: 2%;
-    }
+    .nav-arrow.left { left: 2%; }
+    .nav-arrow.right { right: 2%; }
 
     footer {
       background: #0f0f1c;
@@ -214,9 +223,7 @@
       font-size: 0.9rem;
     }
 
-    footer a:hover {
-      color: #0df6e3;
-    }
+    footer a:hover { color: #0df6e3; }
 
     .footer-container {
       display: flex;
@@ -262,14 +269,15 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .gradient-blue-text {
-  background: linear-gradient(90deg, #0df6e3, #56ccf2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  font-weight: bold;
-}
+      background: linear-gradient(90deg, #0df6e3, #56ccf2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -292,44 +300,46 @@
     </nav>
   </header>
 
-<section class="content">
-  <h1 class="gradient-heading">Featured Art</h1>
-<p>Interested in having your art featured in the next issue? 
-  <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
-</p>
+  <!-- Matches Submit page hero block -->
+  <section class="content">
+    <h1 class="gradient-heading">Featured Art</h1>
+    <p>
+      Interested in having your art featured in the next issue?
+      <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
+    </p>
   </section>
 
   <section class="gallery-grid" id="artGrid">
     <!-- Tiles (each must include data-title and data-artist) -->
-        <div class="art-tile" onclick="openModal(0)" data-title="Title or short description here" data-artist="Artist Name Here">
+    <div class="art-tile" onclick="openModal(0)" data-title="Title or short description here" data-artist="Artist Name Here">
       <img src="CBA6.jpg" alt="Art 1">
     </div>
-        <div class="art-tile" onclick="openModal(1)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="CBA5.jpg" alt="Art 1">
+    <div class="art-tile" onclick="openModal(1)" data-title="Title or short description here" data-artist="Artist Name Here">
+      <img src="CBA5.jpg" alt="Art 2">
     </div>
     <div class="art-tile" onclick="openModal(2)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 1.png" alt="Art 1">
+      <img src="Placeholder Image 1.png" alt="Art 3">
     </div>
     <div class="art-tile" onclick="openModal(3)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 2.png" alt="Art 2">
+      <img src="Placeholder Image 2.png" alt="Art 4">
     </div>
     <div class="art-tile" onclick="openModal(4)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 3.png" alt="Art 3">
+      <img src="Placeholder Image 3.png" alt="Art 5">
     </div>
     <div class="art-tile" onclick="openModal(5)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 4.png" alt="Art 4">
+      <img src="Placeholder Image 4.png" alt="Art 6">
     </div>
     <div class="art-tile" onclick="openModal(6)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 5.png" alt="Art 5">
+      <img src="Placeholder Image 5.png" alt="Art 7">
     </div>
     <div class="art-tile" onclick="openModal(7)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 6.png" alt="Art 6">
+      <img src="Placeholder Image 6.png" alt="Art 8">
     </div>
     <div class="art-tile" onclick="openModal(8)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 7.png" alt="Art 7">
+      <img src="Placeholder Image 7.png" alt="Art 9">
     </div>
     <div class="art-tile" onclick="openModal(9)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 8.png" alt="Art 8">
+      <img src="Placeholder Image 8.png" alt="Art 10">
     </div>
   </section>
 
