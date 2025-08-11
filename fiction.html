@@ -25,31 +25,39 @@
     }
     h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
 
-    /* Header */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--neon);
-      color: #0f0f1c;
-      padding: 1rem 2rem;
-      font-size: 2rem;
-      flex-wrap: wrap;
-      position: relative;
-    }
-    .logo-title { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; }
-    .logo-title img { height: 60px; width: auto; }
-    .logo-title span { font-size: 2.8rem; } /* Match homepage title size */
-    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-    .site-nav a { color:#0f0f1c; text-decoration:none; font-weight:bold; transition: color .3s; }
-    .site-nav a:hover { color: var(--pink); }
-    .hamburger { display:none; flex-direction:column; justify-content:center; cursor:pointer; width:30px; height:25px; gap:5px; }
-    .hamburger div { background:#0f0f1c; height:4px; width:100%; border-radius:2px; }
-    @media (max-width: 768px){
-      .site-nav{flex-direction:column; width:100%; display:none; background:var(--neon); padding:1rem 0; margin-top:1rem;}
-      .site-nav.active{display:flex;}
-      .hamburger{display:flex;}
-    }
+/* Header (match homepage exactly) */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--neon);
+  color: #0f0f1c;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+.logo-title img { height: 60px; width: auto; }
+.site-nav { display: flex; gap: 2rem; font-size: 1rem; }
+.site-nav a { color:#0f0f1c; text-decoration:none; font-weight:bold; transition: color .3s; }
+.site-nav a:hover { color: var(--pink); }
+
+.hamburger { display:none; flex-direction:column; justify-content:center; cursor:pointer; width:30px; height:25px; gap:5px; }
+.hamburger div { background:#0f0f1c; height:4px; width:100%; border-radius:2px; }
+
+@media (max-width: 768px){
+  .site-nav{flex-direction:column; width:100%; display:none; background:var(--neon); padding:1rem 0; margin-top:1rem;}
+  .site-nav.active{display:flex;}
+  .hamburger{display:flex;}
+}
+
 
     /* Shared */
     a { color: var(--neon); text-decoration:none; }
