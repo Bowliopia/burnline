@@ -170,7 +170,7 @@
   /* Hide the old hover overlays; we still read their content for the modal */
   .card-overlay { display: none !important; }
 
-  /* Modal */
+  /* Modal (default stacked layout) */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -191,11 +191,20 @@
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.6);
     max-height: 90vh;
+
+    /* Use grid areas so we can switch to a two-column layout for books */
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "media"
+      "header"
+      "byline"
+      "body";
   }
 
   .modal-media {
+    grid-area: media;
     position: relative; /* allows absolute positioning for close button */
   }
 
@@ -224,6 +233,7 @@
   }
 
   .modal-header{
+    grid-area: header;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -236,12 +246,14 @@
     color: var(--neon);
   }
   .modal-byline{
+    grid-area: byline;
     margin: 0 0 0.5rem 0;
     color: #b7c0d1;
     font-size: 0.9rem;
     padding: 0 1.25rem;
   }
   .modal-body{
+    grid-area: body;
     padding: 0 1.25rem 1.25rem;
     overflow: auto;
     line-height: 1.55;
@@ -267,6 +279,47 @@
   }
   .steam-link a:hover{
     text-decoration: underline;
+  }
+
+  /* ===== Book modal variant: image left, text right ===== */
+  .modal.modal--book{
+    width: min(960px, 100%);
+    grid-template-columns: 38% 62%;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "media header"
+      "media byline"
+      "media body";
+  }
+
+  .modal.modal--book .modal-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* preserve cover aspect */
+    background: #111522;   /* subtle backdrop behind transparent PNGs */
+  }
+
+  /* Give right column its own scrolling on short screens */
+  .modal.modal--book .modal-body{
+    overflow: auto;
+  }
+
+  /* Mobile: stack like default */
+  @media (max-width: 720px){
+    .modal.modal--book{
+      width: min(720px, 100%);
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto 1fr;
+      grid-template-areas:
+        "media"
+        "header"
+        "byline"
+        "body";
+    }
+    .modal.modal--book .modal-media img{
+      height: auto;
+      object-fit: cover;
+    }
   }
   </style>
 </head>
@@ -575,7 +628,9 @@
       const title = card.querySelector('h3')?.textContent?.trim() || '';
       const byline = card.querySelector('small')?.textContent?.trim() || '';
       const overlayHTML = card.querySelector('.overlay-content')?.innerHTML || '';
+      const isBook = card.getAttribute('data-category') === 'books';
 
+      // Populate modal content
       if(img){
         modalImg.src = img.getAttribute('src') || '';
         modalImg.alt = img.getAttribute('alt') || '';
@@ -586,6 +641,9 @@
       modalTitle.textContent = title;
       modalByline.textContent = byline;
       modalBody.innerHTML = overlayHTML;
+
+      // Toggle book layout variant
+      modal.classList.toggle('modal--book', isBook);
 
       document.body.classList.add('modal-open');
       backdrop.classList.add('show');
@@ -599,6 +657,9 @@
       backdrop.classList.remove('show');
       backdrop.setAttribute('aria-hidden','true');
       document.body.classList.remove('modal-open');
+
+      // Reset book layout class to avoid stale state if desired (optional)
+      // modal.classList.remove('modal--book');
 
       // Return focus to the triggering card
       if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){
