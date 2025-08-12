@@ -239,24 +239,22 @@
     overflow: hidden;
   }
 
-    /* Style Steam links in modal/card content */
-.overlay-content a[href*="store.steampowered.com"],
-.modal-body a[href*="store.steampowered.com"] {
-  display: inline-block;            /* Makes margin-top apply cleanly */
-  margin-top: 0.75rem;               /* Space above link */
-  background: linear-gradient(90deg, #0df6e3, #008cff); /* Your blue gradient */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.overlay-content a[href*="store.steampowered.com"]:hover,
-.modal-body a[href*="store.steampowered.com"]:hover {
-  text-decoration: underline;
-}
-
+  /* Steam link paragraph + gradient link */
+  .steam-link{
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+  }
+  .steam-link a{
+    background: linear-gradient(90deg, #0df6e3, #008cff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .steam-link a:hover{
+    text-decoration: underline;
+  }
   </style>
 </head>
 <body>
@@ -294,7 +292,9 @@
         <div class="card-overlay">
           <div class="overlay-content">
             Cyberpunk on a spacestation with a vibe as good as any. This is one of our all-time favorite pieces of cyberpunk media. The gameplay loop might not be for everyone, but the story and dialogue is as good as it gets.
-            <a href="https://store.steampowered.com/app/1578650/Citizen_Sleeper/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/1578650/Citizen_Sleeper/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
@@ -306,7 +306,9 @@
         <div class="card-overlay">
           <div class="overlay-content">
             If you like cyberpunk stuff and you like top-down shooters, it's pretty can't miss. Don't overthink the story; it's guns + gritty setting.
-            <a href="https://store.steampowered.com/app/464060/RUINER/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/464060/RUINER/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
@@ -317,8 +319,10 @@
         <small>One More Level</small>
         <div class="card-overlay">
           <div class="overlay-content">
-            Like the sword parts of cyberpunk? Place this game.
-            <a href="https://store.steampowered.com/app/1139900/Ghostrunner/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            Like the sword parts of cyberpunk? Play this game.
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/1139900/Ghostrunner/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
@@ -330,7 +334,9 @@
         <div class="card-overlay">
           <div class="overlay-content">
             We'd love to have a clickier take, but it really is as good as advertised. We'd also imagine you wouldn't be on this website without already having played this game.
-            <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
@@ -342,7 +348,9 @@
         <div class="card-overlay">
           <div class="overlay-content">
             Live out your cyberpunk delivery boy fantasy. Something about pixel art and neon works really, really well, too.
-            <a href="https://store.steampowered.com/app/746850/Cloudpunk/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/746850/Cloudpunk/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
@@ -354,7 +362,9 @@
         <div class="card-overlay">
           <div class="overlay-content">
             You like Hades? Great news: those folks made a cyberpunk game.
-            <a href="https://store.steampowered.com/app/237930/Transistor/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/237930/Transistor/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
@@ -366,7 +376,9 @@
         <div class="card-overlay">
           <div class="overlay-content">
             Everyone knows Far Cry 3 was the best Far Cry, and the retro-futuristic '80s action parody dlc matches that speed.
-            <a href="https://store.steampowered.com/app/233270/Far_Cry_3_Blood_Dragon/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            <p class="steam-link">
+              <a href="https://store.steampowered.com/app/233270/Far_Cry_3_Blood_Dragon/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
+            </p>
           </div>
         </div>
       </div>
