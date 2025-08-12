@@ -238,6 +238,25 @@
   body.modal-open{
     overflow: hidden;
   }
+
+    /* Style Steam links in modal/card content */
+.overlay-content a[href*="store.steampowered.com"],
+.modal-body a[href*="store.steampowered.com"] {
+  display: inline-block;            /* Makes margin-top apply cleanly */
+  margin-top: 0.75rem;               /* Space above link */
+  background: linear-gradient(90deg, #0df6e3, #008cff); /* Your blue gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.overlay-content a[href*="store.steampowered.com"]:hover,
+.modal-body a[href*="store.steampowered.com"]:hover {
+  text-decoration: underline;
+}
+
   </style>
 </head>
 <body>
