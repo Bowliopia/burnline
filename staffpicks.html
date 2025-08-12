@@ -343,8 +343,9 @@
   <section class="content">
     <h1>Staff Picks</h1>
     <div class="filters" role="tablist" aria-label="Filter Staff Picks">
-      <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
+      <!-- Books tab moved to the first position -->
       <button class="filter-btn" data-filter="books" role="tab" aria-selected="false">Books</button>
+      <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
       <button class="filter-btn" data-filter="film" role="tab" aria-selected="false">Film / TV</button>
       <button class="filter-btn" data-filter="other" role="tab" aria-selected="false">Other</button>
     </div>
@@ -591,7 +592,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      filterCategory('games');
+      // Default to Books on first load
+      filterCategory('books');
     });
 
     buttons.forEach(button => {
@@ -657,9 +659,6 @@
       backdrop.classList.remove('show');
       backdrop.setAttribute('aria-hidden','true');
       document.body.classList.remove('modal-open');
-
-      // Reset book layout class to avoid stale state if desired (optional)
-      // modal.classList.remove('modal--book');
 
       // Return focus to the triggering card
       if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){
