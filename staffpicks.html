@@ -5,23 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Staff Picks – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
- <style>
+  <style>
+  :root{
+    --bg-1:#0f0f1c;
+    --bg-2:#1b1e35;
+    --card:#1c1e2f;
+    --neon:#0df6e3;
+    --pink:#ff4ac2;
+    --text:#f0f0f0;
+    --ink:#0f0f1c;
+  }
+
   body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-    color: #f0f0f0;
+    background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    color: var(--text);
   }
   h1, h2, h3, nav a, header {
     font-family: 'Orbitron', sans-serif;
   }
 
+  /* Header */
   .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #0df6e3;
-    color: #0f0f1c;
+    background: var(--neon);
+    color: var(--ink);
     padding: 1rem 2rem;
     flex-wrap: wrap;
     position: relative;
@@ -37,22 +48,20 @@
     height: 60px;
     width: auto;
   }
-
   .site-nav {
     display: flex;
     gap: 2rem;
     font-size: 1rem;
   }
   .site-nav a {
-    color: #0f0f1c;
+    color: var(--ink);
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
   }
   .site-nav a:hover {
-    color: #ff4ac2;
+    color: var(--pink);
   }
-
   .hamburger {
     display: none;
     flex-direction: column;
@@ -63,19 +72,18 @@
     gap: 5px;
   }
   .hamburger div {
-    background: #0f0f1c;
+    background: var(--ink);
     height: 4px;
     width: 100%;
     border-radius: 2px;
   }
-
   @media (max-width: 768px) {
     .hamburger { display: flex; }
     .site-nav {
       display: none;
       flex-direction: column;
       width: 100%;
-      background-color: #0df6e3;
+      background-color: var(--neon);
       padding: 1rem 2rem;
       position: absolute;
       top: 100%;
@@ -83,16 +91,17 @@
       z-index: 999;
     }
     .site-nav.show { display: flex; }
-    .site-nav a { color: #0f0f1c; padding: 0.5rem 0; }
+    .site-nav a { color: var(--ink); padding: 0.5rem 0; }
   }
 
+  /* Page */
   .content {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
   }
   .content h1 {
-    color: #ff4ac2;
+    color: var(--pink);
     text-align: center;
     margin-bottom: 2rem;
   }
@@ -107,14 +116,14 @@
   .filters button {
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 4px;
-    background: #0df6e3;
-    color: #0f0f1c;
+    border-radius: 6px;
+    background: var(--neon);
+    color: var(--ink);
     font-weight: bold;
     cursor: pointer;
   }
   .filters button.active {
-    background: #ff4ac2;
+    background: var(--pink);
     color: #fff;
   }
 
@@ -124,65 +133,112 @@
     gap: 2rem;
   }
   .story-card {
-    background-color: #1c1e2f;
-    border-radius: 8px;
+    background-color: var(--card);
+    border-radius: 10px;
     padding: 1rem;
-    display: none;
+    display: none;       /* Shown via .active after filtering */
     position: relative;
     overflow: hidden;
+    cursor: pointer;     /* Indicates click to open modal */
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .story-card:focus-visible{
+    outline: 2px solid var(--neon);
+    outline-offset: 4px;
+  }
+  .story-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,.35);
   }
   .story-card.active { display: block; }
-
   .story-card img {
     width: 100%;
-    border-radius: 6px;
-    margin-bottom: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+    display: block;
   }
   .story-card h3 {
-    color: #0df6e3;
+    color: var(--neon);
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    margin: 0.25rem 0 0.25rem;
   }
   .story-card small {
-    color: #777;
-    font-size: 0.8rem;
+    color: #9aa;
+    font-size: 0.85rem;
   }
 
-  .card-overlay {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(15, 15, 28, 0.85);
-    color: #f0f0f0;
-    padding: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
+  /* Hide the old hover overlays; we still read their content for the modal */
+  .card-overlay { display: none !important; }
+
+  /* Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    z-index: 2000;
+    padding: 1rem;
+  }
+  .modal-backdrop.show { display: flex; }
+
+  .modal {
+    background: #171a2a;
+    color: var(--text);
+    width: min(720px, 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    max-height: 90vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .modal-media img{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem 0.5rem;
+  }
+  .modal-title{
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--neon);
+  }
+  .modal-byline{
+    margin: 0 0 0.5rem 0;
+    color: #b7c0d1;
     font-size: 0.9rem;
-    line-height: 1.4;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    white-space: normal;
-    box-sizing: border-box;
+    padding: 0 1.25rem;
   }
-  .card-overlay .overlay-content { max-width: 90%; }
-  .card-overlay a {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #0df6e3;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s ease;
+  .modal-body{
+    padding: 0 1.25rem 1.25rem;
+    overflow: auto;
+    line-height: 1.55;
   }
-  .card-overlay a:hover {
-    color: #ff4ac2;
-    text-decoration: underline;
+  .modal-close{
+    border: 0;
+    background: transparent;
+    color: #cbd5e1;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
   }
-  .story-card:hover .card-overlay { opacity: 1; }
-</style>
+  .modal-close:hover{ color: #fff; }
+
+  /* Prevent background scroll when modal open */
+  body.modal-open{
+    overflow: hidden;
+  }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -190,10 +246,8 @@
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
-    <div class="hamburger" id="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+      <div></div><div></div><div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Issues</a>
@@ -205,16 +259,17 @@
 
   <section class="content">
     <h1>Staff Picks</h1>
-    <div class="filters">
-      <button class="filter-btn" data-filter="games">Games</button>
-      <button class="filter-btn" data-filter="books">Books</button>
-      <button class="filter-btn" data-filter="film">Film / TV</button>
-      <button class="filter-btn" data-filter="other">Other</button>
+    <div class="filters" role="tablist" aria-label="Filter Staff Picks">
+      <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
+      <button class="filter-btn" data-filter="books" role="tab" aria-selected="false">Books</button>
+      <button class="filter-btn" data-filter="film" role="tab" aria-selected="false">Film / TV</button>
+      <button class="filter-btn" data-filter="other" role="tab" aria-selected="false">Other</button>
     </div>
+
     <div class="story-grid" id="picks">
       <!-- Games -->
-      <div class="story-card" data-category="games">
-        <img src="CS Keyart.png">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Citizen Sleeper">
+        <img src="CS Keyart.png" alt="">
         <h3>Citizen Sleeper</h3>
         <small>Jump Over the Age / Fellow Traveller</small>
         <div class="card-overlay">
@@ -225,8 +280,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games">
-        <img src="Ruiner Keyart.jpg">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ruiner">
+        <img src="Ruiner Keyart.jpg" alt="">
         <h3>Ruiner</h3>
         <small>Reikon Games</small>
         <div class="card-overlay">
@@ -237,8 +292,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games">
-        <img src="Ghostrunner Keyart.jpg">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ghostrunner">
+        <img src="Ghostrunner Keyart.jpg" alt="">
         <h3>Ghostrunner</h3>
         <small>One More Level</small>
         <div class="card-overlay">
@@ -249,8 +304,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games">
-        <img src="CP2077 Keyart.jpg">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cyberpunk 2077">
+        <img src="CP2077 Keyart.jpg" alt="">
         <h3>Cyberpunk 2077</h3>
         <small>CD Projekt Red</small>
         <div class="card-overlay">
@@ -261,8 +316,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games">
-        <img src="Cloudpunk Keyart.jpg">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cloudpunk">
+        <img src="Cloudpunk Keyart.jpg" alt="">
         <h3>Cloudpunk</h3>
         <small>ION Lands</small>
         <div class="card-overlay">
@@ -273,8 +328,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games">
-        <img src="Transistor Keyart.jpg">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Transistor">
+        <img src="Transistor Keyart.jpg" alt="">
         <h3>Transistor</h3>
         <small>Supergiant Games</small>
         <div class="card-overlay">
@@ -285,8 +340,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games">
-        <img src="FC3 Blood Dragon.jpg">
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Far Cry 3: Blood Dragon">
+        <img src="FC3 Blood Dragon.jpg" alt="">
         <h3>Far Cry 3: Blood Dragon</h3>
         <small>Ubisoft</small>
         <div class="card-overlay">
@@ -298,8 +353,8 @@
       </div>
 
       <!-- Books -->
-      <div class="story-card" data-category="books">
-        <img src="Neuromancer.png">
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Neuromancer">
+        <img src="Neuromancer.png" alt="">
         <h3>Neuromancer</h3>
         <small>William Gibson</small>
         <div class="card-overlay">
@@ -311,8 +366,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books">
-        <img src="Mirrorshades.jpg">
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Mirrorshades">
+        <img src="Mirrorshades.jpg" alt="">
         <h3>Mirrorshades</h3>
         <small>Edited by Bruce Sterling</small>
         <div class="card-overlay">
@@ -324,8 +379,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books">
-        <img src="Pattern Recognition.jpg">
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Pattern Recognition">
+        <img src="Pattern Recognition.jpg" alt="">
         <h3>Pattern Recognition</h3>
         <small>William Gibson</small>
         <div class="card-overlay">
@@ -337,8 +392,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books">
-        <img src="Cryptonomicon.jpg">
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Cryptonomicon">
+        <img src="Cryptonomicon.jpg" alt="">
         <h3>Cryptonomicon</h3>
         <small>Neal Stephenson</small>
         <div class="card-overlay">
@@ -350,8 +405,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books">
-        <img src="Synners.jpg">
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Synners">
+        <img src="Synners.jpg" alt="">
         <h3>Synners</h3>
         <small>Pat Cadigan</small>
         <div class="card-overlay">
@@ -364,24 +419,26 @@
       </div>
 
       <!-- Film and TV -->
-      <div class="story-card" data-category="film">
-        <img src="CP Edgerunners.jpg">
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Cyberpunk Edgerunners">
+        <img src="CP Edgerunners.jpg" alt="">
         <h3>Cyberpunk Edgerunners</h3>
         <small>Studio Trigger / CD Projekt</small>
         <div class="card-overlay">
           <div class="overlay-content">An anime spinoff of Cyberpunk 2077 with heart and style.</div>
         </div>
       </div>
-      <div class="story-card" data-category="film">
-        <img src="Ghost in the Shell.jpg">
+
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell">
+        <img src="Ghost in the Shell.jpg" alt="">
         <h3>Ghost in the Shell</h3>
         <small>Mamoru Oshii</small>
         <div class="card-overlay">
           <div class="overlay-content">A philosophical dive into cybernetic identity.</div>
         </div>
       </div>
-      <div class="story-card" data-category="film">
-        <img src="PLUTO.jpg">
+
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for PLUTO">
+        <img src="PLUTO.jpg" alt="">
         <h3>PLUTO</h3>
         <small>Naoki Urasawa / Netflix</small>
         <div class="card-overlay">
@@ -390,8 +447,8 @@
       </div>
 
       <!-- Other -->
-      <div class="story-card" data-category="other">
-        <img src="Neon Rising.png">
+      <div class="story-card" data-category="other" tabindex="0" aria-label="Open details for Neon_Rising">
+        <img src="Neon Rising.png" alt="">
         <h3>Neon_Rising</h3>
         <small>The_Future_is_Now</small>
         <div class="card-overlay">
@@ -401,13 +458,31 @@
     </div>
   </section>
 
+  <!-- Modal (reused for all cards) -->
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal" role="document" tabindex="-1" id="modal">
+      <div class="modal-media">
+        <img src="" alt="" id="modal-img">
+      </div>
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      </div>
+      <p class="modal-byline" id="modal-byline"></p>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
   <script>
+    // Filtering
     const buttons = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.story-card');
 
     function filterCategory(category) {
       buttons.forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-filter') === category);
+        const isActive = btn.getAttribute('data-filter') === category;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', String(isActive));
       });
 
       cards.forEach(card => {
@@ -432,9 +507,86 @@
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('site-nav');
-
     hamburger.addEventListener('click', () => {
       nav.classList.toggle('show');
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+    });
+
+    // Modal logic
+    const backdrop = document.getElementById('modal-backdrop');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalByline = document.getElementById('modal-byline');
+    const modalBody = document.getElementById('modal-body');
+    const modalClose = document.getElementById('modal-close');
+    let lastFocusedEl = null;
+
+    function openModalFromCard(card){
+      // Remember focus to return later
+      lastFocusedEl = document.activeElement;
+
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3')?.textContent?.trim() || '';
+      const byline = card.querySelector('small')?.textContent?.trim() || '';
+      const overlayHTML = card.querySelector('.overlay-content')?.innerHTML || '';
+
+      if(img){
+        modalImg.src = img.getAttribute('src') || '';
+        modalImg.alt = img.getAttribute('alt') || '';
+      } else {
+        modalImg.src = '';
+        modalImg.alt = '';
+      }
+      modalTitle.textContent = title;
+      modalByline.textContent = byline;
+      modalBody.innerHTML = overlayHTML;
+
+      document.body.classList.add('modal-open');
+      backdrop.classList.add('show');
+      backdrop.setAttribute('aria-hidden','false');
+
+      // Move focus into modal
+      modal.focus();
+    }
+
+    function closeModal(){
+      backdrop.classList.remove('show');
+      backdrop.setAttribute('aria-hidden','true');
+      document.body.classList.remove('modal-open');
+
+      // Return focus to the triggering card
+      if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){
+        lastFocusedEl.focus();
+      }
+    }
+
+    // Open modal on card click or Enter/Space
+    cards.forEach(card => {
+      card.addEventListener('click', () => openModalFromCard(card));
+      card.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          openModalFromCard(card);
+        }
+      });
+    });
+
+    // Close handlers
+    modalClose.addEventListener('click', closeModal);
+
+    backdrop.addEventListener('click', (e) => {
+      // Close only if user clicks the backdrop, not the modal content
+      if(e.target === backdrop){
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && backdrop.classList.contains('show')){
+        closeModal();
+      }
     });
   </script>
 </body>
