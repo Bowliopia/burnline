@@ -195,10 +195,32 @@
     grid-template-rows: auto auto 1fr;
   }
 
+  .modal-media {
+    position: relative; /* allows absolute positioning for close button */
+  }
+
   .modal-media img{
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  /* Close button over image */
+  .modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+  .modal-close:hover {
+    background: rgba(0,0,0,0.8);
   }
 
   .modal-header{
@@ -224,15 +246,6 @@
     overflow: auto;
     line-height: 1.55;
   }
-  .modal-close{
-    border: 0;
-    background: transparent;
-    color: #cbd5e1;
-    font-size: 1.5rem;
-    cursor: pointer;
-    line-height: 1;
-  }
-  .modal-close:hover{ color: #fff; }
 
   /* Prevent background scroll when modal open */
   body.modal-open{
@@ -494,10 +507,10 @@
     <div class="modal" role="document" tabindex="-1" id="modal">
       <div class="modal-media">
         <img src="" alt="" id="modal-img">
+        <button class="modal-close" id="modal-close" aria-label="Close">×</button>
       </div>
       <div class="modal-header">
         <h2 class="modal-title" id="modal-title"></h2>
-        <button class="modal-close" id="modal-close" aria-label="Close">×</button>
       </div>
       <p class="modal-byline" id="modal-byline"></p>
       <div class="modal-body" id="modal-body"></div>
