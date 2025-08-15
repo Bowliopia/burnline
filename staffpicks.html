@@ -93,6 +93,14 @@
     .site-nav.show { display: flex; }
     .site-nav a { color: var(--ink); padding: 0.5rem 0; }
   }
+@media (max-width: 768px) {
+  .modal.modal--book .modal-media img {
+    max-height: 50vh; /* half the screen height */
+    width: auto;      /* maintain aspect ratio */
+    height: auto;
+    display: block;
+    margin: 0 auto;   /* center horizontally */
+  }
 
   .content {
     max-width: 1200px;
