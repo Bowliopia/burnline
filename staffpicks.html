@@ -77,13 +77,16 @@
     border-radius: 2px;
   }
 
-  /* New gradient heading style */
+  /* Fixed gradient heading (matches Fiction page colors + cross-browser) */
   .gradient-heading {
     font-size: 2.5rem;
     font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(90deg, var(--pink), #ff8bd1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #f72585, #7209b7);
+    background-clip: text;              /* standard */
+    -webkit-background-clip: text;      /* webkit */
+    color: transparent;                  /* standard */
+    -webkit-text-fill-color: transparent;/* webkit */
+    display: inline-block;               /* ensure clip fits text width */
     margin-bottom: 1.5rem;
     text-align: center;
   }
