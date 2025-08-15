@@ -179,24 +179,23 @@
   }
   .modal-backdrop.show { display: flex; }
 
-  .modal {
-    background: #171a2a;
-    color: var(--text);
-    width: min(720px, 100%);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    max-height: 90vh;
+.modal {
+  background: #171a2a;
+  color: var(--text);
+  width: min(720px, 100%);
+  border-radius: 14px;
+  overflow: visible; /* changed from hidden to visible */
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto 1fr;
-    grid-template-areas:
-      "media"
-      "header"
-      "byline"
-      "body";
-  }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas:
+    "media"
+    "header"
+    "byline"
+    "body";
+}
 
   .modal-media {
     grid-area: media;
@@ -249,12 +248,11 @@
   .modal-body{
     grid-area: body;
     padding: 0 1.25rem 1.25rem;
-    overflow: auto;
     line-height: 1.55;
   }
 
   body.modal-open{
-    overflow: hidden;
+    overflow: auto;
   }
 
   .steam-link{
