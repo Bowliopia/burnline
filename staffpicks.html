@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Staff Picks – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
+  <style>
   :root{
     --bg-1:#0f0f1c;
     --bg-2:#1b1e35;
@@ -26,6 +26,7 @@
     font-family: 'Orbitron', sans-serif;
   }
 
+  /* Header */
   .site-header {
     display: flex;
     justify-content: space-between;
@@ -92,7 +93,15 @@
     .site-nav.show { display: flex; }
     .site-nav a { color: var(--ink); padding: 0.5rem 0; }
   }
-
+@media (max-width: 768px) {
+  .modal.modal--book .modal-media img {
+    max-height: 50vh; /* half the screen height */
+    width: auto;      /* maintain aspect ratio */
+    height: auto;
+    display: block;
+    margin: 0 auto;   /* center horizontally */
+  }
+}
   .content {
     max-width: 1200px;
     margin: 2rem auto;
@@ -179,23 +188,24 @@
   }
   .modal-backdrop.show { display: flex; }
 
-.modal {
-  background: #171a2a;
-  color: var(--text);
-  width: min(720px, 100%);
-  border-radius: 14px;
-  overflow: visible; /* changed from hidden to visible */
-  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  .modal {
+    background: #171a2a;
+    color: var(--text);
+    width: min(720px, 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    max-height: 90vh;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto 1fr;
-  grid-template-areas:
-    "media"
-    "header"
-    "byline"
-    "body";
-}
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "media"
+      "header"
+      "byline"
+      "body";
+  }
 
   .modal-media {
     grid-area: media;
@@ -248,11 +258,12 @@
   .modal-body{
     grid-area: body;
     padding: 0 1.25rem 1.25rem;
+    overflow: auto;
     line-height: 1.55;
   }
 
   body.modal-open{
-    overflow: auto;
+    overflow: hidden;
   }
 
   .steam-link{
@@ -303,7 +314,6 @@
     }
   }
 
-  /* Mobile: stack and show FULL cover (scaled down, no crop) */
   @media (max-width: 720px){
     .modal.modal--book{
       width: min(720px, 100%);
@@ -315,25 +325,13 @@
         "byline"
         "body";
     }
-    .modal.modal--book .modal-media {
-      position: relative;          /* keep X anchored to the image on mobile */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem 0;
-    }
+    .modal.modal--book .modal-media { position: relative; }
     .modal.modal--book .modal-media img{
-      max-width: 90%;              /* avoid edge-hugging */
-      max-height: 50vh;            /* about half the viewport height */
-      width: auto;                 /* preserve aspect ratio */
-      height: auto;                /* preserve aspect ratio */
-      object-fit: contain;         /* ensure the whole cover is visible */
-      background: #111522;         /* same backdrop as desktop PNG handling */
-      margin: 0 auto;
-      display: block;
+      height: auto;
+      object-fit: cover;
     }
   }
-</style>
+  </style>
 </head>
 <body>
   <header class="site-header">
