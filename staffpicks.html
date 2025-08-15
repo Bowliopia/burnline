@@ -94,7 +94,6 @@
     .site-nav a { color: var(--ink); padding: 0.5rem 0; }
   }
 
-  /* Page */
   .content {
     max-width: 1200px;
     margin: 2rem auto;
@@ -136,10 +135,10 @@
     background-color: var(--card);
     border-radius: 10px;
     padding: 1rem;
-    display: none;       /* Shown via .active after filtering */
+    display: none;     
     position: relative;
     overflow: hidden;
-    cursor: pointer;     /* Indicates click to open modal */
+    cursor: pointer;  
     transition: transform .15s ease, box-shadow .15s ease;
   }
   .story-card:focus-visible{
@@ -167,10 +166,8 @@
     font-size: 0.85rem;
   }
 
-  /* Hide the old hover overlays; we still read their content for the modal */
   .card-overlay { display: none !important; }
 
-  /* Modal (default stacked layout) */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -192,7 +189,6 @@
     box-shadow: 0 20px 60px rgba(0,0,0,.6);
     max-height: 90vh;
 
-    /* Use grid areas so we can switch to a two-column layout for books */
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto 1fr;
@@ -205,7 +201,7 @@
 
   .modal-media {
     grid-area: media;
-    position: relative; /* allows absolute positioning for close button */
+    position: relative; 
   }
 
   .modal-media img{
@@ -214,7 +210,6 @@
     display: block;
   }
 
-  /* Close button over image */
   .modal-close {
     position: absolute;
     top: 8px;
@@ -259,12 +254,10 @@
     line-height: 1.55;
   }
 
-  /* Prevent background scroll when modal open */
   body.modal-open{
     overflow: hidden;
   }
 
-  /* Steam link paragraph + gradient link */
   .steam-link{
     margin-top: 0.75rem;
     margin-bottom: 0;
@@ -281,7 +274,6 @@
     text-decoration: underline;
   }
 
-  /* ===== Book modal variant: image left, text right ===== */
   .modal.modal--book{
     width: min(960px, 100%);
     grid-template-columns: 38% 62%;
@@ -295,16 +287,25 @@
   .modal.modal--book .modal-media img{
     width: 100%;
     height: 100%;
-    object-fit: contain;   /* preserve cover aspect */
-    background: #111522;   /* subtle backdrop behind transparent PNGs */
+    object-fit: contain; 
+    background: #111522; 
   }
 
-  /* Give right column its own scrolling on short screens */
   .modal.modal--book .modal-body{
     overflow: auto;
   }
 
-  /* Mobile: stack like default */
+  @media (min-width: 721px){
+    .modal.modal--book { position: relative; }
+    .modal.modal--book .modal-media { position: static; } 
+    .modal.modal--book .modal-close {
+      position: absolute; 
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+    }
+  }
+
   @media (max-width: 720px){
     .modal.modal--book{
       width: min(720px, 100%);
@@ -316,6 +317,7 @@
         "byline"
         "body";
     }
+    .modal.modal--book .modal-media { position: relative; }
     .modal.modal--book .modal-media img{
       height: auto;
       object-fit: cover;
@@ -343,7 +345,7 @@
   <section class="content">
     <h1>Staff Picks</h1>
     <div class="filters" role="tablist" aria-label="Filter Staff Picks">
-      <!-- Books tab moved to the first position -->
+      <!-- Books tab first -->
       <button class="filter-btn" data-filter="books" role="tab" aria-selected="false">Books</button>
       <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
       <button class="filter-btn" data-filter="film" role="tab" aria-selected="false">Film / TV</button>
