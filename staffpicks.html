@@ -76,6 +76,14 @@
     width: 100%;
     border-radius: 2px;
   }
+  .gradient-heading {
+  font-size: 2.5rem; /* matches your other page headers */
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(90deg, var(--pink), #ff8bd1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
   @media (max-width: 768px) {
     .hamburger { display: flex; }
     .site-nav {
@@ -354,7 +362,7 @@
   </header>
 
   <section class="content">
-    <h1>Staff Picks</h1>
+  <h1 class="gradient-heading">Staff Picks</h1>
     <div class="filters" role="tablist" aria-label="Filter Staff Picks">
       <!-- Books tab first -->
       <button class="filter-btn" data-filter="books" role="tab" aria-selected="false">Books</button>
