@@ -71,8 +71,8 @@
       padding: 2rem 0 1rem;
       max-width: 1100px;
       margin: 0 auto;
-      padding-left: 1rem;   /* ensure space on mobile */
-      padding-right: 1rem;  /* ensure space on mobile */
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     .cover-grid {
       display: grid;
@@ -81,22 +81,16 @@
       margin-top: 1.25rem;
     }
     .cover-tile {
-      background: #1a1c30;
-      border-radius: 12px;
-      padding: 0.75rem;
-      box-shadow: 0 0 12px rgba(0,0,0,0.25);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
       cursor: pointer;
-      display: block;
+      transition: transform 0.25s ease;
     }
-    .cover-tile:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(13, 246, 227, 0.18); }
+    .cover-tile:hover { transform: scale(1.02); }
     .cover-tile img {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 8px;
       object-fit: contain;
-      background: #0b0c17;
     }
 
     /* Artwork grid */
@@ -118,7 +112,7 @@
     .art-tile img {
       width: 100%;
       height: 300px;
-      object-fit: cover; /* grid art intentionally crops for uniformity */
+      object-fit: cover;
       display: block;
     }
 
