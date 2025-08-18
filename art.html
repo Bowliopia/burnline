@@ -15,9 +15,7 @@
 
     html { scroll-behavior: smooth; }
 
-    h1, h2, h3, h4, nav a, header {
-      font-family: 'Orbitron', sans-serif;
-    }
+    h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
 
     .site-header {
       display: flex;
@@ -30,79 +28,45 @@
       position: relative;
     }
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: inherit;
-    }
+    .logo-title { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; }
     .logo-title img { height: 60px; width: auto; }
 
     .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
     .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
     .site-nav a:hover { color: #ff4ac2; }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
+    .hamburger { display: none; flex-direction: column; justify-content: center; cursor: pointer; width: 30px; height: 25px; gap: 5px; }
     .hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
 
     @media (max-width: 768px){
       .site-nav{
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        background: #0df6e3;
-        padding: 1rem 0;
-        margin-top: 1rem;
+        flex-direction: column; width: 100%; display: none; background: #0df6e3;
+        padding: 1rem 0; margin-top: 1rem;
       }
       .site-nav.active{ display: flex; }
       .hamburger{ display: flex; }
     }
 
+    /* Containers */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .content {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-      text-align: center;
-    }
-
+    /* Hero/subheading (first) */
+    .content { max-width: 800px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
     .gradient-heading {
       font-size: 2rem;
       background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
-
     .gradient-heading-blue {
       font-size: 1.5rem;
       background: linear-gradient(90deg, #0df6e3, #1e90ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
+    .content p { line-height: 1.7; color: #ccc; margin-bottom: 1.2rem; }
 
-    .content p {
-      line-height: 1.7;
-      color: #ccc;
-      margin-bottom: 1.2rem;
-    }
-
+    /* Cover Gallery */
     .cover-galley { padding: 2rem 0 1rem; }
     .cover-grid {
       display: grid;
@@ -117,30 +81,20 @@
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       cursor: pointer;
-
-      aspect-ratio: 2 / 3;          
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
     }
-    .cover-tile:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 25px rgba(13, 246, 227, 0.18);
-    }
+    .cover-tile:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(13, 246, 227, 0.18); }
     .cover-tile img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;         
+      height: auto;            /* show full image */
       display: block;
       border-radius: 8px;
-      background: #0b0c17;         
+      object-fit: contain;     /* no cropping */
+      background: #0b0c17;     /* subtle letterbox if needed */
     }
 
     /* Artwork grid */
-    .section-heading {
-      text-align: center;
-      margin-top: 2.5rem;
-    }
+    .section-heading { text-align: center; margin-top: 2.5rem; }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -154,124 +108,54 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
-    .art-tile:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 25px rgba(13, 246, 227, 0.15);
-    }
+    .art-tile:hover { transform: scale(1.02); box-shadow: 0 0 25px rgba(13, 246, 227, 0.15); }
     .art-tile img {
       width: 100%;
       height: 300px;
-      object-fit: cover; 
+      object-fit: cover; /* grid art intentionally crops for uniformity */
       display: block;
     }
 
-  
+    /* Modal */
     .modal {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      opacity: 0;
-      visibility: hidden;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      transition: opacity 0.4s ease;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      opacity: 0; visibility: hidden; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.9); transition: opacity 0.4s ease;
     }
     .modal.show { opacity: 1; visibility: visible; }
     .modal-content {
-      max-width: 90%;
-      max-height: 80vh;
-      border-radius: 10px;
+      max-width: 90%; max-height: 80vh; border-radius: 10px;
       box-shadow: 0 0 30px rgba(13, 246, 227, 0.2);
-      background: #0b0c17;
-      object-fit: contain;
+      background: #0b0c17; object-fit: contain;
     }
     .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #0df6e3;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
+      position: absolute; top: 20px; right: 35px; color: #0df6e3;
+      font-size: 40px; font-weight: bold; cursor: pointer;
     }
-    .modal-caption {
-      color: #ccc;
-      margin-top: 1rem;
-      text-align: center;
-      max-width: 80%;
-    }
+    .modal-caption { color: #ccc; margin-top: 1rem; text-align: center; max-width: 80%; }
     .modal-caption h3 { margin: 0; color: #0df6e3; }
     .modal-caption p { margin: 0.5rem 0 0; }
 
     .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 3rem;
-      color: #0df6e3;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 1000;
+      position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem;
+      color: #0df6e3; background: none; border: none; cursor: pointer; z-index: 1000;
     }
-    .nav-arrow.left { left: 2%; }
-    .nav-arrow.right { right: 2%; }
+    .nav-arrow.left { left: 2%; } .nav-arrow.right { right: 2%; }
 
-
-    footer {
-      background: #0f0f1c;
-      padding: 4rem 2rem 2rem;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
+    /* Footer */
+    footer { background: #0f0f1c; padding: 4rem 2rem 2rem; color: #aaa; font-size: 0.9rem; }
     footer a:hover { color: #0df6e3; }
-    .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 3rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+    .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 3rem; max-width: 1200px; margin: auto; }
     .footer-column { flex: 1 1 250px; min-width: 200px; }
     .footer-logo { height: 100px; margin-bottom: 1rem; }
-    .footer-bottom {
-      text-align: center;
-      margin-top: 3rem;
-      border-top: 1px solid #222;
-      padding-top: 1rem;
-      color: #555;
-    }
-    .newsletter-input {
-      padding: 0.6rem 1rem;
-      border-radius: 4px;
-      border: none;
-      width: 70%;
-      margin-bottom: 0.8rem;
-    }
-    .newsletter-button {
-      padding: 0.6rem 1.2rem;
-      background-color: #0df6e3;
-      color: #0f0f1c;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    .footer-bottom { text-align: center; margin-top: 3rem; border-top: 1px solid #222; padding-top: 1rem; color: #555; }
+    .newsletter-input { padding: 0.6rem 1rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.8rem; }
+    .newsletter-button { padding: 0.6rem 1.2rem; background-color: #0df6e3; color: #0f0f1c; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
 
     .gradient-blue-text {
       background: linear-gradient(90deg, #0df6e3, #56ccf2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      font-weight: bold;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; color: transparent; font-weight: bold;
     }
   </style>
 </head>
@@ -293,6 +177,7 @@
     </nav>
   </header>
 
+  <!-- 1) SUBHEADING / BLURB (first on page) -->
   <section class="content">
     <h1 class="gradient-heading">Featured Art</h1>
     <p>
@@ -301,27 +186,28 @@
     </p>
   </section>
 
+  <!-- 2) COVER GALLERY -->
   <section class="cover-galley container">
-    <h2 class="gradient-heading-blue">Cover Galley</h2>
+    <h2 class="gradient-heading-blue">Cover Gallery</h2>
     <div class="cover-grid">
-      <div class="cover-tile art-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
+      <div class="cover-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
         <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover">
       </div>
-      <div class="cover-tile art-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
+      <div class="cover-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
         <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover">
       </div>
-      <div class="cover-tile art-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
+      <div class="cover-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
         <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover">
       </div>
     </div>
   </section>
 
+  <!-- 3) MORE ART GRID -->
   <section class="container">
     <div class="section-heading">
       <h2 class="gradient-heading-blue">More Art From Burnline</h2>
     </div>
     <div class="gallery-grid" id="artGrid">
-      <!-- Ensure data attributes for captions -->
       <div class="art-tile" data-title="CBA6" data-artist="Artist Name">
         <img src="CBA6.jpg" alt="Art 1">
       </div>
@@ -355,6 +241,7 @@
     </div>
   </section>
 
+  <!-- Modal -->
   <div id="imageModal" class="modal" aria-hidden="true">
     <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
     <button class="nav-arrow left" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
@@ -403,8 +290,8 @@
     const modalArtist = document.getElementById('modalArtist');
 
     function buildTilesAndBindClicks() {
-      // any element with class "art-tile" participates (covers + grid)
-      tiles = Array.from(document.querySelectorAll('.art-tile'));
+      // Include both cover tiles and art tiles
+      tiles = Array.from(document.querySelectorAll('.cover-tile, .art-tile'));
       tiles.forEach((tile, i) => {
         tile.addEventListener('click', () => openModal(i));
       });
@@ -448,7 +335,6 @@
       nav.classList.toggle('active');
     }
 
-    // Initialize
     document.addEventListener('DOMContentLoaded', buildTilesAndBindClicks);
   </script>
 </body>
