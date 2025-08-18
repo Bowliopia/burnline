@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Art – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
+ <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -67,7 +67,13 @@
     .content p { line-height: 1.7; color: #ccc; margin-bottom: 1.2rem; }
 
     /* Cover Gallery */
-    .cover-galley { padding: 2rem 0 1rem; }
+    .cover-galley {
+      padding: 2rem 0 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 1rem;   /* ensure space on mobile */
+      padding-right: 1rem;  /* ensure space on mobile */
+    }
     .cover-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -86,11 +92,11 @@
     .cover-tile:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(13, 246, 227, 0.18); }
     .cover-tile img {
       width: 100%;
-      height: auto;            /* show full image */
+      height: auto;
       display: block;
       border-radius: 8px;
-      object-fit: contain;     /* no cropping */
-      background: #0b0c17;     /* subtle letterbox if needed */
+      object-fit: contain;
+      background: #0b0c17;
     }
 
     /* Artwork grid */
@@ -157,7 +163,7 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; color: transparent; font-weight: bold;
     }
-  </style>
+</style>
 </head>
 <body>
 
