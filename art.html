@@ -67,14 +67,13 @@
       .hamburger{ display: flex; }
     }
 
-    /* Shared section container */
+
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* Hero/subheading block to match Submit page */
     .content {
       max-width: 800px;
       margin: 3rem auto;
@@ -104,10 +103,7 @@
       margin-bottom: 1.2rem;
     }
 
-    /* Cover Galley section (now first) */
-    .cover-galley {
-      padding: 3rem 0 1rem;
-    }
+    .cover-galley { padding: 2rem 0 1rem; }
     .cover-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -121,6 +117,11 @@
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       cursor: pointer;
+
+      aspect-ratio: 2 / 3;          
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .cover-tile:hover {
       transform: translateY(-3px);
@@ -128,9 +129,11 @@
     }
     .cover-tile img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: contain;         
       display: block;
       border-radius: 8px;
+      background: #0b0c17;         
     }
 
     /* Artwork grid */
@@ -158,11 +161,11 @@
     .art-tile img {
       width: 100%;
       height: 300px;
-      object-fit: cover;
+      object-fit: cover; 
       display: block;
     }
 
-    /* Modal */
+  
     .modal {
       display: flex;
       align-items: center;
@@ -185,6 +188,8 @@
       max-height: 80vh;
       border-radius: 10px;
       box-shadow: 0 0 30px rgba(13, 246, 227, 0.2);
+      background: #0b0c17;
+      object-fit: contain;
     }
     .close {
       position: absolute;
@@ -218,7 +223,7 @@
     .nav-arrow.left { left: 2%; }
     .nav-arrow.right { right: 2%; }
 
-    /* Footer */
+
     footer {
       background: #0f0f1c;
       padding: 4rem 2rem 2rem;
@@ -288,7 +293,14 @@
     </nav>
   </header>
 
-  <!-- 1) COVER GALLEY (first section) -->
+  <section class="content">
+    <h1 class="gradient-heading">Featured Art</h1>
+    <p>
+      Interested in having your art featured in the next issue?
+      <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
+    </p>
+  </section>
+
   <section class="cover-galley container">
     <h2 class="gradient-heading-blue">Cover Galley</h2>
     <div class="cover-grid">
@@ -304,22 +316,12 @@
     </div>
   </section>
 
-  <!-- 2) SUBHEADING / BLURB -->
-  <section class="content">
-    <h1 class="gradient-heading">Featured Art</h1>
-    <p>
-      Interested in having your art featured in the next issue?
-      <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
-    </p>
-  </section>
-
-  <!-- 3) MORE ART GRID -->
   <section class="container">
     <div class="section-heading">
       <h2 class="gradient-heading-blue">More Art From Burnline</h2>
     </div>
     <div class="gallery-grid" id="artGrid">
-      <!-- Add data-title and data-artist so modal has captions -->
+      <!-- Ensure data attributes for captions -->
       <div class="art-tile" data-title="CBA6" data-artist="Artist Name">
         <img src="CBA6.jpg" alt="Art 1">
       </div>
@@ -353,7 +355,6 @@
     </div>
   </section>
 
-  <!-- Modal -->
   <div id="imageModal" class="modal" aria-hidden="true">
     <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
     <button class="nav-arrow left" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
@@ -402,6 +403,7 @@
     const modalArtist = document.getElementById('modalArtist');
 
     function buildTilesAndBindClicks() {
+      // any element with class "art-tile" participates (covers + grid)
       tiles = Array.from(document.querySelectorAll('.art-tile'));
       tiles.forEach((tile, i) => {
         tile.addEventListener('click', () => openModal(i));
