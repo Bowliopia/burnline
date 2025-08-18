@@ -13,9 +13,7 @@
       color: #f0f0f0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     h1, h2, h3, h4, nav a, header {
       font-family: 'Orbitron', sans-serif;
@@ -69,9 +67,17 @@
       .hamburger{ display: flex; }
     }
 
+    /* Shared section container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero/subheading block to match Submit page */
     .content {
       max-width: 800px;
-      margin: 4rem auto;
+      margin: 3rem auto;
       padding: 0 2rem;
       text-align: center;
     }
@@ -98,61 +104,28 @@
       margin-bottom: 1.2rem;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 3rem 2rem;
-    }
-
-    .art-tile {
-      background: #1a1c30;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .art-tile:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 25px rgba(13, 246, 227, 0.15);
-    }
-
-    .art-tile img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Cover Galley section */
+    /* Cover Galley section (now first) */
     .cover-galley {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 2rem 3rem;
-      text-align: center;
+      padding: 3rem 0 1rem;
     }
-
     .cover-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
     }
-
     .cover-tile {
       background: #1a1c30;
       border-radius: 12px;
       padding: 0.75rem;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
     }
-
     .cover-tile:hover {
       transform: translateY(-3px);
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.18);
     }
-
     .cover-tile img {
       width: 100%;
       height: auto;
@@ -160,6 +133,36 @@
       border-radius: 8px;
     }
 
+    /* Artwork grid */
+    .section-heading {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0 3rem;
+    }
+    .art-tile {
+      background: #1a1c30;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .art-tile:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.15);
+    }
+    .art-tile img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Modal */
     .modal {
       display: flex;
       align-items: center;
@@ -174,22 +177,15 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      transition: opacity 0.4s ease, transform 0.3s ease;
+      transition: opacity 0.4s ease;
     }
-
-    .modal.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
+    .modal.show { opacity: 1; visibility: visible; }
     .modal-content {
       max-width: 90%;
       max-height: 80vh;
       border-radius: 10px;
       box-shadow: 0 0 30px rgba(13, 246, 227, 0.2);
-      transition: transform 0.3s ease;
     }
-
     .close {
       position: absolute;
       top: 20px;
@@ -199,21 +195,14 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     .modal-caption {
       color: #ccc;
       margin-top: 1rem;
       text-align: center;
+      max-width: 80%;
     }
-
-    .modal-caption h3 {
-      margin: 0;
-      color: #0df6e3;
-    }
-
-    .modal-caption p {
-      margin: 0.5rem 0 0;
-    }
+    .modal-caption h3 { margin: 0; color: #0df6e3; }
+    .modal-caption p { margin: 0.5rem 0 0; }
 
     .nav-arrow {
       position: absolute;
@@ -226,19 +215,17 @@
       cursor: pointer;
       z-index: 1000;
     }
-
     .nav-arrow.left { left: 2%; }
     .nav-arrow.right { right: 2%; }
 
+    /* Footer */
     footer {
       background: #0f0f1c;
       padding: 4rem 2rem 2rem;
       color: #aaa;
       font-size: 0.9rem;
     }
-
     footer a:hover { color: #0df6e3; }
-
     .footer-container {
       display: flex;
       flex-wrap: wrap;
@@ -247,17 +234,8 @@
       max-width: 1200px;
       margin: auto;
     }
-
-    .footer-column {
-      flex: 1 1 250px;
-      min-width: 200px;
-    }
-
-    .footer-logo {
-      height: 100px;
-      margin-bottom: 1rem;
-    }
-
+    .footer-column { flex: 1 1 250px; min-width: 200px; }
+    .footer-logo { height: 100px; margin-bottom: 1rem; }
     .footer-bottom {
       text-align: center;
       margin-top: 3rem;
@@ -265,7 +243,6 @@
       padding-top: 1rem;
       color: #555;
     }
-
     .newsletter-input {
       padding: 0.6rem 1rem;
       border-radius: 4px;
@@ -273,7 +250,6 @@
       width: 70%;
       margin-bottom: 0.8rem;
     }
-
     .newsletter-button {
       padding: 0.6rem 1.2rem;
       background-color: #0df6e3;
@@ -302,9 +278,7 @@
       <span>BURNLINE</span>
     </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Issues</a>
@@ -314,6 +288,23 @@
     </nav>
   </header>
 
+  <!-- 1) COVER GALLEY (first section) -->
+  <section class="cover-galley container">
+    <h2 class="gradient-heading-blue">Cover Galley</h2>
+    <div class="cover-grid">
+      <div class="cover-tile art-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
+        <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover">
+      </div>
+      <div class="cover-tile art-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
+        <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover">
+      </div>
+      <div class="cover-tile art-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
+        <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2) SUBHEADING / BLURB -->
   <section class="content">
     <h1 class="gradient-heading">Featured Art</h1>
     <p>
@@ -322,35 +313,52 @@
     </p>
   </section>
 
-  <section class="gallery-grid" id="artGrid">
-    <div class="art-tile"><img src="CBA6.jpg" alt="Art 1"></div>
-    <div class="art-tile"><img src="CBA5.jpg" alt="Art 2"></div>
-    <div class="art-tile"><img src="Placeholder Image 1.png" alt="Art 3"></div>
-    <div class="art-tile"><img src="Placeholder Image 2.png" alt="Art 4"></div>
-    <div class="art-tile"><img src="Placeholder Image 3.png" alt="Art 5"></div>
-    <div class="art-tile"><img src="Placeholder Image 4.png" alt="Art 6"></div>
-    <div class="art-tile"><img src="Placeholder Image 5.png" alt="Art 7"></div>
-    <div class="art-tile"><img src="Placeholder Image 6.png" alt="Art 8"></div>
-    <div class="art-tile"><img src="Placeholder Image 7.png" alt="Art 9"></div>
-    <div class="art-tile"><img src="Placeholder Image 8.png" alt="Art 10"></div>
-  </section>
-
-  <!-- Cover Galley Section -->
-  <section class="cover-galley">
-    <h2 class="gradient-heading-blue">Cover Galley</h2>
-    <div class="cover-grid">
-      <div class="cover-tile"><img src="Burnline Issue 01.png" alt="Burnline Issue 01"></div>
-      <div class="cover-tile"><img src="Burnline Issue 02.png" alt="Burnline Issue 02"></div>
-      <div class="cover-tile"><img src="Burnline Issue 03.png" alt="Burnline Issue 03"></div>
+  <!-- 3) MORE ART GRID -->
+  <section class="container">
+    <div class="section-heading">
+      <h2 class="gradient-heading-blue">More Art From Burnline</h2>
+    </div>
+    <div class="gallery-grid" id="artGrid">
+      <!-- Add data-title and data-artist so modal has captions -->
+      <div class="art-tile" data-title="CBA6" data-artist="Artist Name">
+        <img src="CBA6.jpg" alt="Art 1">
+      </div>
+      <div class="art-tile" data-title="CBA5" data-artist="Artist Name">
+        <img src="CBA5.jpg" alt="Art 2">
+      </div>
+      <div class="art-tile" data-title="Placeholder 1" data-artist="Artist Name">
+        <img src="Placeholder Image 1.png" alt="Art 3">
+      </div>
+      <div class="art-tile" data-title="Placeholder 2" data-artist="Artist Name">
+        <img src="Placeholder Image 2.png" alt="Art 4">
+      </div>
+      <div class="art-tile" data-title="Placeholder 3" data-artist="Artist Name">
+        <img src="Placeholder Image 3.png" alt="Art 5">
+      </div>
+      <div class="art-tile" data-title="Placeholder 4" data-artist="Artist Name">
+        <img src="Placeholder Image 4.png" alt="Art 6">
+      </div>
+      <div class="art-tile" data-title="Placeholder 5" data-artist="Artist Name">
+        <img src="Placeholder Image 5.png" alt="Art 7">
+      </div>
+      <div class="art-tile" data-title="Placeholder 6" data-artist="Artist Name">
+        <img src="Placeholder Image 6.png" alt="Art 8">
+      </div>
+      <div class="art-tile" data-title="Placeholder 7" data-artist="Artist Name">
+        <img src="Placeholder Image 7.png" alt="Art 9">
+      </div>
+      <div class="art-tile" data-title="Placeholder 8" data-artist="Artist Name">
+        <img src="Placeholder Image 8.png" alt="Art 10">
+      </div>
     </div>
   </section>
 
   <!-- Modal -->
-  <div id="imageModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <button class="nav-arrow left" onclick="changeSlide(-1)">&#10094;</button>
+  <div id="imageModal" class="modal" aria-hidden="true">
+    <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
+    <button class="nav-arrow left" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
     <img class="modal-content" id="modalImage" alt="Expanded artwork">
-    <button class="nav-arrow right" onclick="changeSlide(1)">&#10095;</button>
+    <button class="nav-arrow right" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
     <div class="modal-caption">
       <h3 id="modalTitle"></h3>
       <p id="modalArtist"></p>
@@ -386,28 +394,44 @@
 
   <script>
     let currentIndex = 0;
+    let tiles = [];
+
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const modalTitle = document.getElementById('modalTitle');
     const modalArtist = document.getElementById('modalArtist');
-    const tiles = document.querySelectorAll('.art-tile');
+
+    function buildTilesAndBindClicks() {
+      tiles = Array.from(document.querySelectorAll('.art-tile'));
+      tiles.forEach((tile, i) => {
+        tile.addEventListener('click', () => openModal(i));
+      });
+    }
 
     function openModal(index) {
       currentIndex = index;
-      const tile = tiles[index];
-      modal.classList.add('show');
-      modalImg.src = tile.querySelector('img').src;
+      const tile = tiles[currentIndex];
+      const img = tile.querySelector('img');
+      modalImg.src = img.src;
       modalTitle.textContent = tile.dataset.title || '';
       modalArtist.textContent = tile.dataset.artist || '';
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
     }
 
     function closeModal() {
       modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
     }
 
     function changeSlide(direction) {
+      if (!tiles.length) return;
       currentIndex = (currentIndex + direction + tiles.length) % tiles.length;
-      openModal(currentIndex);
+      const tile = tiles[currentIndex];
+      const img = tile.querySelector('img');
+      modalImg.src = img.src;
+      modalTitle.textContent = tile.dataset.title || '';
+      modalArtist.textContent = tile.dataset.artist || '';
     }
 
     document.addEventListener('keydown', function(e) {
@@ -421,6 +445,9 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', buildTilesAndBindClicks);
   </script>
 </body>
 </html>
