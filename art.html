@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Art – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
- <style>
+  <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -71,8 +71,8 @@
       padding: 2rem 0 1rem;
       max-width: 1100px;
       margin: 0 auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: 1rem;   /* spacing on mobile */
+      padding-right: 1rem;  /* spacing on mobile */
     }
     .cover-grid {
       display: grid;
@@ -90,16 +90,16 @@
       height: auto;
       display: block;
       border-radius: 8px;
-      object-fit: contain;
+      object-fit: contain; /* show full image */
     }
 
     /* Artwork grid */
-    .section-heading { text-align: center; margin-top: 2.5rem; }
+    .section-heading { text-align: left; margin-top: 2.5rem; } /* left align per request */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      padding: 2rem 0 3rem;
+      padding: 2rem 0 1rem;
     }
     .art-tile {
       background: #1a1c30;
@@ -112,9 +112,26 @@
     .art-tile img {
       width: 100%;
       height: 300px;
-      object-fit: cover;
+      object-fit: cover; /* uniform thumbnails for issue art */
       display: block;
     }
+
+    /* Load More button */
+    .load-more-wrap { text-align: center; padding: 0 0 3rem; }
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: #0df6e3;
+      color: #0f0f1c;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,246,227,0.25); }
+    .btn:active { transform: translateY(0); box-shadow: none; }
+    .hidden { display: none !important; }
 
     /* Modal */
     .modal {
@@ -157,7 +174,7 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; color: transparent; font-weight: bold;
     }
-</style>
+  </style>
 </head>
 <body>
 
@@ -177,7 +194,7 @@
     </nav>
   </header>
 
-  <!-- 1) SUBHEADING / BLURB (first on page) -->
+  <!-- Featured Art blurb -->
   <section class="content">
     <h1 class="gradient-heading">Featured Art</h1>
     <p>
@@ -186,28 +203,31 @@
     </p>
   </section>
 
-  <!-- 2) COVER GALLERY -->
-  <section class="cover-galley container">
-    <h2 class="gradient-heading-blue">Cover Gallery</h2>
-    <div class="cover-grid">
-      <div class="cover-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
-        <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover">
-      </div>
-      <div class="cover-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
-        <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover">
-      </div>
-      <div class="cover-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
-        <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover">
+  <!-- Cover Gallery -->
+  <section class="cover-galley">
+    <div class="container">
+      <h2 class="gradient-heading-blue" style="text-align:left;">Cover Gallery</h2>
+      <div class="cover-grid">
+        <div class="cover-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
+          <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover">
+        </div>
+        <div class="cover-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
+          <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover">
+        </div>
+        <div class="cover-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
+          <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 3) MORE ART GRID -->
+  <!-- Issue Art (formerly "More Art From Burnline") -->
   <section class="container">
     <div class="section-heading">
-      <h2 class="gradient-heading-blue">More Art From Burnline</h2>
+      <h2 class="gradient-heading-blue">Issue Art</h2>
     </div>
-    <div class="gallery-grid" id="artGrid">
+    <div class="gallery-grid" id="issueArtGrid">
+      <!-- Ensure data attributes for captions -->
       <div class="art-tile" data-title="CBA6" data-artist="Artist Name">
         <img src="CBA6.jpg" alt="Art 1">
       </div>
@@ -238,6 +258,9 @@
       <div class="art-tile" data-title="Placeholder 8" data-artist="Artist Name">
         <img src="Placeholder Image 8.png" alt="Art 10">
       </div>
+    </div>
+    <div class="load-more-wrap">
+      <button id="loadMoreBtn" class="btn">Load More</button>
     </div>
   </section>
 
@@ -288,12 +311,18 @@
     const modalImg = document.getElementById('modalImage');
     const modalTitle = document.getElementById('modalTitle');
     const modalArtist = document.getElementById('modalArtist');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
 
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('active');
+    }
+
+    // Build the list of clickable tiles (only visible ones)
     function buildTilesAndBindClicks() {
-      // Include both cover tiles and art tiles
-      tiles = Array.from(document.querySelectorAll('.cover-tile, .art-tile'));
+      tiles = Array.from(document.querySelectorAll('.cover-tile, .art-tile:not(.hidden)'));
       tiles.forEach((tile, i) => {
-        tile.addEventListener('click', () => openModal(i));
+        tile.onclick = () => openModal(i);
       });
     }
 
@@ -330,12 +359,34 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
+    // Show only first 3 Issue Art items initially
+    function initIssueArtVisibility() {
+      const issueArtItems = Array.from(document.querySelectorAll('#issueArtGrid .art-tile'));
+      issueArtItems.forEach((item, idx) => {
+        if (idx > 2) item.classList.add('hidden');
+      });
+      // Hide button if 3 or fewer items exist
+      if (issueArtItems.length <= 3) {
+        loadMoreBtn.classList.add('hidden');
+      }
     }
 
-    document.addEventListener('DOMContentLoaded', buildTilesAndBindClicks);
+    // Reveal the rest on click
+    function attachLoadMore() {
+      loadMoreBtn.addEventListener('click', () => {
+        const hiddenItems = document.querySelectorAll('#issueArtGrid .art-tile.hidden');
+        hiddenItems.forEach(el => el.classList.remove('hidden'));
+        loadMoreBtn.classList.add('hidden');
+        buildTilesAndBindClicks(); // rebuild so modal includes newly visible items
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initIssueArtVisibility();
+      attachLoadMore();
+      buildTilesAndBindClicks();
+    });
   </script>
 </body>
 </html>
