@@ -69,7 +69,6 @@
       .hamburger{ display: flex; }
     }
 
-    /* Match the Submit page header + paragraph block */
     .content {
       max-width: 800px;
       margin: 4rem auto;
@@ -99,26 +98,6 @@
       margin-bottom: 1.2rem;
     }
 
-    .gallery-hero {
-      text-align: center;
-      padding: 4rem 2rem 2rem;
-    }
-
-    .gallery-hero h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-
-    .gallery-hero p {
-      font-size: 1.1rem;
-      color: #ccc;
-      max-width: 700px;
-      margin: auto;
-    }
-
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -144,6 +123,41 @@
       height: 300px;
       object-fit: cover;
       display: block;
+    }
+
+    /* Cover Galley section */
+    .cover-galley {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 2rem 3rem;
+      text-align: center;
+    }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .cover-tile {
+      background: #1a1c30;
+      border-radius: 12px;
+      padding: 0.75rem;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cover-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.18);
+    }
+
+    .cover-tile img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
     }
 
     .modal {
@@ -300,7 +314,6 @@
     </nav>
   </header>
 
-  <!-- Matches Submit page hero block -->
   <section class="content">
     <h1 class="gradient-heading">Featured Art</h1>
     <p>
@@ -310,36 +323,25 @@
   </section>
 
   <section class="gallery-grid" id="artGrid">
-    <!-- Tiles (each must include data-title and data-artist) -->
-    <div class="art-tile" onclick="openModal(0)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="CBA6.jpg" alt="Art 1">
-    </div>
-    <div class="art-tile" onclick="openModal(1)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="CBA5.jpg" alt="Art 2">
-    </div>
-    <div class="art-tile" onclick="openModal(2)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 1.png" alt="Art 3">
-    </div>
-    <div class="art-tile" onclick="openModal(3)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 2.png" alt="Art 4">
-    </div>
-    <div class="art-tile" onclick="openModal(4)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 3.png" alt="Art 5">
-    </div>
-    <div class="art-tile" onclick="openModal(5)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 4.png" alt="Art 6">
-    </div>
-    <div class="art-tile" onclick="openModal(6)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 5.png" alt="Art 7">
-    </div>
-    <div class="art-tile" onclick="openModal(7)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 6.png" alt="Art 8">
-    </div>
-    <div class="art-tile" onclick="openModal(8)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 7.png" alt="Art 9">
-    </div>
-    <div class="art-tile" onclick="openModal(9)" data-title="Title or short description here" data-artist="Artist Name Here">
-      <img src="Placeholder Image 8.png" alt="Art 10">
+    <div class="art-tile"><img src="CBA6.jpg" alt="Art 1"></div>
+    <div class="art-tile"><img src="CBA5.jpg" alt="Art 2"></div>
+    <div class="art-tile"><img src="Placeholder Image 1.png" alt="Art 3"></div>
+    <div class="art-tile"><img src="Placeholder Image 2.png" alt="Art 4"></div>
+    <div class="art-tile"><img src="Placeholder Image 3.png" alt="Art 5"></div>
+    <div class="art-tile"><img src="Placeholder Image 4.png" alt="Art 6"></div>
+    <div class="art-tile"><img src="Placeholder Image 5.png" alt="Art 7"></div>
+    <div class="art-tile"><img src="Placeholder Image 6.png" alt="Art 8"></div>
+    <div class="art-tile"><img src="Placeholder Image 7.png" alt="Art 9"></div>
+    <div class="art-tile"><img src="Placeholder Image 8.png" alt="Art 10"></div>
+  </section>
+
+  <!-- Cover Galley Section -->
+  <section class="cover-galley">
+    <h2 class="gradient-heading-blue">Cover Galley</h2>
+    <div class="cover-grid">
+      <div class="cover-tile"><img src="Burnline Issue 01.png" alt="Burnline Issue 01"></div>
+      <div class="cover-tile"><img src="Burnline Issue 02.png" alt="Burnline Issue 02"></div>
+      <div class="cover-tile"><img src="Burnline Issue 03.png" alt="Burnline Issue 03"></div>
     </div>
   </section>
 
