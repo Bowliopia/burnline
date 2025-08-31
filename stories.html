@@ -25,8 +25,6 @@
       --magenta:#f72585;
       --purple:#7209b7;
       --border-dark:#222;
-      --maxw: 1100px;
-      --reading: 720px; /* comfortable reading width for about-style intro */
     }
 
     /* Base */
@@ -110,18 +108,19 @@
       .hamburger { display: flex; }
     }
 
-    /* About-style intro (single left-aligned column) */
+    /* About-style intro (single column, centered with generous side padding like About page) */
     .page-intro {
-      padding: 6rem 2rem 4rem;
+      padding: 6rem 0 4rem;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       border-bottom: 1px solid var(--border-dark);
     }
     .intro-inner {
-      max-width: var(--reading);
-      margin: 0 auto 0 0; /* left align within flow */
+      max-width: 800px;      /* mirrors About's max text width */
+      margin: 0 auto;        /* centers the column */
+      padding: 0 2rem;       /* generous gutters on both sides, like About */
     }
     .gradient-heading {
-      font-size: 2.2rem;
+      font-size: 2rem;       /* match About heading scale */
       background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -130,14 +129,14 @@
     .page-intro p {
       font-size: 1.1rem;
       color: var(--text-muted);
-      margin: 0 0 1rem 0;
-      line-height: 1.75;
+      margin: 0 0 1.2rem 0;
+      line-height: 1.7;      /* match About rhythm */
     }
     .intro-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
     .btn {
       background-color: var(--cyan);
@@ -164,7 +163,7 @@
       color: var(--cyan-hover);
     }
 
-    /* Grid band (reuse) */
+    /* Grid band (reuse site style) */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -311,18 +310,14 @@
     </nav>
   </header>
 
-  <!-- About-style single-column intro -->
+  <!-- About-style single-column intro (centered like the About page) -->
   <section class="page-intro">
     <div class="intro-inner">
       <h1 class="gradient-heading">Featured Fiction</h1>
-      <p>
-        Editor-selected cyberpunk short fiction from across Burnline—neon skylines, ghost signals, chrome hearts.
-        This page collects standout stories in one place so you can jump straight into the good stuff.
-      </p>
-      <p>
-        We refresh the lineup periodically to surface new voices and returning favorites. If you’re a writer working
-        in near-future worlds, glitch-bright aesthetics, or human stories in machine cities, we’d love to read your work.
-      </p>
+      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline—neon skylines, ghost signals, chrome hearts.
+         This page collects standout stories in one place so you can jump straight into the good stuff.</p>
+      <p>We refresh the lineup periodically to surface new voices and returning favorites. If you’re a writer working
+         in near-future worlds, glitch-bright aesthetics, or human stories in machine cities, we’d love to read your work.</p>
       <div class="intro-actions">
         <a class="btn" href="submit.html">Submit Your Story</a>
         <a class="btn btn-ghost" href="fiction.html">Browse All Issues</a>
