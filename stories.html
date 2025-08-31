@@ -27,7 +27,6 @@
       --border-dark:#222;
     }
 
-    /* Base */
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -44,7 +43,7 @@
     h2 { font-size: 2.2rem; }
     h3 { font-size: 1.5rem; }
 
-    /* Header (match homepage) */
+    /* Header */
     .site-header {
       display: flex;
       justify-content: space-between;
@@ -61,15 +60,8 @@
       text-decoration: none;
       color: inherit;
     }
-    .logo-title img {
-      height: 60px;
-      width: auto;
-    }
-    .site-nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 1rem;
-    }
+    .logo-title img { height: 60px; width: auto; }
+    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
     .site-nav a {
       color: var(--ink-dark);
       text-decoration: none;
@@ -77,7 +69,6 @@
       transition: color 0.3s;
     }
     .site-nav a:hover { color: var(--magenta); }
-
     .hamburger {
       display: none;
       flex-direction: column;
@@ -108,19 +99,19 @@
       .hamburger { display: flex; }
     }
 
-    /* About-style intro (single column, centered with generous side padding like About page) */
+    /* Intro */
     .page-intro {
       padding: 6rem 0 4rem;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       border-bottom: 1px solid var(--border-dark);
     }
     .intro-inner {
-      max-width: 800px;      /* mirrors About's max text width */
-      margin: 0 auto;        /* centers the column */
-      padding: 0 2rem;       /* generous gutters on both sides, like About */
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
     .gradient-heading {
-      font-size: 2rem;       /* match About heading scale */
+      font-size: 2rem;
       background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -130,14 +121,14 @@
       font-size: 1.1rem;
       color: var(--text-muted);
       margin: 0 0 1.2rem 0;
-      line-height: 1.7;      /* match About rhythm */
+      line-height: 1.7;
     }
     .intro-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       margin-top: 0.5rem;
-      justify-content: center; /* Center the buttons */
+      justify-content: center;
     }
     .btn {
       background-color: var(--cyan);
@@ -148,7 +139,7 @@
       font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+      transition: background-color 0.3s;
       text-decoration: none;
       display: inline-block;
     }
@@ -164,35 +155,28 @@
       color: var(--cyan-hover);
     }
 
-/* Grid band (reuse site style, lock to 4 columns max) */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Always 4 cards per row on large screens */
-  gap: 2.5rem;
-  padding: 6rem 2rem;
-  background-color: var(--bg-deep-1);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
-  background-repeat: repeat;
-  background-attachment: fixed;
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
-}
-    /* Responsive breakpoints */
-@media (max-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 per row on medium screens */
-  }
-}
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
-  }
-}
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr; /* 1 per row on mobile */
-  }
-}
+    /* Grid (max 4 per row) */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+      padding: 6rem 2rem;
+      background-color: var(--bg-deep-1);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
+      background-repeat: repeat;
+      background-attachment: fixed;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    @media (max-width: 1200px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
     .card {
       background: var(--card);
       border-radius: 12px;
@@ -207,24 +191,14 @@
       border-radius: 8px;
       margin-bottom: 1rem;
     }
-    .card h3 {
-      color: var(--cyan);
-      margin-bottom: 0.5rem;
-    }
+    .card h3 { color: var(--cyan); margin-bottom: 0.5rem; }
     .card p { color: var(--text-muted-2); }
-    .card-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
+    .card-link { text-decoration: none; color: inherit; display: block; }
     .card-link:hover .card {
       transform: scale(1.02);
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
-    .story-card .story-excerpt {
-      color: var(--text-muted-2);
-      margin: 0.35rem 0 0.75rem;
-    }
+    .story-card .story-excerpt { margin: 0.35rem 0 0.75rem; }
     .story-meta {
       font-size: 0.9rem;
       color: var(--text-muted-2);
@@ -233,18 +207,10 @@
 
     /* Load more */
     .load-more {
+      grid-column: 1 / -1;
       text-align: center;
       padding: 1rem 0 0.5rem;
     }
-    /* Make the load-more live INSIDE the grid band and span full width */
-    .grid .load-more {
-      grid-column: 1 / -1;
-      background: transparent;
-      border: 0;
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-
     .is-hidden { display: none !important; }
 
     /* Footer */
@@ -254,10 +220,7 @@
       color: var(--footer-muted);
       font-size: 0.9rem;
     }
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
+    footer a { color: var(--text-muted); text-decoration: none; }
     footer a:hover { color: var(--cyan); }
     .footer-container {
       display: flex;
@@ -267,14 +230,8 @@
       max-width: 1200px;
       margin: auto;
     }
-    .footer-column {
-      flex: 1 1 250px;
-      min-width: 200px;
-    }
-    .footer-logo {
-      height: 100px;
-      margin-bottom: 1rem;
-    }
+    .footer-column { flex: 1 1 250px; min-width: 200px; }
+    .footer-logo { height: 100px; margin-bottom: 1rem; }
     .footer-bottom {
       text-align: center;
       margin-top: 3rem;
@@ -305,11 +262,11 @@
     </nav>
   </header>
 
-  <!-- About-style single-column intro (centered like the About page) -->
+  <!-- Intro -->
   <section class="page-intro">
     <div class="intro-inner">
       <h1 class="gradient-heading">Featured Fiction</h1>
-      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline.This page features standout stories in one place so that you can read them in-browser instead of via digital flipbook, if you'd like.</p>
+      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent luctus feugiat nunc, nec tincidunt nisi tempor vel.</p>
       <div class="intro-actions">
         <a class="btn" href="submit.html">Submit Your Story</a>
         <a class="btn btn-ghost" href="fiction.html">Browse All Issues</a>
@@ -317,134 +274,86 @@
     </div>
   </section>
 
-  <!-- Story grid (no spotlight, no filters) -->
+  <!-- Story Grid -->
   <section class="grid" id="stories">
 
-    <!-- Visible by default -->
-    <a href="fiction.html#neon-ashes" class="card-link story-card">
+    <a href="#" class="card-link story-card">
       <div class="card">
-        <img src="AL Cover.png" loading="lazy" alt="Neon Ashes artwork">
-        <h3>Neon Ashes</h3>
-        <p class="story-excerpt">When the holodome flickers and the rain turns to static, a courier with a ghosted implant
-          races the grid to deliver a memory that isn’t supposed to exist.</p>
-        <div class="story-meta">by J. M. Caldwell • 9 min read</div>
+        <img src="AL Cover.png" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a augue nec lorem viverra varius.</p>
+        <div class="story-meta">by [Author's Name] • 9 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#chrome-dreams" class="card-link story-card">
+    <a href="#" class="card-link story-card">
       <div class="card">
-        <img src="NM Art.png" loading="lazy" alt="Chrome Dreams artwork">
-        <h3>Chrome Dreams</h3>
-        <p class="story-excerpt">A street mechanic reverse-engineers desire itself—and the city charges interest.</p>
-        <div class="story-meta">by Riko Ahn • 7 min read</div>
+        <img src="NM Art.png" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor velit ac sapien blandit.</p>
+        <div class="story-meta">by [Author's Name] • 7 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#memory-blackout" class="card-link story-card">
+    <a href="#" class="card-link story-card">
       <div class="card">
-        <img src="CS2 Keyart.jpg" loading="lazy" alt="The Memory Blackout artwork">
-        <h3>The Memory Blackout</h3>
-        <p class="story-excerpt">Every sunrise, Dex wakes up missing four hours—until he finds a note in his own code.</p>
-        <div class="story-meta">by Dex Silva • 11 min read</div>
+        <img src="CS2 Keyart.jpg" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales leo nec erat elementum.</p>
+        <div class="story-meta">by [Author's Name] • 11 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#smog-season" class="card-link story-card">
+    <a href="#" class="card-link story-card">
       <div class="card">
-        <img src="Burnline Issue 01.png" loading="lazy" alt="Smog Season artwork">
-        <h3>Smog Season</h3>
-        <p class="story-excerpt">The city sells clean air in vials; Aliya sells a map to a wind the syndicates can’t own.</p>
-        <div class="story-meta">by Aliya Zhang • 8 min read</div>
+        <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis tortor non justo ultricies.</p>
+        <div class="story-meta">by [Author's Name] • 8 min read</div>
       </div>
     </a>
 
-    <!-- Hidden initially; revealed by Load More -->
-    <a href="fiction.html#datalace" class="card-link story-card is-hidden">
+    <!-- Hidden initially -->
+    <a href="#" class="card-link story-card is-hidden">
       <div class="card">
-        <img src="AL Cover.png" loading="lazy" alt="Datalace artwork">
-        <h3>Datalace</h3>
-        <p class="story-excerpt">A black-market neural weave binds five strangers into one impossible heist.</p>
-        <div class="story-meta">by T. J. Krow • 10 min read</div>
+        <img src="AL Cover.png" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula sem in lorem suscipit.</p>
+        <div class="story-meta">by [Author's Name] • 10 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#ghost-signal" class="card-link story-card is-hidden">
+    <a href="#" class="card-link story-card is-hidden">
       <div class="card">
-        <img src="NM Art.png" loading="lazy" alt="Ghost Signal artwork">
-        <h3>Ghost Signal</h3>
-        <p class="story-excerpt">A pirate DJ broadcasts from the dead zone—until someone answers back.</p>
-        <div class="story-meta">by M. Reyes • 6 min read</div>
+        <img src="NM Art.png" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis risus nec magna pretium.</p>
+        <div class="story-meta">by [Author's Name] • 6 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#synth-skin" class="card-link story-card is-hidden">
+    <a href="#" class="card-link story-card is-hidden">
       <div class="card">
-        <img src="CS2 Keyart.jpg" loading="lazy" alt="Synth Skin artwork">
-        <h3>Synth Skin</h3>
-        <p class="story-excerpt">A bodymod artist discovers her custom pigment can rewrite more than color.</p>
-        <div class="story-meta">by ARTI.FX • 9 min read</div>
+        <img src="CS2 Keyart.jpg" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec sapien quis justo congue.</p>
+        <div class="story-meta">by [Author's Name] • 9 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#glitch-harbor" class="card-link story-card is-hidden">
+    <a href="#" class="card-link story-card is-hidden">
       <div class="card">
-        <img src="Burnline Issue 01.png" loading="lazy" alt="Glitch Harbor artwork">
-        <h3>Glitch Harbor</h3>
-        <p class="story-excerpt">Cargo goes missing at the edge of the sim; the tide brings back something else.</p>
-        <div class="story-meta">by S. N. Vale • 12 min read</div>
+        <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
+        <h3>[Story Title]</h3>
+        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a mi sit amet mi dapibus.</p>
+        <div class="story-meta">by [Author's Name] • 12 min read</div>
       </div>
     </a>
 
-    <a href="fiction.html#mirror-city" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="AL Cover.png" loading="lazy" alt="Mirror City artwork">
-        <h3>Mirror City</h3>
-        <p class="story-excerpt">In a city of reflections, a courier follows the one place light won’t go.</p>
-        <div class="story-meta">by K. Tanaka • 7 min read</div>
-      </div>
-    </a>
-
-    <a href="fiction.html#wetware-garden" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="NM Art.png" loading="lazy" alt="Wetware Garden artwork">
-        <h3>Wetware Garden</h3>
-        <p class="story-excerpt">An urban beekeeper breeds hives that pollinate memories instead of flowers.</p>
-        <div class="story-meta">by Lina Chow • 9 min read</div>
-      </div>
-    </a>
-
-    <a href="fiction.html#the-last-node" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="CS2 Keyart.jpg" loading="lazy" alt="The Last Node artwork">
-        <h3>The Last Node</h3>
-        <p class="story-excerpt">Shut down the final relay, or set the city’s ghosts free—there’s no third option.</p>
-        <div class="story-meta">by Omar Q. • 10 min read</div>
-      </div>
-    </a>
-
-    <a href="fiction.html#cinder-protocol" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="Burnline Issue 01.png" loading="lazy" alt="Cinder Protocol artwork">
-        <h3>Cinder Protocol</h3>
-        <p class="story-excerpt">A firefighter AI learns to love the city it’s sworn to let burn.</p>
-        <div class="story-meta">by A. Gesta • 8 min read</div>
-      </div>
-    </a>
-
-    <a href="fiction.html#cold-sun-market" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="AL Cover.png" loading="lazy" alt="Cold Sun Market artwork">
-        <h3>Cold Sun Market</h3>
-        <p class="story-excerpt">Beneath a broken holodome, a shopkeeper sells secondhand weather.</p>
-        <div class="story-meta">by R. M. Hale • 6 min read</div>
-      </div>
-    </a>
-
-    <!-- Load More button moved INSIDE the grid so it shares the same background -->
+    <!-- Load More -->
     <div class="load-more">
       <button id="load-more" class="btn">Load More Stories</button>
     </div>
-
   </section>
 
   <!-- Footer -->
@@ -464,9 +373,9 @@
       </div>
       <div class="footer-column">
         <h4 style="color: var(--cyan);">Read</h4>
-        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue 01</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue 02</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue 03</a></p>
+        <p><a href="fiction.html">Issue 01</a></p>
+        <p><a href="fiction.html">Issue 02</a></p>
+        <p><a href="fiction.html">Issue 03</a></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -475,16 +384,13 @@
   </footer>
 
   <script>
-    // Mobile nav toggle (with a11y)
+    // Mobile nav
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('site-nav');
-    if (hamburger) {
-      hamburger.addEventListener('click', () => {
-        const isActive = nav.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-      });
-    }
-    // Close nav when a link is clicked (mobile)
+    hamburger.addEventListener('click', () => {
+      const isActive = nav.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
     nav.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         if (nav.classList.contains('active')) {
@@ -493,36 +399,19 @@
         }
       });
     });
-    // Close nav on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
 
-    // Load More Stories logic (progressively reveal hidden cards)
+    // Load More
     (function(){
-      const BATCH_SIZE = 6;
+      const BATCH_SIZE = 4;
       const btn = document.getElementById('load-more');
       const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
-
       function revealBatch() {
         const batch = hiddenCards().slice(0, BATCH_SIZE);
         batch.forEach(el => el.classList.remove('is-hidden'));
-        if (hiddenCards().length === 0) {
-          btn.style.display = 'none';
-        }
-        // Scroll the button back into view after revealing, for UX on long grids
-        btn.scrollIntoView({behavior: 'smooth', block: 'center'});
+        if (hiddenCards().length === 0) btn.style.display = 'none';
       }
-
       btn.addEventListener('click', revealBatch);
-
-      // Hide button if nothing to load
-      if (hiddenCards().length === 0) {
-        btn.style.display = 'none';
-      }
+      if (hiddenCards().length === 0) btn.style.display = 'none';
     })();
   </script>
 </body>
