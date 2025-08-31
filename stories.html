@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Featured Fiction – Burnline</title>
+
+  <!-- Fonts (match homepage) -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-deep-1:#0f0f1c;
+      --bg-deep-2:#1b1e35;
+      --bg-hero-2:#2d2b4a;
+      --card:#22253e;
+      --text:#f0f0f0;
+      --text-muted:#cccccc;
+      --text-muted-2:#bbbbbb;
+      --footer-muted:#aaaaaa;
+      --footer-subtle:#555555;
+      --ink-dark:#0f0f1c;
+      --cyan:#0df6e3;
+      --cyan-hover:#0ad3c6;
+      --magenta:#f72585;
+      --purple:#7209b7;
+      --border-dark:#222;
+    }
+
+    /* Base */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-deep-1), var(--bg-deep-2));
+      color: var(--text);
+    }
+    h1, h2, h3, nav a, header {
+      font-family: 'Orbitron', sans-serif;
+      line-height: 1.4;
+    }
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.2rem; }
+    h3 { font-size: 1.5rem; }
+
+    /* Header (match homepage, with tiny a11y improvement) */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--cyan);
+      color: var(--ink-dark);
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-title img {
+      height: 60px;
+      width: auto;
+    }
+    .site-nav {
+      display: flex;
+      gap: 2rem;
+      font-size: 1rem;
+    }
+    .site-nav a {
+      color: var(--ink-dark);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .site-nav a:hover { color: var(--magenta); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      gap: 5px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+    }
+    .hamburger div {
+      background: var(--ink-dark);
+      height: 4px;
+      width: 100%;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .site-nav {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: var(--cyan);
+        padding: 1rem 0;
+        margin-top: 1rem;
+      }
+      .site-nav.active { display: flex; }
+      .hamburger { display: flex; }
+    }
+
+    /* Hero (reuse homepage look) */
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      padding: 6rem 2rem;
+      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
+      flex-wrap: wrap;
+    }
+    .hero-text { max-width: 700px; }
+    .gradient-heading {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+    .hero img {
+      cursor: pointer;
+      transition: opacity 0.2s ease, box-shadow .2s ease;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      max-width: 340px;
+      height: auto;
+    }
+    .hero img:hover { opacity: 0.9; }
+
+    /* Feature (spotlight) section */
+    .feature {
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      background-color: rgba(0,0,0,0.08);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.06'/></svg>");
+      background-repeat: repeat;
+      background-attachment: fixed;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(13, 246, 227, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .card p { color: var(--text-muted-2); }
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card-link:hover .card {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
+    }
+
+    .story-card--feature {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .story-card--feature .feature-image {
+      width: 100%;
+      height: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .story-card--feature .feature-content h2 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .story-card--feature .feature-content h3 {
+      margin-top: 0.25rem;
+      margin-bottom: 0.6rem;
+    }
+    .story-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted-2);
+      margin: 0.25rem 0 1.25rem;
+    }
+    .read-issue-btn {
+      background-color: var(--cyan);
+      border: none;
+      color: var(--ink-dark);
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .read-issue-btn:hover { background-color: var(--cyan-hover); }
+
+    @media (max-width: 960px) {
+      .story-card--feature {
+        grid-template-columns: 1fr;
+      }
+      .story-card--feature .feature-image {
+        max-height: 280px;
+      }
+    }
+
+    /* Grid (reuse homepage grid band) */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      padding: 6rem 2rem;
+      background-color: var(--bg-deep-1);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
+      background-repeat: repeat;
+      background-attachment: fixed;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    /* Story cards inside the grid */
+    .story-card .story-excerpt {
+      color: var(--text-muted-2);
+      margin: 0.35rem 0 0.75rem;
+    }
+
+    /* Load more section */
+    .load-more {
+      text-align: center;
+      padding: 2rem 2rem 4rem;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .is-hidden { display: none !important; }
+
+    /* Newsletter CTA (optional mini) */
+    .subscribe {
+      padding: 4rem 2rem 3rem;
+    }
+    .subscribe .subscribe-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-dark);
+      width: min(540px, 90%);
+      margin-bottom: 0.8rem;
+      background: var(--bg-deep-2);
+      color: var(--text);
+    }
+    .newsletter-input::placeholder { color: var(--footer-muted); }
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: var(--cyan);
+      color: var(--ink-dark);
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .newsletter-button:hover { background: var(--cyan-hover); }
+
+    /* Footer (match homepage) */
+    footer {
+      background: var(--bg-deep-1);
+      padding: 5rem 2rem 3rem;
+      color: var(--footer-muted);
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--cyan); }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column {
+      flex: 1 1 250px;
+      min-width: 200px;
+    }
+    .footer-logo {
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 1rem;
+      color: var(--footer-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
+
+    <button class="hamburger" id="hamburger" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle menu">
+      <div></div><div></div><div></div>
+    </button>
+
+    <nav class="site-nav" id="site-nav">
+      <a href="fiction.html">Issues</a>
+      <a href="art.html">Art</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <a href="#spotlight">
+      <img src="Burnline Issue 01.png" loading="lazy" alt="Burnline cover art"/>
+    </a>
+
+    <div class="hero-text" style="display:flex; flex-direction:column;">
+      <h1 class="gradient-heading" style="margin-bottom: 0.75rem;">Featured Fiction</h1>
+      <p>Editor-selected cyberpunk short stories from across our issues—neon cities, ghost signals, chrome hearts.
+         We rotate features regularly to spotlight standout writing from our contributors.</p>
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
+        <a class="read-issue-btn" href="submit.html">Submit Your Story</a>
+        <a class="read-issue-btn" href="fiction.html" style="background:transparent; border:1px solid var(--cyan); color:var(--cyan);">Browse All Issues</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotlight story -->
+  <section class="feature" id="spotlight">
+    <div class="card story-card--feature">
+      <img class="feature-image" src="AL Cover.png" loading="lazy" alt="Spotlight story artwork">
+
+      <div class="feature-content">
+        <h2>Spotlight</h2>
+        <h3>Neon Ashes</h3>
+        <p class="story-excerpt">When the holodome flickers and the rain turns to static, a courier with a ghosted implant
+          races the grid to deliver a memory that isn’t supposed to exist.</p>
+        <div class="story-meta">by J. M. Caldwell • 9 min read • Original</div>
+        <a class="read-issue-btn" href="fiction.html#neon-ashes">Read Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story grid -->
+  <section class="grid" id="stories">
+
+    <!-- First row (visible by default) -->
+    <a href="fiction.html#chrome-dreams" class="card-link story-card">
+      <div class="card">
+        <img src="NM Art.png" loading="lazy" alt="Chrome Dreams artwork">
+        <h3>Chrome Dreams</h3>
+        <p class="story-excerpt">A street mechanic reverse-engineers desire itself—and the city charges interest.</p>
+        <div class="story-meta">by Riko Ahn • 7 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#memory-blackout" class="card-link story-card">
+      <div class="card">
+        <img src="CS2 Keyart.jpg" loading="lazy" alt="The Memory Blackout artwork">
+        <h3>The Memory Blackout</h3>
+        <p class="story-excerpt">Every sunrise, Dex wakes up missing four hours—until he finds a note in his own code.</p>
+        <div class="story-meta">by Dex Silva • 11 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#smog-season" class="card-link story-card">
+      <div class="card">
+        <img src="Burnline Issue 01.png" loading="lazy" alt="Smog Season artwork">
+        <h3>Smog Season</h3>
+        <p class="story-excerpt">The city sells clean air in vials; Aliya sells a map to a wind the syndicates can’t own.</p>
+        <div class="story-meta">by Aliya Zhang • 8 min read</div>
+      </div>
+    </a>
+
+    <!-- Hidden initially (revealed by Load More) -->
+    <a href="fiction.html#datalace" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="AL Cover.png" loading="lazy" alt="Datalace artwork">
+        <h3>Datalace</h3>
+        <p class="story-excerpt">A black-market neural weave binds five strangers into one impossible heist.</p>
+        <div class="story-meta">by T. J. Krow • 10 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#ghost-signal" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="NM Art.png" loading="lazy" alt="Ghost Signal artwork">
+        <h3>Ghost Signal</h3>
+        <p class="story-excerpt">A pirate DJ broadcasts from the dead zone—until someone answers back.</p>
+        <div class="story-meta">by M. Reyes • 6 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#synth-skin" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="CS2 Keyart.jpg" loading="lazy" alt="Synth Skin artwork">
+        <h3>Synth Skin</h3>
+        <p class="story-excerpt">A bodymod artist discovers her custom pigment can rewrite more than color.</p>
+        <div class="story-meta">by ARTI.FX • 9 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#glitch-harbor" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="Burnline Issue 01.png" loading="lazy" alt="Glitch Harbor artwork">
+        <h3>Glitch Harbor</h3>
+        <p class="story-excerpt">Cargo goes missing at the edge of the sim; the tide brings back something else.</p>
+        <div class="story-meta">by S. N. Vale • 12 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#mirror-city" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="AL Cover.png" loading="lazy" alt="Mirror City artwork">
+        <h3>Mirror City</h3>
+        <p class="story-excerpt">In a city of reflections, a courier follows the one place light won’t go.</p>
+        <div class="story-meta">by K. Tanaka • 7 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#wetware-garden" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="NM Art.png" loading="lazy" alt="Wetware Garden artwork">
+        <h3>Wetware Garden</h3>
+        <p class="story-excerpt">An urban beekeeper breeds hives that pollinate memories instead of flowers.</p>
+        <div class="story-meta">by Lina Chow • 9 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#the-last-node" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="CS2 Keyart.jpg" loading="lazy" alt="The Last Node artwork">
+        <h3>The Last Node</h3>
+        <p class="story-excerpt">Shut down the final relay, or set the city’s ghosts free—there’s no third option.</p>
+        <div class="story-meta">by Omar Q. • 10 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#cinder-protocol" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="Burnline Issue 01.png" loading="lazy" alt="Cinder Protocol artwork">
+        <h3>Cinder Protocol</h3>
+        <p class="story-excerpt">A firefighter AI learns to love the city it’s sworn to let burn.</p>
+        <div class="story-meta">by A. Gesta • 8 min read</div>
+      </div>
+    </a>
+
+    <a href="fiction.html#cold-sun-market" class="card-link story-card is-hidden">
+      <div class="card">
+        <img src="AL Cover.png" loading="lazy" alt="Cold Sun Market artwork">
+        <h3>Cold Sun Market</h3>
+        <p class="story-excerpt">Beneath a broken holodome, a shopkeeper sells secondhand weather.</p>
+        <div class="story-meta">by R. M. Hale • 6 min read</div>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- Load more button -->
+  <div class="load-more">
+    <button id="load-more" class="read-issue-btn">Load More Stories</button>
+  </div>
+
+  <!-- Newsletter mini CTA -->
+  <section class="subscribe" aria-labelledby="subscribe-heading">
+    <div class="subscribe-inner">
+      <h2 id="subscribe-heading" class="gradient-heading" style="margin-bottom:0.5rem;">Get new stories in your inbox</h2>
+      <p style="color:var(--text-muted); margin:0 0 1rem;">Occasional updates. No spam. Just neon-lit fiction.</p>
+      <form>
+        <input type="email" placeholder="Email Address" class="newsletter-input" aria-label="Email address">
+        <br/>
+        <button type="submit" class="newsletter-button">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer (match homepage) -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p>Get stories, art, and updates from Burnline straight to your inbox.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: var(--cyan);">Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+      <div class="footer-column">
+        <h4 style="color: var(--cyan);">Read</h4>
+        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue 01</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue 02</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue 03</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle (with a11y)
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('site-nav');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        const isActive = nav.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      });
+    }
+    // Close nav when a link is clicked (mobile)
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+    // Close nav on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Load More Stories logic
+    (function(){
+      const BATCH_SIZE = 6;
+      const btn = document.getElementById('load-more');
+      const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
+
+      function revealBatch() {
+        const batch = hiddenCards().slice(0, BATCH_SIZE);
+        batch.forEach(el => el.classList.remove('is-hidden'));
+        if (hiddenCards().length === 0) {
+          btn.style.display = 'none';
+        }
+      }
+
+      // If there are <= 6 hidden at start, clicking once will reveal all then hide button
+      btn.addEventListener('click', revealBatch);
+
+      // If there are no hidden cards initially, hide the button
+      if (hiddenCards().length === 0) {
+        btn.style.display = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>
