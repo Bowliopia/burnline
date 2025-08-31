@@ -137,7 +137,7 @@
       gap: 1rem;
       flex-wrap: wrap;
       margin-top: 0.5rem;
-      justify-content: center; /* CENTER the buttons */
+      justify-content: center; /* Center the buttons */
     }
     .btn {
       background-color: var(--cyan);
@@ -173,7 +173,7 @@
       background-color: var(--bg-deep-1);
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
       background-repeat: repeat;
-      background-attachment: fixed;
+      background-attachment: fixed; /* parallax-style lines */
       border-top: 1px solid var(--border-dark);
       border-bottom: 1px solid var(--border-dark);
     }
@@ -218,40 +218,18 @@
     /* Load more */
     .load-more {
       text-align: center;
-      padding: 2rem 2rem 4rem;
-      border-bottom: 1px solid var(--border-dark);
+      padding: 1rem 0 0.5rem;
     }
-    .is-hidden { display: none !important; }
+    /* Make the load-more live INSIDE the grid band and span full width */
+    .grid .load-more {
+      grid-column: 1 / -1;
+      background: transparent;
+      border: 0;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
 
-    /* Newsletter CTA (mini) */
-    .subscribe {
-      padding: 4rem 2rem 3rem;
-    }
-    .subscribe .subscribe-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .newsletter-input {
-      padding: 0.6rem 1rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-dark);
-      width: min(540px, 90%);
-      margin-bottom: 0.8rem;
-      background: var(--bg-deep-2);
-      color: var(--text);
-    }
-    .newsletter-input::placeholder { color: var(--footer-muted); }
-    .newsletter-button {
-      padding: 0.6rem 1.2rem;
-      background-color: var(--cyan);
-      color: var(--ink-dark);
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .newsletter-button:hover { background: var(--cyan-hover); }
+    .is-hidden { display: none !important; }
 
     /* Footer */
     footer {
@@ -446,24 +424,11 @@
       </div>
     </a>
 
-  </section>
-
-  <!-- Load more -->
-  <div class="load-more">
-    <button id="load-more" class="btn">Load More Stories</button>
-  </div>
-
-  <!-- Newsletter mini CTA -->
-  <section class="subscribe" aria-labelledby="subscribe-heading">
-    <div class="subscribe-inner">
-      <h2 id="subscribe-heading" class="gradient-heading" style="margin-bottom:0.5rem;">Get new stories in your inbox</h2>
-      <p style="color:var(--text-muted); margin:0 0 1rem;">Occasional updates. No spam. Just neon-lit fiction.</p>
-      <form>
-        <input type="email" placeholder="Email Address" class="newsletter-input" aria-label="Email address">
-        <br/>
-        <button type="submit" class="newsletter-button">Subscribe</button>
-      </form>
+    <!-- Load More button moved INSIDE the grid so it shares the same background -->
+    <div class="load-more">
+      <button id="load-more" class="btn">Load More Stories</button>
     </div>
+
   </section>
 
   <!-- Footer -->
@@ -532,6 +497,8 @@
         if (hiddenCards().length === 0) {
           btn.style.display = 'none';
         }
+        // Scroll the button back into view after revealing, for UX on long grids
+        btn.scrollIntoView({behavior: 'smooth', block: 'center'});
       }
 
       btn.addEventListener('click', revealBatch);
