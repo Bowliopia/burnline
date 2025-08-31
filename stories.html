@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Featured Fiction – Burnline</title>
 
-  <!-- Fonts (match homepage) -->
+  <!-- Fonts (match site) -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -25,6 +25,8 @@
       --magenta:#f72585;
       --purple:#7209b7;
       --border-dark:#222;
+      --maxw: 1100px;
+      --reading: 720px; /* comfortable reading width for about-style intro */
     }
 
     /* Base */
@@ -44,7 +46,7 @@
     h2 { font-size: 2.2rem; }
     h3 { font-size: 1.5rem; }
 
-    /* Header (match homepage, with tiny a11y improvement) */
+    /* Header (match homepage) */
     .site-header {
       display: flex;
       justify-content: space-between;
@@ -108,49 +110,72 @@
       .hamburger { display: flex; }
     }
 
-    /* Hero (reuse homepage look) */
-    .hero {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      padding: 6rem 2rem;
+    /* About-style intro (single left-aligned column) */
+    .page-intro {
+      padding: 6rem 2rem 4rem;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
-      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-dark);
     }
-    .hero-text { max-width: 700px; }
+    .intro-inner {
+      max-width: var(--reading);
+      margin: 0 auto 0 0; /* left align within flow */
+    }
     .gradient-heading {
       font-size: 2.2rem;
       background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem 0;
     }
-    .hero-text p {
+    .page-intro p {
       font-size: 1.1rem;
       color: var(--text-muted);
-      margin-bottom: 1.2rem;
+      margin: 0 0 1rem 0;
+      line-height: 1.75;
     }
-    .hero img {
+    .intro-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .btn {
+      background-color: var(--cyan);
+      border: none;
+      color: var(--ink-dark);
+      padding: 0.75rem 1.25rem;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 4px;
       cursor: pointer;
-      transition: opacity 0.2s ease, box-shadow .2s ease;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      max-width: 340px;
-      height: auto;
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
-    .hero img:hover { opacity: 0.9; }
+    .btn:hover { background-color: var(--cyan-hover); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+    }
+    .btn-ghost:hover {
+      background: rgba(13,246,227,0.08);
+      border-color: var(--cyan-hover);
+      color: var(--cyan-hover);
+    }
 
-    /* Feature (spotlight) section */
-    .feature {
-      padding: 4rem 2rem;
-      border-top: 1px solid var(--border-dark);
-      border-bottom: 1px solid var(--border-dark);
-      background-color: rgba(0,0,0,0.08);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.06'/></svg>");
+    /* Grid band (reuse) */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      padding: 6rem 2rem;
+      background-color: var(--bg-deep-1);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
       background-repeat: repeat;
       background-attachment: fixed;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
     }
     .card {
       background: var(--card);
@@ -180,81 +205,17 @@
       transform: scale(1.02);
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
-
-    .story-card--feature {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 2rem;
-      align-items: stretch;
-    }
-    .story-card--feature .feature-image {
-      width: 100%;
-      height: 100%;
-      max-height: 420px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    .story-card--feature .feature-content h2 {
-      margin: 0 0 0.25rem 0;
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .story-card--feature .feature-content h3 {
-      margin-top: 0.25rem;
-      margin-bottom: 0.6rem;
-    }
-    .story-meta {
-      font-size: 0.9rem;
-      color: var(--text-muted-2);
-      margin: 0.25rem 0 1.25rem;
-    }
-    .read-issue-btn {
-      background-color: var(--cyan);
-      border: none;
-      color: var(--ink-dark);
-      padding: 0.75rem 2rem;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .read-issue-btn:hover { background-color: var(--cyan-hover); }
-
-    @media (max-width: 960px) {
-      .story-card--feature {
-        grid-template-columns: 1fr;
-      }
-      .story-card--feature .feature-image {
-        max-height: 280px;
-      }
-    }
-
-    /* Grid (reuse homepage grid band) */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      padding: 6rem 2rem;
-      background-color: var(--bg-deep-1);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
-      background-repeat: repeat;
-      background-attachment: fixed;
-      border-top: 1px solid var(--border-dark);
-      border-bottom: 1px solid var(--border-dark);
-    }
-
-    /* Story cards inside the grid */
     .story-card .story-excerpt {
       color: var(--text-muted-2);
       margin: 0.35rem 0 0.75rem;
     }
+    .story-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted-2);
+      margin-top: 0.25rem;
+    }
 
-    /* Load more section */
+    /* Load more */
     .load-more {
       text-align: center;
       padding: 2rem 2rem 4rem;
@@ -262,7 +223,7 @@
     }
     .is-hidden { display: none !important; }
 
-    /* Newsletter CTA (optional mini) */
+    /* Newsletter CTA (mini) */
     .subscribe {
       padding: 4rem 2rem 3rem;
     }
@@ -292,7 +253,7 @@
     }
     .newsletter-button:hover { background: var(--cyan-hover); }
 
-    /* Footer (match homepage) */
+    /* Footer */
     footer {
       background: var(--bg-deep-1);
       padding: 5rem 2rem 3rem;
@@ -350,44 +311,39 @@
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <a href="#spotlight">
-      <img src="Burnline Issue 01.png" loading="lazy" alt="Burnline cover art"/>
-    </a>
-
-    <div class="hero-text" style="display:flex; flex-direction:column;">
-      <h1 class="gradient-heading" style="margin-bottom: 0.75rem;">Featured Fiction</h1>
-      <p>Editor-selected cyberpunk short stories from across our issues—neon cities, ghost signals, chrome hearts.
-         We rotate features regularly to spotlight standout writing from our contributors.</p>
-
-      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
-        <a class="read-issue-btn" href="submit.html">Submit Your Story</a>
-        <a class="read-issue-btn" href="fiction.html" style="background:transparent; border:1px solid var(--cyan); color:var(--cyan);">Browse All Issues</a>
+  <!-- About-style single-column intro -->
+  <section class="page-intro">
+    <div class="intro-inner">
+      <h1 class="gradient-heading">Featured Fiction</h1>
+      <p>
+        Editor-selected cyberpunk short fiction from across Burnline—neon skylines, ghost signals, chrome hearts.
+        This page collects standout stories in one place so you can jump straight into the good stuff.
+      </p>
+      <p>
+        We refresh the lineup periodically to surface new voices and returning favorites. If you’re a writer working
+        in near-future worlds, glitch-bright aesthetics, or human stories in machine cities, we’d love to read your work.
+      </p>
+      <div class="intro-actions">
+        <a class="btn" href="submit.html">Submit Your Story</a>
+        <a class="btn btn-ghost" href="fiction.html">Browse All Issues</a>
       </div>
     </div>
   </section>
 
-  <!-- Spotlight story -->
-  <section class="feature" id="spotlight">
-    <div class="card story-card--feature">
-      <img class="feature-image" src="AL Cover.png" loading="lazy" alt="Spotlight story artwork">
+  <!-- Story grid (no spotlight, no filters) -->
+  <section class="grid" id="stories">
 
-      <div class="feature-content">
-        <h2>Spotlight</h2>
+    <!-- Visible by default -->
+    <a href="fiction.html#neon-ashes" class="card-link story-card">
+      <div class="card">
+        <img src="AL Cover.png" loading="lazy" alt="Neon Ashes artwork">
         <h3>Neon Ashes</h3>
         <p class="story-excerpt">When the holodome flickers and the rain turns to static, a courier with a ghosted implant
           races the grid to deliver a memory that isn’t supposed to exist.</p>
-        <div class="story-meta">by J. M. Caldwell • 9 min read • Original</div>
-        <a class="read-issue-btn" href="fiction.html#neon-ashes">Read Story</a>
+        <div class="story-meta">by J. M. Caldwell • 9 min read</div>
       </div>
-    </div>
-  </section>
+    </a>
 
-  <!-- Story grid -->
-  <section class="grid" id="stories">
-
-    <!-- First row (visible by default) -->
     <a href="fiction.html#chrome-dreams" class="card-link story-card">
       <div class="card">
         <img src="NM Art.png" loading="lazy" alt="Chrome Dreams artwork">
@@ -415,7 +371,7 @@
       </div>
     </a>
 
-    <!-- Hidden initially (revealed by Load More) -->
+    <!-- Hidden initially; revealed by Load More -->
     <a href="fiction.html#datalace" class="card-link story-card is-hidden">
       <div class="card">
         <img src="AL Cover.png" loading="lazy" alt="Datalace artwork">
@@ -499,9 +455,9 @@
 
   </section>
 
-  <!-- Load more button -->
+  <!-- Load more -->
   <div class="load-more">
-    <button id="load-more" class="read-issue-btn">Load More Stories</button>
+    <button id="load-more" class="btn">Load More Stories</button>
   </div>
 
   <!-- Newsletter mini CTA -->
@@ -517,7 +473,7 @@
     </div>
   </section>
 
-  <!-- Footer (match homepage) -->
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -571,7 +527,7 @@
       }
     });
 
-    // Load More Stories logic
+    // Load More Stories logic (progressively reveal hidden cards)
     (function(){
       const BATCH_SIZE = 6;
       const btn = document.getElementById('load-more');
@@ -585,10 +541,9 @@
         }
       }
 
-      // If there are <= 6 hidden at start, clicking once will reveal all then hide button
       btn.addEventListener('click', revealBatch);
 
-      // If there are no hidden cards initially, hide the button
+      // Hide button if nothing to load
       if (hiddenCards().length === 0) {
         btn.style.display = 'none';
       }
