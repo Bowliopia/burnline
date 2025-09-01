@@ -128,7 +128,7 @@
       gap: 1rem;
       flex-wrap: wrap;
       margin-top: 0.5rem;
-      justify-content: center;
+      justify-content: center; /* centered per your request */
     }
     .btn {
       background-color: var(--cyan);
@@ -205,7 +205,7 @@
       margin-top: 0.25rem;
     }
 
-    /* Load more */
+    /* Load more inside grid */
     .load-more {
       grid-column: 1 / -1;
       text-align: center;
@@ -239,6 +239,33 @@
       padding-top: 1rem;
       color: var(--footer-subtle);
     }
+
+    /* ✅ Newsletter input/button styles (copied from homepage to match exactly) */
+    .newsletter-input {
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-dark);
+      width: 70%;
+      margin-bottom: 0.8rem;
+      background: var(--bg-deep-2);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+    }
+    .newsletter-input::placeholder { color: var(--footer-muted); }
+
+    .newsletter-button {
+      padding: 0.6rem 1.2rem;
+      background-color: var(--cyan);
+      color: var(--ink-dark);
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+    }
+    .newsletter-button:hover { background: var(--cyan-hover); }
   </style>
 </head>
 <body>
@@ -266,7 +293,7 @@
   <section class="page-intro">
     <div class="intro-inner">
       <h1 class="gradient-heading">Featured Fiction</h1>
-      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline.This page features standout stories in one place so that you can read them in-browser instead of via digital flipbook, if you'd like</p>
+      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline.This page features standout stories in one place so that you can read them in-browser instead of via digital flipbook, if you'd like.</p>
       <div class="intro-actions">
         <a class="btn" href="submit.html">Submit Your Story</a>
         <a class="btn btn-ghost" href="fiction.html">Browse All Issues</a>
