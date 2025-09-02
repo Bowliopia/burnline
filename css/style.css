@@ -135,11 +135,11 @@ footer {
 }
 
 .footer-column a {
-  color: #ffffff; /* white by default */
+  color: var(--footer-text); 
   text-decoration: none;
 }
 .footer-column a:visited {
-  color: #ffffff;
+  color: var(--footer-text);
 }
 .footer-column a:hover,
 .footer-column a:focus {
