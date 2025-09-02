@@ -218,6 +218,13 @@
       transition: background-color 0.3s;
     }
     .read-issue-btn:hover { background-color: var(--cyan-hover); }
+    
+    .button-row {
+  display: flex;
+  justify-content: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
 
     .newsletter-input {
       padding: 0.6rem 1rem;
@@ -328,10 +335,10 @@
   </div>
 </div>
 
-      <div style="width: 100%; text-align: center; margin-top: 2.5rem;">
-        <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
-      </div>
-    </div>
+<div class="button-row" style="width: 100%; margin-top: 2.5rem;">
+  <button id="toggle-flipbook" class="read-issue-btn">Read This Issue</button>
+  <a class="read-issue-btn" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
+</div>
   </section>
 
   <section id="latest-issue">
@@ -415,3 +422,4 @@
   </script>
 </body>
 </html>
+
