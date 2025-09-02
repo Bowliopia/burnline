@@ -1,189 +1,45 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About – Burnline</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Global header/footer/vars/buttons/newsletter -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page-specific utilities only -->
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
-    }
+    .content { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
 
-    h1, h2, h3, h4, nav a, header {
-      font-family: 'Orbitron', sans-serif;
-    }
-
-   /* Header (match homepage exactly) */
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0df6e3;
-  color: #0f0f1c;
-  padding: 1rem 2rem;
-  font-family: 'Orbitron', sans-serif;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.logo-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  color: inherit;
-}
-.logo-title img { height: 60px; width: auto; }
-/* Note: no font-size on .logo-title span — inherits default like homepage */
-
-.site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-.site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-.site-nav a:hover { color: #ff4ac2; }
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  cursor: pointer;
-  width: 30px;
-  height: 25px;
-  gap: 5px;
-}
-.hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
-
-@media (max-width: 768px) {
-  .site-nav{
-    flex-direction: column;
-    width: 100%;
-    display: none;
-    background-color: #0df6e3;
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-  .site-nav.active { display: flex; }
-  .hamburger { display: flex; }
-}
-
-
-    .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-
-    .content {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-    }
-
-    .content h1 {
-      color: #ff4ac2;
-      margin-bottom: 1rem;
-    }
-
-    .content p {
-      line-height: 1.7;
-      color: #ccc;
-      margin-bottom: 1.2rem;
-    }
-
-    footer {
-      background: #0f0f1c;
-      padding: 2rem 1rem;
-      color: #ccc;
-    }
-
-    .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .footer-column {
-      flex: 1;
-      min-width: 250px;
-      margin: 1rem;
-    }
-
-    .footer-logo {
-      width: 60px;
-      margin-bottom: 1rem;
-    }
-
-    .newsletter-input {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 4px;
-      width: 100%;
-      max-width: 250px;
-      margin-bottom: 0.5rem;
-    }
-
-    .newsletter-button {
-      padding: 0.5rem 1rem;
-      background-color: #0df6e3;
-      border: none;
-      border-radius: 4px;
-      color: #0f0f1c;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .newsletter-button:hover {
-      background-color: #0bc2b7;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #666;
-    }
-
-    .footer-column a:hover {
-      text-decoration: underline;
-      color: #0df6e3;
-    }
-
+    /* gradient link helpers used in the copy */
     .gradient-blue-text {
-  background: linear-gradient(90deg, #0df6e3, #56ccf2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  font-weight: bold;
-}
+      background: linear-gradient(90deg, var(--cyan), #56ccf2);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; color: transparent; font-weight: bold; text-decoration: none;
+    }
+    .gradient-blue-text:hover { opacity: .9; }
 
-        .gradient-pink-text {
-  background: linear-gradient(90deg, #f72585, #7209b7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  font-weight: bold;
-}
+    .gradient-pink-text {
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; color: transparent; font-weight: bold; text-decoration: none;
+    }
+    .gradient-pink-text:hover { opacity: .9; }
   </style>
 </head>
 <body>
 
   <header class="site-header">
-<a href="index.html" class="logo-title">
-  <img src="Flame logo-1.png.png" alt="Burnline logo">
-  <span>BURNLINE</span>
-</a>
+    <a href="index.html" class="logo-title">
+      <img src="Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Issues</a>
@@ -198,37 +54,30 @@
     <p>Burnline is a digital magazine run by a team of 1 (me) who's trying his best to make a hub for some good cyberpunk fiction and artwork. I made this because was looking for short fiction in the subgenre to read but couldn't find a ton of it. Surely it's out there, right? Hopefully Burnline can be a good landing place for that sort of thing.</p>
     <p>I hope to publish stories and art that reflect what you picture when you think cyberpunk. Feel like the real world is folding in on itself? Me too. Let's make some art about it.</p>
     <p>This website and all magazine issues are currently and always will be 100% ad free because I hate digital ads. You should be able to just read something without being bothered. As a result, I may charge a small fee for future editions so that I can pay the writers/artists whose work I publish. For the meantime, the magazine is free, because free is good.</p>
-    <p>If you’d like to submit, collaborate, or just say hi, head over to the  <a href="submit.html" class="gradient-blue-text">Submit page</a> or reach out at <a href="mailto:contact@burnlinemag.com" class="gradient-pink-text">contact@burnlinemag.com</a>. If there's anything Burnline's site/magazine doesn't show that you think belongs here, this editor would love to hear about it.</p>
+    <p>If you’d like to submit, collaborate, or just say hi, head over to the <a href="submit.html" class="gradient-blue-text">Submit page</a> or reach out at <a href="mailto:contact@burnlinemag.com" class="gradient-pink-text">contact@burnlinemag.com</a>. If there's anything Burnline's site/magazine doesn't show that you think belongs here, this editor would love to hear about it.</p>
   </section>
 
   <footer>
     <div class="footer-container">
-      <!-- Newsletter -->
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p style="line-height: 1.6;">Sign up to our newsletter to get the latest neon-lit stories and art from Burnline.</p>
+        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, I promise.</p>
         <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input">
-          <br>
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
-
-      <!-- Contact Info -->
       <div class="footer-column">
-        <h4 style="color: #0df6e3;">Get In Touch</h4>
-        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+        <h4>Get In Touch</h4>
+        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
       </div>
-
-      <!-- Read -->
       <div class="footer-column">
-        <h4 style="color: #0df6e3;">Read</h4>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Neon Dystopia</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">Future//Tense</a></p>
-        <p><a href="#" style="color: #ccc; text-decoration: none;">HackDust</a></p>
+        <h4>Read</h4>
+        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue Library</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       &copy; 2025 Burnline Magazine — All rights reserved
     </div>
