@@ -4,320 +4,118 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Staff Picks – Burnline</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg-1:#0f0f1c;
-    --bg-2:#1b1e35;
-    --card:#1c1e2f;
-    --neon:#0df6e3;
-    --pink:#ff4ac2;
-    --text:#f0f0f0;
-    --ink:#0f0f1c;
-  }
 
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
-    color: var(--text);
-  }
-  h1, h2, h3, nav a, header {
-    font-family: 'Orbitron', sans-serif;
-  }
+  <!-- Global header/footer/vars/buttons/newsletter -->
+  <link rel="stylesheet" href="css/style.css">
 
-  .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--neon);
-    color: var(--ink);
-    padding: 1rem 2rem;
-    flex-wrap: wrap;
-    position: relative;
-  }
-  .logo-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: inherit;
-  }
-  .logo-title img {
-    height: 60px;
-    width: auto;
-  }
-  .site-nav {
-    display: flex;
-    gap: 2rem;
-    font-size: 1rem;
-  }
-  .site-nav a {
-    color: var(--ink);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  .site-nav a:hover {
-    color: var(--pink);
-  }
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    gap: 5px;
-  }
-  .hamburger div {
-    background: var(--ink);
-    height: 4px;
-    width: 100%;
-    border-radius: 2px;
-  }
+  <!-- Page-specific styles only -->
+  <style>
+    .gradient-heading{
+      font-size: 2.5rem;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
 
-  .gradient-heading {
-  font-size: 2.5rem;
-  font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(90deg, #f72585, #7209b7);
-  background-clip: text;              
-  -webkit-background-clip: text;      
-  color: transparent;                  
-  -webkit-text-fill-color: transparent;
-  display: block;   
-  margin-bottom: 1.5rem;
-  text-align: center;    
-}
+    .content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
 
-  @media (max-width: 768px) {
-    .hamburger { display: flex; }
-    .site-nav {
-      display: none;
-      flex-direction: column;
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .filters .filter-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: var(--cyan);
+      color: var(--ink-dark);
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .filters .filter-btn.active {
+      background: var(--magenta);
+      color: #fff;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .story-card {
+      background-color: var(--card);
+      border-radius: 10px;
+      padding: 1rem;
+      display: none; /* hidden until filtered on */
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .story-card:focus-visible{
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+    .story-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.35);
+    }
+    .story-card.active { display: block; }
+    .story-card img {
       width: 100%;
-      background-color: var(--neon);
-      padding: 1rem 2rem;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 999;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      display: block;
     }
-    .site-nav.show { display: flex; }
-    .site-nav a { color: var(--ink); padding: 0.5rem 0; }
-  }
-
-  .content {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 2rem;
-  }
-
-  .filters {
-    display: flex;
-    justify-content: center; 
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-  
-  .filters button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    background: var(--neon);
-    color: var(--ink);
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .filters button.active {
-    background: var(--pink);
-    color: #fff;
-  }
-
-  .story-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-  .story-card {
-    background-color: var(--card);
-    border-radius: 10px;
-    padding: 1rem;
-    display: none;     
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;  
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .story-card:focus-visible{
-    outline: 2px solid var(--neon);
-    outline-offset: 4px;
-  }
-  .story-card:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0,0,0,.35);
-  }
-  .story-card.active { display: block; }
-  .story-card img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
-  .story-card h3 {
-    color: var(--neon);
-    font-size: 1.1rem;
-    margin: 0.25rem 0 0.25rem;
-  }
-  .story-card small {
-    color: #9aa;
-    font-size: 0.85rem;
-  }
-
-  .card-overlay { display: none !important; }
-
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: 1rem;
-  }
-  .modal-backdrop.show { display: flex; }
-
-  .modal {
-    background: #171a2a;
-    color: var(--text);
-    width: min(720px, 100%);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    max-height: 90vh;
-
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto 1fr;
-    grid-template-areas:
-      "media"
-      "header"
-      "byline"
-      "body";
-  }
-
-  .modal-media {
-    grid-area: media;
-    position: relative; 
-  }
-
-  .modal-media img{
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-  }
-  .modal-close:hover {
-    background: rgba(0,0,0,0.8);
-  }
-
-  .modal-header{
-    grid-area: header;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.25rem 0.5rem;
-  }
-  .modal-title{
-    margin: 0;
-    font-size: 1.25rem;
-    color: var(--neon);
-  }
-  .modal-byline{
-    grid-area: byline;
-    margin: 0 0 0.5rem 0;
-    color: #b7c0d1;
-    font-size: 0.9rem;
-    padding: 0 1.25rem;
-  }
-  .modal-body{
-    grid-area: body;
-    padding: 0 1.25rem 1.25rem;
-    overflow: auto;
-    line-height: 1.55;
-  }
-
-  body.modal-open{
-    overflow: hidden;
-  }
-
-  .steam-link{
-    margin-top: 0.75rem;
-    margin-bottom: 0;
-  }
-  .steam-link a{
-    background: linear-gradient(90deg, #0df6e3, #008cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  .steam-link a:hover{
-    text-decoration: underline;
-  }
-
-  .modal.modal--book{
-    width: min(960px, 100%);
-    grid-template-columns: 38% 62%;
-    grid-template-rows: auto auto 1fr;
-    grid-template-areas:
-      "media header"
-      "media byline"
-      "media body";
-  }
-
-  .modal.modal--book .modal-media img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
-    background: #111522; 
-  }
-
-  .modal.modal--book .modal-body{
-    overflow: auto;
-  }
-
-  @media (min-width: 721px){
-    .modal.modal--book { position: relative; }
-    .modal.modal--book .modal-media { position: static; } 
-    .modal.modal--book .modal-close {
-      position: absolute; 
-      top: 10px;
-      right: 10px;
-      z-index: 2;
+    .story-card h3 {
+      color: var(--cyan);
+      font-size: 1.1rem;
+      margin: 0.25rem 0 0.25rem;
     }
-  }
+    .story-card small {
+      color: #9aa;
+      font-size: 0.85rem;
+    }
 
-  @media (max-width: 720px){
-    .modal.modal--book{
+    .card-overlay { display: none !important; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 1rem;
+    }
+    .modal-backdrop.show { display: flex; }
+    .modal {
+      background: #171a2a;
+      color: var(--text);
       width: min(720px, 100%);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+      max-height: 90vh;
+
+      display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: auto auto auto 1fr;
       grid-template-areas:
@@ -326,35 +124,115 @@
         "byline"
         "body";
     }
-    .modal.modal--book .modal-media {
-      position: relative;     
+    .modal-media { grid-area: media; position: relative; }
+    .modal-media img { width: 100%; height: auto; display: block; }
+    .modal-close {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.8); }
+    .modal-header{
+      grid-area: header;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 0.5rem 0;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem 0.5rem;
+    }
+    .modal-title{ margin: 0; font-size: 1.25rem; color: var(--cyan); }
+    .modal-byline{
+      grid-area: byline;
+      margin: 0 0 0.5rem 0;
+      color: #b7c0d1;
+      font-size: 0.9rem;
+      padding: 0 1.25rem;
+    }
+    .modal-body{
+      grid-area: body;
+      padding: 0 1.25rem 1.25rem;
+      overflow: auto;
+      line-height: 1.55;
+    }
+    body.modal-open{ overflow: hidden; }
+
+    .steam-link{ margin-top: 0.75rem; margin-bottom: 0; }
+    .steam-link a{
+      background: linear-gradient(90deg, var(--cyan), #008cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .steam-link a:hover{ text-decoration: underline; }
+
+    /* Modal variant for books */
+    .modal.modal--book{
+      width: min(960px, 100%);
+      grid-template-columns: 38% 62%;
+      grid-template-rows: auto auto 1fr;
+      grid-template-areas:
+        "media header"
+        "media byline"
+        "media body";
     }
     .modal.modal--book .modal-media img{
-      max-width: 90%;          
-      max-height: 50vh;      
-      width: auto;            
-      height: auto;              
-      object-fit: contain;        
-      background: #111522;       
-      margin: 0 auto;
-      display: block;
+      width: 100%; height: 100%;
+      object-fit: contain; background: #111522;
     }
-  }
-</style>
+    .modal.modal--book .modal-body{ overflow: auto; }
+
+    @media (min-width: 721px){
+      .modal.modal--book { position: relative; }
+      .modal.modal--book .modal-media { position: static; }
+      .modal.modal--book .modal-close {
+        position: absolute; top: 10px; right: 10px; z-index: 2;
+      }
+    }
+    @media (max-width: 720px){
+      .modal.modal--book{
+        width: min(720px, 100%);
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto 1fr;
+        grid-template-areas:
+          "media"
+          "header"
+          "byline"
+          "body";
+      }
+      .modal.modal--book .modal-media {
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+        padding: 0.5rem 0;
+      }
+      .modal.modal--book .modal-media img{
+        max-width: 90%; max-height: 50vh; width: auto; height: auto;
+        object-fit: contain; background: #111522; margin: 0 auto; display: block;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Header -->
   <header class="site-header">
     <a href="index.html" class="logo-title">
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
-    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+
+    <button class="hamburger" id="hamburger" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle menu">
       <div></div><div></div><div></div>
-    </div>
+    </button>
+
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Issues</a>
       <a href="art.html">Art</a>
@@ -363,10 +241,11 @@
     </nav>
   </header>
 
+  <!-- Main -->
   <section class="content">
     <h1 class="gradient-heading">Staff Picks</h1>
+
     <div class="filters" role="tablist" aria-label="Filter Staff Picks">
-      <!-- Books tab first -->
       <button class="filter-btn" data-filter="books" role="tab" aria-selected="false">Books</button>
       <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
       <button class="filter-btn" data-filter="film" role="tab" aria-selected="false">Film / TV</button>
@@ -480,7 +359,7 @@
         <small>William Gibson</small>
         <div class="card-overlay">
           <div class="overlay-content">
-            If you're here and you haven't read this book yet, why? This is the one. Don't overthink it.
+            If you're here and you haven't read this yet, why? This is the one. Don't overthink it.
             <br><br>
             Please don't buy this on Amazon. Instead, find a local bookstore with a good sci-fi section. If they have a used section, this book will cost you like $4 and you'll support the good guys instead of the mega-corp.
           </div>
@@ -594,46 +473,65 @@
     </div>
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p>Get stories, art, and updates from Burnline straight to your inbox.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h4>Get In Touch</h4>
+        <p>contact@burnline.net<br><span style="font-size: 0.8rem;">(no story submissions by email)</span></p>
+      </div>
+      <div class="footer-column">
+        <h4>Read</h4>
+        <p><a href="fiction.html">Issue 01</a></p>
+        <p><a href="fiction.html">Issue 02</a></p>
+        <p><a href="fiction.html">Issue 03</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
   <script>
+    // Mobile nav (match global behavior: toggle .active on #site-nav)
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('site-nav');
+    hamburger.addEventListener('click', () => {
+      const isActive = nav.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
     // Filtering
     const buttons = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.story-card');
-
     function filterCategory(category) {
       buttons.forEach(btn => {
         const isActive = btn.getAttribute('data-filter') === category;
         btn.classList.toggle('active', isActive);
         btn.setAttribute('aria-selected', String(isActive));
       });
-
       cards.forEach(card => {
-        card.classList.remove('active');
-        if (card.getAttribute('data-category') === category) {
-          card.classList.add('active');
-        }
+        card.classList.toggle('active', card.getAttribute('data-category') === category);
       });
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Default to Books on first load
-      filterCategory('books');
-    });
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const category = button.getAttribute('data-filter');
-        filterCategory(category);
-      });
-    });
-
-    // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('site-nav');
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('show');
-      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', String(!expanded));
-    });
+    document.addEventListener('DOMContentLoaded', () => { filterCategory('books'); });
+    buttons.forEach(button => button.addEventListener('click', () => filterCategory(button.getAttribute('data-filter'))));
 
     // Modal logic
     const backdrop = document.getElementById('modal-backdrop');
@@ -646,35 +544,23 @@
     let lastFocusedEl = null;
 
     function openModalFromCard(card){
-      // Remember focus to return later
       lastFocusedEl = document.activeElement;
-
       const img = card.querySelector('img');
       const title = card.querySelector('h3')?.textContent?.trim() || '';
       const byline = card.querySelector('small')?.textContent?.trim() || '';
       const overlayHTML = card.querySelector('.overlay-content')?.innerHTML || '';
       const isBook = card.getAttribute('data-category') === 'books';
 
-      // Populate modal content
-      if(img){
-        modalImg.src = img.getAttribute('src') || '';
-        modalImg.alt = img.getAttribute('alt') || '';
-      } else {
-        modalImg.src = '';
-        modalImg.alt = '';
-      }
+      modalImg.src = img ? (img.getAttribute('src') || '') : '';
+      modalImg.alt = img ? (img.getAttribute('alt') || '') : '';
       modalTitle.textContent = title;
       modalByline.textContent = byline;
       modalBody.innerHTML = overlayHTML;
-
-      // Toggle book layout variant
       modal.classList.toggle('modal--book', isBook);
 
       document.body.classList.add('modal-open');
       backdrop.classList.add('show');
       backdrop.setAttribute('aria-hidden','false');
-
-      // Move focus into modal
       modal.focus();
     }
 
@@ -682,11 +568,7 @@
       backdrop.classList.remove('show');
       backdrop.setAttribute('aria-hidden','true');
       document.body.classList.remove('modal-open');
-
-      // Return focus to the triggering card
-      if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){
-        lastFocusedEl.focus();
-      }
+      if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){ lastFocusedEl.focus(); }
     }
 
     // Open modal on card click or Enter/Space
@@ -702,18 +584,9 @@
 
     // Close handlers
     modalClose.addEventListener('click', closeModal);
-
-    backdrop.addEventListener('click', (e) => {
-      // Close only if user clicks the backdrop, not the modal content
-      if(e.target === backdrop){
-        closeModal();
-      }
-    });
-
+    backdrop.addEventListener('click', (e) => { if(e.target === backdrop){ closeModal(); } });
     document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && backdrop.classList.contains('show')){
-        closeModal();
-      }
+      if(e.key === 'Escape' && backdrop.classList.contains('show')){ closeModal(); }
     });
   </script>
 </body>
