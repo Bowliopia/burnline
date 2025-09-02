@@ -1,3 +1,5 @@
+Submit FUNCTIONAL 9/2
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,41 +98,64 @@
       margin-bottom: 1.2rem;
     }
 
-  /* Footer */
     footer {
-      background: var(--bg-deep-1);
-      padding: 5rem 2rem 3rem;
-      color: var(--footer-muted);
-      font-size: 0.9rem;
+      background: #0f0f1c;
+      padding: 2rem 1rem;
+      color: #ccc;
     }
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    footer a:hover { color: var(--cyan); }
 
     .footer-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 3rem;
       max-width: 1200px;
       margin: auto;
     }
+
     .footer-column {
-      flex: 1 1 250px;
-      min-width: 200px;
+      flex: 1;
+      min-width: 250px;
+      margin: 1rem;
     }
+
     .footer-logo {
-      height: 100px;
+      width: 60px;
       margin-bottom: 1rem;
     }
+
+    .newsletter-input {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 250px;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-button {
+      padding: 0.5rem 1rem;
+      background-color: #0df6e3;
+      border: none;
+      border-radius: 4px;
+      color: #0f0f1c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .newsletter-button:hover {
+      background-color: #0bc2b7;
+    }
+
     .footer-bottom {
       text-align: center;
-      margin-top: 3rem;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 1rem;
-      color: var(--footer-subtle);
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .footer-column a:hover {
+      text-decoration: underline;
+      color: #0df6e3;
     }
   </style>
 </head>
