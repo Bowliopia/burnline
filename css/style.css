@@ -30,6 +30,25 @@ h1, h2, h3, h4, nav a, header {
   line-height: 1.4;
 }
 
+/* Gradient headers */
+h1 {
+  background: linear-gradient(90deg, var(--magenta), var(--purple)); /* pink → purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
+h2 {
+  background: linear-gradient(90deg, var(--cyan), #56ccf2); /* cyan → light blue */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
 /* ===== Header ===== */
 .site-header {
   display: flex;
