@@ -26,38 +26,35 @@
     }
     h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
 
-/* Header (match homepage exactly) */
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--neon);
-  color: #0f0f1c;
-  padding: 1rem 2rem;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.logo-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  color: inherit;
-}
-.logo-title img { height: 60px; width: auto; }
-.site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-.site-nav a { color:#0f0f1c; text-decoration:none; font-weight:bold; transition: color .3s; }
-.site-nav a:hover { color: var(--pink); }
-
-.hamburger { display:none; flex-direction:column; justify-content:center; cursor:pointer; width:30px; height:25px; gap:5px; }
-.hamburger div { background:#0f0f1c; height:4px; width:100%; border-radius:2px; }
-
-@media (max-width: 768px){
-  .site-nav{flex-direction:column; width:100%; display:none; background:var(--neon); padding:1rem 0; margin-top:1rem;}
-  .site-nav.active{display:flex;}
-  .hamburger{display:flex;}
-}
+    /* Header */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--neon);
+      color: #0f0f1c;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-title img { height: 60px; width: auto; }
+    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
+    .site-nav a { color:#0f0f1c; text-decoration:none; font-weight:bold; transition: color .3s; }
+    .site-nav a:hover { color: var(--pink); }
+    .hamburger { display:none; flex-direction:column; justify-content:center; cursor:pointer; width:30px; height:25px; gap:5px; }
+    .hamburger div { background:#0f0f1c; height:4px; width:100%; border-radius:2px; }
+    @media (max-width: 768px){
+      .site-nav{flex-direction:column; width:100%; display:none; background:var(--neon); padding:1rem 0; margin-top:1rem;}
+      .site-nav.active{display:flex;}
+      .hamburger{display:flex;}
+    }
 
     a { color: var(--neon); text-decoration:none; }
     a:hover { text-decoration:none; }
@@ -148,7 +145,7 @@
       .issue-hero .cover{max-width:100%; flex:0 0 auto;}
     }
 
-    /* Flipbook sections (hidden by default, same styling block reused) */
+    /* Flipbook section */
     .flipbook-section {
       padding: 3rem 0 0;
       text-align: center;
@@ -197,91 +194,7 @@
       <h1 class="gradient-heading">Issue Library</h1>
     </div>
 
-    <!-- Issue 003 -->
-    <section class="issue-hero" id="issue-003">
-      <a href="#flip-003" class="cover js-open-flipbook" data-target="flip-003" aria-label="Open Issue 03 flipbook">
-        <img src="Burnline Issue 03.png" alt="Issue 03 cover" loading="lazy" width="900" height="1200">
-      </a>
-      <div class="text">
-        <h1 class="gradient-heading" style="margin-bottom: 1rem;">Issue 03</h1>
-        <div class="two-col">
-          <div>
-            <h3>Fiction</h3>
-            <ul>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Artwork</h3>
-            <ul>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-            </ul>
-          </div>
-        </div>
-        <div class="cta">
-          <a class="btn toggle-flipbook js-open-flipbook" href="#flip-003" data-target="flip-003">Read Issue</a>
-          <a class="btn secondary" href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Download PDF</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Flipbook for Issue 003 -->
-    <section id="flip-003" class="flipbook-section">
-      <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
-      <p style="margin-top: 1rem;">
-        <a href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Open in Fullscreen</a>
-      </p>
-    </section>
-
-    <!-- Issue 002 -->
-    <section class="issue-hero" id="issue-002">
-      <a href="#flip-002" class="cover js-open-flipbook" data-target="flip-002" aria-label="Open Issue 02 flipbook">
-        <img src="Burnline Issue 02.png" alt="Issue 02 cover" loading="lazy" width="900" height="1200">
-      </a>
-      <div class="text">
-        <h1 class="gradient-heading" style="margin-bottom: 1rem;">Issue 02</h1>
-        <div class="two-col">
-          <div>
-            <h3>Fiction</h3>
-            <ul>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Artwork</h3>
-            <ul>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-            </ul>
-          </div>
-        </div>
-        <div class="cta">
-          <a class="btn toggle-flipbook js-open-flipbook" href="#flip-002" data-target="flip-002">Read Issue</a>
-          <a class="btn secondary" href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Download PDF</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Flipbook for Issue 002 -->
-    <section id="flip-002" class="flipbook-section">
-      <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
-      <p style="margin-top: 1rem;">
-        <a href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Open in Fullscreen</a>
-      </p>
-    </section>
-
-    <!-- Issue 001 -->
+    <!-- Issue 001 only -->
     <section class="issue-hero" id="issue-001">
       <a href="#flip-001" class="cover js-open-flipbook" data-target="flip-001" aria-label="Open Issue 01 flipbook">
         <img src="Burnline Issue 01.png" alt="Issue 01 cover" loading="lazy" width="900" height="1200">
@@ -343,8 +256,6 @@
       <div class="footer-column">
         <h4 style="color: var(--neon);">Read</h4>
         <p><a href="#" style="color:#ccc; text-decoration:none;">Issue 01</a></p>
-        <p><a href="#" style="color:#ccc; text-decoration:none;">Issue 02</a></p>
-        <p><a href="#" style="color:#ccc; text-decoration:none;">Issue 03</a></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -358,7 +269,7 @@
       nav.classList.toggle('active');
     }
 
-    // Individual flipbook toggles
+    // Toggle for Issue 01
     function toggleFlipbook(event) {
       event.preventDefault();
       const targetId = this.getAttribute('data-target');
@@ -380,7 +291,6 @@
       }
     }
 
-    // Attach to all covers and buttons
     document.querySelectorAll('.js-open-flipbook').forEach(el => {
       el.addEventListener('click', toggleFlipbook);
     });
