@@ -136,18 +136,20 @@
       color: var(--footer-text);
     }
 
-    /* Lock footer link styling so they aren't purple/underlined by default */
-    .footer-column a{
-      color: var(--cyan, #0df6e3);
-      text-decoration: none;
-    }
-    .footer-column a:visited{
-      color: var(--cyan, #0df6e3);          /* prevent purple visited color */
-    }
-    .footer-column a:hover,
-    .footer-column a:focus{
-      text-decoration: underline;
-    }
+/* Lock footer link styling */
+.footer-column a {
+  color: #ffffff;               /* white by default */
+  text-decoration: none;
+}
+.footer-column a:visited {
+  color: #ffffff;               /* stay white when visited */
+}
+.footer-column a:hover,
+.footer-column a:focus {
+  color: var(--purple, #7209b7); /* homepage purple on hover */
+  text-decoration: none;         /* no underline */
+}
+
 
     .footer-logo{
       width: 60px;
