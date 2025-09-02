@@ -130,36 +130,6 @@ h1, h2, h3, h4, nav a, header {
   flex-wrap: wrap;
 }
 
-/* ===== Newsletter (shared) ===== */
-.newsletter-input {
-  width: 100%;
-  max-width: 320px;
-  padding: .7rem .9rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-dark);
-  background: var(--bg-deep-2);
-  color: var(--text);
-  outline: none;
-  margin-bottom: .6rem;
-}
-.newsletter-input::placeholder {
-  color: var(--footer-muted);
-}
-
-.newsletter-button {
-  padding: .7rem 1.2rem;
-  border-radius: 8px;
-  border: none;
-  background: var(--cyan);
-  color: var(--ink-dark);
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.newsletter-button:hover {
-  background: var(--cyan-hover);
-}
-
 /* ===== Footer ===== */
 footer {
   background: var(--bg-deep-1);
@@ -196,6 +166,35 @@ footer {
 .footer-logo {
   height: 100px;
   margin-bottom: 1rem;
+}
+
+/* Newsletter (footer – match homepage) */
+.newsletter-input {
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-dark);
+  width: 70%;
+  margin-bottom: 0.8rem;
+  background: var(--bg-deep-2);
+  color: var(--text);
+  outline: none;
+}
+.newsletter-input::placeholder {
+  color: var(--footer-muted);
+}
+
+.newsletter-button {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--cyan);
+  color: var(--ink-dark);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.newsletter-button:hover {
+  background: var(--cyan-hover);
 }
 
 /* Footer links */
