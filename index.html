@@ -4,104 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Burnline – The Cyberpunk Magazine</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg-deep-1:#0f0f1c;
-      --bg-deep-2:#1b1e35;
-      --bg-hero-2:#2d2b4a;
-      --card:#22253e;
-      --text:#f0f0f0;
-      --text-muted:#cccccc;
-      --text-muted-2:#bbbbbb;
-      --footer-muted:#aaaaaa;
-      --footer-subtle:#555555;
-      --ink-dark:#0f0f1c;
-      --cyan:#0df6e3;
-      --cyan-hover:#0ad3c6;
-      --magenta:#f72585;
-      --purple:#7209b7;
-      --border-dark:#222;
-    }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, var(--bg-deep-1), var(--bg-deep-2));
-      color: var(--text);
-    }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Global header/footer/vars -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page-specific styles (hero, grid, cards, buttons, latest-issue) -->
+  <style>
     html { scroll-behavior: smooth; }
 
-    h1, h2, h3, nav a, header {
-      font-family: 'Orbitron', sans-serif;
-      line-height: 1.4;
-    }
     h1 { font-size: 2.8rem; }
     h2 { font-size: 2.2rem; }
     h3 { font-size: 1.5rem; }
-
-    /* Header */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--cyan);
-      color: var(--ink-dark);
-      padding: 1rem 2rem;
-      flex-wrap: wrap;
-    }
-
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: inherit;
-    }
-    .logo-title img {
-      height: 60px;
-      width: auto;
-    }
-
-    .site-nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 1rem;
-    }
-    .site-nav a {
-      color: var(--ink-dark);
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    .site-nav a:hover { color: #ff4ac2; }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
-    .hamburger div {
-      background: var(--ink-dark);
-      height: 4px;
-      width: 100%;
-      border-radius: 2px;
-    }
-    @media (max-width: 768px) {
-      .site-nav {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        background-color: var(--cyan);
-        padding: 1rem 0;
-        margin-top: 1rem;
-      }
-      .site-nav.active { display: flex; }
-      .hamburger { display: flex; }
-    }
 
     /* Hero */
     .hero {
@@ -113,6 +29,7 @@
       padding: 6rem 2rem;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       flex-wrap: wrap;
+      color: var(--text);
     }
     .hero-text { max-width: 600px; }
     .hero-text h1 {
@@ -183,6 +100,7 @@
     .card h3 {
       color: var(--cyan);
       margin-bottom: 0.5rem;
+      font-family: 'Orbitron', sans-serif;
     }
     .card p { color: var(--text-muted-2); }
 
@@ -192,6 +110,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .card-link {
@@ -204,7 +123,7 @@
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
 
-    /* Buttons/inputs – unified with Issues page */
+    /* Buttons/inputs */
     .btn {
       background: var(--cyan);
       color: var(--ink-dark);
@@ -256,43 +175,6 @@
       cursor: pointer;
     }
     .newsletter-button:hover { background: var(--cyan-hover); }
-
-    /* Footer */
-    footer {
-      background: var(--bg-deep-1);
-      padding: 5rem 2rem 3rem;
-      color: var(--footer-muted);
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    footer a:hover { color: var(--cyan); }
-
-    .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 3rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .footer-column {
-      flex: 1 1 250px;
-      min-width: 200px;
-    }
-    .footer-logo {
-      height: 100px;
-      margin-bottom: 1rem;
-    }
-    .footer-bottom {
-      text-align: center;
-      margin-top: 3rem;
-      border-top: 1px solid var(--border-dark);
-      padding-top: 1rem;
-      color: var(--footer-subtle);
-    }
   </style>
 </head>
 <body>
@@ -390,11 +272,11 @@
         </form>
       </div>
       <div class="footer-column">
-        <h4 style="color: var(--cyan);">Get In Touch</h4>
-        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></p>
+        <h4>Get In Touch</h4>
+        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
       </div>
       <div class="footer-column">
-        <h4 style="color: var(--cyan);">Read</h4>
+        <h4>Read</h4>
         <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue Library</a></p>
         <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
         <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
@@ -415,7 +297,6 @@
       event.preventDefault();
       const section = document.getElementById('latest-issue');
       const button = document.getElementById('toggle-flipbook');
-
       const isHidden = section.style.display === 'none' || section.style.display === '';
 
       if (isHidden) {
@@ -432,5 +313,3 @@
   </script>
 </body>
 </html>
-
-
