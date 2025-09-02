@@ -65,7 +65,7 @@ h1, h2, h3, h4, nav a, header {
   transition: color 0.3s;
 }
 .site-nav a:hover {
-  color: var(--purple); /* purple hover to match homepage */
+  color: var(--purple); /* purple hover */
 }
 
 .hamburger {
@@ -100,7 +100,7 @@ h1, h2, h3, h4, nav a, header {
 footer {
   background: var(--bg-deep-1);
   padding: 5rem 2rem 3rem;
-  color: var(--footer-muted);
+  color: var(--footer-muted);   /* base grey for footer text */
   font-size: 0.9rem;
 }
 
@@ -126,7 +126,7 @@ footer {
 
 .footer-column p {
   margin: .4rem 0;
-  color: var(--footer-text);
+  color: inherit; /* ensure it matches footer base color */
 }
 
 .footer-logo {
@@ -134,17 +134,16 @@ footer {
   margin-bottom: 1rem;
 }
 
-.footer-column a {
-  color: var(--footer-text); 
-  text-decoration: none;
-}
+/* Footer links */
+.footer-column a,
 .footer-column a:visited {
-  color: var(--footer-text);
+  color: var(--footer-muted);   /* same grey as email */
+  text-decoration: none;
 }
 .footer-column a:hover,
 .footer-column a:focus {
-  color: var(--purple); /* purple hover like homepage */
-  text-decoration: none; /* no underline */
+  color: var(--purple);         /* purple hover */
+  text-decoration: none;        /* no underline */
 }
 
 .footer-bottom {
