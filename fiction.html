@@ -4,72 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fiction – Burnline</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Global header/footer/vars/buttons/newsletter -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page-specific styles only -->
   <style>
-    :root{
-      --bg-start:#0f0f1c;
-      --bg-end:#1b1e35;
-      --neon:#0df6e3;
-      --pink:#ff4ac2;
-      --card:#14172a;
-      --card-2:#1c1e2f;
-      --text:#f0f0f0;
-      --muted:#b7b7c7;
-      --border-dark:#222;
-    }
-    *{box-sizing:border-box}
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
-      color: var(--text);
-    }
-    h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
+    *{ box-sizing: border-box; }
 
-    /* Header */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--neon);
-      color: #0f0f1c;
-      padding: 1rem 2rem;
-      flex-wrap: wrap;
-      position: relative;
-    }
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: inherit;
-    }
-    .logo-title img { height: 60px; width: auto; }
-    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-    .site-nav a { color:#0f0f1c; text-decoration:none; font-weight:bold; transition: color .3s; }
-    .site-nav a:hover { color: var(--pink); }
-    .hamburger { display:none; flex-direction:column; justify-content:center; cursor:pointer; width:30px; height:25px; gap:5px; }
-    .hamburger div { background:#0f0f1c; height:4px; width:100%; border-radius:2px; }
-    @media (max-width: 768px){
-      .site-nav{flex-direction:column; width:100%; display:none; background:var(--neon); padding:1rem 0; margin-top:1rem;}
-      .site-nav.active{display:flex;}
-      .hamburger{display:flex;}
-    }
-
-    a { color: var(--neon); text-decoration:none; }
-    a:hover { text-decoration:none; }
     .gradient-heading {
       font-size: 2.2rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin: 0 0 1rem 0;
+      font-family: 'Orbitron', sans-serif;
     }
     .content { max-width: 1200px; margin: 2rem auto 4rem; padding: 0 2rem; }
-    .section-intro { text-align:center; margin: 2rem 0 3rem; }
+    .section-intro { text-align: center; margin: 2rem 0 3rem; }
 
     .issue-hero{
-      display:flex;
+      display: flex;
       gap: 2rem;
       align-items: flex-start;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
@@ -82,25 +40,25 @@
     .issue-hero .cover{
       flex: 0 0 380px;
       max-width: 380px;
-      background: var(--card-2);
+      background: var(--card);
       border-radius: 12px;
       overflow: hidden;
     }
     .issue-hero .cover img{
-      width:100%;
-      height:auto;
-      display:block;
+      width: 100%;
+      height: auto;
+      display: block;
       aspect-ratio: 3 / 4;
       object-fit: cover;
     }
     .issue-hero .text{
-      flex:1;
-      max-width:700px;
-      display:flex;
-      flex-direction:column;
+      flex: 1;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
     }
     .issue-hero .two-col{
-      display:flex;
+      display: flex;
       flex-wrap: wrap;
       gap: 2rem;
       margin-top: 0.5rem;
@@ -112,37 +70,19 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: #888;
+      font-family: 'Orbitron', sans-serif;
     }
-    .issue-hero ul{ list-style:none; padding:0; margin:0; color: var(--muted); }
+    .issue-hero ul{ list-style: none; padding: 0; margin: 0; color: var(--text-muted); }
     .issue-hero li{ margin-bottom: .75rem; }
-    .issue-hero li strong{ color:#fff; }
+    .issue-hero li strong{ color: #fff; }
     .issue-hero .cta{
       width: 100%;
       text-align: center;
       margin-top: 2.5rem;
-      display:flex;
-      gap:.75rem;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .btn{
-      background: var(--neon);
-      color:#0f0f1c;
-      border:none;
-      font-weight:800;
-      padding:.65rem 1rem;
-      border-radius:8px;
-      cursor:pointer;
-      display:inline-block;
-    }
-    .btn.secondary{
-      background: transparent;
-      color: var(--neon);
-      border:1px solid rgba(13,246,227,0.45);
-    }
-    @media (max-width: 980px){
-      .issue-hero{flex-direction:column;}
-      .issue-hero .cover{max-width:100%; flex:0 0 auto;}
+      display: flex;
+      gap: .75rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     /* Flipbook section */
@@ -158,17 +98,14 @@
       background: #000;
     }
     .flipbook-section a {
-      color: var(--neon);
+      color: var(--cyan);
       text-decoration: underline;
     }
 
-    footer { background: #0f0f1c; padding: 2rem; color: #ccc; margin-top: 4rem; }
-    .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; max-width: 1200px; margin: 0 auto; }
-    .footer-column { flex:1; min-width:220px; }
-    .footer-logo { width: 80px; margin-bottom: 1rem; }
-    .newsletter-input { padding: 0.5rem; width: 80%; margin-bottom: 0.5rem; border-radius: 4px; border: none; }
-    .newsletter-button { padding: 0.5rem 1rem; background-color: var(--neon); border: none; color: #0f0f1c; font-weight: bold; border-radius: 4px; cursor: pointer; }
-    .footer-bottom { text-align: center; margin-top: 2rem; color: #777; font-size: 0.85rem; }
+    @media (max-width: 980px){
+      .issue-hero{ flex-direction: column; }
+      .issue-hero .cover{ max-width: 100%; flex: 0 0 auto; }
+    }
   </style>
 </head>
 <body>
@@ -194,7 +131,7 @@
       <h1 class="gradient-heading">Issue Library</h1>
     </div>
 
-    <!-- Issue 001 only -->
+    <!-- Issue 001 -->
     <section class="issue-hero" id="issue-001">
       <a href="#flip-001" class="cover js-open-flipbook" data-target="flip-001" aria-label="Open Issue 01 flipbook">
         <img src="Burnline Issue 01.png" alt="Issue 01 cover" loading="lazy" width="900" height="1200">
@@ -221,16 +158,16 @@
             </ul>
           </div>
         </div>
-<div class="cta">
-  <a class="btn toggle-flipbook js-open-flipbook" href="#flip-001" data-target="flip-001">Read Issue</a>
-  <a class="btn secondary" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
-</div>
+        <div class="cta">
+          <a class="btn toggle-flipbook js-open-flipbook" href="#flip-001" data-target="flip-001">Read Issue</a>
+          <a class="btn secondary" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
+        </div>
       </div>
     </section>
 
     <!-- Flipbook for Issue 001 -->
     <section id="flip-001" class="flipbook-section">
-      <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
+      <iframe allowfullscreen allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
       <p style="margin-top: 1rem;">
         <a href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Open in Fullscreen</a>
       </p>
@@ -244,18 +181,17 @@
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
         <p style="line-height:1.6;">Sign up to our newsletter to get the latest stories, art, and neon-lit news from Burnline.</p>
         <form style="margin-top:1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input">
-          <br>
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
       <div class="footer-column">
-        <h4 style="color: var(--neon);">Get In Touch</h4>
+        <h4>Get In Touch</h4>
         <p>contact@burnlinemag.com<br><span style="font-size:0.8rem;">(no story submissions by email)</span></p>
       </div>
       <div class="footer-column">
-        <h4 style="color: var(--neon);">Read</h4>
-        <p><a href="#" style="color:#ccc; text-decoration:none;">Issue 01</a></p>
+        <h4>Read</h4>
+        <p><a href="fiction.html">Issue 01</a></p>
       </div>
     </div>
     <div class="footer-bottom">
