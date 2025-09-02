@@ -1,5 +1,3 @@
-Submit FUNCTIONAL 9/2
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,157 +5,196 @@ Submit FUNCTIONAL 9/2
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submit – Burnline</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
-    }
-
-    h1, h2, h3, h4, nav a, header {
-      font-family: 'Orbitron', sans-serif;
-    }
-
-/* Header (match homepage exactly) */
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0df6e3;
-  color: #0f0f1c;
-  padding: 1rem 2rem;
-  font-family: 'Orbitron', sans-serif;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.logo-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  color: inherit;
-}
-.logo-title img { height: 60px; width: auto; }
-/* No font-size on .logo-title span — inherits default like homepage */
-
-.site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-.site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-.site-nav a:hover { color: #ff4ac2; }
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  cursor: pointer;
-  width: 30px;
-  height: 25px;
-  gap: 5px;
-}
-.hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
-
-@media (max-width: 768px) {
-  .site-nav {
-    flex-direction: column;
-    width: 100%;
-    display: none;
-    background-color: #0df6e3;
-    padding: 1rem 0;
-    margin-top: 1rem;
+<style>
+  /* Shared tokens (with safe fallbacks) */
+  :root{
+    --cyan:#0df6e3;
+    --footer-bg:#0f0f1c;
+    --footer-text:#f0f0f0;
+    --footer-muted:#aaaaaa;
+    --footer-subtle:#555555;
   }
-  .site-nav.active { display: flex; }
-  .hamburger { display: flex; }
-}
 
-    .content {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-      text-align: center;
-    }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f0f1c, #1b1e35);
+    color: #f0f0f0;
+  }
 
-    .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-    .gradient-heading-blue {
-  font-size: 1.5rem;
-  background: linear-gradient(90deg, #0df6e3, #1e90ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
+  h1, h2, h3, h4, nav a, header {
+    font-family: 'Orbitron', sans-serif;
+  }
 
-    .content p {
-      line-height: 1.7;
-      color: #ccc;
-      margin-bottom: 1.2rem;
-    }
+  /* Header (match homepage exactly) */
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0df6e3;
+    color: #0f0f1c;
+    padding: 1rem 2rem;
+    font-family: 'Orbitron', sans-serif;
+    flex-wrap: wrap;
+    position: relative;
+  }
 
-    footer {
-      background: #0f0f1c;
-      padding: 2rem 1rem;
-      color: #ccc;
-    }
+  .logo-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .logo-title img { height: 60px; width: auto; }
+  /* No font-size on .logo-title span — inherits default like homepage */
 
-    .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
-    }
+  .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
+  .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+  .site-nav a:hover { color: #ff4ac2; }
 
-    .footer-column {
-      flex: 1;
-      min-width: 250px;
-      margin: 1rem;
-    }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    gap: 5px;
+  }
+  .hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
 
-    .footer-logo {
-      width: 60px;
-      margin-bottom: 1rem;
-    }
-
-    .newsletter-input {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 4px;
+  @media (max-width: 768px) {
+    .site-nav {
+      flex-direction: column;
       width: 100%;
-      max-width: 250px;
-      margin-bottom: 0.5rem;
-    }
-
-    .newsletter-button {
-      padding: 0.5rem 1rem;
+      display: none;
       background-color: #0df6e3;
-      border: none;
-      border-radius: 4px;
-      color: #0f0f1c;
-      cursor: pointer;
-      font-weight: bold;
+      padding: 1rem 0;
+      margin-top: 1rem;
     }
+    .site-nav.active { display: flex; }
+    .hamburger { display: flex; }
+  }
 
-    .newsletter-button:hover {
-      background-color: #0bc2b7;
-    }
+  .content {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
 
-    .footer-bottom {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #666;
-    }
+  .gradient-heading {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #f72585, #7209b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+  .gradient-heading-blue {
+    font-size: 1.5rem;
+    background: linear-gradient(90deg, #0df6e3, #1e90ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
 
-    .footer-column a:hover {
-      text-decoration: underline;
-      color: #0df6e3;
+  .content p {
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ===== Unified footer (matches homepage look) ===== */
+  footer{
+    background: linear-gradient(135deg, var(--footer-bg), #1b1e35);
+    color: var(--footer-text);
+    margin-top: 3rem;
+    padding: 0; /* container handles inner padding */
+  }
+
+  .footer-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-column{ min-width: 250px; }
+
+  .footer-column h4{
+    margin: 0 0 .75rem;
+    color: var(--cyan, #0df6e3);          /* ensure blue/cyan even if --cyan missing elsewhere */
+    letter-spacing: .5px;
+  }
+
+  .footer-column p{
+    margin: .4rem 0;
+    color: var(--footer-text);
+  }
+
+  /* Lock footer link styling so they aren't purple/underlined by default */
+  .footer-column a{
+    color: var(--cyan, #0df6e3);
+    text-decoration: none;
+  }
+  .footer-column a:visited{
+    color: var(--cyan, #0df6e3);          /* prevent purple visited color */
+  }
+  .footer-column a:hover,
+  .footer-column a:focus{
+    text-decoration: underline;
+  }
+
+  .footer-logo{
+    width: 60px;
+    height: auto;
+    display: block;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 6px rgba(13,246,227,.15));
+  }
+
+  .newsletter-input{
+    width: 100%;
+    max-width: 320px;
+    padding: .7rem .9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    color: var(--footer-text);
+    outline: none;
+    margin-bottom: .5rem;
+  }
+  .newsletter-input::placeholder{ color: #cfcfe6; opacity: .8; }
+
+  .newsletter-button{
+    padding: .7rem 1.1rem;
+    border-radius: 12px;
+    border: none;
+    background: var(--cyan, #0df6e3);
+    color: #0f0f1c;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .newsletter-button:hover{ filter: brightness(1.08); }
+
+  .footer-bottom{
+    border-top: 1px solid rgba(255,255,255,.12);
+    color: var(--footer-muted);
+    text-align: center;
+    padding: 1rem 1.5rem 1.4rem;
+    font-size: .95rem;
+  }
+
+  @media (max-width: 880px){
+    .footer-container{
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
 
@@ -232,31 +269,34 @@ Submit FUNCTIONAL 9/2
 </section>
 
 
-  <footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, I promise.</p>
-        <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-column">
-        <h4 style="color: var(--cyan);">Get In Touch</h4>
-        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></p>
-      </div>
-      <div class="footer-column">
-        <h4 style="color: var(--cyan);">Read</h4>
-        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue Library</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
-      </div>
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+      <p>Get issue updates from Burnline straight to your inbox. No spam or anything, I promise.</p>
+      <form style="margin-top: 1rem;">
+        <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+        <button type="submit" class="newsletter-button">Subscribe</button>
+      </form>
     </div>
-    <div class="footer-bottom">
-      &copy; 2025 Burnline Magazine — All rights reserved
+
+    <div class="footer-column">
+      <h4>Get In Touch</h4>
+      <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
     </div>
-  </footer>
+
+    <div class="footer-column">
+      <h4>Read</h4>
+      <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue Library</a></p>
+      <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
+      <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    &copy; 2025 Burnline Magazine — All rights reserved
+  </div>
+</footer>
 
   <script>
     function toggleMenu() {
