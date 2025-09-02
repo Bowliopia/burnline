@@ -15,6 +15,7 @@
       --card-2:#1c1e2f;
       --text:#f0f0f0;
       --muted:#b7b7c7;
+      --border-dark:#222;
     }
     *{box-sizing:border-box}
     body {
@@ -57,7 +58,6 @@
   .site-nav.active{display:flex;}
   .hamburger{display:flex;}
 }
-
 
     a { color: var(--neon); text-decoration:none; }
     a:hover { text-decoration:none; }
@@ -148,6 +148,23 @@
       .issue-hero .cover{max-width:100%; flex:0 0 auto;}
     }
 
+    /* Flipbook section (same behavior as homepage) */
+    #latest-issue {
+      padding: 4rem 2rem;
+      text-align: center;
+      display: none; /* hidden by default like homepage */
+    }
+    #latest-issue .fp-iframe {
+      border: 1px solid var(--border-dark);
+      width: 100%;
+      height: 400px;
+      background: #000;
+    }
+    #latest-issue a {
+      color: var(--neon);
+      text-decoration: underline;
+    }
+
     footer { background: #0f0f1c; padding: 2rem; color: #ccc; margin-top: 4rem; }
     .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; max-width: 1200px; margin: 0 auto; }
     .footer-column { flex:1; min-width:220px; }
@@ -182,7 +199,7 @@
 
     <!-- Issue 003 -->
     <section class="issue-hero" id="issue-003">
-      <a href="#issue-003-open" class="cover">
+      <a href="#latest-issue" class="cover js-open-flipbook" aria-label="Open Issue 03 flipbook">
         <img src="Burnline Issue 03.png" alt="Issue 03 cover" loading="lazy" width="900" height="1200">
       </a>
       <div class="text">
@@ -208,15 +225,15 @@
           </div>
         </div>
         <div class="cta">
-          <a class="btn" href="#">Read Issue</a>
-          <a class="btn secondary" href="#">Download PDF</a>
+          <a class="btn toggle-flipbook js-open-flipbook" href="#latest-issue">Read Issue</a>
+          <a class="btn secondary" href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Download PDF</a>
         </div>
       </div>
     </section>
 
     <!-- Issue 002 -->
     <section class="issue-hero" id="issue-002">
-      <a href="#issue-002-open" class="cover">
+      <a href="#latest-issue" class="cover js-open-flipbook" aria-label="Open Issue 02 flipbook">
         <img src="Burnline Issue 02.png" alt="Issue 02 cover" loading="lazy" width="900" height="1200">
       </a>
       <div class="text">
@@ -242,15 +259,15 @@
           </div>
         </div>
         <div class="cta">
-          <a class="btn" href="#">Read Issue</a>
-          <a class="btn secondary" href="#">Download PDF</a>
+          <a class="btn toggle-flipbook js-open-flipbook" href="#latest-issue">Read Issue</a>
+          <a class="btn secondary" href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Download PDF</a>
         </div>
       </div>
     </section>
 
     <!-- Issue 001 -->
     <section class="issue-hero" id="issue-001">
-      <a href="#issue-001-open" class="cover">
+      <a href="#latest-issue" class="cover js-open-flipbook" aria-label="Open Issue 01 flipbook">
         <img src="Burnline Issue 01.png" alt="Issue 01 cover" loading="lazy" width="900" height="1200">
       </a>
       <div class="text">
@@ -276,13 +293,21 @@
           </div>
         </div>
         <div class="cta">
-          <a class="btn" href="#">Read Issue</a>
-          <a class="btn secondary" href="#">Download PDF</a>
+          <a class="btn toggle-flipbook js-open-flipbook" href="#latest-issue">Read Issue</a>
+          <a class="btn secondary" href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Download PDF</a>
         </div>
       </div>
     </section>
 
   </main>
+
+  <!-- Shared flipbook section (hidden by default, same as homepage) -->
+  <section id="latest-issue">
+    <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
+    <p style="margin-top: 1rem;">
+      <a href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Open in Fullscreen</a>
+    </p>
+  </section>
 
   <footer>
     <div class="footer-container">
@@ -316,6 +341,30 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
+
+    // --- Flipbook behavior copied to match homepage ---
+    function openFlipbook(event) {
+      if (event) event.preventDefault();
+      const section = document.getElementById('latest-issue');
+      const isHidden = section.style.display === 'none' || section.style.display === '';
+
+      // Update all "Read Issue" buttons to reflect state (so they behave consistently)
+      const buttons = document.querySelectorAll('.toggle-flipbook');
+
+      if (isHidden) {
+        section.style.display = 'block';
+        buttons.forEach(btn => { btn.textContent = 'Hide Issue'; });
+        section.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        section.style.display = 'none';
+        buttons.forEach(btn => { btn.textContent = 'Read Issue'; });
+      }
+    }
+
+    // Attach to all triggers: cover links + buttons
+    document.querySelectorAll('.js-open-flipbook').forEach(el => {
+      el.addEventListener('click', openFlipbook);
+    });
   </script>
 </body>
 </html>
