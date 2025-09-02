@@ -4,198 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submit – Burnline</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Global header/footer/vars/buttons/newsletter -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Submit-page specific styles only -->
   <style>
-    /* Shared tokens (with safe fallbacks) */
-    :root{
-      --cyan:#0df6e3;
-      --footer-bg:#0f0f1c;
-      --footer-text:#f0f0f0;
-      --footer-muted:#aaaaaa;
-      --footer-subtle:#555555;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
-    }
-
-    h1, h2, h3, h4, nav a, header {
-      font-family: 'Orbitron', sans-serif;
-    }
-
-    /* Header (match homepage exactly) */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0df6e3;
-      color: #0f0f1c;
-      padding: 1rem 2rem;
-      font-family: 'Orbitron', sans-serif;
-      flex-wrap: wrap;
-      position: relative;
-    }
-
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: inherit;
-    }
-    .logo-title img { height: 60px; width: auto; }
-    /* No font-size on .logo-title span — inherits default like homepage */
-
-    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-    .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-    .site-nav a:hover { color: #ff4ac2; }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      cursor: pointer;
-      width: 30px;
-      height: 25px;
-      gap: 5px;
-    }
-    .hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
-
-    @media (max-width: 768px) {
-      .site-nav {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        background-color: #0df6e3;
-        padding: 1rem 0;
-        margin-top: 1rem;
-      }
-      .site-nav.active { display: flex; }
-      .hamburger { display: flex; }
-    }
-
     .content {
       max-width: 800px;
       margin: 4rem auto;
       padding: 0 2rem;
       text-align: center;
     }
-
     .gradient-heading {
       font-size: 2rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
     }
     .gradient-heading-blue {
       font-size: 1.5rem;
-      background: linear-gradient(90deg, #0df6e3, #1e90ff);
+      background: linear-gradient(90deg, var(--cyan), #1e90ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
     }
-
     .content p {
       line-height: 1.7;
-      color: #ccc;
+      color: var(--text-muted);
       margin-bottom: 1.2rem;
-    }
-
-    /* ===== Unified footer (matches homepage look) ===== */
-    footer{
-      background: linear-gradient(135deg, var(--footer-bg), #1b1e35);
-      color: var(--footer-text);
-      margin-top: 3rem;
-      padding: 0; /* container handles inner padding */
-      font-size: 0.9rem;
-    }
-
-    .footer-container{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .footer-column{ min-width: 250px; }
-
-    .footer-column h4{
-      margin: 0 0 .75rem;
-      color: var(--cyan, #0df6e3);          /* ensure blue/cyan even if --cyan missing elsewhere */
-      letter-spacing: .5px;
-    }
-
-    .footer-column p{
-      margin: .4rem 0;
-      color: var(--footer-text);
-    }
-
-/* Lock footer link styling */
-.footer-column a {
-  color: #ffffff;               /* white by default */
-  text-decoration: none;
-}
-.footer-column a:visited {
-  color: #ffffff;               /* stay white when visited */
-}
-.footer-column a:hover,
-.footer-column a:focus {
-  color: var(--purple, #7209b7); /* homepage purple on hover */
-  text-decoration: none;         /* no underline */
-}
-
-
-    .footer-logo{
-      width: 60px;
-      height: auto;
-      display: block;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 0 6px rgba(13,246,227,.15));
-    }
-
-    .newsletter-input{
-      width: 100%;
-      max-width: 320px;
-      padding: .7rem .9rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: var(--footer-text);
-      outline: none;
-      margin-bottom: .5rem;
-    }
-    .newsletter-input::placeholder{ color: #cfcfe6; opacity: .8; }
-
-    .newsletter-button{
-      padding: .7rem 1.1rem;
-      border-radius: 12px;
-      border: none;
-      background: var(--cyan, #0df6e3);
-      color: #0f0f1c;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .newsletter-button:hover{ filter: brightness(1.08); }
-
-    .footer-bottom{
-      border-top: 1px solid rgba(255,255,255,.12);
-      color: var(--footer-muted);
-      text-align: center;
-      padding: 1rem 1.5rem 1.4rem;
-      font-size: .95rem;
-    }
-
-    @media (max-width: 880px){
-      .footer-container{
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
     }
   </style>
 </head>
@@ -226,8 +69,8 @@
 
     <!-- Tabs -->
     <div style="margin: 2rem 0;">
-      <a href="#fiction" style="margin-right: 2rem; color: #0df6e3; font-weight: bold; text-decoration: none;">Fiction Guidelines</a>
-      <a href="#art" style="color: #0df6e3; font-weight: bold; text-decoration: none;">Art Guidelines</a>
+      <a href="#fiction" style="margin-right: 2rem; color: var(--cyan); font-weight: bold; text-decoration: none;">Fiction Guidelines</a>
+      <a href="#art" style="color: var(--cyan); font-weight: bold; text-decoration: none;">Art Guidelines</a>
     </div>
 
     <!-- Fiction Guidelines Section -->
@@ -242,13 +85,13 @@
           <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">Word Limit</td>
           <td style="padding: 0.5rem;">500 – 10,000 words</td>
         </tr>
-        <tr style="background-color: #1b1e35;">
+        <tr style="background-color: var(--bg-deep-2);">
           <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">Pay Rate</td>
           <td style="padding: 0.5rem;">$50 USD per accepted piece. It’s our goal to eventually pay a competitive per-word rate, but we’re not quite there yet.</td>
         </tr>
         <tr>
           <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">How to Submit</td>
-          <td style="padding: 0.5rem;">Email your story as a .doc, .docx, or .pdf to <a href="mailto:contact@burnline.net" style="color: #0df6e3;">contact@burnline.net</a>. Please include the word <strong>"Submission"</strong> in the subject line.</td>
+          <td style="padding: 0.5rem;">Email your story as a .doc, .docx, or .pdf to <a href="mailto:contact@burnline.net" style="color: var(--cyan);">contact@burnline.net</a>. Please include the word <strong>"Submission"</strong> in the subject line.</td>
         </tr>
       </table>
 
@@ -260,7 +103,7 @@
       <h2 id="art" class="gradient-heading-blue" style="margin-top: 4rem;">Art Guidelines</h2>
       <p>We’re accepting cyberpunk-themed visual art for digital publication. This includes illustration, digital collage, photography, animation stills, glitch art, or anything else that fits the tone of Burnline. We care more about the vibe than the medium.</p>
 
-      <p><strong>How to Submit:</strong> Email <a href="mailto:contact@burnline.net" style="color: #0df6e3;">contact@burnline.net</a> with your artwork attached (JPG or PNG) or linked via portfolio or file share. Please include the word <strong>"Submission"</strong> in the subject line.</p>
+      <p><strong>How to Submit:</strong> Email <a href="mailto:contact@burnline.net" style="color: var(--cyan);">contact@burnline.net</a> with your artwork attached (JPG or PNG) or linked via portfolio or file share. Please include the word <strong>"Submission"</strong> in the subject line.</p>
 
       <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
     </div>
