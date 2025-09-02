@@ -204,47 +204,36 @@
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
 
-    /* Buttons/inputs */
-    .read-issue-btn {
-      background-color: var(--cyan);
-      border: none;
+    /* Buttons/inputs – unified with Issues page */
+    .btn {
+      background: var(--cyan);
       color: var(--ink-dark);
-      padding: 0.75rem 2rem;
-      font-weight: bold;
+      border: none;
+      font-weight: 800;
       font-size: 1rem;
-      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      padding: .65rem 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 1rem;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
       transition: background-color 0.3s;
     }
-.btn {
-  background: var(--cyan);
-  color: var(--ink-dark);
-  border: none;
-  font-weight: 800;
-  font-family: 'Inter', sans-serif; 
-  padding: .65rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-}
+    .btn:hover { background: var(--cyan-hover); }
 
-.btn.secondary {
-  background: transparent;
-  color: var(--cyan);
-  border: 1px solid rgba(13,246,227,0.45);
-}
+    .btn.secondary {
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid rgba(13,246,227,0.45);
+    }
 
-    .read-issue-btn:hover { background-color: var(--cyan-hover); }
-    
     .button-row {
-  display: flex;
-  justify-content: center;
-  gap: .75rem;
-  flex-wrap: wrap;
-}
+      display: flex;
+      justify-content: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
 
     .newsletter-input {
       padding: 0.6rem 1rem;
@@ -331,34 +320,35 @@
     </a>
 
     <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
-<h1 class="gradient-heading" style="margin-bottom: 1rem;">The Latest Issue</h1>
+      <h1 class="gradient-heading" style="margin-bottom: 1rem;">The Latest Issue</h1>
 
-<div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 0.5rem;">
-  <div style="flex: 1 1 300px;">
-    <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
-    <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
-      <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-      <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-      <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-      <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-      <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-    </ul>
-  </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 0.5rem;">
+        <div style="flex: 1 1 300px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
+          <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
+            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+          </ul>
+        </div>
 
-  <div style="flex: 1 1 300px;">
-    <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
-    <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
-      <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
-      <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
-      <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
-    </ul>
-  </div>
-</div>
+        <div style="flex: 1 1 300px;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
+          <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
+            <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
+            <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
+            <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
+          </ul>
+        </div>
+      </div>
 
-<div class="button-row" style="width: 100%; margin-top: 2.5rem;">
-  <button id="toggle-flipbook" class="btn">Read This Issue</button>
-  <a class="btn secondary" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
-</div>
+      <div class="button-row" style="width: 100%; margin-top: 2.5rem;">
+        <button id="toggle-flipbook" class="btn">Read This Issue</button>
+        <a class="btn secondary" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
+      </div>
+    </div>
   </section>
 
   <section id="latest-issue">
@@ -442,6 +432,3 @@
   </script>
 </body>
 </html>
-
-
-
