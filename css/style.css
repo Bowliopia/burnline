@@ -15,6 +15,10 @@
   --magenta:#f72585;
   --purple:#7209b7;
   --border-dark:#222;
+
+  /* Unified H1 sizing */
+  --h1-min: 2.25rem;
+  --h1-max: 3.75rem;
 }
 
 /* ===== Base ===== */
@@ -30,17 +34,24 @@ h1, h2, h3, h4, nav a, header {
   line-height: 1.4;
 }
 
-/* Gradient headers */
+/* Gradient headers (site-wide) */
 h1 {
-  background: linear-gradient(90deg, var(--magenta), var(--purple)); /* pink → purple */
+  /* unified size for all page titles */
+  font-size: clamp(var(--h1-min), 2.2vw + 1.2rem, var(--h1-max));
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+
+  /* pink → purple gradient */
+  background: linear-gradient(90deg, var(--magenta), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  font-weight: 600;
 }
 
 h2 {
+  /* keep your h2 look */
   background: linear-gradient(90deg, var(--cyan), #56ccf2); /* cyan → light blue */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -48,6 +59,9 @@ h2 {
   color: transparent;
   font-weight: 600;
 }
+
+/* Optional utility for explicit page titles if you need it */
+.page-title { font-size: inherit; }
 
 /* ===== Header ===== */
 .site-header {
