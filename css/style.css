@@ -78,6 +78,10 @@ h2 {
   margin-bottom: 1.2rem;
 }
 
+.content h1 {
+  text-align: center;
+}
+
 /* ===== Header ===== */
 .site-header {
   display: flex;
