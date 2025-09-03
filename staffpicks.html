@@ -31,25 +31,36 @@
       padding: 0 2rem;
     }
 
-    .filters {
+    /* ==== Tabs (match Submit page style) ==== */
+    .tabs { margin-top: 0.5rem; }
+    .tablist {
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
+      justify-content: center;  /* center the tabs */
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 1.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
     }
-    .filters .filter-btn {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 6px;
-      background: var(--cyan);
-      color: var(--ink-dark);
-      font-weight: bold;
+    .tab {
+      appearance: none;
+      border: 1px solid var(--border-dark);
+      background: var(--card);
+      color: var(--text);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
       cursor: pointer;
+      transition: transform 120ms ease, background 150ms ease, border-color 150ms ease;
+      white-space: nowrap;
     }
-    .filters .filter-btn.active {
-      background: var(--magenta);
-      color: #fff;
+    .tab:hover { transform: translateY(-1px); }
+    .tab[aria-selected="true"] {
+      background: linear-gradient(90deg, var(--cyan), #1e90ff);
+      color: var(--ink-dark);
+      border-color: transparent;
     }
 
     .story-grid {
@@ -245,14 +256,18 @@
   <section class="content">
     <h1 class="gradient-heading">Staff Picks</h1>
 
-    <div class="filters" role="tablist" aria-label="Filter Staff Picks">
-      <button class="filter-btn" data-filter="books" role="tab" aria-selected="false">Books</button>
-      <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
-      <button class="filter-btn" data-filter="film" role="tab" aria-selected="false">Film / TV</button>
-      <button class="filter-btn" data-filter="other" role="tab" aria-selected="false">Other</button>
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tablist" role="tablist" aria-label="Filter Staff Picks">
+        <button class="tab" id="tab-books" role="tab" aria-selected="true" aria-controls="panel-grid" data-filter="books">Books</button>
+        <button class="tab" id="tab-games" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="games">Games</button>
+        <button class="tab" id="tab-film"  role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="film">Film / TV</button>
+        <button class="tab" id="tab-other" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="other">Other</button>
+      </div>
     </div>
 
-    <div class="story-grid" id="picks">
+    <!-- Single panel showing grid; filtering switches visible cards -->
+    <div id="panel-grid" class="story-grid" role="tabpanel" tabindex="0" aria-labelledby="tab-books">
       <!-- Games -->
       <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Citizen Sleeper">
         <img src="CS Keyart.png" alt="">
@@ -501,7 +516,7 @@
   </footer>
 
   <script>
-    // Mobile nav (match global behavior: toggle .active on #site-nav)
+    // Mobile nav (toggle .active on #site-nav)
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('site-nav');
     hamburger.addEventListener('click', () => {
@@ -517,21 +532,63 @@
       });
     });
 
-    // Filtering
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.story-card');
-    function filterCategory(category) {
-      buttons.forEach(btn => {
-        const isActive = btn.getAttribute('data-filter') === category;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-selected', String(isActive));
+    // Cards reference
+    const cards = Array.from(document.querySelectorAll('.story-card'));
+
+    // Tabs logic + filtering + hash support
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const panel = document.getElementById('panel-grid');
+
+      function setSelected(tabEl, pushHash = true) {
+        // Update aria-selected and panel label
+        tabs.forEach(t => t.setAttribute('aria-selected', t === tabEl ? 'true' : 'false'));
+        panel.setAttribute('aria-labelledby', tabEl.id);
+
+        // Filter cards
+        const category = tabEl.getAttribute('data-filter');
+        cards.forEach(card => {
+          const isActive = card.getAttribute('data-category') === category;
+          card.classList.toggle('active', isActive);
+        });
+
+        // Hash
+        if (pushHash) {
+          const hash = '#' + (tabEl.id.replace('tab-','')); // books, games, film, other
+          if (history.replaceState) {
+            history.replaceState(null, '', hash);
+          } else {
+            location.hash = hash;
+          }
+        }
+      }
+
+      // Click + keyboard
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => setSelected(t, true));
+        t.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const next = e.key === 'ArrowRight'
+              ? tabs[(i + 1) % tabs.length]
+              : tabs[(i - 1 + tabs.length) % tabs.length];
+            next.focus();
+          }
+        });
       });
-      cards.forEach(card => {
-        card.classList.toggle('active', card.getAttribute('data-category') === category);
+
+      // Initial from hash
+      const hash = (location.hash || '#books').toLowerCase().replace('#','');
+      const initialTab = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'books'));
+      setSelected(initialTab, false);
+
+      // Hash changes
+      window.addEventListener('hashchange', () => {
+        const h = (location.hash || '#books').toLowerCase().replace('#','');
+        const hTab = document.getElementById('tab-' + (['books','games','film','other'].includes(h) ? h : 'books'));
+        if (hTab) setSelected(hTab, false);
       });
-    }
-    document.addEventListener('DOMContentLoaded', () => { filterCategory('books'); });
-    buttons.forEach(button => button.addEventListener('click', () => filterCategory(button.getAttribute('data-filter'))));
+    })();
 
     // Modal logic
     const backdrop = document.getElementById('modal-backdrop');
