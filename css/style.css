@@ -60,6 +60,14 @@ h2 {
   font-weight: 600;
 }
 
+/* Compact gradient title (matches Fiction "Issue Library") */
+.gradient-heading {
+  /* keep gradient decorative; just normalize size/margins */
+  font-size: 2.2rem;       /* same as Fiction page */
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
 /* Optional utility for explicit page titles if you need it */
 .page-title { font-size: inherit; }
 
