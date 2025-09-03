@@ -82,6 +82,36 @@ h2 {
   text-align: center;
 }
 
+/* ===== Utilities (site-wide) ===== */
+/* Blue gradient text for inline links (e.g., "Visit our Submit page.") */
+a.gradient-blue-text,
+.gradient-blue-text {
+  background: linear-gradient(90deg, var(--cyan), #56ccf2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;      /* required for the clip to show */
+  font-weight: 700;
+  display: inline-block;   /* improves rendering across browsers */
+  text-decoration: none;   /* keep clean by default */
+}
+a.gradient-blue-text:hover,
+.gradient-blue-text:hover {
+  filter: brightness(1.05);
+}
+
+/* Optional: blue gradient heading helper used on Art page */
+.gradient-heading-blue {
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, var(--cyan), #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
 /* ===== Header ===== */
 .site-header {
   display: flex;
