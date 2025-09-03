@@ -105,6 +105,26 @@
 
     .card-overlay { display: none !important; }
 
+   /* Stack tabs on narrow screens */
+@media (max-width: 520px) {
+  .tablist {
+    flex-direction: column;      /* stack */
+    align-items: stretch;
+    justify-content: flex-start; /* override center */
+    gap: 0.6rem;
+    border-bottom: 0;            /* no underline when vertical */
+    padding-bottom: 0;
+    overflow-x: visible;
+  }
+  .tab {
+    width: 100%;
+    text-align: center;
+    border-radius: 12px;         /* softer when full-width */
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+  }
+}
+
     /* Modal */
     .modal-backdrop {
       position: fixed;
