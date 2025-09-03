@@ -40,6 +40,77 @@
       color: var(--text-muted);
       margin-bottom: 1.2rem;
     }
+
+    /* ==== Tabs ==== */
+    .tabs {
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .tablist {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 1.25rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+    .tablist:focus-within .tab[aria-selected="false"] {
+      /* subtle hint when tablist focused */
+      outline: none;
+    }
+    .tab {
+      appearance: none;
+      border: 1px solid var(--border-dark);
+      background: var(--card);
+      color: var(--text);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 120ms ease, background 150ms ease, border-color 150ms ease;
+      white-space: nowrap;
+    }
+    .tab:hover { transform: translateY(-1px); }
+    .tab[aria-selected="true"] {
+      background: linear-gradient(90deg, var(--cyan), #1e90ff);
+      color: var(--ink-dark);
+      border-color: transparent;
+    }
+    .tabpanel {
+      display: block;
+    }
+    .tabpanel[hidden] {
+      display: none !important;
+    }
+
+    /* Tables inside panels */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      max-width: 700px;
+    }
+    .info-table td {
+      padding: 0.5rem;
+      vertical-align: top;
+    }
+    .info-table td:first-child {
+      font-weight: bold;
+      width: 32%;
+      min-width: 160px;
+    }
+    .info-table tr:nth-child(2n) {
+      background: var(--bg-deep-2);
+    }
+
+    /* Small tweaks for narrow screens */
+    @media (max-width: 560px) {
+      .tab { font-size: 0.9rem; padding: 0.55rem 0.9rem; }
+      .gradient-heading { font-size: 1.8rem; }
+      .gradient-heading-blue { font-size: 1.25rem; }
+    }
   </style>
 </head>
 <body>
@@ -59,70 +130,71 @@
       <a href="fiction.html">Issues</a>
       <a href="art.html">Art</a>
       <a href="https://bowliopia.github.io/burnline/about.html">About</a>
-      <a href="submit.html">Submit</a>
+      <a href="submit.html" aria-current="page">Submit</a>
     </nav>
   </header>
 
   <section class="content">
     <h1 class="gradient-heading">Submit to Burnline</h1>
 
-    <!-- Fiction Guidelines Section -->
-    <div id="fiction" style="text-align: left;">
-      <h2 id="fiction" class="gradient-heading-blue" style="margin-top: 3rem;">Fiction Guidelines</h2>
-      <p>We’re excited about cyberpunk in all its forms—classic and modern, urban and off-world, sleek and gritty. In fiction, we're looking for what you'd expect; near-future worlds with corporate control, people altered by tech-implants, you get it. <strong>Above all however, we care about character.</strong> We want people who make us feel something while they're navigating whatever wild setting you’ve built.</p>
-      <p style="margin-top: -0.5rem;">We're less interested in anything outside of the cyberpunk subgenre for this magazine. If you're submitting, please make sure you'd classify your work as cyberpunk specifically.</p>
+    <!-- Tabs -->
+    <div class="tabs" id="guidelines-tabs">
+      <div class="tablist" role="tablist" aria-label="Submission guideline tabs">
+        <button class="tab" id="tab-fiction" role="tab" aria-selected="true" aria-controls="panel-fiction">Fiction Guidelines</button>
+        <button class="tab" id="tab-art" role="tab" aria-selected="false" aria-controls="panel-art">Art Guidelines</button>
+      </div>
 
-      <!-- Info Table -->
-      <table style="width: 100%; border-collapse: collapse; margin-top: 2rem; max-width: 700px;">
-        <tr>
-          <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">Word Limit</td>
-          <td style="padding: 0.5rem;">500 – 10,000 words</td>
-        </tr>
-        <tr style="background-color: var(--bg-deep-2);">
-          <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">Pay Rate</td>
-          <td style="padding: 0.5rem;">Because this is a free magazine without ads, we can't offer any payment at this time. It’s our goal to eventually pay a competitive per-word rate, but we’re not quite there yet. We get it if that's a non-starter for you.</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">How to Submit</td>
-          <td style="padding: 0.5rem;">Email your story as a .doc, .docx, or .pdf to <a href="mailto:contact@burnlinemag.com" style="color: var(--cyan);">contact@burnlinemag.com</a>. Please include the word <strong>"Submission"</strong> in the subject line.</td>
-        </tr>
-      </table>
+      <!-- Fiction Panel -->
+      <section id="panel-fiction" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-fiction">
+        <h2 class="gradient-heading-blue" style="margin-top: 0;">Fiction Guidelines</h2>
+        <p>We’re excited about cyberpunk in all its forms—classic and modern, urban and off-world, sleek and gritty. In fiction, we're looking for what you'd expect; near-future worlds with corporate control, people altered by tech-implants, you get it. <strong>Above all however, we care about character.</strong> We want people who make us feel something while they're navigating whatever wild setting you’ve built.</p>
+        <p style="margin-top: -0.5rem;">We're less interested in anything outside of the cyberpunk subgenre for this magazine. If you're submitting, please make sure you'd classify your work as cyberpunk specifically.</p>
 
-      <p style="margin-top: 1.5rem;"><strong>No AI-generated or AI-assisted work will be accepted.</strong> We only want human-created fiction. There's irony somewhere in here.</p>
-            <p>Please feel free to submit your work to any other publications while you're waiting to hear back from us—just let us know if it gets picked up. If we take a while to respond, we haven't forgotten your work, we're just moving through the backlog. Thanks for your patience.</p>
-      <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
-    </div>
-        <div style="text-align: left; margin-top: 3rem;">
-      <h3>Cover Letters</h3>
-      <p>Emails and cover letters are <em>much less important</em> to us than your fiction or artwork. If a part of your personal story contributes to what you've made, we’d love to hear about it—but otherwise, keep it simple. We're here for the work itself.</p>
-    </div>
+        <table class="info-table">
+          <tr>
+            <td>Word Limit</td>
+            <td>500 – 10,000 words</td>
+          </tr>
+          <tr>
+            <td>Pay Rate</td>
+            <td>Because this is a free magazine without ads, we can't offer any payment at this time. It’s our goal to eventually pay a competitive per-word rate, but we’re not quite there yet. We get it if that's a non-starter for you.</td>
+          </tr>
+          <tr>
+            <td>How to Submit</td>
+            <td>Email your story as a .doc, .docx, or .pdf to <a href="mailto:contact@burnlinemag.com" style="color: var(--cyan);">contact@burnlinemag.com</a>. Please include the word <strong>"Submission"</strong> in the subject line.</td>
+          </tr>
+        </table>
+
+        <p style="margin-top: 1.5rem;"><strong>No AI-generated or AI-assisted work will be accepted.</strong> We only want human-created fiction. There's irony somewhere in here.</p>
+        <p>Please feel free to submit your work to any other publications while you're waiting to hear back from us—just let us know if it gets picked up. If we take a while to respond, we haven't forgotten your work, we're just moving through the backlog. Thanks for your patience.</p>
+      </section>
+
+      <!-- Art Panel -->
+      <section id="panel-art" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-art" hidden>
+        <h2 class="gradient-heading-blue" style="margin-top: 0;">Art Guidelines</h2>
+        <p>We’re accepting cyberpunk-themed visual art for digital publication. Any medium is welcome—digital, hand-drawn, or mixed—except photography. If it feels cyberpunk, we want to see it.</p>
+
+        <table class="info-table">
+          <tr>
+            <td>Artwork Specs</td>
+            <td>Cover art should be portrait-oriented, sized at 8.5&quot; × 11&quot; (2550 × 3300 px) at 300 dpi. Please have a PNG or high-quality JPG available if selected. Inner-issue art can be any dimension.</td>
+          </tr>
+          <tr>
+            <td>Pay Rate</td>
+            <td>Because this is a free magazine without ads, we can't offer any payment at this time. It’s our goal to eventually pay a competitive rate, but we’re not quite there yet. We get it if that's a non-starter for you.</td>
+          </tr>
+          <tr>
+            <td>How to Submit</td>
+            <td>Email <a href="mailto:contact@burnlinemag.com" style="color: var(--cyan);">contact@burnlinemag.com</a> with a link to your artwork wherever it's hosted (online portfolio, Reddit post, etc.). Please include the word <strong>"Submission"</strong> in the subject line.</td>
+          </tr>
+        </table>
+
+        <p>If selected, your artwork will be added to the digital issue of the magazine and included on our Art page. You'll be fully credited on the magazine and site, including whatever name and profile/social handles you'd like to include.</p>
+        <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
+      </section>
     </div>
 
-    <!-- Art Guidelines Section -->
-    <div id="art" style="text-align: left;">
-      <h2 id="art" class="gradient-heading-blue" style="margin-top: 4rem;">Art Guidelines</h2>
-      <p>We’re accepting cyberpunk-themed visual art for digital publication. Any medium is welcome—digital, hand-drawn, or mixed—except photography. If it feels cyberpunk, we want to see it.</p>
-      
-      <!-- Info Table -->
-      <table style="width: 100%; border-collapse: collapse; margin-top: 2rem; max-width: 700px;">
-        <tr>
-          <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">Artword Specs</td>
-          <td style="padding: 0.5rem;">Cover art should be viewable in portrait orientation, sized at 8.5" × 11" (2550 × 3300 pixels) at 300 dpi. Please have a PNG or high-quality JPG available if selected. Inner-issue art can be any dimmension.</td>
-        </tr>
-        <tr style="background-color: var(--bg-deep-2);">
-          <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">Pay Rate</td>
-          <td style="padding: 0.5rem;">Because this is a free magazine without ads, we can't offer any payment at this time. It’s our goal to eventually pay a competitive per-word rate, but we’re not quite there yet. We get it if that's a non-starter for you.</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; font-weight: bold; vertical-align: top;">How to Submit</td>
-          <td style="padding: 0.5rem;">Email <a href="mailto:contact@burnlinemag.com" style="color: var(--cyan);">contact@burnlinemag.com</a> with a link to your artwork wherever it's hosted (online portfolio, Reddit post, whatever). Please include the word <strong>"Submission"</strong> in the subject line.</td>
-        </tr>
-      
-      </table>
-       <p> If selected, your artwork will be added to the digital issue of the magazine and included on our Art page. You'll be fully credited on the magazine and site, including whatever name and profile/social handles you'd like to include. </p></p>
-      <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
-    </div>
-
+    <!-- Shared note -->
     <div style="text-align: left; margin-top: 3rem;">
       <h3>Cover Letters</h3>
       <p>Emails and cover letters are <em>much less important</em> to us than your fiction or artwork. If a part of your personal story contributes to what you've made, we’d love to hear about it—but otherwise, keep it simple. We're here for the work itself.</p>
@@ -142,7 +214,7 @@
 
       <div class="footer-column">
         <h4>Get In Touch</h4>
-        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
+        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a><br><span style="font-size: 0.8rem;"></span></p>
       </div>
 
       <div class="footer-column">
@@ -163,6 +235,62 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
+
+    // === Tabs logic with hash support ===
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const panels = {
+        'tab-fiction': document.getElementById('panel-fiction'),
+        'tab-art': document.getElementById('panel-art')
+      };
+
+      function selectTab(tabId, pushHash = true) {
+        tabs.forEach(t => {
+          const selected = t.id === tabId;
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          panels[t.id].hidden = !selected;
+        });
+
+        if (pushHash) {
+          const hash = tabId === 'tab-art' ? '#art' : '#fiction';
+          if (history.replaceState) {
+            history.replaceState(null, '', hash);
+          } else {
+            location.hash = hash;
+          }
+        }
+      }
+
+      // Click handling
+      tabs.forEach(t => {
+        t.addEventListener('click', () => selectTab(t.id, true));
+        t.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const idx = tabs.indexOf(t);
+            const next = e.key === 'ArrowRight'
+              ? tabs[(idx + 1) % tabs.length]
+              : tabs[(idx - 1 + tabs.length) % tabs.length];
+            next.focus();
+          }
+        });
+      });
+
+      // Hash -> initial tab
+      const hash = (location.hash || '').toLowerCase();
+      if (hash === '#art') {
+        selectTab('tab-art', false);
+      } else {
+        selectTab('tab-fiction', false);
+      }
+
+      // If someone changes hash manually
+      window.addEventListener('hashchange', () => {
+        const h = (location.hash || '').toLowerCase();
+        if (h === '#art') selectTab('tab-art', false);
+        else selectTab('tab-fiction', false);
+      });
+    })();
   </script>
 </body>
 </html>
