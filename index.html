@@ -15,21 +15,39 @@
   <style>
     html { scroll-behavior: smooth; }
 
+    /* Layout caps to match Art page feel */
+    :root{
+      --page-max: 1100px;
+      --narrow-max: 800px;
+      --page-pad: clamp(16px, 4vw, 32px);
+    }
+    .wrap{
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
+    }
+    .wrap--narrow{
+      max-width: var(--narrow-max);
+    }
+
     h1 { font-size: 2.8rem; }
     h2 { font-size: 2.2rem; }
     h3 { font-size: 1.5rem; }
 
-    /* Hero */
+    /* Hero (full-bleed background, capped inner content) */
     .hero {
+      padding: 6rem 0; /* remove side padding; handled by .wrap */
+      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
+      color: var(--text);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .hero-inner{
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 3rem;
-      padding: 6rem 2rem;
-      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       flex-wrap: wrap;
-      color: var(--text);
     }
     .hero-text { max-width: 600px; }
     .hero-text h1 {
@@ -37,6 +55,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
     }
     .hero-text p {
       font-size: 1.1rem;
@@ -52,9 +71,9 @@
     }
     .hero a img:hover { opacity: 0.9; }
 
-    /* Latest issue section */
+    /* Latest issue section (capped via .wrap on the element) */
     #latest-issue {
-      padding: 4rem 2rem;
+      padding: 4rem 0;
       text-align: center;
       display: none;
     }
@@ -69,18 +88,20 @@
       text-decoration: underline;
     }
 
-    /* Grid band */
+    /* Grid band (full-bleed background; inner content capped by .wrap) */
     .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      padding: 6rem 2rem;
+      padding: 6rem 0; /* remove side padding; handled by .wrap */
       background-color: var(--bg-deep-1);
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
       background-repeat: repeat;
       background-attachment: fixed;
       border-top: 1px solid var(--border-dark);
       border-bottom: 1px solid var(--border-dark);
+    }
+    .grid-inner{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
     }
 
     .card {
@@ -140,13 +161,11 @@
       transition: background-color 0.3s;
     }
     .btn:hover { background: var(--cyan-hover); }
-
     .btn.secondary {
       background: transparent;
       color: var(--cyan);
       border: 1px solid rgba(13,246,227,0.45);
     }
-
     .button-row {
       display: flex;
       justify-content: center;
@@ -164,7 +183,6 @@
       color: var(--text);
     }
     .newsletter-input::placeholder { color: var(--footer-muted); }
-
     .newsletter-button {
       padding: 0.6rem 1.2rem;
       background-color: var(--cyan);
@@ -184,9 +202,7 @@
       <span>BURNLINE</span>
     </a>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Issues</a>
@@ -197,69 +213,78 @@
     </nav>
   </header>
 
+  <!-- HERO (full-bleed band, capped inner content) -->
   <section class="hero">
-    <a href="#latest-issue" onclick="openFlipbook(event)">
-      <img src="Burnline Issue 01.png" alt="Latest issue cover" />
-    </a>
+    <div class="hero-inner wrap">
+      <a href="#latest-issue" onclick="openFlipbook(event)">
+        <img src="Burnline Issue 01.png" alt="Latest issue cover" />
+      </a>
 
-    <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
-      <h1 class="gradient-heading" style="margin-bottom: 1rem;">The Latest Issue</h1>
+      <div class="hero-text" style="flex: 1; max-width: 700px; display: flex; flex-direction: column;">
+        <h1 class="gradient-heading" style="margin-bottom: 1rem;">The Latest Issue</h1>
 
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 0.5rem;">
-        <div style="flex: 1 1 300px;">
-          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
-          <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
-            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-            <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
-          </ul>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 0.5rem;">
+          <div style="flex: 1 1 300px;">
+            <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Fiction</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
+              <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+              <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+              <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+              <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+              <li style="margin-bottom: 0.75rem;"><strong>[Story Title]</strong> by [Author Name]</li>
+            </ul>
+          </div>
+
+          <div style="flex: 1 1 300px;">
+            <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
+              <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
+              <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
+              <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
+            </ul>
+          </div>
         </div>
 
-        <div style="flex: 1 1 300px;">
-          <h3 style="margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">Artwork</h3>
-          <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted);">
-            <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
-            <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
-            <li style="margin-bottom: 0.75rem;"><strong>[Artwork Name]</strong> by [Artist Name]</li>
-          </ul>
+        <div class="button-row" style="width: 100%; margin-top: 2.5rem;">
+          <button id="toggle-flipbook" class="btn">Read This Issue</button>
+          <a class="btn secondary" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
         </div>
-      </div>
-
-      <div class="button-row" style="width: 100%; margin-top: 2.5rem;">
-        <button id="toggle-flipbook" class="btn">Read This Issue</button>
-        <a class="btn secondary" href="Burnline-Issue-01.pdf" download="Burnline-Issue-01.pdf">Download PDF</a>
       </div>
     </div>
   </section>
 
-  <section id="latest-issue">
+  <!-- Latest issue (capped with .wrap) -->
+  <section id="latest-issue" class="wrap">
     <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
     <p style="margin-top: 1rem;">
       <a href="https://heyzine.com/flip-book/055f81b30b.html" target="_blank">Open in Fullscreen</a>
     </p>
   </section>
 
+  <!-- Feature cards (full-bleed band, capped inner content) -->
   <section class="grid" id="features">
-    <a href="fiction.html" class="card-link">
-      <div class="card">
-        <img src="Card IMG.png" alt="Featured Stories image">
-        <h3>Issue Library</h3>
+    <div class="wrap">
+      <div class="grid-inner">
+        <a href="fiction.html" class="card-link">
+          <div class="card">
+            <img src="Card IMG.png" alt="Featured Stories image">
+            <h3>Issue Library</h3>
+          </div>
+        </a>
+        <a href="stories.html" class="card-link">
+          <div class="card">
+            <img src="AL Cover.png" alt="Poll image">
+            <h3>Featured Stories</h3>
+          </div>
+        </a>
+        <a href="staffpicks.html" class="card-link">
+          <div class="card">
+            <img src="1000xResist.png" alt="Staff Picks image">
+            <h3>Staff Picks</h3>
+          </div>
+        </a>
       </div>
-    </a>
-    <a href="stories.html" class="card-link">
-      <div class="card">
-        <img src="AL Cover.png" alt="Poll image">
-        <h3>Featured Stories</h3>
-      </div>
-    </a>
-    <a href="staffpicks.html" class="card-link">
-      <div class="card">
-        <img src="1000xResist.png" alt="Staff Picks image">
-        <h3>Staff Picks</h3>
-      </div>
-    </a>
+    </div>
   </section>
 
   <footer>
