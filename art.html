@@ -74,13 +74,12 @@
       padding-left: 1rem;   /* spacing on mobile */
       padding-right: 1rem;  /* spacing on mobile */
     }
-.cover-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 220px); /* fixed column width */
-  justify-content: center; /* center items if fewer than full row */
-  gap: 2rem;
-  margin-top: 1.25rem;
-}
+    .cover-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 1.25rem;
+    }
     .cover-tile {
       cursor: pointer;
       transition: transform 0.25s ease;
@@ -96,13 +95,12 @@
 
     /* Artwork grid */
     .section-heading { text-align: left; margin-top: 2.5rem; } /* left align per request */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 280px); /* fixed tile width */
-  justify-content: center; /* center the grid if fewer than full row */
-  gap: 2rem;
-  padding: 2rem 0 1rem;
-}
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0 1rem;
+    }
     .art-tile {
       background: #1a1c30;
       border-radius: 10px;
@@ -213,6 +211,12 @@
       <div class="cover-grid">
         <div class="cover-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
           <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover">
+        </div>
+        <div class="cover-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
+          <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover">
+        </div>
+        <div class="cover-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
+          <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover">
         </div>
       </div>
     </div>
