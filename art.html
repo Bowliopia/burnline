@@ -4,23 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Art – Burnline</title>
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Global header/footer/vars/buttons/newsletter -->
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Page-specific styles only -->
   <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
+      color: #f0f0f0;
+    }
+
     html { scroll-behavior: smooth; }
+
+    h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0df6e3;
+      color: #0f0f1c;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .logo-title { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; }
+    .logo-title img { height: 60px; width: auto; }
+
+    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
+    .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+    .site-nav a:hover { color: #ff4ac2; }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; cursor: pointer; width: 30px; height: 25px; gap: 5px; }
+    .hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
+
+    @media (max-width: 768px){
+      .site-nav{
+        flex-direction: column; width: 100%; display: none; background: #0df6e3;
+        padding: 1rem 0; margin-top: 1rem;
+      }
+      .site-nav.active{ display: flex; }
+      .hamburger{ display: flex; }
+    }
+
+    /* Containers */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
     /* Hero/subheading (first) */
     .content { max-width: 800px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
-    .content p { line-height: 1.7; color: var(--text-muted, #ccc); margin-bottom: 1.2rem; }
+    .gradient-heading {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #f72585, #7209b7);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .gradient-heading-blue {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #0df6e3, #1e90ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .content p { line-height: 1.7; color: #ccc; margin-bottom: 1.2rem; }
 
     /* Cover Gallery */
-    .cover-gallery {
+    .cover-galley {
       padding: 2rem 0 1rem;
       max-width: 1100px;
       margin: 0 auto;
@@ -47,7 +94,7 @@
     }
 
     /* Artwork grid */
-    .section-heading { text-align: left; margin-top: 2.5rem; }
+    .section-heading { text-align: left; margin-top: 2.5rem; } /* left align per request */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -55,7 +102,7 @@
       padding: 2rem 0 1rem;
     }
     .art-tile {
-      background: var(--card, #1a1c30);
+      background: #1a1c30;
       border-radius: 10px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -71,8 +118,19 @@
 
     /* Load More button */
     .load-more-wrap { text-align: center; padding: 0 0 3rem; }
-
-    /* Utility */
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: #0df6e3;
+      color: #0f0f1c;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,246,227,0.25); }
+    .btn:active { transform: translateY(0); box-shadow: none; }
     .hidden { display: none !important; }
 
     /* Modal */
@@ -88,18 +146,34 @@
       background: #0b0c17; object-fit: contain;
     }
     .close {
-      position: absolute; top: 20px; right: 35px; color: var(--cyan, #0df6e3);
+      position: absolute; top: 20px; right: 35px; color: #0df6e3;
       font-size: 40px; font-weight: bold; cursor: pointer;
     }
-    .modal-caption { color: var(--text-muted, #ccc); margin-top: 1rem; text-align: center; max-width: 80%; }
-    .modal-caption h3 { margin: 0; color: var(--cyan, #0df6e3); }
+    .modal-caption { color: #ccc; margin-top: 1rem; text-align: center; max-width: 80%; }
+    .modal-caption h3 { margin: 0; color: #0df6e3; }
     .modal-caption p { margin: 0.5rem 0 0; }
 
     .nav-arrow {
       position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem;
-      color: var(--cyan, #0df6e3); background: none; border: none; cursor: pointer; z-index: 1000;
+      color: #0df6e3; background: none; border: none; cursor: pointer; z-index: 1000;
     }
     .nav-arrow.left { left: 2%; } .nav-arrow.right { right: 2%; }
+
+    /* Footer */
+    footer { background: #0f0f1c; padding: 4rem 2rem 2rem; color: #aaa; font-size: 0.9rem; }
+    footer a:hover { color: #0df6e3; }
+    .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 3rem; max-width: 1200px; margin: auto; }
+    .footer-column { flex: 1 1 250px; min-width: 200px; }
+    .footer-logo { height: 100px; margin-bottom: 1rem; }
+    .footer-bottom { text-align: center; margin-top: 3rem; border-top: 1px solid #222; padding-top: 1rem; color: #555; }
+    .newsletter-input { padding: 0.6rem 1rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.8rem; }
+    .newsletter-button { padding: 0.6rem 1.2rem; background-color: #0df6e3; color: #0f0f1c; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+
+    .gradient-blue-text {
+      background: linear-gradient(90deg, #0df6e3, #56ccf2);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; color: transparent; font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -115,7 +189,7 @@
     <nav class="site-nav" id="site-nav">
       <a href="fiction.html">Issues</a>
       <a href="stories.html">Stories</a>
-      <a href="art.html" aria-current="page">Art</a>
+      <a href="art.html">Art</a>
       <a href="about.html">About</a>
       <a href="submit.html">Submit</a>
     </nav>
@@ -131,18 +205,18 @@
   </section>
 
   <!-- Cover Gallery -->
-  <section class="cover-gallery">
+  <section class="cover-galley">
     <div class="container">
       <h2 class="gradient-heading-blue" style="text-align:left;">Cover Gallery</h2>
       <div class="cover-grid">
         <div class="cover-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
-          <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover" loading="lazy">
+          <img src="Burnline Issue 01.png" alt="Burnline Issue 01 cover">
         </div>
         <div class="cover-tile" data-title="Burnline — Issue 02" data-artist="Burnline Editorial">
-          <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover" loading="lazy">
+          <img src="Burnline Issue 02.png" alt="Burnline Issue 02 cover">
         </div>
         <div class="cover-tile" data-title="Burnline — Issue 03" data-artist="Burnline Editorial">
-          <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover" loading="lazy">
+          <img src="Burnline Issue 03.png" alt="Burnline Issue 03 cover">
         </div>
       </div>
     </div>
@@ -156,34 +230,34 @@
     <div class="gallery-grid" id="issueArtGrid">
       <!-- Ensure data attributes for captions -->
       <div class="art-tile" data-title="CBA6" data-artist="Artist Name">
-        <img src="CBA6.jpg" alt="CBA6 artwork" loading="lazy">
+        <img src="CBA6.jpg" alt="Art 1">
       </div>
       <div class="art-tile" data-title="CBA5" data-artist="Artist Name">
-        <img src="CBA5.jpg" alt="CBA5 artwork" loading="lazy">
+        <img src="CBA5.jpg" alt="Art 2">
       </div>
       <div class="art-tile" data-title="Placeholder 1" data-artist="Artist Name">
-        <img src="Placeholder Image 1.png" alt="Placeholder artwork 1" loading="lazy">
+        <img src="Placeholder Image 1.png" alt="Art 3">
       </div>
       <div class="art-tile" data-title="Placeholder 2" data-artist="Artist Name">
-        <img src="Placeholder Image 2.png" alt="Placeholder artwork 2" loading="lazy">
+        <img src="Placeholder Image 2.png" alt="Art 4">
       </div>
       <div class="art-tile" data-title="Placeholder 3" data-artist="Artist Name">
-        <img src="Placeholder Image 3.png" alt="Placeholder artwork 3" loading="lazy">
+        <img src="Placeholder Image 3.png" alt="Art 5">
       </div>
       <div class="art-tile" data-title="Placeholder 4" data-artist="Artist Name">
-        <img src="Placeholder Image 4.png" alt="Placeholder artwork 4" loading="lazy">
+        <img src="Placeholder Image 4.png" alt="Art 6">
       </div>
       <div class="art-tile" data-title="Placeholder 5" data-artist="Artist Name">
-        <img src="Placeholder Image 5.png" alt="Placeholder artwork 5" loading="lazy">
+        <img src="Placeholder Image 5.png" alt="Art 7">
       </div>
       <div class="art-tile" data-title="Placeholder 6" data-artist="Artist Name">
-        <img src="Placeholder Image 6.png" alt="Placeholder artwork 6" loading="lazy">
+        <img src="Placeholder Image 6.png" alt="Art 8">
       </div>
       <div class="art-tile" data-title="Placeholder 7" data-artist="Artist Name">
-        <img src="Placeholder Image 7.png" alt="Placeholder artwork 7" loading="lazy">
+        <img src="Placeholder Image 7.png" alt="Art 9">
       </div>
       <div class="art-tile" data-title="Placeholder 8" data-artist="Artist Name">
-        <img src="Placeholder Image 8.png" alt="Placeholder artwork 8" loading="lazy">
+        <img src="Placeholder Image 8.png" alt="Art 10">
       </div>
     </div>
     <div class="load-more-wrap">
@@ -203,7 +277,7 @@
     </div>
   </div>
 
-  <footer class="site-footer">
+  <footer>
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
