@@ -196,22 +196,25 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <a href="index.html" class="logo-title">
-      <img src="Flame logo-1.png.png" alt="Burnline logo">
-      <span>BURNLINE</span>
-    </a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div><div></div><div></div>
-    </div>
-    <nav class="site-nav" id="site-nav">
-      <a href="fiction.html">Issues</a>
-      <a href="stories.html">Stories</a>
-      <a href="art.html">Art</a>
-      <a href="about.html">About</a>
-      <a href="submit.html">Submit</a>
-    </nav>
-  </header>
+<header class="site-header">
+  <a href="index.html" class="logo-title">
+    <img src="Flame logo-1.png.png" alt="Burnline logo">
+    <span>BURNLINE</span>
+  </a>
+
+  <!-- Add id and remove inline onclick -->
+  <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <div></div><div></div><div></div>
+  </div>
+
+  <nav class="site-nav" id="site-nav">
+    <a href="fiction.html">Issues</a>
+    <a href="stories.html">Stories</a>
+    <a href="art.html">Art</a>
+    <a href="about.html">About</a>
+    <a href="submit.html">Submit</a>
+  </nav>
+</header>
 
   <!-- HERO (full-bleed band, capped inner content) -->
   <section class="hero">
@@ -256,9 +259,9 @@
   <!-- Latest issue (capped with .wrap) -->
   <section id="latest-issue" class="wrap">
     <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/6c786ba517.html"></iframe>
-    <p style="margin-top: 1rem;">
-      <a href="https://heyzine.com/flip-book/055f81b30b.html" target="_blank">Open in Fullscreen</a>
-    </p>
+<p style="margin-top: 1rem;">
+  <a href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank">Open in Fullscreen</a>
+</p>
   </section>
 
   <!-- Feature cards (full-bleed band, capped inner content) -->
@@ -314,44 +317,70 @@
   </footer>
 
 <script>
-  // Mobile nav
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('site-nav');
-  hamburger.addEventListener('click', () => {
-    const isActive = nav.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-  });
-  nav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      if (nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
+  // --- Config: keep your Heyzine URL in one place ---
+  const FLIPBOOK_URL = "https://heyzine.com/flip-book/6c786ba517.html"; // update if needed
 
-  // Load More
-  (function(){
-    const BATCH_SIZE = 3; // reveal full rows (3-up)
+  // --- Mobile nav (guarded so it won't throw if elements are missing) ---
+  (function () {
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('site-nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        const isActive = nav.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+  })();
+
+  // --- Flipbook reveal + scroll ---
+  function showFlipbook(e) {
+    if (e) e.preventDefault();
+    const section = document.getElementById('latest-issue');
+    if (!section) return;
+    const iframe = section.querySelector('.fp-iframe');
+    if (iframe && iframe.src !== FLIPBOOK_URL) {
+      iframe.src = FLIPBOOK_URL;
+    }
+    section.style.display = 'block';
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Wire up the hero cover image and the "Read This Issue" button
+  (function () {
+    const heroLink = document.querySelector('.hero a[href="#latest-issue"]');
+    if (heroLink) heroLink.addEventListener('click', showFlipbook);
+
+    const btn = document.getElementById('toggle-flipbook');
+    if (btn) btn.addEventListener('click', showFlipbook);
+  })();
+
+  // --- Remove/guard any "Load More" logic (it doesn't exist on this page) ---
+  (function () {
     const btn = document.getElementById('load-more');
-    const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
+    if (!btn) return; // do nothing on pages without this button
 
+    const BATCH_SIZE = 3;
+    const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
     function revealBatch() {
       const batch = hiddenCards().slice(0, BATCH_SIZE);
       batch.forEach(el => el.classList.remove('is-hidden'));
-
-      // Hide the button immediately after it's clicked
       btn.style.display = 'none';
     }
-
     btn.addEventListener('click', revealBatch);
-
-    // If nothing is hidden on load (edge case), hide the button
     if (hiddenCards().length === 0) btn.style.display = 'none';
   })();
 </script>
 </body>
 </html>
+
 
 
 
