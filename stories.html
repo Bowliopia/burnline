@@ -29,59 +29,58 @@
     }
     .wrap--narrow{ max-width: var(--narrow-max); }
 
-/* Intro (full-bleed bg, capped inner) */
-.page-intro {
-  padding: 6rem 0 4rem;
-  background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
-  border-bottom: 1px solid var(--border-dark);
-}
-.intro-inner {
-  margin: 0 auto;
-  max-width: var(--narrow-max);
-  padding-inline: var(--page-pad);
-}
-.gradient-heading {
-  font-size: 2rem;
-  background: linear-gradient(90deg, var(--magenta), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0 0 1rem 0;
-  font-family: 'Orbitron', sans-serif;
-  text-align: center; /* keep just the heading centered */
-}
-.page-intro p {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  margin: 0 0 1.2rem 0;
-  line-height: 1.7;
-  text-align: left; /* ← left-align body text */
-}
-.intro-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-  justify-content: flex-start; /* ← left-align CTA row */
-}
+    /* Intro (full-bleed bg, capped inner) */
+    .page-intro {
+      padding: 6rem 0 4rem;
+      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .intro-inner {
+      margin: 0 auto;
+      max-width: var(--narrow-max);
+      padding-inline: var(--page-pad);
+    }
+    .gradient-heading {
+      font-size: 2rem;
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0 0 1rem 0;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center; /* keep just the heading centered */
+    }
+    .page-intro p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin: 0 0 1.2rem 0;
+      line-height: 1.7;
+      text-align: left; /* left-align body text */
+    }
+    .intro-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+      justify-content: flex-start; /* left-align CTA row */
+    }
 
-/* Grid band (full-bleed bg; inner capped) */
-.grid {
-  padding: 6rem 0;                /* side padding handled by .wrap */
-  background-color: var(--bg-deep-1);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
-  background-repeat: repeat;
-  background-attachment: fixed;
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
-}
-.grid-inner{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* was 4 → now 3 */
-  gap: 2.5rem;
-}
-@media (max-width: 1200px) { .grid-inner { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 700px)  { .grid-inner { grid-template-columns: 1fr; } }
-
+    /* Grid band (full-bleed bg; inner capped) */
+    .grid {
+      padding: 6rem 0;                /* side padding handled by .wrap */
+      background-color: var(--bg-deep-1);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
+      background-repeat: repeat;
+      background-attachment: fixed;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .grid-inner{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 per row on large screens */
+      gap: 2.5rem;
+    }
+    @media (max-width: 1200px) { .grid-inner { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px)  { .grid-inner { grid-template-columns: 1fr; } }
 
     .card {
       background: var(--card);
@@ -113,7 +112,7 @@
 
     /* Load more sits inside the capped grid */
     .load-more {
-      grid-column: 1 / -1;
+      grid-column: 1 / -1; /* full-width row inside the grid */
       text-align: center;
       padding: 1rem 0 0.5rem;
     }
@@ -159,6 +158,7 @@
     <div class="wrap">
       <div class="grid-inner">
 
+        <!-- First row: 3 visible cards -->
         <a href="#" class="card-link story-card">
           <div class="card">
             <img src="AL Cover.png" alt="Story artwork" loading="lazy">
@@ -186,7 +186,13 @@
           </div>
         </a>
 
-        <a href="#" class="card-link story-card">
+        <!-- Load More appears directly after the 3rd card (first row) -->
+        <div class="load-more">
+          <button id="load-more" class="btn">Load More Stories</button>
+        </div>
+
+        <!-- Everything from the 4th card onward starts hidden -->
+        <a href="#" class="card-link story-card is-hidden">
           <div class="card">
             <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
             <h3>[Story Title]</h3>
@@ -195,7 +201,6 @@
           </div>
         </a>
 
-        <!-- Hidden initially -->
         <a href="#" class="card-link story-card is-hidden">
           <div class="card">
             <img src="AL Cover.png" alt="Story artwork" loading="lazy">
@@ -231,11 +236,6 @@
             <div class="story-meta">by [Author's Name] • 12 min read</div>
           </div>
         </a>
-
-        <!-- Load More -->
-        <div class="load-more">
-          <button id="load-more" class="btn">Load More Stories</button>
-        </div>
 
       </div>
     </div>
@@ -287,15 +287,19 @@
 
     // Load More
     (function(){
-      const BATCH_SIZE = 4;
+      const BATCH_SIZE = 3; // reveal full rows (3-up)
       const btn = document.getElementById('load-more');
       const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
+
       function revealBatch() {
         const batch = hiddenCards().slice(0, BATCH_SIZE);
         batch.forEach(el => el.classList.remove('is-hidden'));
         if (hiddenCards().length === 0) btn.style.display = 'none';
       }
+
       btn.addEventListener('click', revealBatch);
+
+      // If nothing is hidden (edge case), hide the button
       if (hiddenCards().length === 0) btn.style.display = 'none';
     })();
   </script>
