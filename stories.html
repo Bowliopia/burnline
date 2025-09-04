@@ -16,16 +16,30 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* Intro */
+    /* Layout caps to match Art/Home spacing */
+    :root{
+      --page-max: 1100px;
+      --narrow-max: 800px;
+      --page-pad: clamp(16px, 4vw, 32px);
+    }
+    .wrap{
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
+    }
+    .wrap--narrow{ max-width: var(--narrow-max); }
+
+    /* Intro (full-bleed bg, capped inner) */
     .page-intro {
-      padding: 6rem 0 4rem;
+      padding: 6rem 0 4rem;           /* side padding handled by .wrap */
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       border-bottom: 1px solid var(--border-dark);
     }
     .intro-inner {
-      max-width: 800px;
       margin: 0 auto;
-      padding: 0 2rem;
+      /* switch to the same cap/padding system */
+      max-width: var(--narrow-max);
+      padding-inline: var(--page-pad);
     }
     .gradient-heading {
       font-size: 2rem;
@@ -34,13 +48,14 @@
       -webkit-text-fill-color: transparent;
       margin: 0 0 1rem 0;
       font-family: 'Orbitron', sans-serif;
-       text-align: center;
+      text-align: center;
     }
     .page-intro p {
       font-size: 1.1rem;
       color: var(--text-muted);
       margin: 0 0 1.2rem 0;
       line-height: 1.7;
+      text-align: center;
     }
     .intro-actions {
       display: flex;
@@ -50,12 +65,9 @@
       justify-content: center;
     }
 
-    /* Grid (max 4 per row) */
+    /* Grid band (full-bleed bg; inner capped) */
     .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2.5rem;
-      padding: 6rem 2rem;
+      padding: 6rem 0;                /* side padding handled by .wrap */
       background-color: var(--bg-deep-1);
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
       background-repeat: repeat;
@@ -63,9 +75,14 @@
       border-top: 1px solid var(--border-dark);
       border-bottom: 1px solid var(--border-dark);
     }
-    @media (max-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 900px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px)  { .grid { grid-template-columns: 1fr; } }
+    .grid-inner{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+    }
+    @media (max-width: 1200px) { .grid-inner { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 900px)  { .grid-inner { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .grid-inner { grid-template-columns: 1fr; } }
 
     .card {
       background: var(--card);
@@ -95,7 +112,7 @@
       margin-top: 0.25rem;
     }
 
-    /* Load more inside grid */
+    /* Load more sits inside the capped grid */
     .load-more {
       grid-column: 1 / -1;
       text-align: center;
@@ -126,104 +143,110 @@
     </nav>
   </header>
 
-  <!-- Intro -->
+  <!-- Intro (full-bleed band, capped inner) -->
   <section class="page-intro">
     <div class="intro-inner">
       <h1 class="gradient-heading">Featured Stories</h1>
       <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline. This page features standout stories in one place so that you can read them in-browser instead of via digital flipbook, if you'd prefer.</p>
-          <p>
-      Interested in having your work featured in the next issue? <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
-    </p>
+      <p>
+        Interested in having your work featured in the next issue?
+        <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
+      </p>
       <div class="intro-actions">
         <a class="btn secondary" href="fiction.html">Browse All Issues</a>
       </div>
     </div>
   </section>
 
-  <!-- Story Grid -->
+  <!-- Story Grid (full-bleed bg, capped inner) -->
   <section class="grid" id="stories">
+    <div class="wrap">
+      <div class="grid-inner">
 
-    <a href="#" class="card-link story-card">
-      <div class="card">
-        <img src="AL Cover.png" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a augue nec lorem viverra varius.</p>
-        <div class="story-meta">by [Author's Name] • 9 min read</div>
+        <a href="#" class="card-link story-card">
+          <div class="card">
+            <img src="AL Cover.png" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a augue nec lorem viverra varius.</p>
+            <div class="story-meta">by [Author's Name] • 9 min read</div>
+          </div>
+        </a>
+
+        <a href="#" class="card-link story-card">
+          <div class="card">
+            <img src="NM Art.png" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor velit ac sapien blandit.</p>
+            <div class="story-meta">by [Author's Name] • 7 min read</div>
+          </div>
+        </a>
+
+        <a href="#" class="card-link story-card">
+          <div class="card">
+            <img src="CS2 Keyart.jpg" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales leo nec erat elementum.</p>
+            <div class="story-meta">by [Author's Name] • 11 min read</div>
+          </div>
+        </a>
+
+        <a href="#" class="card-link story-card">
+          <div class="card">
+            <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis tortor non justo ultricies.</p>
+            <div class="story-meta">by [Author's Name] • 8 min read</div>
+          </div>
+        </a>
+
+        <!-- Hidden initially -->
+        <a href="#" class="card-link story-card is-hidden">
+          <div class="card">
+            <img src="AL Cover.png" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula sem in lorem suscipit.</p>
+            <div class="story-meta">by [Author's Name] • 10 min read</div>
+          </div>
+        </a>
+
+        <a href="#" class="card-link story-card is-hidden">
+          <div class="card">
+            <img src="NM Art.png" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis risus nec magna pretium.</p>
+            <div class="story-meta">by [Author's Name] • 6 min read</div>
+          </div>
+        </a>
+
+        <a href="#" class="card-link story-card is-hidden">
+          <div class="card">
+            <img src="CS2 Keyart.jpg" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec sapien quis justo congue.</p>
+            <div class="story-meta">by [Author's Name] • 9 min read</div>
+          </div>
+        </a>
+
+        <a href="#" class="card-link story-card is-hidden">
+          <div class="card">
+            <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
+            <h3>[Story Title]</h3>
+            <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a mi sit amet mi dapibus.</p>
+            <div class="story-meta">by [Author's Name] • 12 min read</div>
+          </div>
+        </a>
+
+        <!-- Load More -->
+        <div class="load-more">
+          <button id="load-more" class="btn">Load More Stories</button>
+        </div>
+
       </div>
-    </a>
-
-    <a href="#" class="card-link story-card">
-      <div class="card">
-        <img src="NM Art.png" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor velit ac sapien blandit.</p>
-        <div class="story-meta">by [Author's Name] • 7 min read</div>
-      </div>
-    </a>
-
-    <a href="#" class="card-link story-card">
-      <div class="card">
-        <img src="CS2 Keyart.jpg" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales leo nec erat elementum.</p>
-        <div class="story-meta">by [Author's Name] • 11 min read</div>
-      </div>
-    </a>
-
-    <a href="#" class="card-link story-card">
-      <div class="card">
-        <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis tortor non justo ultricies.</p>
-        <div class="story-meta">by [Author's Name] • 8 min read</div>
-      </div>
-    </a>
-
-    <!-- Hidden initially -->
-    <a href="#" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="AL Cover.png" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula sem in lorem suscipit.</p>
-        <div class="story-meta">by [Author's Name] • 10 min read</div>
-      </div>
-    </a>
-
-    <a href="#" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="NM Art.png" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis risus nec magna pretium.</p>
-        <div class="story-meta">by [Author's Name] • 6 min read</div>
-      </div>
-    </a>
-
-    <a href="#" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="CS2 Keyart.jpg" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec sapien quis justo congue.</p>
-        <div class="story-meta">by [Author's Name] • 9 min read</div>
-      </div>
-    </a>
-
-    <a href="#" class="card-link story-card is-hidden">
-      <div class="card">
-        <img src="Burnline Issue 01.png" alt="Story artwork" loading="lazy">
-        <h3>[Story Title]</h3>
-        <p class="story-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a mi sit amet mi dapibus.</p>
-        <div class="story-meta">by [Author's Name] • 12 min read</div>
-      </div>
-    </a>
-
-    <!-- Load More -->
-    <div class="load-more">
-      <button id="load-more" class="btn">Load More Stories</button>
     </div>
   </section>
 
   <!-- Footer -->
-    <footer>
+  <footer>
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
