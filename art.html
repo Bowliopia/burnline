@@ -74,12 +74,13 @@
       padding-left: 1rem;   /* spacing on mobile */
       padding-right: 1rem;  /* spacing on mobile */
     }
-    .cover-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-top: 1.25rem;
-    }
+.cover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px); /* fixed column width */
+  justify-content: center; /* center items if fewer than full row */
+  gap: 2rem;
+  margin-top: 1.25rem;
+}
     .cover-tile {
       cursor: pointer;
       transition: transform 0.25s ease;
