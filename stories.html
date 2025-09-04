@@ -18,7 +18,7 @@
 
     /* Layout caps to match Art/Home spacing */
     :root{
-      --page-max: 1200px;  /* was 1100px → a bit wider */
+      --page-max: 1100px;
       --narrow-max: 800px;
       --page-pad: clamp(16px, 4vw, 32px);
     }
@@ -29,52 +29,59 @@
     }
     .wrap--narrow{ max-width: var(--narrow-max); }
 
-    /* Intro (full-bleed bg, capped inner) */
-    .page-intro {
-      padding: 6rem 0 4rem;
-      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
-      border-bottom: 1px solid var(--border-dark);
-    }
-    .intro-inner {
-      margin: 0 auto;
-      max-width: var(--narrow-max);
-      padding-inline: var(--page-pad);
-    }
-    .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, var(--magenta), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 0 0 1rem 0;
-      font-family: 'Orbitron', sans-serif;
-      text-align: center; /* keep heading centered */
-    }
-    .page-intro p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin: 0 0 1.2rem 0;
-      line-height: 1.7;
-      text-align: left;
-    }
+/* Intro (full-bleed bg, capped inner) */
+.page-intro {
+  padding: 6rem 0 4rem;
+  background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
+  border-bottom: 1px solid var(--border-dark);
+}
+.intro-inner {
+  margin: 0 auto;
+  max-width: var(--narrow-max);
+  padding-inline: var(--page-pad);
+}
+.gradient-heading {
+  font-size: 2rem;
+  background: linear-gradient(90deg, var(--magenta), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 1rem 0;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center; /* keep just the heading centered */
+}
+.page-intro p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 0 0 1.2rem 0;
+  line-height: 1.7;
+  text-align: left; /* ← left-align body text */
+}
+.intro-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  justify-content: flex-start; /* ← left-align CTA row */
+}
 
-    /* Grid band (full-bleed bg; inner capped) */
-    .grid {
-      padding: 6rem 0;
-      background-color: var(--bg-deep-1);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
-      background-repeat: repeat;
-      background-attachment: fixed;
-      border-top: 1px solid var(--border-dark);
-      border-bottom: 1px solid var(--border-dark);
-    }
-    .grid-inner{
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* back to 4 per row */
-      gap: 2.5rem;
-    }
-    @media (max-width: 1200px) { .grid-inner { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 900px)  { .grid-inner { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px)  { .grid-inner { grid-template-columns: 1fr; } }
+/* Grid band (full-bleed bg; inner capped) */
+.grid {
+  padding: 6rem 0;                /* side padding handled by .wrap */
+  background-color: var(--bg-deep-1);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+.grid-inner{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* was 4 → now 3 */
+  gap: 2.5rem;
+}
+@media (max-width: 1200px) { .grid-inner { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px)  { .grid-inner { grid-template-columns: 1fr; } }
+
 
     .card {
       background: var(--card);
@@ -135,7 +142,7 @@
     </nav>
   </header>
 
-  <!-- Intro -->
+  <!-- Intro (full-bleed band, capped inner) -->
   <section class="page-intro">
     <div class="intro-inner">
       <h1 class="gradient-heading">Featured Stories</h1>
@@ -147,12 +154,11 @@
     </div>
   </section>
 
-  <!-- Story Grid -->
+  <!-- Story Grid (full-bleed bg, capped inner) -->
   <section class="grid" id="stories">
     <div class="wrap">
       <div class="grid-inner">
 
-        <!-- Cards (same as before) -->
         <a href="#" class="card-link story-card">
           <div class="card">
             <img src="AL Cover.png" alt="Story artwork" loading="lazy">
