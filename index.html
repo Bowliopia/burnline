@@ -313,29 +313,43 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
-    }
-
-    function openFlipbook(event) {
-      event.preventDefault();
-      const section = document.getElementById('latest-issue');
-      const button = document.getElementById('toggle-flipbook');
-      const isHidden = section.style.display === 'none' || section.style.display === '';
-
-      if (isHidden) {
-        section.style.display = 'block';
-        if (button) button.textContent = 'Hide Issue';
-        section.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        section.style.display = 'none';
-        if (button) button.textContent = 'Read This Issue';
+<script>
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('site-nav');
+  hamburger.addEventListener('click', () => {
+    const isActive = nav.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
       }
+    });
+  });
+
+  // Load More
+  (function(){
+    const BATCH_SIZE = 3; // reveal full rows (3-up)
+    const btn = document.getElementById('load-more');
+    const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
+
+    function revealBatch() {
+      const batch = hiddenCards().slice(0, BATCH_SIZE);
+      batch.forEach(el => el.classList.remove('is-hidden'));
+
+      // Hide the button immediately after it's clicked
+      btn.style.display = 'none';
     }
 
-    document.getElementById('toggle-flipbook').addEventListener('click', openFlipbook);
-  </script>
+    btn.addEventListener('click', revealBatch);
+
+    // If nothing is hidden on load (edge case), hide the button
+    if (hiddenCards().length === 0) btn.style.display = 'none';
+  })();
+</script>
 </body>
 </html>
+
