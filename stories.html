@@ -29,41 +29,40 @@
     }
     .wrap--narrow{ max-width: var(--narrow-max); }
 
-    /* Intro (full-bleed bg, capped inner) */
-    .page-intro {
-      padding: 6rem 0 4rem;           /* side padding handled by .wrap */
-      background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
-      border-bottom: 1px solid var(--border-dark);
-    }
-    .intro-inner {
-      margin: 0 auto;
-      /* switch to the same cap/padding system */
-      max-width: var(--narrow-max);
-      padding-inline: var(--page-pad);
-    }
-    .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, var(--magenta), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 0 0 1rem 0;
-      font-family: 'Orbitron', sans-serif;
-      text-align: center;
-    }
-    .page-intro p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin: 0 0 1.2rem 0;
-      line-height: 1.7;
-      text-align: center;
-    }
-    .intro-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-      justify-content: center;
-    }
+/* Intro (full-bleed bg, capped inner) */
+.page-intro {
+  padding: 6rem 0 4rem;
+  background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
+  border-bottom: 1px solid var(--border-dark);
+}
+.intro-inner {
+  margin: 0 auto;
+  max-width: var(--narrow-max);
+  padding-inline: var(--page-pad);
+}
+.gradient-heading {
+  font-size: 2rem;
+  background: linear-gradient(90deg, var(--magenta), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 1rem 0;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center; /* keep just the heading centered */
+}
+.page-intro p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 0 0 1.2rem 0;
+  line-height: 1.7;
+  text-align: left; /* ← left-align body text */
+}
+.intro-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  justify-content: flex-start; /* ← left-align CTA row */
+}
 
 /* Grid band (full-bleed bg; inner capped) */
 .grid {
