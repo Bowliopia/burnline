@@ -80,6 +80,19 @@
       gap: 2rem;
       margin-top: 1.25rem;
     }
+    /* Preserve original 3-up size at desktop and center a single cover */
+@media (min-width: 900px) {
+  .cover-grid {
+    /* force the same three columns you had when 3 items were present */
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center; /* keeps each tile centered in its column */
+  }
+
+  /* If there's exactly one cover-tile, place it in the middle column */
+  .cover-grid:has(> .cover-tile:only-child) > .cover-tile {
+    grid-column: 2;
+  }
+}
     .cover-tile {
       cursor: pointer;
       transition: transform 0.25s ease;
