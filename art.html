@@ -92,16 +92,6 @@
     grid-column: 1;
   }
 
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: start;   /* left-align tiles in incomplete rows */
-  }
-  /* Optional: if a single art tile remains, keep it in the LEFT column */
-  .gallery-grid:has(> .art-tile:only-child) > .art-tile {
-    grid-column: 1;
-  }
-}
-
 }
     .cover-tile {
       cursor: pointer;
