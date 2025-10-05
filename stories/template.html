@@ -38,10 +38,16 @@
 
     .gradient-heading{font-family:'Orbitron',sans-serif;font-size:clamp(var(--h1-min),6vw,var(--h1-max));background:linear-gradient(90deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.1;margin:0 0 .5rem 0}
     .nav-breadcrumb{font-size:.95rem;color:var(--text-muted);margin-bottom:1rem}
-    .meta-row{display:grid;grid-template-columns:1fr;gap:.5rem;color:var(--text-muted);font-size:.95rem}
+    .meta-row{display:grid;grid-template-columns:1fr;gap:.25rem;color:var(--text-muted);font-size:.95rem}
     .meta-row span+span::before{content:" • ";margin:0 .25rem;color:var(--footer-subtle)}
     .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
     .meta-label{color:var(--text-muted-2)}
+    /* NEW: force single-column meta on desktop so the date line sits below author */
+    @media (min-width:960px){
+      .meta-row{grid-template-columns:1fr}
+    }
+    /* NEW: styling for the line under author */
+    .meta-line{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;color:var(--text-muted);font-size:.95rem;margin-top:.15rem}
 
     /* Gradient link helpers */
     .gradient-pink-text{
@@ -85,7 +91,6 @@
     .prev-next{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:3rem}
     .prev-next a{text-decoration:none}
     @media (min-width:960px){
-      .meta-row{grid-template-columns:1fr 1fr}
       .story-inner{grid-template-columns:1fr 320px}
       .prev-next{grid-template-columns:1fr 1fr}
     }
@@ -160,11 +165,11 @@
         <div class="meta-row">
           <div class="meta-flex">
             <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
-            <!-- Art and Editor removed as requested -->
           </div>
-          <div class="meta-flex">
+          <!-- Moved below author -->
+          <div class="meta-line">
             <span><time datetime="2025-10-01">October 1, 2025</time></span>
-            <span id="readTime">~ X min read</span>
+            <span id="readTime">~ 1 min read</span>
             <span id="wordCount" aria-label="Approximate word count">~ 0 words</span>
           </div>
         </div>
