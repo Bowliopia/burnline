@@ -11,7 +11,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="[Story Title] – Burnline" />
   <meta property="og:description" content="Original cyberpunk short fiction on Burnline." />
-  <meta property="og:image" content="../img/placeholder-story-illustration.jpg" />
+  <meta property="og:image" content="../AL Cover.png" />
   <meta property="og:url" content="https://YOUR_USERNAME.github.io/burnline/stories/story-slug.html" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -26,13 +26,14 @@
     .read-progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--magenta),var(--purple),var(--cyan));z-index:9999;transition:width .1s linear}
 
     .page-hero{padding:5rem 1rem 2rem;background:linear-gradient(135deg,var(--bg-deep-1),var(--bg-hero-2));border-bottom:1px solid var(--border-dark)}
-    .hero-inner{max-width:1100px;margin:0 auto} /* widened a bit to fit two columns nicely */
-    .hero-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:start}
-    /* desktop: art left, text right */
+    .hero-inner{max-width:1100px;margin:0 auto}
+    /* Mobile first: stack text then image */
+    .hero-row{display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start}
+    /* Desktop: row with art left and text right */
     @media (min-width:960px){
-      .hero-grid{grid-template-columns:420px 1fr}
-      .hero-text{grid-column:2}
-      .page-hero .story-figure{grid-column:1}
+      .hero-row{flex-direction:row}
+      .hero-row .story-figure{order:-1;flex:0 0 420px;max-width:420px;margin:0}
+      .hero-row .hero-text{flex:1 1 auto}
     }
 
     .gradient-heading{font-family:'Orbitron',sans-serif;font-size:clamp(var(--h1-min),6vw,var(--h1-max));background:linear-gradient(90deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.1;margin:0 0 .5rem 0}
@@ -42,15 +43,15 @@
     .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
     .meta-label{color:var(--text-muted-2)}
 
-    /* Default figure style (used if you add images in the story body later) */
+    /* Default figure style for images inside the story body */
     .story-figure{margin:2rem auto 0;max-width:720px;width:100%}
     .story-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border-dark)}
     .story-figure figcaption{color:var(--footer-muted);font-size:.9rem;margin-top:.5rem}
 
-    /* Hero-specific figure sizing: small column like Reactor */
-    .page-hero .story-figure{margin:0;max-width:420px}
+    /* Hero image behavior (kept tidy and not too tall) */
+    .page-hero .story-figure{margin:0}
     @media (min-width:600px){
-      .page-hero .story-figure img{max-height:75vh;object-fit:cover}
+      .page-hero .story-figure img{max-height:75vh;object-fit:cover;object-position:center}
     }
 
     main.story{padding:2rem 1rem 4rem}
@@ -113,9 +114,9 @@
     </nav>
   </header>
 
-  <!-- ===== Page Hero (art left on desktop, below on mobile) ===== -->
+  <!-- ===== Page Hero (art left on desktop, text first on mobile) ===== -->
   <section class="page-hero" role="banner">
-    <div class="hero-inner hero-grid">
+    <div class="hero-inner hero-row">
       <div class="hero-text">
         <div class="nav-breadcrumb">
           <a href="../fiction.html">Fiction</a> / <span>[Story Title]</span>
