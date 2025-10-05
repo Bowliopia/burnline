@@ -68,11 +68,14 @@
     .story-body p{margin:1.1rem 0}
     .dropcap:first-letter{float:left;font-size:3.4rem;line-height:.9;padding-right:.35rem;padding-top:.1rem;font-weight:700;color:var(--cyan)}
     .story-aside{position:sticky;top:5.5rem;height:fit-content;display:grid;gap:1rem}
+
     .card{background:var(--card);border:1px solid var(--border-dark);border-radius:14px;padding:1rem;box-shadow:0 8px 20px rgba(0,0,0,.15)}
     .author-card h4,.newsletter-card h4{margin:0 0 .5rem 0;font-family:'Orbitron',sans-serif}
     .pullquote{font-size:1.25rem;padding:1rem 1.25rem;margin:2rem 0;border-left:4px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:8px}
+
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:.6rem .9rem;border-radius:999px;border:1px solid var(--border-dark);background:linear-gradient(90deg,rgba(247,37,133,.1),rgba(114,9,183,.1));color:var(--text);text-decoration:none;font-weight:600}
     .btn:hover{background:linear-gradient(90deg,rgba(13,246,227,.12),rgba(114,9,183,.18))}
+
     .prev-next{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:3rem}
     .prev-next a{text-decoration:none}
     @media (min-width:960px){
@@ -87,13 +90,19 @@
     }
     .newsletter-card button{ width:100%; max-width:340px; }
 
-    /* Smaller author button so it doesn't span the entire card */
+    /* Make the author card a flex column & center only the button */
+    .author-card{
+      display:flex;
+      flex-direction:column;
+      gap:.25rem;
+    }
     .author-card .btn{
-      display:inline-flex;          /* shrink-to-fit the label */
-      width:auto;                   /* no full-width */
+      width:auto;
       max-width:none;
-      padding:.55rem 1rem;          /* slightly slimmer than default */
-      margin:.6rem auto 0;          /* keep it centered in the card */
+      padding:.55rem 1rem;
+      margin-top:.6rem;
+      margin-inline:0;
+      align-self:center; /* centers the button within the card */
     }
   </style>
 
@@ -117,6 +126,7 @@
 </head>
 <body>
 
+  <!-- Header / Nav -->
   <header class="site-header">
     <a href="../index.html" class="logo-title">
       <img src="../Flame logo-1.png.png" alt="Burnline logo">
@@ -134,6 +144,7 @@
     </nav>
   </header>
 
+  <!-- Page Hero -->
   <section class="page-hero" role="banner">
     <div class="hero-inner hero-row">
       <div class="hero-text">
@@ -162,6 +173,7 @@
     </div>
   </section>
 
+  <!-- Main -->
   <main id="main" class="story" role="main">
     <div class="story-inner">
       <article class="story-body" data-count-words>
@@ -179,9 +191,9 @@
 
         <p>Proin laoreet ornare lorem, vel bibendum lorem ultrices at. Phasellus porta, sem eget hendrerit porta, lacus orci auctor sapien, sit amet vehicula velit turpis sit amet turpis. Nunc sed efficitur orci.</p>
         <p>Sed nec magna placerat, tincidunt augue nec, fermentum dolor. Aliquam erat volutpat. Praesent faucibus velit nec nunc aliquam consequat. Cras ornare imperdiet sem, sed ullamcorper mi rhoncus sit amet.</p>
-
       </article>
 
+      <!-- Right rail -->
       <aside class="story-aside" aria-label="About the author and newsletter">
         <section class="card author-card">
           <h4>About the Author</h4>
@@ -201,6 +213,7 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -227,6 +240,7 @@
     </div>
   </footer>
 
+  <!-- Tiny JS -->
   <script>
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
