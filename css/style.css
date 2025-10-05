@@ -100,6 +100,21 @@ a.gradient-blue-text:hover,
   filter: brightness(1.05);
 }
 
+/* Blue gradient for email links in page body only */
+.content a[href^="mailto:"] {
+  background: linear-gradient(90deg, var(--cyan), #56ccf2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;      /* required for the clip to show */
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;   /* smoother rendering across browsers */
+}
+.content a[href^="mailto:"]:hover {
+  filter: brightness(1.05);
+}
+
 /* Optional: blue gradient heading helper used on Art page */
 .gradient-heading-blue {
   font-size: 1.5rem;
