@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Art – Burnline</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Global header/footer/vars/buttons/newsletter -->
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
     body {
       margin: 0;
@@ -80,19 +86,16 @@
       gap: 2rem;
       margin-top: 1.25rem;
     }
-    /* Preserve original 3-up size at desktop and center a single cover */
-/* Desktop: keep 3-up size and left-align incomplete rows */
-@media (min-width: 900px) {
-  .cover-grid {
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: start;   /* align tiles to the left of each column */
-  }
-  /* If there's exactly one cover, keep it in the LEFT column */
-  .cover-grid:has(> .cover-tile:only-child) > .cover-tile {
-    grid-column: 1;
-  }
-
-}
+    /* Desktop: keep 3-up size and left-align incomplete rows */
+    @media (min-width: 900px) {
+      .cover-grid {
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: start;
+      }
+      .cover-grid:has(> .cover-tile:only-child) > .cover-tile {
+        grid-column: 1;
+      }
+    }
     .cover-tile {
       cursor: pointer;
       transition: transform 0.25s ease;
@@ -103,11 +106,11 @@
       height: auto;
       display: block;
       border-radius: 8px;
-      object-fit: contain; /* show full image */
+      object-fit: contain;
     }
 
     /* Artwork grid */
-    .section-heading { text-align: left; margin-top: 2.5rem; } /* left align per request */
+    .section-heading { text-align: left; margin-top: 2.5rem; }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -125,7 +128,7 @@
     .art-tile img {
       width: 100%;
       height: 300px;
-      object-fit: cover; /* uniform thumbnails for issue art */
+      object-fit: cover;
       display: block;
     }
 
@@ -172,15 +175,8 @@
     }
     .nav-arrow.left { left: 2%; } .nav-arrow.right { right: 2%; }
 
-    /* Footer */
-    footer { background: #0f0f1c; padding: 4rem 2rem 2rem; color: #aaa; font-size: 0.9rem; }
-    footer a:hover { color: #0df6e3; }
-    .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 3rem; max-width: 1200px; margin: auto; }
-    .footer-column { flex: 1 1 250px; min-width: 200px; }
-    .footer-logo { height: 100px; margin-bottom: 1rem; }
-    .footer-bottom { text-align: center; margin-top: 3rem; border-top: 1px solid #222; padding-top: 1rem; color: #555; }
-    .newsletter-input { padding: 0.6rem 1rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.8rem; }
-    .newsletter-button { padding: 0.6rem 1.2rem; background-color: #0df6e3; color: #0f0f1c; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+    /* Removed local footer overrides to match global footer styles */
+    /* (Footer styles now come entirely from css/style.css) */
 
     .gradient-blue-text {
       background: linear-gradient(90deg, #0df6e3, #56ccf2);
@@ -235,7 +231,6 @@
       <h2 class="gradient-heading-blue">Issue Art</h2>
     </div>
     <div class="gallery-grid" id="issueArtGrid">
-      <!-- Ensure data attributes for captions -->
       <div class="art-tile" data-title="CBA6" data-artist="Artist Name">
         <img src="CBA6.jpg" alt="Art 1">
       </div>
@@ -269,7 +264,7 @@
     </div>
   </div>
 
- <!-- Footer -->
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -358,7 +353,6 @@
       issueArtItems.forEach((item, idx) => {
         if (idx > 2) item.classList.add('hidden');
       });
-      // Hide button if 3 or fewer items exist
       if (issueArtItems.length <= 3) {
         loadMoreBtn.classList.add('hidden');
       }
@@ -370,7 +364,7 @@
         const hiddenItems = document.querySelectorAll('#issueArtGrid .art-tile.hidden');
         hiddenItems.forEach(el => el.classList.remove('hidden'));
         loadMoreBtn.classList.add('hidden');
-        buildTilesAndBindClicks(); // rebuild so modal includes newly visible items
+        buildTilesAndBindClicks();
       });
     }
 
