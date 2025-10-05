@@ -72,6 +72,25 @@
       .story-inner{grid-template-columns:1fr 320px}
       .prev-next{grid-template-columns:1fr 1fr}
     }
+    /* Center the email field in the right-rail newsletter card */
+.newsletter-card form{
+  display: grid;
+  gap: .6rem;
+  justify-items: center;      /* center children horizontally */
+}
+
+.newsletter-card input[type="email"]{
+  width: 100%;
+  max-width: 340px;           /* cap so it can visually center */
+  box-sizing: border-box;
+  margin: 0 !important;       /* reset any inherited offsets */
+  float: none !important;
+}
+
+.newsletter-card button{
+  width: 100%;
+  max-width: 340px;           /* optional: match input width for symmetry */
+}
   </style>
 
   <!-- JSON-LD Article schema -->
