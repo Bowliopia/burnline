@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>[Story Title] – Burnline</title>
+  <meta name="description" content="Read “[Story Title]” on Burnline – original cyberpunk fiction with art by [Illustrator Name]." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- Page-specific minimal styles; relies on your global variables -->
+  <style>
+    .read-progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--magenta),var(--purple),var(--cyan));z-index:9999;transition:width .1s linear}
+
+    .page-hero{padding:5rem 1rem 2rem;background:linear-gradient(135deg,var(--bg-deep-1),var(--bg-hero-2));border-bottom:1px solid var(--border-dark)}
+    .hero-inner{max-width:1100px;margin:0 auto}
+    /* Mobile first: stack text then image */
+    .hero-row{display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start}
+    /* Desktop: row with art left and text right */
+    @media (min-width:960px){
+      .hero-row{flex-direction:row}
+      .hero-row .story-figure{order:-1;flex:0 0 420px;max-width:420px;margin:0}
+      .hero-row .hero-text{flex:1 1 auto}
+    }
+
+    .gradient-heading{font-family:'Orbitron',sans-serif;font-size:clamp(var(--h1-min),6vw,var(--h1-max));background:linear-gradient(90deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.1;margin:0 0 .5rem 0}
+    .nav-breadcrumb{font-size:.95rem;color:var(--text-muted);margin-bottom:1rem}
+    .meta-row{display:grid;grid-template-columns:1fr;gap:.25rem;color:var(--text-muted);font-size:.95rem}
+    .meta-row span+span::before{content:" • ";margin:0 .25rem;color:var(--footer-subtle)}
+    .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
+    .meta-label{color:var(--text-muted-2)}
+    @media (min-width:960px){ .meta-row{grid-template-columns:1fr} }
+    .meta-line{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;color:var(--text-muted);font-size:.95rem;margin-top:.15rem}
+
+    /* Gradient link helpers */
+    .gradient-pink-text{
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      text-decoration: none; font-weight: 700;
+    }
+    .gradient-pink-text:hover{opacity:.92}
+    .gradient-blue-text{
+      background: linear-gradient(90deg, var(--cyan), #56ccf2);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      text-decoration: none; font-weight: 700;
+    }
+    .gradient-blue-text:hover{opacity:.92}
+
+    /* Default figure style for images inside the story body */
+    .story-figure{margin:2rem auto 0;max-width:720px;width:100%}
+    .story-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border-dark)}
+    .story-figure figcaption{color:var(--footer-muted);font-size:.9rem;margin-top:.5rem}
+
+    /* Hero image behavior (kept tidy and not too tall) */
+    .page-hero .story-figure{margin:0}
+    @media (min-width:600px){
+      .page-hero .story-figure img{max-height:75vh;object-fit:cover;object-position:center}
+    }
+
+    main.story{padding:2rem 1rem 4rem}
+    .story-inner{display:grid;grid-template-columns:1fr;gap:2rem;max-width:1000px;margin:0 auto}
+    .story-body{max-width:720px;font-size:1.125rem;line-height:1.85}
+    .story-body p{margin:1.1rem 0}
+    .dropcap:first-letter{float:left;font-size:3.4rem;line-height:.9;padding-right:.35rem;padding-top:.1rem;font-weight:700;color:var(--cyan)}
+    .story-aside{position:sticky;top:5.5rem;height:fit-content;display:grid;gap:1rem}
+    .card{background:var(--card);border:1px solid var(--border-dark);border-radius:14px;padding:1rem;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .author-card h4,.newsletter-card h4{margin:0 0 .5rem 0;font-family:'Orbitron',sans-serif}
+    .pullquote{font-size:1.25rem;padding:1rem 1.25rem;margin:2rem 0;border-left:4px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:8px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.6rem .9rem;border-radius:999px;border:1px solid var(--border-dark);background:linear-gradient(90deg,rgba(247,37,133,.1),rgba(114,9,183,.1));color:var(--text);text-decoration:none;font-weight:600}
+    .btn:hover{background:linear-gradient(90deg,rgba(13,246,227,.12),rgba(114,9,183,.18))}
+    .prev-next{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:3rem}
+    .prev-next a{text-decoration:none}
+    @media (min-width:960px){
+      .story-inner{grid-template-columns:1fr 320px}
+      .prev-next{grid-template-columns:1fr 1fr}
+    }
+
+    /* Center the email field in the right-rail newsletter card */
+    .newsletter-card form{ display:grid; gap:.6rem; justify-items:center; }
+    .newsletter-card input[type="email"]{
+      width:100%; max-width:340px; box-sizing:border-box; margin:0!important; float:none!important;
+    }
+    .newsletter-card button{ width:100%; max-width:340px; }
+  </style>
+
+  <!-- JSON-LD Article schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"[Story Title]",
+    "description":"Original cyberpunk short fiction on Burnline.",
+    "image":"https://YOUR_USERNAME.github.io/burnline/img/placeholder-story-illustration.jpg",
+    "author":{"@type":"Person","name":"[Author Name]"},
+    "editor":{"@type":"Person","name":"[Editor Name]"},
+    "datePublished":"2025-10-01",
+    "dateModified":"2025-10-01",
+    "publisher":{"@type":"Organization","name":"Burnline","logo":{"@type":"ImageObject","url":"https://YOUR_USERNAME.github.io/burnline/img/burnline-logo.png"}},
+    "articleSection":"Fiction",
+    "wordCount": 3850
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Header / Nav / Logo — matches other pages (About) ===== -->
+  <header class="site-header">
+    <a href="../index.html" class="logo-title">
+      <img src="../Flame logo-1.png.png" alt="Burnline logo">
+      <span>BURNLINE</span>
+    </a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+    <nav class="site-nav" id="site-nav">
+      <a href="../fiction.html">Issues</a>
+      <a href="../stories.html">Stories</a>
+      <a href="../art.html">Art</a>
+      <a href="../about.html">About</a>
+      <a href="../submit.html">Submit</a>
+    </nav>
+  </header>
+
+  <!-- ===== Page Hero (art left on desktop, text first on mobile) ===== -->
+  <section class="page-hero" role="banner">
+    <div class="hero-inner hero-row">
+      <div class="hero-text">
+        <div class="nav-breadcrumb">
+          <a href="../fiction.html" class="gradient-pink-text">Fiction</a> / <span>[Story 7]</span>
+        </div>
+        <h1 class="gradient-heading">[Story Title]</h1>
+        <p style="color:var(--text-muted);margin:0 0 1rem 0;">[Optional subtitle or teaser sentence goes here.]</p>
+
+        <div class="meta-row">
+          <div class="meta-flex">
+            <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
+          </div>
+          <div class="meta-line">
+            <span><time datetime="2025-10-01">October 1, 2025</time></span>
+            <span id="readTime">~ 1 min read</span>
+            <span id="wordCount" aria-label="Approximate word count">~ 0 words</span>
+          </div>
+        </div>
+      </div>
+
+      <figure class="story-figure">
+        <img src="../Cyberpunk Girl.png" alt="[Describe the illustration briefly]" loading="lazy" decoding="async" />
+        <figcaption>Illustration by [Illustrator Name].</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Main Content ===== -->
+  <main id="main" class="story" role="main">
+    <div class="story-inner">
+      <!-- Story body -->
+      <article class="story-body" data-count-words>
+        <p class="dropcap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae libero sit amet lacus gravida feugiat. Integer vitae efficitur quam. Cras nec risus ut magna imperdiet luctus sit amet at neque.</p>
+        <p>Quisque in feugiat nunc, vitae hendrerit magna. Sed vehicula diam nec magna suscipit, sed condimentum tortor cursus. Nunc iaculis dolor vitae lectus posuere, non euismod justo tristique.</p>
+        <p>Aliquam erat volutpat. Donec gravida arcu ac mi bibendum, vitae consectetur nisl venenatis. Vivamus pharetra, tellus sed efficitur posuere, lectus lectus consectetur metus, vitae egestas diam velit sit amet sem.</p>
+
+        <div class="pullquote">“This is a pull-quote placeholder—use for a standout line.”</div>
+
+        <p>Morbi nec eleifend metus. Vestibulum at magna dolor. Donec in lorem non sem fermentum luctus. Integer lobortis dictum felis, et vulputate diam faucibus vitae. Vivamus luctus turpis id hendrerit interdum.</p>
+        <p>Curabitur id odio ac ex viverra efficitur. Nunc a nisi sit amet est iaculis pulvinar. Sed ut arcu nisi. Integer laoreet arcu sed nunc accumsan, sit amet convallis quam pulvinar.</p>
+        <p>Etiam gravida porta sem, non sagittis enim efficitur eget. Donec vehicula laoreet ex, a condimentum nibh dignissim at. Integer et orci ut augue tincidunt euismod. Mauris ut vulputate est.</p>
+
+        <hr />
+
+        <p>Proin laoreet ornare lorem, vel bibendum lorem ultrices at. Phasellus porta, sem eget hendrerit porta, lacus orci auctor sapien, sit amet vehicula velit turpis sit amet turpis. Nunc sed efficitur orci.</p>
+        <p>Sed nec magna placerat, tincidunt augue nec, fermentum dolor. Aliquam erat volutpat. Praesent faucibus velit nec nunc aliquam consequat. Cras ornare imperdiet sem, sed ullamcorper mi rhoncus sit amet.</p>
+
+      </article>
+
+      <!-- Right rail -->
+      <aside class="story-aside" aria-label="About the author and newsletter">
+        <section class="card author-card">
+          <h4>About the Author</h4>
+          <p><strong>[Author Name]</strong> is a placeholder bio. Two to three sentences, linking to a personal site or more Burnline stories.</p>
+          <p><a class="gradient-blue-text" href="../author/[author-slug].html">More from this author →</a></p>
+        </section>
+
+        <section class="card newsletter-card">
+          <h4>Get the Latest</h4>
+          <p>New issue updates straight to your inbox.</p>
+          <form action="#" method="post" aria-label="Newsletter signup">
+            <input id="nl-email" name="email" type="email" placeholder="Email Address" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border-dark);background:var(--ink-dark);color:var(--text);" />
+            <button class="btn" type="submit" style="margin-top:.6rem;">Subscribe</button>
+          </form>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===== Footer (matches About page exactly; logo path adjusted) ===== -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="../Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, we promise.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h4>Get In Touch</h4>
+        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
+      </div>
+      <div class="footer-column">
+        <h4>Read</h4>
+        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue Library</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
+  <!-- ===== Tiny JS: progress, read time + hamburger toggle ===== -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('site-nav');
+      if (nav) nav.classList.toggle('active');
+    }
+
+    (function(){
+      const bar=document.getElementById('readProgress');
+      const main=document.querySelector('main.story');
+      if(!bar||!main) return;
+      const onScroll=()=>{
+        const total=main.scrollHeight-window.innerHeight;
+        const scrolled=window.scrollY-(main.offsetTop||0);
+        const pct=Math.max(0,Math.min(1,scrolled/total));
+        bar.style.width=(pct*100)+'%';
+      };
+      window.addEventListener('scroll',onScroll,{passive:true});
+      window.addEventListener('resize',onScroll);
+      onScroll();
+    })();
+
+    (function(){
+      const body=document.querySelector('[data-count-words]');
+      const wc=document.getElementById('wordCount');
+      const rt=document.getElementById('readTime');
+      if(!body||!wc||!rt) return;
+      const text=body.innerText||body.textContent||'';
+      const words=(text.trim().match(/\S+/g)||[]).length;
+      const mins=Math.max(1,Math.round(words/225));
+      wc.textContent=`~ ${words.toLocaleString()} words`;
+      rt.textContent=`~ ${mins} min read`;
+    })();
+  </script>
+</body>
+</html>
