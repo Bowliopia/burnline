@@ -88,6 +88,15 @@
       width:100%; max-width:340px; box-sizing:border-box; margin:0!important; float:none!important;
     }
     .newsletter-card button{ width:100%; max-width:340px; }
+
+    /* Make the author CTA match Subscribe button size/centering */
+    .author-card .btn{
+      display:block;
+      width:100%;
+      max-width:340px;
+      margin-top:.6rem;
+      margin-inline:auto;
+    }
   </style>
 
   <!-- JSON-LD Article schema -->
@@ -184,7 +193,8 @@
         <section class="card author-card">
           <h4>About the Author</h4>
           <p><strong>[Author Name]</strong> is a placeholder bio. Two to three sentences, linking to a personal site or more Burnline stories.</p>
-          <p><a class="gradient-blue-text" href="../author/[author-slug].html">More from this author →</a></p>
+          <!-- CHANGED: gradient link -> button; removed arrow -->
+          <a class="btn" href="../author/[author-slug].html">More from this author</a>
         </section>
 
         <section class="card newsletter-card">
