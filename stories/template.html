@@ -63,8 +63,6 @@
     .card{background:var(--card);border:1px solid var(--border-dark);border-radius:14px;padding:1rem;box-shadow:0 8px 20px rgba(0,0,0,.15)}
     .author-card h4,.newsletter-card h4{margin:0 0 .5rem 0;font-family:'Orbitron',sans-serif}
     .pullquote{font-size:1.25rem;padding:1rem 1.25rem;margin:2rem 0;border-left:4px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:8px}
-    .story-tags a{display:inline-block;font-size:.9rem;border:1px solid var(--border-dark);padding:.25rem .5rem;border-radius:999px;margin:.25rem .25rem 0 0;text-decoration:none;color:var(--text-muted)}
-    .share-row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:.6rem .9rem;border-radius:999px;border:1px solid var(--border-dark);background:linear-gradient(90deg,rgba(247,37,133,.1),rgba(114,9,183,.1));color:var(--text);text-decoration:none;font-weight:600}
     .btn:hover{background:linear-gradient(90deg,rgba(13,246,227,.12),rgba(114,9,183,.18))}
     .prev-next{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:3rem}
@@ -165,17 +163,7 @@
         <p>Proin laoreet ornare lorem, vel bibendum lorem ultrices at. Phasellus porta, sem eget hendrerit porta, lacus orci auctor sapien, sit amet vehicula velit turpis sit amet turpis. Nunc sed efficitur orci.</p>
         <p>Sed nec magna placerat, tincidunt augue nec, fermentum dolor. Aliquam erat volutpat. Praesent faucibus velit nec nunc aliquam consequat. Cras ornare imperdiet sem, sed ullamcorper mi rhoncus sit amet.</p>
 
-        <div class="story-tags" aria-label="Tags">
-          <a href="../tags/cyberpunk.html">cyberpunk</a>
-          <a href="../tags/near-future.html">near-future</a>
-          <a href="../tags/ai.html">AI</a>
-        </div>
-
-        <div class="share-row" aria-label="Share">
-          <button class="btn" id="copyLinkBtn" type="button">Copy link</button>
-          <a class="btn" id="twShare" target="_blank" rel="noopener" href="#">Share on X</a>
-          <a class="btn" id="fbShare" target="_blank" rel="noopener" href="#">Share on Facebook</a>
-        </div>
+        <!-- Tags and Share buttons intentionally removed -->
 
         <div class="prev-next">
           <a class="btn" href="../stories/previous-story.html">← Previous: [Previous Story]</a>
@@ -204,24 +192,34 @@
     </div>
   </main>
 
-  <!-- ===== Global Footer ===== -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer-inner">
-      <div>
-        <strong>Burnline</strong> — The Cyberpunk Magazine
-        <div class="footer-small" style="color:var(--footer-muted);">© <span id="year"></span> Burnline. All rights reserved.</div>
+  <!-- ===== Footer (matches About page exactly; logo path adjusted) ===== -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="../Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, we promise.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
       </div>
-      <nav aria-label="Footer">
-        <ul>
-          <li><a href="../submit.html">Submit</a></li>
-          <li><a href="../about.html">About</a></li>
-          <li><a href="../privacy.html">Privacy</a></li>
-        </ul>
-      </nav>
+      <div class="footer-column">
+        <h4>Get In Touch</h4>
+        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
+      </div>
+      <div class="footer-column">
+        <h4>Read</h4>
+        <p><a href="https://bowliopia.github.io/burnline/fiction.html">Issue Library</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
+        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Burnline Magazine — All rights reserved
     </div>
   </footer>
 
-  <!-- ===== Tiny JS: progress, read time, sharing + hamburger toggle ===== -->
+  <!-- ===== Tiny JS: progress, read time + hamburger toggle (share code removed) ===== -->
   <script>
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
@@ -253,33 +251,6 @@
       const mins=Math.max(1,Math.round(words/225));
       wc.textContent=`~ ${words.toLocaleString()} words`;
       rt.textContent=`~ ${mins} min read`;
-    })();
-
-    (function(){
-      const url=window.location.href;
-      const title=document.title;
-      const tw=document.getElementById('twShare');
-      const fb=document.getElementById('fbShare');
-      const copy=document.getElementById('copyLinkBtn');
-      if(tw) tw.href=`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
-      if(fb) fb.href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-      if(copy){
-        copy.addEventListener('click',async()=>{
-          try{
-            await navigator.clipboard.writeText(url);
-            copy.textContent='Link copied!';
-            setTimeout(()=>copy.textContent='Copy link',1400);
-          }catch(e){
-            copy.textContent='Copy failed';
-            setTimeout(()=>copy.textContent='Copy link',1400);
-          }
-        });
-      }
-    })();
-
-    (function(){
-      const y=document.getElementById('year');
-      if(y) y.textContent=new Date().getFullYear();
     })();
   </script>
 </body>
