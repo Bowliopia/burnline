@@ -43,6 +43,23 @@
     .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
     .meta-label{color:var(--text-muted-2)}
 
+    /* Gradient link helpers */
+    .gradient-pink-text{
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      text-decoration: none; font-weight: 700;
+    }
+    .gradient-pink-text:hover{opacity:.92}
+
+    .gradient-blue-text{
+      background: linear-gradient(90deg, var(--cyan), #56ccf2);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      text-decoration: none; font-weight: 700;
+    }
+    .gradient-blue-text:hover{opacity:.92}
+
     /* Default figure style for images inside the story body */
     .story-figure{margin:2rem auto 0;max-width:720px;width:100%}
     .story-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border-dark)}
@@ -72,25 +89,24 @@
       .story-inner{grid-template-columns:1fr 320px}
       .prev-next{grid-template-columns:1fr 1fr}
     }
+
     /* Center the email field in the right-rail newsletter card */
-.newsletter-card form{
-  display: grid;
-  gap: .6rem;
-  justify-items: center;      /* center children horizontally */
-}
-
-.newsletter-card input[type="email"]{
-  width: 100%;
-  max-width: 340px;           /* cap so it can visually center */
-  box-sizing: border-box;
-  margin: 0 !important;       /* reset any inherited offsets */
-  float: none !important;
-}
-
-.newsletter-card button{
-  width: 100%;
-  max-width: 340px;           /* optional: match input width for symmetry */
-}
+    .newsletter-card form{
+      display: grid;
+      gap: .6rem;
+      justify-items: center;
+    }
+    .newsletter-card input[type="email"]{
+      width: 100%;
+      max-width: 340px;
+      box-sizing: border-box;
+      margin: 0 !important;
+      float: none !important;
+    }
+    .newsletter-card button{
+      width: 100%;
+      max-width: 340px;
+    }
   </style>
 
   <!-- JSON-LD Article schema -->
@@ -136,7 +152,7 @@
     <div class="hero-inner hero-row">
       <div class="hero-text">
         <div class="nav-breadcrumb">
-          <a href="../fiction.html">Fiction</a> / <span>[Story Title]</span>
+          <a href="../fiction.html" class="gradient-pink-text">Fiction</a> / <span>[Story Title]</span>
         </div>
         <h1 class="gradient-heading">[Story Title]</h1>
         <p style="color:var(--text-muted);margin:0 0 1rem 0;">[Optional subtitle or teaser sentence goes here.]</p>
@@ -144,8 +160,7 @@
         <div class="meta-row">
           <div class="meta-flex">
             <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
-            <span><span class="meta-label">Art</span> <strong>[Illustrator Name]</strong></span>
-            <span><span class="meta-label">Editor</span> <strong>[Editor Name]</strong></span>
+            <!-- Art and Editor removed as requested -->
           </div>
           <div class="meta-flex">
             <span><time datetime="2025-10-01">October 1, 2025</time></span>
@@ -182,8 +197,6 @@
         <p>Proin laoreet ornare lorem, vel bibendum lorem ultrices at. Phasellus porta, sem eget hendrerit porta, lacus orci auctor sapien, sit amet vehicula velit turpis sit amet turpis. Nunc sed efficitur orci.</p>
         <p>Sed nec magna placerat, tincidunt augue nec, fermentum dolor. Aliquam erat volutpat. Praesent faucibus velit nec nunc aliquam consequat. Cras ornare imperdiet sem, sed ullamcorper mi rhoncus sit amet.</p>
 
-        <!-- Tags and Share buttons intentionally removed -->
-
         <div class="prev-next">
           <a class="btn" href="../stories/previous-story.html">← Previous story</a>
           <a class="btn" href="../stories/next-story.html">Next story →</a>
@@ -195,7 +208,7 @@
         <section class="card author-card">
           <h4>About the Author</h4>
           <p><strong>[Author Name]</strong> is a placeholder bio. Two to three sentences, linking to a personal site or more Burnline stories.</p>
-          <p><a href="../author/[author-slug].html">More from this author →</a></p>
+          <p><a class="gradient-blue-text" href="../author/[author-slug].html">More from this author →</a></p>
         </section>
 
         <section class="card newsletter-card">
@@ -237,7 +250,7 @@
     </div>
   </footer>
 
-  <!-- ===== Tiny JS: progress, read time + hamburger toggle (share code removed) ===== -->
+  <!-- ===== Tiny JS: progress, read time + hamburger toggle ===== -->
   <script>
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
