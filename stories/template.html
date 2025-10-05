@@ -19,7 +19,9 @@
 
     .page-hero{padding:5rem 1rem 2rem;background:linear-gradient(135deg,var(--bg-deep-1),var(--bg-hero-2));border-bottom:1px solid var(--border-dark)}
     .hero-inner{max-width:1100px;margin:0 auto}
+    /* Mobile first: stack text then image */
     .hero-row{display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start}
+    /* Desktop: row with art left and text right */
     @media (min-width:960px){
       .hero-row{flex-direction:row}
       .hero-row .story-figure{order:-1;flex:0 0 420px;max-width:420px;margin:0}
@@ -88,19 +90,6 @@
       width:100%; max-width:340px; box-sizing:border-box; margin:0!important; float:none!important;
     }
     .newsletter-card button{ width:100%; max-width:340px; }
-
-    /* Match the author button size to the Subscribe button */
-    .author-card{
-      display:flex;
-      flex-direction:column;
-      gap:.25rem;
-    }
-    .author-card .btn{
-      display:block;
-      width:100%;
-      max-width:340px;
-      margin:.6rem auto 0;  /* same top spacing, centered */
-    }
   </style>
 
   <!-- JSON-LD Article schema -->
@@ -188,6 +177,7 @@
 
         <p>Proin laoreet ornare lorem, vel bibendum lorem ultrices at. Phasellus porta, sem eget hendrerit porta, lacus orci auctor sapien, sit amet vehicula velit turpis sit amet turpis. Nunc sed efficitur orci.</p>
         <p>Sed nec magna placerat, tincidunt augue nec, fermentum dolor. Aliquam erat volutpat. Praesent faucibus velit nec nunc aliquam consequat. Cras ornare imperdiet sem, sed ullamcorper mi rhoncus sit amet.</p>
+
       </article>
 
       <!-- Right rail -->
@@ -195,7 +185,7 @@
         <section class="card author-card">
           <h4>About the Author</h4>
           <p><strong>[Author Name]</strong> is a placeholder bio. Two to three sentences, linking to a personal site or more Burnline stories.</p>
-          <a class="btn" href="../author/[author-slug].html">More from this author</a>
+          <p><a class="gradient-blue-text" href="../author/[author-slug].html">More from this author</a></p>
         </section>
 
         <section class="card newsletter-card">
