@@ -32,8 +32,24 @@
     .meta-row span+span::before{content:" • ";margin:0 .25rem;color:var(--footer-subtle)}
     .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
     .meta-label{color:var(--text-muted-2)}
-    .story-figure{margin:2rem auto 0;max-width:1000px}
-    .story-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border-dark)}
+/* Match image width to the story text width for a cleaner look */
+.story-figure{
+  margin: 2rem auto 0;
+  max-width: 720px;   /* was 1000px */
+  width: 100%;
+}
+.story-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--border-dark);
+}
+
+/* Optional: keep super-tall images from dominating on short screens */
+@media (min-width: 600px){
+  .story-figure img{ max-height: 75vh; object-fit: contain; }
+}
     .story-figure figcaption{color:var(--footer-muted);font-size:.9rem;margin-top:.5rem}
     main.story{padding:2rem 1rem 4rem}
     .story-inner{display:grid;grid-template-columns:1fr;gap:2rem;max-width:1000px;margin:0 auto}
