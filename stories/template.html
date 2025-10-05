@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>[Story Title] – Burnline</title>
+  <meta name="description" content="Read “[Story Title]” on Burnline – original cyberpunk fiction with art by [Illustrator Name]." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="[Story Title] – Burnline" />
+  <meta property="og:description" content="Original cyberpunk short fiction on Burnline." />
+  <meta property="og:image" content="img/placeholder-story-illustration.jpg" />
+  <meta property="og:url" content="https://your-domain/burnline/fiction/story-slug" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Page-specific minimal styles (kept tiny; everything else should live in style.css) -->
+  <style>
+    /* Top reading progress bar */
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--magenta), var(--purple), var(--cyan));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    .page-hero {
+      padding: 5rem 1rem 2rem;
+      background: linear-gradient(135deg, var(--bg-deep-1), var(--bg-hero-2));
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .gradient-heading {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(var(--h1-min), 6vw, var(--h1-max));
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      line-height: 1.1;
+      margin: 0 0 0.5rem 0;
+      text-align: left; /* center if you prefer */
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .meta-row span + span::before { content: " • "; margin: 0 0.25rem; color: var(--footer-subtle); }
+    .meta-flex {
+      display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;
+      align-items: center;
+    }
+    .meta-label { color: var(--text-muted-2); }
+
+    .story-figure {
+      margin: 2rem auto 0;
+      max-width: 1000px;
+    }
+    .story-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid var(--border-dark);
+    }
+    .story-figure figcaption {
+      color: var(--footer-muted);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+
+    main.story {
+      padding: 2rem 1rem 4rem;
+    }
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .story-body {
+      max-width: 720px;
+      font-size: 1.125rem;
+      line-height: 1.85;
+    }
+    .story-body p { margin: 1.1rem 0; }
+    .dropcap:first-letter {
+      float: left;
+      font-size: 3.4rem;
+      line-height: 0.9;
+      padding-right: 0.35rem;
+      padding-top: 0.1rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .story-aside {
+      position: sticky;
+      top: 5.5rem;
+      height: fit-content;
+      display: grid;
+      gap: 1rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .author-card h4,
+    .newsletter-card h4 { margin: 0 0 0.5rem 0; font-family: 'Orbitron', sans-serif; }
+
+    .pullquote {
+      font-size: 1.25rem;
+      padding: 1rem 1.25rem;
+      margin: 2rem 0;
+      border-left: 4px solid var(--cyan);
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+    }
+
+    .story-tags a {
+      display: inline-block;
+      font-size: 0.9rem;
+      border: 1px solid var(--border-dark);
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      margin: 0.25rem 0.25rem 0 0;
+      text-decoration: none;
+      color: var(--text-muted);
+    }
+
+    .share-row {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-dark);
+      background: linear-gradient(90deg, rgba(247,37,133,0.1), rgba(114,9,183,0.1));
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn:hover { background: linear-gradient(90deg, rgba(13,246,227,0.12), rgba(114,9,183,0.18)); }
+
+    .nav-breadcrumb {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .prev-next {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .prev-next a { text-decoration: none; }
+    @media (min-width: 960px) {
+      .meta-row { grid-template-columns: 1fr 1fr; }
+      .story-inner { grid-template-columns: 1fr 320px; }
+      .prev-next { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+
+  <!-- JSON-LD Article schema (fill in on publish) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "[Story Title]",
+    "description": "Original cyberpunk short fiction on Burnline.",
+    "image": "https://your-domain/burnline/img/placeholder-story-illustration.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "[Author Name]"
+    },
+    "editor": {
+      "@type": "Person",
+      "name": "[Editor Name]"
+    },
+    "datePublished": "2025-10-01",
+    "dateModified": "2025-10-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Burnline",
+      "logo": { "@type": "ImageObject", "url": "img/burnline-logo.png" }
+    },
+    "articleSection": "Fiction",
+    "wordCount": 3850
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="read-progress" id="readProgress"></div>
+
+  <!-- ===== Global Header / Nav (match your site structure) ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Burnline Home">
+        <!-- Use your flame/logo mark -->
+        <img src="img/burnline-mark.svg" alt="" width="28" height="28" />
+        <span>Burnline</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menu">
+          <!-- Same hamburger icon you use elsewhere -->
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <ul id="navMenu">
+          <li><a href="index.html#latest">Latest</a></li>
+          <li><a href="fiction.html">Fiction</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="staff-picks.html">Staff Picks</a></li>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Page Hero ===== -->
+  <section class="page-hero" role="banner">
+    <div class="hero-inner">
+      <div class="nav-breadcrumb">
+        <a href="fiction.html">Fiction</a> / <span>[Story Title]</span>
+      </div>
+      <h1 class="gradient-heading">[Story Title]</h1>
+      <p style="color:var(--text-muted); margin: 0 0 1rem 0;">[Optional subtitle or teaser sentence goes here.]</p>
+
+      <div class="meta-row">
+        <div class="meta-flex">
+          <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
+          <span><span class="meta-label">Art</span> <strong>[Illustrator Name]</strong></span>
+          <span><span class="meta-label">Editor</span> <strong>[Editor Name]</strong></span>
+        </div>
+        <div class="meta-flex">
+          <span><time datetime="2025-10-01">October 1, 2025</time></span>
+          <span id="readTime">~ X min read</span>
+          <span id="wordCount" aria-label="Approximate word count">~ 0 words</span>
+        </div>
+      </div>
+
+      <figure class="story-figure">
+        <img src="img/placeholder-story-illustration.jpg" alt="[Describe the illustration briefly]" loading="lazy" decoding="async" />
+        <figcaption>Illustration by [Illustrator Name].</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Main Content ===== -->
+  <main id="main" class="story" role="main">
+    <div class="story-inner">
+      <!-- Story body -->
+      <article class="story-body" data-count-words>
+        <p class="dropcap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae libero sit amet lacus gravida feugiat. Integer vitae efficitur quam. Cras nec risus ut magna imperdiet luctus sit amet at neque.</p>
+        <p>Quisque in feugiat nunc, vitae hendrerit magna. Sed vehicula diam nec magna suscipit, sed condimentum tortor cursus. Nunc iaculis dolor vitae lectus posuere, non euismod justo tristique.</p>
+        <p>Aliquam erat volutpat. Donec gravida arcu ac mi bibendum, vitae consectetur nisl venenatis. Vivamus pharetra, tellus sed efficitur posuere, lectus lectus consectetur metus, vitae egestas diam velit sit amet sem.</p>
+
+        <div class="pullquote">“This is a pull-quote placeholder—use for a standout line.”</div>
+
+        <p>Morbi nec eleifend metus. Vestibulum at magna dolor. Donec in lorem non sem fermentum luctus. Integer lobortis dictum felis, et vulputate diam faucibus vitae. Vivamus luctus turpis id hendrerit interdum.</p>
+        <p>Curabitur id odio ac ex viverra efficitur. Nunc a nisi sit amet est iaculis pulvinar. Sed ut arcu nisi. Integer laoreet arcu sed nunc accumsan, sit amet convallis quam pulvinar.</p>
+        <p>Etiam gravida porta sem, non sagittis enim efficitur eget. Donec vehicula laoreet ex, a condimentum nibh dignissim at. Integer et orci ut augue tincidunt euismod. Mauris ut vulputate est.</p>
+
+        <hr />
+
+        <p>Proin laoreet ornare lorem, vel bibendum lorem ultrices at. Phasellus porta, sem eget hendrerit porta, lacus orci auctor sapien, sit amet vehicula velit turpis sit amet turpis. Nunc sed efficitur orci.</p>
+        <p>Sed nec magna placerat, tincidunt augue nec, fermentum dolor. Aliquam erat volutpat. Praesent faucibus velit nec nunc aliquam consequat. Cras ornare imperdiet sem, sed ullamcorper mi rhoncus sit amet.</p>
+
+        <div class="story-tags" aria-label="Tags">
+          <a href="tags/cyberpunk.html">cyberpunk</a>
+          <a href="tags/near-future.html">near-future</a>
+          <a href="tags/ai.html">AI</a>
+        </div>
+
+        <div class="share-row" aria-label="Share">
+          <button class="btn" id="copyLinkBtn" type="button">Copy link</button>
+          <a class="btn" id="twShare" target="_blank" rel="noopener" href="#">Share on X</a>
+          <a class="btn" id="fbShare" target="_blank" rel="noopener" href="#">Share on Facebook</a>
+        </div>
+
+        <div class="prev-next">
+          <a class="btn" href="previous-story.html">← Previous: [Previous Story]</a>
+          <a class="btn" href="next-story.html">Next: [Next Story] →</a>
+        </div>
+      </article>
+
+      <!-- Right rail -->
+      <aside class="story-aside" aria-label="About the author and newsletter">
+        <section class="card author-card">
+          <h4>About the Author</h4>
+          <p><strong>[Author Name]</strong> is a placeholder bio. Two to three sentences, linking to a personal site or more Burnline stories.</p>
+          <p><a href="author/[author-slug].html">More from this author →</a></p>
+        </section>
+
+        <section class="card newsletter-card">
+          <h4>Get the Latest</h4>
+          <p>New stories, art, and issues—straight to your inbox.</p>
+          <!-- If you have a global newsletter include, swap this block -->
+          <form action="#" method="post" aria-label="Newsletter signup">
+            <label for="nl-email" class="visually-hidden">Email</label>
+            <input id="nl-email" name="email" type="email" placeholder="you@domain.com" required style="width:100%; padding:0.6rem; border-radius:10px; border:1px solid var(--border-dark); background:var(--ink-dark); color:var(--text);" />
+            <button class="btn" type="submit" style="margin-top:0.6rem;">Subscribe</button>
+          </form>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===== Global Footer ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <strong>Burnline</strong> — The Cyberpunk Magazine
+        <div class="footer-small" style="color:var(--footer-muted);">© <span id="year"></span> Burnline. All rights reserved.</div>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== Tiny JS: nav toggle, progress, read time, sharing ===== -->
+  <script>
+    // Mobile nav toggle (use same JS as site; this is a safe fallback)
+    (function(){
+      const btn = document.querySelector('.nav-toggle');
+      const menu = document.getElementById('navMenu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('open');
+      });
+    })();
+
+    // Reading progress bar
+    (function(){
+      const bar = document.getElementById('readProgress');
+      const main = document.querySelector('main.story');
+      if (!bar || !main) return;
+      const onScroll = () => {
+        const rect = main.getBoundingClientRect();
+        const total = main.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY - (main.offsetTop || 0);
+        const pct = Math.max(0, Math.min(1, scrolled / total));
+        bar.style.width = (pct * 100) + '%';
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    })();
+
+    // Word count + read time (~225 wpm default)
+    (function(){
+      const body = document.querySelector('[data-count-words]');
+      const wcSpan = document.getElementById('wordCount');
+      const rtSpan = document.getElementById('readTime');
+      if (!body || !wcSpan || !rtSpan) return;
+      const text = body.innerText || body.textContent || '';
+      const words = (text.trim().match(/\S+/g) || []).length;
+      const wpm = 225;
+      const mins = Math.max(1, Math.round(words / wpm));
+      wcSpan.textContent = `~ ${words.toLocaleString()} words`;
+      rtSpan.textContent = `~ ${mins} min read`;
+    })();
+
+    // Share links + copy
+    (function(){
+      const url = window.location.href;
+      const title = document.title;
+      const tw = document.getElementById('twShare');
+      const fb = document.getElementById('fbShare');
+      const copyBtn = document.getElementById('copyLinkBtn');
+
+      if (tw) tw.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+      if (fb) fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(url);
+            copyBtn.textContent = 'Link copied!';
+            setTimeout(() => copyBtn.textContent = 'Copy link', 1400);
+          } catch (e) {
+            copyBtn.textContent = 'Copy failed';
+            setTimeout(() => copyBtn.textContent = 'Copy link', 1400);
+          }
+        });
+      }
+    })();
+
+    // Footer year
+    (function(){
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
