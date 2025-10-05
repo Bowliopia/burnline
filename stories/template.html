@@ -7,14 +7,6 @@
   <title>[Story Title] – Burnline</title>
   <meta name="description" content="Read “[Story Title]” on Burnline – original cyberpunk fiction with art by [Illustrator Name]." />
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="[Story Title] – Burnline" />
-  <meta property="og:description" content="Original cyberpunk short fiction on Burnline." />
-  <meta property="og:image" content="../AL Cover.png" />
-  <meta property="og:url" content="https://YOUR_USERNAME.github.io/burnline/stories/story-slug.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -42,11 +34,7 @@
     .meta-row span+span::before{content:" • ";margin:0 .25rem;color:var(--footer-subtle)}
     .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
     .meta-label{color:var(--text-muted-2)}
-    /* NEW: force single-column meta on desktop so the date line sits below author */
-    @media (min-width:960px){
-      .meta-row{grid-template-columns:1fr}
-    }
-    /* NEW: styling for the line under author */
+    @media (min-width:960px){ .meta-row{grid-template-columns:1fr} }
     .meta-line{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;color:var(--text-muted);font-size:.95rem;margin-top:.15rem}
 
     /* Gradient link helpers */
@@ -57,7 +45,6 @@
       text-decoration: none; font-weight: 700;
     }
     .gradient-pink-text:hover{opacity:.92}
-
     .gradient-blue-text{
       background: linear-gradient(90deg, var(--cyan), #56ccf2);
       -webkit-background-clip: text; background-clip: text;
@@ -96,22 +83,11 @@
     }
 
     /* Center the email field in the right-rail newsletter card */
-    .newsletter-card form{
-      display: grid;
-      gap: .6rem;
-      justify-items: center;
-    }
+    .newsletter-card form{ display:grid; gap:.6rem; justify-items:center; }
     .newsletter-card input[type="email"]{
-      width: 100%;
-      max-width: 340px;
-      box-sizing: border-box;
-      margin: 0 !important;
-      float: none !important;
+      width:100%; max-width:340px; box-sizing:border-box; margin:0!important; float:none!important;
     }
-    .newsletter-card button{
-      width: 100%;
-      max-width: 340px;
-    }
+    .newsletter-card button{ width:100%; max-width:340px; }
   </style>
 
   <!-- JSON-LD Article schema -->
@@ -166,7 +142,6 @@
           <div class="meta-flex">
             <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
           </div>
-          <!-- Moved below author -->
           <div class="meta-line">
             <span><time datetime="2025-10-01">October 1, 2025</time></span>
             <span id="readTime">~ 1 min read</span>
