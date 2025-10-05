@@ -68,7 +68,6 @@
     .story-body p{margin:1.1rem 0}
     .dropcap:first-letter{float:left;font-size:3.4rem;line-height:.9;padding-right:.35rem;padding-top:.1rem;font-weight:700;color:var(--cyan)}
     .story-aside{position:sticky;top:5.5rem;height:fit-content;display:grid;gap:1rem}
-
     .card{background:var(--card);border:1px solid var(--border-dark);border-radius:14px;padding:1rem;box-shadow:0 8px 20px rgba(0,0,0,.15)}
     .author-card h4,.newsletter-card h4{margin:0 0 .5rem 0;font-family:'Orbitron',sans-serif}
     .pullquote{font-size:1.25rem;padding:1rem 1.25rem;margin:2rem 0;border-left:4px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:8px}
@@ -90,19 +89,17 @@
     }
     .newsletter-card button{ width:100%; max-width:340px; }
 
-    /* Make the author card a flex column & center only the button */
+    /* Match the author button size to the Subscribe button */
     .author-card{
       display:flex;
       flex-direction:column;
       gap:.25rem;
     }
     .author-card .btn{
-      width:auto;
-      max-width:none;
-      padding:.55rem 1rem;
-      margin-top:.6rem;
-      margin-inline:0;
-      align-self:center; /* centers the button within the card */
+      display:block;
+      width:100%;
+      max-width:340px;
+      margin:.6rem auto 0;  /* same top spacing, centered */
     }
   </style>
 
