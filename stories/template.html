@@ -24,33 +24,35 @@
   <!-- Page-specific minimal styles; relies on your global variables -->
   <style>
     .read-progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--magenta),var(--purple),var(--cyan));z-index:9999;transition:width .1s linear}
+
     .page-hero{padding:5rem 1rem 2rem;background:linear-gradient(135deg,var(--bg-deep-1),var(--bg-hero-2));border-bottom:1px solid var(--border-dark)}
-    .hero-inner{max-width:900px;margin:0 auto}
+    .hero-inner{max-width:1100px;margin:0 auto} /* widened a bit to fit two columns nicely */
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:start}
+    /* desktop: art left, text right */
+    @media (min-width:960px){
+      .hero-grid{grid-template-columns:420px 1fr}
+      .hero-text{grid-column:2}
+      .page-hero .story-figure{grid-column:1}
+    }
+
     .gradient-heading{font-family:'Orbitron',sans-serif;font-size:clamp(var(--h1-min),6vw,var(--h1-max));background:linear-gradient(90deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.1;margin:0 0 .5rem 0}
     .nav-breadcrumb{font-size:.95rem;color:var(--text-muted);margin-bottom:1rem}
     .meta-row{display:grid;grid-template-columns:1fr;gap:.5rem;color:var(--text-muted);font-size:.95rem}
     .meta-row span+span::before{content:" • ";margin:0 .25rem;color:var(--footer-subtle)}
     .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
     .meta-label{color:var(--text-muted-2)}
-/* Match image width to the story text width for a cleaner look */
-.story-figure{
-  margin: 2rem auto 0;
-  max-width: 720px;   /* was 1000px */
-  width: 100%;
-}
-.story-figure img{
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-  border: 1px solid var(--border-dark);
-}
 
-/* Optional: keep super-tall images from dominating on short screens */
-@media (min-width: 600px){
-  .story-figure img{ max-height: 75vh; object-fit: contain; }
-}
+    /* Default figure style (used if you add images in the story body later) */
+    .story-figure{margin:2rem auto 0;max-width:720px;width:100%}
+    .story-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border-dark)}
     .story-figure figcaption{color:var(--footer-muted);font-size:.9rem;margin-top:.5rem}
+
+    /* Hero-specific figure sizing: small column like Reactor */
+    .page-hero .story-figure{margin:0;max-width:420px}
+    @media (min-width:600px){
+      .page-hero .story-figure img{max-height:75vh;object-fit:cover}
+    }
+
     main.story{padding:2rem 1rem 4rem}
     .story-inner{display:grid;grid-template-columns:1fr;gap:2rem;max-width:1000px;margin:0 auto}
     .story-body{max-width:720px;font-size:1.125rem;line-height:1.85}
@@ -111,31 +113,32 @@
     </nav>
   </header>
 
-  <!-- ===== Page Hero ===== -->
+  <!-- ===== Page Hero (art left on desktop, below on mobile) ===== -->
   <section class="page-hero" role="banner">
-    <div class="hero-inner">
-      <div class="nav-breadcrumb">
-        <a href="../fiction.html">Fiction</a> / <span>[Story Title]</span>
-      </div>
-      <h1 class="gradient-heading">[Story Title]</h1>
-      <p style="color:var(--text-muted);margin:0 0 1rem 0;">[Optional subtitle or teaser sentence goes here.]</p>
-
-      <div class="meta-row">
-        <div class="meta-flex">
-          <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
-          <span><span class="meta-label">Art</span> <strong>[Illustrator Name]</strong></span>
-          <span><span class="meta-label">Editor</span> <strong>[Editor Name]</strong></span>
+    <div class="hero-inner hero-grid">
+      <div class="hero-text">
+        <div class="nav-breadcrumb">
+          <a href="../fiction.html">Fiction</a> / <span>[Story Title]</span>
         </div>
-        <div class="meta-flex">
-          <span><time datetime="2025-10-01">October 1, 2025</time></span>
-          <span id="readTime">~ X min read</span>
-          <span id="wordCount" aria-label="Approximate word count">~ 0 words</span>
+        <h1 class="gradient-heading">[Story Title]</h1>
+        <p style="color:var(--text-muted);margin:0 0 1rem 0;">[Optional subtitle or teaser sentence goes here.]</p>
+
+        <div class="meta-row">
+          <div class="meta-flex">
+            <span><span class="meta-label">By</span> <strong>[Author Name]</strong></span>
+            <span><span class="meta-label">Art</span> <strong>[Illustrator Name]</strong></span>
+            <span><span class="meta-label">Editor</span> <strong>[Editor Name]</strong></span>
+          </div>
+          <div class="meta-flex">
+            <span><time datetime="2025-10-01">October 1, 2025</time></span>
+            <span id="readTime">~ X min read</span>
+            <span id="wordCount" aria-label="Approximate word count">~ 0 words</span>
+          </div>
         </div>
       </div>
 
       <figure class="story-figure">
-<meta property="og:image" content="../AL Cover.png" />
-<img src="../AL Cover.png" alt="[Describe the illustration briefly]" loading="lazy" decoding="async" />
+        <img src="../AL Cover.png" alt="[Describe the illustration briefly]" loading="lazy" decoding="async" />
         <figcaption>Illustration by [Illustrator Name].</figcaption>
       </figure>
     </div>
@@ -190,7 +193,6 @@
         <section class="card newsletter-card">
           <h4>Get the Latest</h4>
           <p>New stories, art, and issues—straight to your inbox.</p>
-          <!-- Replace with your global newsletter include if you have one -->
           <form action="#" method="post" aria-label="Newsletter signup">
             <label for="nl-email" class="visually-hidden">Email</label>
             <input id="nl-email" name="email" type="email" placeholder="you@domain.com" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border-dark);background:var(--ink-dark);color:var(--text);" />
@@ -220,13 +222,11 @@
 
   <!-- ===== Tiny JS: progress, read time, sharing + hamburger toggle ===== -->
   <script>
-    // Matches your About page: toggles 'active' on #site-nav
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
       if (nav) nav.classList.toggle('active');
     }
 
-    // Reading progress bar
     (function(){
       const bar=document.getElementById('readProgress');
       const main=document.querySelector('main.story');
@@ -242,7 +242,6 @@
       onScroll();
     })();
 
-    // Word count + read time
     (function(){
       const body=document.querySelector('[data-count-words]');
       const wc=document.getElementById('wordCount');
@@ -255,7 +254,6 @@
       rt.textContent=`~ ${mins} min read`;
     })();
 
-    // Share links + copy
     (function(){
       const url=window.location.href;
       const title=document.title;
@@ -278,7 +276,6 @@
       }
     })();
 
-    // Footer year
     (function(){
       const y=document.getElementById('year');
       if(y) y.textContent=new Date().getFullYear();
