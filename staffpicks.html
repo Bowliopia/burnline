@@ -280,8 +280,8 @@
     <!-- Tabs -->
     <div class="tabs">
       <div class="tablist" role="tablist" aria-label="Filter Staff Picks">
-        <button class="tab" id="tab-games" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="games">Games</button>
-        <button class="tab" id="tab-books" role="tab" aria-selected="true" aria-controls="panel-grid" data-filter="books">Books</button>
+        <button class="tab" id="tab-games" role="tab" aria-selected="true" aria-controls="panel-grid" data-filter="games">Games</button>
+        <button class="tab" id="tab-books" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="books">Books</button>
         <button class="tab" id="tab-film"  role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="film">Film / TV</button>
         <button class="tab" id="tab-other" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="other">Other</button>
       </div>
@@ -722,15 +722,15 @@
         });
       });
 
-      // Initial from hash
-      const hash = (location.hash || '#books').toLowerCase().replace('#','');
-      const initialTab = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'books'));
+      // Initial from hash (default to #games)
+      const hash = (location.hash || '#games').toLowerCase().replace('#','');
+      const initialTab = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'games'));
       setSelected(initialTab, false);
 
-      // Hash changes
+      // Hash changes (default to #games)
       window.addEventListener('hashchange', () => {
-        const h = (location.hash || '#books').toLowerCase().replace('#','');
-        const hTab = document.getElementById('tab-' + (['books','games','film','other'].includes(h) ? h : 'books'));
+        const h = (location.hash || '#games').toLowerCase().replace('#','');
+        const hTab = document.getElementById('tab-' + (['books','games','film','other'].includes(h) ? h : 'games'));
         if (hTab) setSelected(hTab, false);
       });
     })();
