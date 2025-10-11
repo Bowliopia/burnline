@@ -13,86 +13,128 @@
   <!-- Global styles -->
   <link rel="stylesheet" href="../css/style.css" />
 
-  <!-- Page-specific minimal styles; relies on your global variables -->
+  <!-- Page-specific styles (kept minimal; uses global design tokens) -->
   <style>
-    .read-progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--magenta),var(--purple),var(--cyan));z-index:9999;transition:width .1s linear}
-
-    .page-hero{padding:5rem 1rem 2rem;background:linear-gradient(135deg,var(--bg-deep-1),var(--bg-hero-2));border-bottom:1px solid var(--border-dark)}
-    .hero-inner{max-width:1100px;margin:0 auto}
-    /* Mobile first: stack text then image */
-    .hero-row{display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start}
-    /* Desktop: row with art left and text right */
-    @media (min-width:960px){
-      .hero-row{flex-direction:row}
-      .hero-row .story-figure{order:-1;flex:0 0 420px;max-width:420px;margin:0}
-      .hero-row .hero-text{flex:1 1 auto}
+    /* Reading progress bar (width updated on scroll via JS) */
+    .read-progress {
+      position: fixed; top: 0; left: 0; height: 4px; width: 0;
+      background: linear-gradient(90deg, var(--magenta), var(--purple), var(--cyan));
+      z-index: 9999; transition: width .1s linear;
     }
 
-    .gradient-heading{font-family:'Orbitron',sans-serif;font-size:clamp(var(--h1-min),6vw,var(--h1-max));background:linear-gradient(90deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.1;margin:0 0 .5rem 0}
-    .nav-breadcrumb{font-size:.95rem;color:var(--text-muted);margin-bottom:1rem}
-    .meta-row{display:grid;grid-template-columns:1fr;gap:.25rem;color:var(--text-muted);font-size:.95rem}
-    .meta-row span+span::before{content:" • ";margin:0 .25rem;color:var(--footer-subtle)}
-    .meta-flex{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
-    .meta-label{color:var(--text-muted-2)}
-    @media (min-width:960px){ .meta-row{grid-template-columns:1fr} }
-    .meta-line{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;color:var(--text-muted);font-size:.95rem;margin-top:.15rem}
+    /* Hero */
+    .page-hero {
+      padding: 5rem 1rem 2rem;
+      background: linear-gradient(135deg, var(--bg-deep-1), var(--bg-hero-2));
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; }
 
-    /* Gradient link helpers */
+    /* Layout: mobile-first stack; row on desktop */
+    .hero-row { display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+    @media (min-width: 960px) {
+      .hero-row { flex-direction: row; }
+      .hero-row .story-figure { order: -1; flex: 0 0 420px; max-width: 420px; margin: 0; }
+      .hero-row .hero-text { flex: 1 1 auto; }
+    }
+
+    /* Typographic treatments */
+    .gradient-heading{
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(var(--h1-min), 6vw, var(--h1-max));
+      background: linear-gradient(90deg, var(--magenta), var(--purple));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      line-height: 1.1; margin: 0 0 .5rem 0;
+    }
+    .nav-breadcrumb { font-size: .95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+    /* Meta rows (author/date/read time) */
+    .meta-row { display: grid; grid-template-columns: 1fr; gap: .25rem; color: var(--text-muted); font-size: .95rem; }
+    .meta-row span + span::before { content: " • "; margin: 0 .25rem; color: var(--footer-subtle); }
+    .meta-flex { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; }
+    .meta-label { color: var(--text-muted-2); }
+    @media (min-width: 960px) { .meta-row { grid-template-columns: 1fr; } }
+    .meta-line { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; color: var(--text-muted); font-size: .95rem; margin-top: .15rem; }
+
+    /* Gradient link utilities */
     .gradient-pink-text{
       background: linear-gradient(90deg, var(--magenta), var(--purple));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent; color: transparent;
       text-decoration: none; font-weight: 700;
     }
-    .gradient-pink-text:hover{opacity:.92}
+    .gradient-pink-text:hover{ opacity: .92; }
+
     .gradient-blue-text{
       background: linear-gradient(90deg, var(--cyan), #56ccf2);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent; color: transparent;
       text-decoration: none; font-weight: 700;
     }
-    .gradient-blue-text:hover{opacity:.92}
+    .gradient-blue-text:hover{ opacity: .92; }
 
-    /* Default figure style for images inside the story body */
-    .story-figure{margin:2rem auto 0;max-width:720px;width:100%}
-    .story-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border-dark)}
-    .story-figure figcaption{color:var(--footer-muted);font-size:.9rem;margin-top:.5rem}
+    /* Figures inside story body */
+    .story-figure { margin: 2rem auto 0; max-width: 720px; width: 100%; }
+    .story-figure img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--border-dark); }
+    .story-figure figcaption { color: var(--footer-muted); font-size: .9rem; margin-top: .5rem; }
 
-    /* Hero image behavior (kept tidy and not too tall) */
-    .page-hero .story-figure{margin:0}
-    @media (min-width:600px){
-      .page-hero .story-figure img{max-height:75vh;object-fit:cover;object-position:center}
+    /* Hero image containment */
+    .page-hero .story-figure { margin: 0; }
+    @media (min-width: 600px){
+      .page-hero .story-figure img { max-height: 75vh; object-fit: cover; object-position: center; }
     }
 
-    main.story{padding:2rem 1rem 4rem}
-    .story-inner{display:grid;grid-template-columns:1fr;gap:2rem;max-width:1000px;margin:0 auto}
-    .story-body{max-width:720px;font-size:1.125rem;line-height:1.85}
-    .story-body p{margin:1.1rem 0}
-    .dropcap:first-letter{float:left;font-size:3.4rem;line-height:.9;padding-right:.35rem;padding-top:.1rem;font-weight:700;color:var(--cyan)}
-    .story-aside{position:sticky;top:5.5rem;height:fit-content;display:grid;gap:1rem}
-    .card{background:var(--card);border:1px solid var(--border-dark);border-radius:14px;padding:1rem;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-    .author-card h4,.newsletter-card h4{margin:0 0 .5rem 0;font-family:'Orbitron',sans-serif}
-    .pullquote{font-size:1.25rem;padding:1rem 1.25rem;margin:2rem 0;border-left:4px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:8px}
+    /* Main layout */
+    main.story { padding: 2rem 1rem 4rem; }
+    .story-inner { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto; }
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.6rem .9rem;border-radius:999px;border:1px solid var(--border-dark);background:linear-gradient(90deg,rgba(247,37,133,.1),rgba(114,9,183,.1));color:var(--text);text-decoration:none;font-weight:600}
-    .btn:hover{background:linear-gradient(90deg,rgba(13,246,227,.12),rgba(114,9,183,.18))}
-
-    .prev-next{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:3rem}
-    .prev-next a{text-decoration:none}
-    @media (min-width:960px){
-      .story-inner{grid-template-columns:1fr 320px}
-      .prev-next{grid-template-columns:1fr 1fr}
+    /* Article body */
+    .story-body { max-width: 720px; font-size: 1.125rem; line-height: 1.85; }
+    .story-body p { margin: 1.1rem 0; }
+    .dropcap:first-letter {
+      float: left; font-size: 3.4rem; line-height: .9; padding-right: .35rem; padding-top: .1rem;
+      font-weight: 700; color: var(--cyan);
     }
 
-    /* Center the email field in the right-rail newsletter card */
-    .newsletter-card form{ display:grid; gap:.6rem; justify-items:center; }
+    /* Right-rail */
+    .story-aside { position: sticky; top: 5.5rem; height: fit-content; display: grid; gap: 1rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border-dark); border-radius: 14px; padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    .author-card h4, .newsletter-card h4 { margin: 0 0 .5rem 0; font-family: 'Orbitron', sans-serif; }
+    .pullquote {
+      font-size: 1.25rem; padding: 1rem 1.25rem; margin: 2rem 0;
+      border-left: 4px solid var(--cyan); background: rgba(255,255,255,.03); border-radius: 8px;
+    }
+
+    /* Buttons */
+    .btn{
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .6rem .9rem; border-radius: 999px; border: 1px solid var(--border-dark);
+      background: linear-gradient(90deg, rgba(247,37,133,.1), rgba(114,9,183,.1));
+      color: var(--text); text-decoration: none; font-weight: 600;
+    }
+    .btn:hover{ background: linear-gradient(90deg, rgba(13,246,227,.12), rgba(114,9,183,.18)); }
+
+    /* Prev/Next links */
+    .prev-next { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 3rem; }
+    .prev-next a { text-decoration: none; }
+    @media (min-width: 960px){
+      .story-inner { grid-template-columns: 1fr 320px; }
+      .prev-next { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Newsletter inputs in right-rail: centered, consistent width */
+    .newsletter-card form { display: grid; gap: .6rem; justify-items: center; }
     .newsletter-card input[type="email"]{
-      width:100%; max-width:340px; box-sizing:border-box; margin:0!important; float:none!important;
+      width: 100%; max-width: 340px; box-sizing: border-box; margin: 0 !important; float: none !important;
     }
-    .newsletter-card button{ width:100%; max-width:340px; }
+    .newsletter-card button { width: 100%; max-width: 340px; }
   </style>
 
-  <!-- JSON-LD Article schema -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -112,15 +154,18 @@
 </head>
 <body>
 
-  <!-- Header / Nav -->
+  <!-- Reading progress bar -->
+  <div id="readProgress" class="read-progress" aria-hidden="true"></div>
+
+  <!-- Header / Primary navigation -->
   <header class="site-header">
     <a href="../index.html" class="logo-title">
       <img src="../Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
-    <div class="hamburger" onclick="toggleMenu()">
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation" aria-controls="site-nav" aria-expanded="false">
       <div></div><div></div><div></div>
-    </div>
+    </button>
     <nav class="site-nav" id="site-nav">
       <a href="../issues.html">Issues</a>
       <a href="../stories.html">Stories</a>
@@ -130,13 +175,13 @@
     </nav>
   </header>
 
-  <!-- Page Hero -->
+  <!-- Hero -->
   <section class="page-hero" role="banner">
     <div class="hero-inner hero-row">
       <div class="hero-text">
-        <div class="nav-breadcrumb">
-          <a href="../issues.html" class="gradient-pink-text">Fiction</a> / <span>[Story Title]</span>
-        </div>
+        <nav class="nav-breadcrumb" aria-label="Breadcrumb">
+          <a href="../issues.html" class="gradient-pink-text">Fiction</a> / <span aria-current="page">[Story Title]</span>
+        </nav>
         <h1 class="gradient-heading">[Story Title]</h1>
         <p style="color:var(--text-muted);margin:0 0 1rem 0;">[Optional subtitle or teaser sentence goes here.]</p>
 
@@ -153,13 +198,13 @@
       </div>
 
       <figure class="story-figure">
-        <img src="../AL Cover.png" alt="[Describe the illustration briefly]" loading="lazy" decoding="async" />
+        <img src="../Placeholder 4.png" alt="[Describe the illustration briefly]" loading="lazy" decoding="async" />
         <figcaption>Illustration by [Illustrator Name].</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- Main -->
+  <!-- Main content -->
   <main id="main" class="story" role="main">
     <div class="story-inner">
       <article class="story-body" data-count-words>
@@ -180,7 +225,7 @@
 
       </article>
 
-      <!-- Right rail -->
+      <!-- Right rail: author and newsletter -->
       <aside class="story-aside" aria-label="About the author and newsletter">
         <section class="card author-card">
           <h4>About the Author</h4>
@@ -227,38 +272,49 @@
     </div>
   </footer>
 
-  <!-- Tiny JS -->
+  <!-- Minimal JS: nav toggle, progress bar, word count/read time -->
   <script>
+    // Toggle primary navigation on small screens
     function toggleMenu() {
       const nav = document.getElementById('site-nav');
-      if (nav) nav.classList.toggle('active');
+      const btn = document.querySelector('.hamburger');
+      if (!nav || !btn) return;
+      nav.classList.toggle('active');
+      const expanded = nav.classList.contains('active');
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
 
-    (function(){
-      const bar=document.getElementById('readProgress');
-      const main=document.querySelector('main.story');
-      if(!bar||!main) return;
-      const onScroll=()=>{
-        const total=main.scrollHeight-window.innerHeight;
-        const scrolled=window.scrollY-(main.offsetTop||0);
-        const pct=Math.max(0,Math.min(1,scrolled/total));
-        bar.style.width=(pct*100)+'%';
+    // Reading progress: adjusts the top bar width based on scroll position within <main.story>
+    (function () {
+      const bar = document.getElementById('readProgress');
+      const main = document.querySelector('main.story');
+      if (!bar || !main) return;
+
+      const onScroll = () => {
+        const total = main.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY - (main.offsetTop || 0);
+        const pct = Math.max(0, Math.min(1, scrolled / total));
+        bar.style.width = (pct * 100) + '%';
       };
-      window.addEventListener('scroll',onScroll,{passive:true});
-      window.addEventListener('resize',onScroll);
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
       onScroll();
     })();
 
-    (function(){
-      const body=document.querySelector('[data-count-words]');
-      const wc=document.getElementById('wordCount');
-      const rt=document.getElementById('readTime');
-      if(!body||!wc||!rt) return;
-      const text=body.innerText||body.textContent||'';
-      const words=(text.trim().match(/\S+/g)||[]).length;
-      const mins=Math.max(1,Math.round(words/225));
-      wc.textContent=`~ ${words.toLocaleString()} words`;
-      rt.textContent=`~ ${mins} min read`;
+    // Word count + estimated read time (~225 wpm)
+    (function () {
+      const body = document.querySelector('[data-count-words]');
+      const wc = document.getElementById('wordCount');
+      const rt = document.getElementById('readTime');
+      if (!body || !wc || !rt) return;
+
+      const text = body.innerText || body.textContent || '';
+      const words = (text.trim().match(/\S+/g) || []).length;
+      const mins = Math.max(1, Math.round(words / 225));
+
+      wc.textContent = `~ ${words.toLocaleString()} words`;
+      rt.textContent = `~ ${mins} min read`;
     })();
   </script>
 </body>
