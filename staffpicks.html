@@ -209,15 +209,16 @@
     <!-- Tabs -->
     <div class="tabs">
       <div class="tablist" role="tablist" aria-label="Filter Staff Picks">
-        <button class="tab" id="tab-games" role="tab" aria-selected="true" aria-controls="panel-grid" data-filter="games">Games</button>
-        <button class="tab" id="tab-books" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="books">Books</button>
+        <!-- Books now first & initially selected -->
+        <button class="tab" id="tab-books" role="tab" aria-selected="true" aria-controls="panel-grid" data-filter="books">Books</button>
+        <button class="tab" id="tab-games" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="games">Games</button>
         <button class="tab" id="tab-film"  role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="film">Film / TV</button>
         <button class="tab" id="tab-other" role="tab" aria-selected="false" aria-controls="panel-grid" data-filter="other">Other</button>
       </div>
     </div>
 
     <!-- Single panel with filterable grid -->
-    <div id="panel-grid" class="story-grid" role="tabpanel" tabindex="0" aria-labelledby="tab-games">
+    <div id="panel-grid" class="story-grid" role="tabpanel" tabindex="0" aria-labelledby="tab-books">
       <!-- Games -->
       <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for 1000xRESIST">
         <img src="1000xResist.png" alt="">
@@ -627,15 +628,15 @@
         });
       });
 
-      // Initial from hash (default: games)
-      const hash = (location.hash || '#games').toLowerCase().replace('#','');
-      const initial = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'games'));
+      // Initial from hash (default: books)
+      const hash = (location.hash || '#books').toLowerCase().replace('#','');
+      const initial = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'books'));
       setSelected(initial, false);
 
       // React to hash changes
       window.addEventListener('hashchange', () => {
-        const h = (location.hash || '#games').toLowerCase().replace('#','');
-        const hTab = document.getElementById('tab-' + (['books','games','film','other'].includes(h) ? h : 'games'));
+        const h = (location.hash || '#books').toLowerCase().replace('#','');
+        const hTab = document.getElementById('tab-' + (['books','games','film','other'].includes(h) ? h : 'books'));
         if (hTab) setSelected(hTab, false);
       });
     })();
