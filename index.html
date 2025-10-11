@@ -11,7 +11,7 @@
   <!-- Global header/footer/vars -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page-specific styles (hero, grid, cards, buttons, latest-issue) -->
+  <!-- Page-specific styles (hero, grid, cards, buttons) -->
   <style>
     html { scroll-behavior: smooth; }
 
@@ -70,23 +70,6 @@
       max-width: 300px;
     }
     .hero a img:hover { opacity: 0.9; }
-
-    /* Latest issue section (capped via .wrap on the element) */
-    #latest-issue {
-      padding: 4rem 0;
-      text-align: center;
-      display: none;
-    }
-    #latest-issue .fp-iframe {
-      border: 1px solid var(--border-dark);
-      width: 100%;
-      height: 400px;
-      background: #000;
-    }
-    #latest-issue a {
-      color: var(--cyan);
-      text-decoration: underline;
-    }
 
     /* Grid band (full-bleed background; inner content capped by .wrap) */
     .grid {
@@ -219,7 +202,8 @@
   <!-- HERO (full-bleed band, capped inner content) -->
   <section class="hero">
     <div class="hero-inner wrap">
-      <a href="#latest-issue" onclick="openFlipbook(event)">
+      <!-- Cover image opens Heyzine in a new tab -->
+      <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener">
         <img src="New Cover.png" alt="Latest issue cover" />
       </a>
 
@@ -249,26 +233,11 @@
         </div>
 
         <div class="button-row" style="width: 100%; margin-top: 2.5rem;">
-          <button id="toggle-flipbook" class="btn">Read This Issue</button>
-<a
-  href="Placeholder Mag.pdf"
-  download
-  class="btn subscribe-btn"
->
-  Download PDF
-</a>
-
+          <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener" class="btn">Read This Issue</a>
+          <a href="Placeholder Mag.pdf" download class="btn subscribe-btn">Download PDF</a>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Latest issue (capped with .wrap) -->
-  <section id="latest-issue" class="wrap">
-  <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" style="border: 1px solid lightgray; width: 100%; height: 400px;" src="https://heyzine.com/flip-book/f23a012d4f.html"></iframe>
-<p style="margin-top: 1rem;">
-  <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank">Open in new tab</a>
-</p>
   </section>
 
   <!-- Feature cards (full-bleed band, capped inner content) -->
@@ -324,9 +293,6 @@
   </footer>
 
 <script>
-  // --- Config: keep your Heyzine URL in one place ---
-  const FLIPBOOK_URL = "https://heyzine.com/flip-book/f23a012d4f.html"; // update if needed
-
   // --- Mobile nav (guarded so it won't throw if elements are missing) ---
   (function () {
     const hamburger = document.getElementById('hamburger');
@@ -347,28 +313,6 @@
     }
   })();
 
-  // --- Flipbook reveal + scroll ---
-  function showFlipbook(e) {
-    if (e) e.preventDefault();
-    const section = document.getElementById('latest-issue');
-    if (!section) return;
-    const iframe = section.querySelector('.fp-iframe');
-    if (iframe && iframe.src !== FLIPBOOK_URL) {
-      iframe.src = FLIPBOOK_URL;
-    }
-    section.style.display = 'block';
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // Wire up the hero cover image and the "Read This Issue" button
-  (function () {
-    const heroLink = document.querySelector('.hero a[href="#latest-issue"]');
-    if (heroLink) heroLink.addEventListener('click', showFlipbook);
-
-    const btn = document.getElementById('toggle-flipbook');
-    if (btn) btn.addEventListener('click', showFlipbook);
-  })();
-
   // --- Remove/guard any "Load More" logic (it doesn't exist on this page) ---
   (function () {
     const btn = document.getElementById('load-more');
@@ -387,23 +331,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
