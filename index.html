@@ -36,7 +36,7 @@
 
     /* Hero (full-bleed background, capped inner content) */
     .hero {
-      padding: 6rem 0; /* remove side padding; handled by .wrap */
+      padding: 6rem 0;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
       color: var(--text);
       border-bottom: 1px solid var(--border-dark);
@@ -73,7 +73,7 @@
 
     /* Grid band (full-bleed background; inner content capped by .wrap) */
     .grid {
-      padding: 6rem 0; /* remove side padding; handled by .wrap */
+      padding: 6rem 0;
       background-color: var(--bg-deep-1);
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
       background-repeat: repeat;
@@ -178,7 +178,12 @@
     }
     .newsletter-button:hover { background: var(--cyan-hover); }
 
-    /* --- NEW: responsive stacking for the bottom image cards --- */
+    /* --- Bottom image cards: make taller + mirror Art page spacing --- */
+    /* Doubled visual height by halving aspect ratio from ~16:9 to 8:9 */
+    .home-cards { gap: 2rem; margin-top: 1.25rem; }
+    .edge-card { aspect-ratio: 8 / 9; }
+
+    /* Responsive stacking */
     @media (max-width: 1024px) {
       .home-cards { grid-template-columns: repeat(2, 1fr) !important; }
     }
@@ -325,7 +330,7 @@
   // --- Remove/guard any "Load More" logic (it doesn't exist on this page) ---
   (function () {
     const btn = document.getElementById('load-more');
-    if (!btn) return; // do nothing on pages without this button
+    if (!btn) return;
 
     const BATCH_SIZE = 3;
     const hiddenCards = () => Array.from(document.querySelectorAll('.story-card.is-hidden'));
