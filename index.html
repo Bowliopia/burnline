@@ -81,12 +81,13 @@
       border-top: 1px solid var(--border-dark);
       border-bottom: 1px solid var(--border-dark);
     }
+
+    /* Legacy card styles (safe to keep; not used by new bottom cards) */
     .grid-inner{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2.5rem;
     }
-
     .card {
       background: var(--card);
       border-radius: 12px;
@@ -243,26 +244,26 @@
   <!-- Feature cards (full-bleed band, capped inner content) -->
   <section class="grid" id="features">
     <div class="wrap">
-      <div class="grid-inner">
-        <a href="issues.html" class="card-link">
-          <div class="card">
-            <img src="Frame 21.png" alt="Featured Stories image">
-            <h3>Issue Library</h3>
-          </div>
+      <!-- New image-only, edge-to-edge cards -->
+      <section class="home-cards">
+        <!-- Issue Library -->
+        <a class="edge-card" href="issues.html" aria-label="Open the Issue Library">
+          <span class="sr-only">Issue Library</span>
+          <img src="Frame 21.png" alt="" loading="lazy">
         </a>
-        <a href="stories.html" class="card-link">
-          <div class="card">
-            <img src="Frame 22.png" alt="Poll image">
-            <h3>Featured Stories</h3>
-          </div>
+
+        <!-- Featured Stories -->
+        <a class="edge-card" href="stories.html" aria-label="Open Featured Stories">
+          <span class="sr-only">Featured Stories</span>
+          <img src="Frame 22.png" alt="" loading="lazy">
         </a>
-        <a href="staffpicks.html" class="card-link">
-          <div class="card">
-            <img src="Frame 23.png" alt="Staff Picks image">
-            <h3>Staff Picks</h3>
-          </div>
+
+        <!-- Staff Picks -->
+        <a class="edge-card" href="staffpicks.html" aria-label="Open Staff Picks">
+          <span class="sr-only">Staff Picks</span>
+          <img src="Frame 23.png" alt="" loading="lazy">
         </a>
-      </div>
+      </section>
     </div>
   </section>
 
@@ -331,5 +332,3 @@
 </script>
 </body>
 </html>
-
-
