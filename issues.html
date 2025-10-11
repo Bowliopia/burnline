@@ -75,7 +75,8 @@
     .issue-hero ul{ list-style: none; padding: 0; margin: 0; color: var(--text-muted); }
     .issue-hero li{ margin-bottom: .75rem; }
     .issue-hero li strong{ color: #fff; }
-    .issue-hero .cta{
+    .issue-hero .cta,
+    .button-row{
       width: 100%;
       text-align: center;
       margin-top: 2.5rem;
@@ -83,23 +84,6 @@
       gap: .75rem;
       justify-content: center;
       flex-wrap: wrap;
-    }
-
-    /* Flipbook section */
-    .flipbook-section {
-      padding: 3rem 0 0;
-      text-align: center;
-      display: none;
-    }
-    .flipbook-section .fp-iframe {
-      border: 1px solid var(--border-dark);
-      width: 100%;
-      height: 400px;
-      background: #000;
-    }
-    .flipbook-section a {
-      color: var(--cyan);
-      text-decoration: underline;
     }
 
     @media (max-width: 980px){
@@ -134,7 +118,8 @@
 
     <!-- Issue 001 -->
     <section class="issue-hero" id="issue-001">
-      <a href="#flip-001" class="cover js-open-flipbook" data-target="flip-001" aria-label="Open Issue 01 flipbook">
+      <!-- Cover now opens Heyzine in a new tab -->
+      <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener" class="cover" aria-label="Open Issue 01 flipbook">
         <img src="New Cover.png" alt="Issue 01 cover" loading="lazy" width="900" height="1200">
       </a>
       <div class="text">
@@ -159,19 +144,14 @@
             </ul>
           </div>
         </div>
+
         <div class="button-row" style="width: 100%; margin-top: 2.5rem;">
+          <!-- Read This Issue opens Heyzine in a new tab -->
           <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener" class="btn">Read This Issue</a>
-          <a href="Placeholder Mag.pdf" download class="btn secondary">Download PDF</a>
+          <!-- Inverted Download button with encoded space -->
+          <a href="Placeholder%20Mag.pdf" download class="btn secondary">Download PDF</a>
         </div>
       </div>
-    </section>
-
-    <!-- Flipbook for Issue 001 -->
-    <section id="flip-001" class="flipbook-section">
-      <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" style="border: 1px solid lightgray; width: 100%; height: 400px;" src="https://heyzine.com/flip-book/f23a012d4f.html"></iframe>
-      <p style="margin-top: 1rem;">
-        <a href="https://heyzine.com/flip-book/6c786ba517.html" target="_blank" rel="noopener">Open in Fullscreen</a>
-      </p>
     </section>
 
   </main>
@@ -207,32 +187,6 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('active');
     }
-
-    // Toggle for Issue 01
-    function toggleFlipbook(event) {
-      event.preventDefault();
-      const targetId = this.getAttribute('data-target');
-      if (!targetId) return;
-
-      const section = document.getElementById(targetId);
-      if (!section) return;
-
-      const isHidden = section.style.display === 'none' || section.style.display === '';
-      const relatedButtons = document.querySelectorAll('[data-target="'+targetId+'"]');
-
-      if (isHidden) {
-        section.style.display = 'block';
-        relatedButtons.forEach(btn => { if (btn.classList.contains('toggle-flipbook')) btn.textContent = 'Hide Issue'; });
-        section.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        section.style.display = 'none';
-        relatedButtons.forEach(btn => { if (btn.classList.contains('toggle-flipbook')) btn.textContent = 'Read Issue'; });
-      }
-    }
-
-    document.querySelectorAll('.js-open-flipbook').forEach(el => {
-      el.addEventListener('click', toggleFlipbook);
-    });
   </script>
 </body>
 </html>
