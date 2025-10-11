@@ -82,8 +82,9 @@
     .story-card:focus-visible{ outline: 2px solid var(--cyan); outline-offset: 4px; }
     .story-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.35); }
 
-    /* Taller books, like homepage override */
-    .story-card[data-category="books"] { aspect-ratio: 8 / 9; }
+/* Taller books */
+.story-card[data-category="books"] { aspect-ratio: 2 / 3; }   /* or 1 / 2 */
+
 
     .story-card img{
       display: block;
