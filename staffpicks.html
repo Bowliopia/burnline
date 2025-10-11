@@ -64,37 +64,45 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
     }
+
+    /* EDGE-CARD STYLE (full-bleed image cards) */
     .story-card {
-      background-color: var(--card);
-      border-radius: 10px;
-      padding: 1rem;
-      display: none; /* hidden until filtered */
+      display: none;              /* hidden until filtered */
       position: relative;
-      overflow: hidden;
       cursor: pointer;
+      overflow: hidden;
+      border-radius: 16px;
+      background: none;
+      padding: 0;
+      box-shadow: none;
       transition: transform .15s ease, box-shadow .15s ease;
+      aspect-ratio: 16 / 9;       /* default card height (games/film/other) */
     }
+    .story-card.active { display: block; }
     .story-card:focus-visible{ outline: 2px solid var(--cyan); outline-offset: 4px; }
     .story-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.35); }
-    .story-card.active { display: block; }
 
-    /* UNIFORM THUMBNAIL CROPPING */
+    /* Taller books, like homepage override */
+    .story-card[data-category="books"] { aspect-ratio: 8 / 9; }
+
     .story-card img{
-      width: 100%;
-      height: clamp(180px, 24vw, 220px); /* responsive but consistent */
-      object-fit: cover;                 /* fills box, crops overflow */
-      object-position: center;           /* center the crop */
-      border-radius: 8px;
-      margin-bottom: 0.8rem;
       display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;           /* full-bleed magic */
+      object-position: center;
+      border-radius: 0;
+      margin: 0;
+      transition: transform 300ms ease;
     }
-.story-card[data-category="books"] img{
-  height: clamp(320px, 50vw, 520px); /* was clamp(220px, 28vw, 280px) */
-}
+    @media (hover:hover) and (pointer:fine) {
+      .story-card:hover img { transform: scale(1.03); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .story-card img { transition: none !important; }
+    }
 
-    .story-card h3 { color: var(--cyan); font-size: 1.1rem; margin: 0.25rem 0 0.25rem; }
-    .story-card small { color: #9aa; font-size: 0.85rem; }
-
+    /* Hide any legacy overlay card content on the grid (modal still uses it) */
     .card-overlay { display: none !important; }
 
     /* Stack tabs on narrow screens */
@@ -234,10 +242,8 @@
     <!-- Single panel with filterable grid -->
     <div id="panel-grid" class="story-grid" role="tabpanel" tabindex="0" aria-labelledby="tab-books">
       <!-- Games -->
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for 1000xRESIST">
+      <div class="story-card" data-category="games" data-title="1000xRESIST" data-byline="Reikon Games" tabindex="0" aria-label="Open details for 1000xRESIST">
         <img src="1000xResist.png" alt="">
-        <h3>1000xRESIST</h3>
-        <small>Reikon Games</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>This game follows Watcher, a clone of the “Allmother,” who was one of the only people immune to an alien-borne pandemic that ravaged the earth many generations prior. Watcher and her many sisters, all clones of the Allmother, survive together in their cult-like, subterranean society, where they determine their future together.</p>
@@ -249,10 +255,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Citizen Sleeper">
+      <div class="story-card" data-category="games" data-title="Citizen Sleeper" data-byline="Jump Over the Age / Fellow Traveller" tabindex="0" aria-label="Open details for Citizen Sleeper">
         <img src="CS Keyart.png" alt="">
-        <h3>Citizen Sleeper</h3>
-        <small>Jump Over the Age / Fellow Traveller</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Citizen Sleeper is a role-playing game where you, a Sleeper, wake up aboard a space station foreign to you, where many of the corporate-owned inhabitants see you as less than human. By rolling dice and making choices on how you spend each day aboard the station, you explore the best way to make important relationships, cut deals, and leave the ship in hopes of regaining your freedom.</p>
@@ -263,10 +267,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cloudpunk">
+      <div class="story-card" data-category="games" data-title="Cloudpunk" data-byline="ION Lands" tabindex="0" aria-label="Open details for Cloudpunk">
         <img src="Cloudpunk Keyart.jpg" alt="">
-        <h3>Cloudpunk</h3>
-        <small>ION Lands</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Cloudpunk puts you in the role of Rania, a delivery driver working for a semi-legal courier service in a sprawling, vertical cyberpunk city. Over the course of a night, you ferry packages, meet eccentric residents, and slowly piece together the human and inhuman stories that fill the neon skyline.</p>
@@ -276,10 +278,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cyberpunk 2077">
+      <div class="story-card" data-category="games" data-title="Cyberpunk 2077" data-byline="CD Projekt Red" tabindex="0" aria-label="Open details for Cyberpunk 2077">
         <img src="CP2077 Keyart.jpg" alt="">
-        <h3>Cyberpunk 2077</h3>
-        <small>CD Projekt Red</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>You know what this game is and don’t need me to describe it to you.</p>
@@ -291,10 +291,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Far Cry 3: Blood Dragon">
+      <div class="story-card" data-category="games" data-title="Far Cry 3: Blood Dragon" data-byline="Ubisoft" tabindex="0" aria-label="Open details for Far Cry 3: Blood Dragon">
         <img src="FC3 Blood Dragon.jpg" alt="">
-        <h3>Far Cry 3: Blood Dragon</h3>
-        <small>Ubisoft</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Blood Dragon is a standalone expansion of Far Cry 3 that dials everything up to absurdity. You play Rex “Power” Colt, a cyborg soldier in a neon-drenched parody of ‘80s action films, fighting laser raptors, cyber-sharks, and a mad scientist villain.</p>
@@ -304,10 +302,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ghostrunner">
+      <div class="story-card" data-category="games" data-title="Ghostrunner" data-byline="One More Level" tabindex="0" aria-label="Open details for Ghostrunner">
         <img src="Ghostrunner Keyart.jpg" alt="">
-        <h3>Ghostrunner</h3>
-        <small>One More Level</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Ghostrunner casts you as a cybernetic ninja ascending a massive tower city, armed with nothing but a katana, lightning reflexes, and a grappling hook.</p>
@@ -317,10 +313,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Perfect Dark (Xbox 360)">
+      <div class="story-card" data-category="games" data-title="Perfect Dark (Xbox 360)" data-byline="Rare" tabindex="0" aria-label="Open details for Perfect Dark (Xbox 360)">
         <img src="Perfect Dark.jpg" alt="">
-        <h3>Perfect Dark (Xbox 360)</h3>
-        <small>Rare</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>This remaster of the original N64 classic follows Joanna Dark, a secret agent caught in a conspiracy involving corporations, aliens, and cutting-edge weapons.</p>
@@ -330,10 +324,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ruiner">
+      <div class="story-card" data-category="games" data-title="Ruiner" data-byline="Reikon Games" tabindex="0" aria-label="Open details for Ruiner">
         <img src="Ruiner Keyart.jpg" alt="">
-        <h3>Ruiner</h3>
-        <small>Reikon Games</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Ruiner is a fast-paced twin-stick shooter where you play as a helmeted antihero on a mission to rescue his kidnapped brother. The gameplay is a mix of fast-paced melee and gun combat, all wrapped in a pounding synth soundtrack and blood-red visuals.</p>
@@ -344,10 +336,8 @@
       </div>
 
       <!-- Books -->
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Altered Carbon">
+      <div class="story-card" data-category="books" data-title="Altered Carbon" data-byline="Richard K. Morgan" tabindex="0" aria-label="Open details for Altered Carbon">
         <img src="Altered Carbon1.jpg" alt="">
-        <h3>Altered Carbon</h3>
-        <small>Richard K. Morgan</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>In Richard Morgan’s version of the future, people’s consciousness can be transferred into new bodies (or “sleeves”), making death escapable for the lucky few who are rich enough to afford the process. Takeshi Kovacs, a former elite soldier turned private investigator, is hired to investigate the murder of one such person.</p>
@@ -357,10 +347,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Blame!">
+      <div class="story-card" data-category="books" data-title="Blame!" data-byline="Tsutomu Nihei" tabindex="0" aria-label="Open details for Blame!">
         <img src="Blame!.jpg" alt="">
-        <h3>Blame!</h3>
-        <small>Tsutomu Nihei</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Blame! follows Killy, a silent wanderer armed with an impossibly powerful gun, as he searches for humans with the Net Terminal Gene across a vast megastructure. Dialogue is sparse, characters are fleeting, and the environment is the main mode of storytelling, where bleak structures stretch on endlessly.</p>
@@ -371,10 +359,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Burning Chrome">
+      <div class="story-card" data-category="books" data-title="Burning Chrome" data-byline="William Gibson" tabindex="0" aria-label="Open details for Burning Chrome">
         <img src="Burning Chrome.png" alt="">
-        <h3>Burning Chrome</h3>
-        <small>William Gibson</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>This short story collection by William Gibson gathers some of his earliest and most defining works. The title story, co-written with Bruce Sterling, brings in genre-defining tropes: console cowboys, ice-breaking, and big-city crime at night. Other stories like “Johnny Mnemonic” and “New Rose Hotel” further sketch the outline of what would later become full-fledged cyberpunk.</p>
@@ -384,10 +370,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Count Zero">
+      <div class="story-card" data-category="books" data-title="Count Zero" data-byline="William Gibson" tabindex="0" aria-label="Open details for Count Zero">
         <img src="Count Zero.jpg" alt="">
-        <h3>Count Zero</h3>
-        <small>William Gibson</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Seven years after Neuromancer, the second entry in Gibson’s Sprawl trilogy weaves together three storylines: a mercenary caught in a corporate double-cross, a young hacker in over his head, and an art dealer hunting a mysterious painter. As the threads converge, the novel explores the evolving relationship between humans and AIs, including strange voodoo-like digital entities.</p>
@@ -397,10 +381,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Mirrorshades">
+      <div class="story-card" data-category="books" data-title="Mirrorshades" data-byline="Edited by Bruce Sterling" tabindex="0" aria-label="Open details for Mirrorshades">
         <img src="Mirrorshades.jpg" alt="">
-        <h3>Mirrorshades</h3>
-        <small>Edited by Bruce Sterling</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Edited by Bruce Sterling, Mirrorshades brings together many of the early voices from the original cyberpunk movement (Gibson, Cadigan, Sterling, and more). Each story experiments with different aspects of the genre—from body modification and AI to street-level rebellion against sprawling corporations.</p>
@@ -410,10 +392,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Neuromancer">
+      <div class="story-card" data-category="books" data-title="Neuromancer" data-byline="William Gibson" tabindex="0" aria-label="Open details for Neuromancer">
         <img src="Neuromancer.jpg" alt="">
-        <h3>Neuromancer</h3>
-        <small>William Gibson</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Neuromancer follows Case, a high-tech, low-life hacker trying to survive after a former employer disabled the tech within his nervous system. After a shadowy ex-military officer and a razorgirl approach him, Case agrees to a high-stakes heist in hopes of restoring himself.</p>
@@ -423,10 +403,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Schismatrix Plus">
+      <div class="story-card" data-category="books" data-title="Schismatrix Plus" data-byline="Bruce Sterling" tabindex="0" aria-label="Open details for Schismatrix Plus">
         <img src="Schismatrix Plus.jpg" alt="">
-        <h3>Schismatrix Plus</h3>
-        <small>Bruce Sterling</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Abelard Lindsay navigates power struggles between two posthuman factions: Shapers (genetic modification) and Mechanists (cybernetics). Across decades and shifting alliances, humanity evolves beyond Earth—and flesh.</p>
@@ -436,10 +414,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Synners">
+      <div class="story-card" data-category="books" data-title="Synners" data-byline="Pat Cadigan" tabindex="0" aria-label="Open details for Synners">
         <img src="Synners.jpg" alt="">
-        <h3>Synners</h3>
-        <small>Pat Cadigan</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>People directly plug into entertainment streams until the boundary between human consciousness and digital content dissolves. What begins as hackers colliding with new tech spirals into a crisis where society risks collapsing under information overload.</p>
@@ -449,10 +425,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Titanium Noir">
+      <div class="story-card" data-category="books" data-title="Titanium Noir" data-byline="Nick Harkaway" tabindex="0" aria-label="Open details for Titanium Noir">
         <img src="Titanium Noir.jpg" alt="">
-        <h3>Titanium Noir</h3>
-        <small>Nick Harkaway</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>In a city where biotech created a class of “Titans”—genetically modified elites— a detective is pulled into a murder involving one of them. Classic noir setup meets a cyberpunk future.</p>
@@ -463,10 +437,8 @@
       </div>
 
       <!-- Film / TV -->
-      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Blade Runner 2049">
+      <div class="story-card" data-category="film" data-title="Blade Runner 2049" data-byline="Denis Villeneuve" tabindex="0" aria-label="Open details for Blade Runner 2049">
         <img src="BR 2049.jpg" alt="">
-        <h3>Blade Runner 2049</h3>
-        <small>Denis Villeneuve</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Thirty years after the original, K—a replicant blade runner—uncovers a secret that could change the balance between humans and replicants. It’s a story about identity, memory, and what it means to be real.</p>
@@ -475,10 +447,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Cyberpunk Edgerunners">
+      <div class="story-card" data-category="film" data-title="Cyberpunk Edgerunners" data-byline="Studio Trigger / CD Projekt" tabindex="0" aria-label="Open details for Cyberpunk Edgerunners">
         <img src="CP Edgerunners.jpg" alt="">
-        <h3>Cyberpunk Edgerunners</h3>
-        <small>Studio Trigger / CD Projekt</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Set in the world of Cyberpunk 2077, Edgerunners follows David Martinez, a street kid who implants illegal tech and spirals into Night City’s mercenary life.</p>
@@ -487,10 +457,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell (1995 film)">
+      <div class="story-card" data-category="film" data-title="Ghost in the Shell (1995 film)" data-byline="Mamoru Oshii" tabindex="0" aria-label="Open details for Ghost in the Shell (1995 film)">
         <img src="Ghost in the Shell.jpg" alt="">
-        <h3>Ghost in the Shell (1995 film)</h3>
-        <small>Mamoru Oshii</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Major Motoko Kusanagi, a cyborg with Section 9, hunts a mysterious hacker known as the Puppet Master.</p>
@@ -499,10 +467,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell: Stand Alone Complex">
+      <div class="story-card" data-category="film" data-title="Ghost in the Shell: Stand Alone Complex" data-byline="Kenji Kamiyama / Production I.G." tabindex="0" aria-label="Open details for Ghost in the Shell: Stand Alone Complex">
         <img src="Ghost in the Shell SAC.png" alt="">
-        <h3>Ghost in the Shell: Stand Alone Complex</h3>
-        <small>Kenji Kamiyama / Production I.G.</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>Expands the GITS universe with episodic cases and arcs following Major Kusanagi and Section 9.</p>
@@ -512,10 +478,8 @@
       </div>
 
       <!-- Other -->
-      <div class="story-card" data-category="other" tabindex="0" aria-label="Open details for Neon_Rising">
+      <div class="story-card" data-category="other" data-title="The_Future_Is_Now / Neon_Rising" data-byline="Deathburger" tabindex="0" aria-label="Open details for Neon_Rising">
         <img src="Neon Rising.png" alt="">
-        <h3>The_Future_Is_Now / Neon_Rising</h3>
-        <small>Deathburger</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>An art book that mixes narrative with wordless visuals. The art alone tells stories, with just enough lore to make the world feel alive.</p>
@@ -525,10 +489,8 @@
         </div>
       </div>
 
-      <div class="story-card" data-category="other" tabindex="0" aria-label="Open details for TO:KY:OO">
+      <div class="story-card" data-category="other" data-title="TO:KY:OO" data-byline="Liam Wong" tabindex="0" aria-label="Open details for TO:KY:OO">
         <img src="Tokyo.png" alt="">
-        <h3>TO:KY:OO</h3>
-        <small>Liam Wong</small>
         <div class="card-overlay">
           <div class="overlay-content">
             <p>A photography book capturing Tokyo at night—real streets framed like cyberpunk scenes.</p>
@@ -669,8 +631,11 @@
       function openModalFromCard(card){
         lastFocusedEl = document.activeElement;
         const img = card.querySelector('img');
-        const title = card.querySelector('h3')?.textContent?.trim() || '';
-        const byline = card.querySelector('small')?.textContent?.trim() || '';
+
+        // Pull title & byline from data attributes (since we removed visible text)
+        const title = card.dataset.title || '';
+        const byline = card.dataset.byline || '';
+
         const overlayHTML = card.querySelector('.overlay-content')?.innerHTML || '';
         const isBook = card.getAttribute('data-category') === 'books';
 
