@@ -82,6 +82,66 @@ h2 {
   text-align: center;
 }
 
+/* Utility: screen-reader only (keeps accessible labels while hiding visually) */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Home bottom cards: edge-to-edge images */
+.home-cards { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1rem; 
+  max-width: var(--page-max, 1100px);
+  margin: 0 auto;
+}
+
+/* The clickable card */
+.edge-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;        /* adjust if you want taller/shorter cards */
+  border: none;
+  background: none;
+  padding: 0;
+  overflow: hidden;             /* hides any overflow from hover scale */
+  border-radius: 16px;          /* optional rounded corners—remove if you want sharp edges */
+  box-shadow: none;             /* remove any default shadow; add your own if desired */
+}
+
+/* Make the image fill the card completely */
+.edge-card > img,
+.edge-card > picture,
+.edge-card > picture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* the key to full-bleed */
+}
+
+/* Optional: subtle hover lift (respects reduced motion) */
+@media (hover:hover) and (pointer:fine) {
+  .edge-card img { transition: transform 300ms ease; }
+  .edge-card:hover img { transform: scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .edge-card img { transition: none !important; }
+}
+
+/* If your existing card component had padding/background/border, neutralize it */
+.home-cards .card {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+
 /* ===== Utilities (site-wide) ===== */
 /* Blue gradient text for inline links (e.g., "Visit our Submit page.") */
 a.gradient-blue-text,
