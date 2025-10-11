@@ -11,6 +11,7 @@
   <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- Page styles -->
   <style>
     body {
       margin: 0;
@@ -23,6 +24,7 @@
 
     h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
 
+    /* Header */
     .site-header {
       display: flex;
       justify-content: space-between;
@@ -56,7 +58,7 @@
     /* Containers */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-    /* Hero/subheading (first) */
+    /* Intro */
     .content { max-width: 800px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
     .gradient-heading {
       font-size: 2rem;
@@ -72,13 +74,13 @@
     }
     .content p { line-height: 1.7; color: #ccc; margin-bottom: 1.2rem; }
 
-    /* Cover Gallery */
+    /* Cover gallery */
     .cover-galley {
       padding: 2rem 0 1rem;
       max-width: 1100px;
       margin: 0 auto;
-      padding-left: 1rem;   /* spacing on mobile */
-      padding-right: 1rem;  /* spacing on mobile */
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     .cover-grid {
       display: grid;
@@ -86,20 +88,15 @@
       gap: 2rem;
       margin-top: 1.25rem;
     }
-    /* Desktop: keep 3-up size and left-align incomplete rows */
+    /* Desktop: 3-up; left-align short rows */
     @media (min-width: 900px) {
       .cover-grid {
         grid-template-columns: repeat(3, 1fr);
         justify-items: start;
       }
-      .cover-grid:has(> .cover-tile:only-child) > .cover-tile {
-        grid-column: 1;
-      }
+      .cover-grid:has(> .cover-tile:only-child) > .cover-tile { grid-column: 1; }
     }
-    .cover-tile {
-      cursor: pointer;
-      transition: transform 0.25s ease;
-    }
+    .cover-tile { cursor: pointer; transition: transform 0.25s ease; }
     .cover-tile:hover { transform: scale(1.02); }
     .cover-tile img {
       width: 100%;
@@ -132,7 +129,7 @@
       display: block;
     }
 
-    /* Load More button */
+    /* Load more */
     .load-more-wrap { text-align: center; padding: 0 0 3rem; }
     .btn {
       appearance: none;
@@ -173,11 +170,10 @@
       position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem;
       color: #0df6e3; background: none; border: none; cursor: pointer; z-index: 1000;
     }
-    .nav-arrow.left { left: 2%; } .nav-arrow.right { right: 2%; }
+    .nav-arrow.left { left: 2%; }
+    .nav-arrow.right { right: 2%; }
 
-    /* Removed local footer overrides to match global footer styles */
-    /* (Footer styles now come entirely from css/style.css) */
-
+    /* Footer styles are centralized in css/style.css */
     .gradient-blue-text {
       background: linear-gradient(90deg, #0df6e3, #56ccf2);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -192,9 +188,12 @@
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
-    <div class="hamburger" onclick="toggleMenu()">
+
+    <!-- Mobile menu trigger -->
+    <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
       <div></div><div></div><div></div>
     </div>
+
     <nav class="site-nav" id="site-nav">
       <a href="issues.html">Issues</a>
       <a href="stories.html">Stories</a>
@@ -204,7 +203,7 @@
     </nav>
   </header>
 
-  <!-- Featured Art blurb -->
+  <!-- Intro -->
   <section class="content">
     <h1 class="gradient-heading">Featured Art</h1>
     <p>
@@ -213,7 +212,7 @@
     </p>
   </section>
 
-  <!-- Cover Gallery -->
+  <!-- Cover gallery -->
   <section class="cover-galley">
     <div class="container">
       <h2 class="gradient-heading-blue" style="text-align:left;">Cover Gallery</h2>
@@ -225,7 +224,7 @@
     </div>
   </section>
 
-  <!-- Issue Art (formerly "More Art From Burnline") -->
+  <!-- Issue art -->
   <section class="container">
     <div class="section-heading">
       <h2 class="gradient-heading-blue">Issue Art</h2>
@@ -246,7 +245,7 @@
       <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
         <img src="Placeholder 2.png" alt="Art 8">
       </div>
-            <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
+      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
         <img src="Placeholder 3.png" alt="Art 9">
       </div>
     </div>
@@ -267,7 +266,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -295,6 +293,27 @@
   </footer>
 
   <script>
+    // Mobile nav (guarded)
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const nav = document.getElementById('site-nav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          const isActive = nav.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            if (nav.classList.contains('active')) {
+              nav.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+    })();
+
+    // Gallery modal + Load More
     let currentIndex = 0;
     let tiles = [];
 
@@ -304,12 +323,6 @@
     const modalArtist = document.getElementById('modalArtist');
     const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-    function toggleMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
-    }
-
-    // Build the list of clickable tiles (only visible ones)
     function buildTilesAndBindClicks() {
       tiles = Array.from(document.querySelectorAll('.cover-tile, .art-tile:not(.hidden)'));
       tiles.forEach((tile, i) => {
@@ -361,7 +374,7 @@
       }
     }
 
-    // Reveal the rest on click
+    // Reveal remaining items
     function attachLoadMore() {
       loadMoreBtn.addEventListener('click', () => {
         const hiddenItems = document.querySelectorAll('#issueArtGrid .art-tile.hidden');
@@ -371,7 +384,7 @@
       });
     }
 
-    // Initialize
+    // Init
     document.addEventListener('DOMContentLoaded', () => {
       initIssueArtVisibility();
       attachLoadMore();
