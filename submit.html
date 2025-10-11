@@ -11,14 +11,10 @@
   <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Submit-page specific styles only -->
+  <!-- Page styles -->
   <style>
-    .content {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-      text-align: center;
-    }
+    .content { max-width: 800px; margin: 4rem auto; padding: 0 2rem; text-align: center; }
+
     .gradient-heading {
       font-size: 2rem;
       background: linear-gradient(90deg, var(--magenta), var(--purple));
@@ -35,94 +31,74 @@
       margin-bottom: 1rem;
       font-family: 'Orbitron', sans-serif;
     }
-    .content p {
-      line-height: 1.7;
-      color: var(--text-muted);
-      margin-bottom: 1.2rem;
-    }
+    .content p { line-height: 1.7; color: var(--text-muted); margin-bottom: 1.2rem; }
 
-   /* ==== Tabs ==== */
-.tabs {
-  margin-top: 2rem;
-  text-align: left;
-}
-.tablist {
-  display: flex;
-  justify-content: center;   /* <— center the tabs */
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--border-dark);
-  margin-bottom: 1.25rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
-}
-.tab {
-  appearance: none;
-  border: 1px solid var(--border-dark);
-  background: var(--card);
-  color: var(--text);
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform 120ms ease, background 150ms ease, border-color 150ms ease;
-  white-space: nowrap;
-}
+    /* Tabs */
+    .tabs { margin-top: 2rem; text-align: left; }
+    .tablist {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 1.25rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+    .tab {
+      appearance: none;
+      border: 1px solid var(--border-dark);
+      background: var(--card);
+      color: var(--text);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 120ms ease, background 150ms ease, border-color 150ms ease;
+      white-space: nowrap;
+    }
     .tab:hover { transform: translateY(-1px); }
     .tab[aria-selected="true"] {
       background: linear-gradient(90deg, var(--cyan), #1e90ff);
       color: var(--ink-dark);
       border-color: transparent;
     }
-    .tabpanel {
-      display: block;
-    }
-    .tabpanel[hidden] {
-      display: none !important;
-    }
+    .tabpanel { display: block; }
+    .tabpanel[hidden] { display: none !important; }
 
-    /* Tables inside panels */
+    /* Panel tables */
     .info-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 2rem;
       max-width: 700px;
     }
-    .info-table td {
-      padding: 0.5rem;
-      vertical-align: top;
-    }
-    .info-table td:first-child {
-      font-weight: bold;
-      width: 32%;
-      min-width: 160px;
-    }
-    .info-table tr:nth-child(2n) {
-      background: var(--bg-deep-2);
-    }
-    /* Stack tabs on narrow screens */
-@media (max-width: 520px) {
-  .tablist {
-    flex-direction: column;  
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0.6rem;
-    border-bottom: 0;        
-    padding-bottom: 0;
-    overflow-x: visible;
-  }
-  .tab {
-    width: 100%;
-    text-align: center;
-    border-radius: 12px;      
-    padding: 0.7rem 1rem;
-    font-size: 1rem;
-  }
-}
+    .info-table td { padding: 0.5rem; vertical-align: top; }
+    .info-table td:first-child { font-weight: bold; width: 32%; min-width: 160px; }
+    .info-table tr:nth-child(2n) { background: var(--bg-deep-2); }
 
+    /* Narrow screens: stack tabs */
+    @media (max-width: 520px) {
+      .tablist {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0.6rem;
+        border-bottom: 0;
+        padding-bottom: 0;
+        overflow-x: visible;
+      }
+      .tab {
+        width: 100%;
+        text-align: center;
+        border-radius: 12px;
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
+      }
+    }
 
-    /* Small tweaks for narrow screens */
+    /* Minor size tweaks */
     @media (max-width: 560px) {
       .tab { font-size: 0.9rem; padding: 0.55rem 0.9rem; }
       .gradient-heading { font-size: 1.8rem; }
@@ -138,16 +114,16 @@
       <span>BURNLINE</span>
     </a>
 
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+    <!-- Mobile menu trigger -->
+    <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <div></div><div></div><div></div>
     </div>
+
     <nav class="site-nav" id="site-nav">
       <a href="issues.html">Issues</a>
       <a href="stories.html">Stories</a>
       <a href="art.html">Art</a>
-      <a href="https://bowliopia.github.io/burnline/about.html">About</a>
+      <a href="about.html">About</a>
       <a href="submit.html" aria-current="page">Submit</a>
     </nav>
   </header>
@@ -162,7 +138,7 @@
         <button class="tab" id="tab-art" role="tab" aria-selected="false" aria-controls="panel-art">Art Guidelines</button>
       </div>
 
-      <!-- Fiction Panel -->
+      <!-- Fiction -->
       <section id="panel-fiction" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-fiction">
         <h2 class="gradient-heading-blue" style="margin-top: 0;">Fiction Guidelines</h2>
         <p>We’re excited about cyberpunk in all its forms—classic and modern, urban and off-world, sleek and gritty. In fiction, we're looking for what you'd expect; near-future worlds with corporate control, people altered by tech-implants, you get it. <strong>Above all however, we care about character.</strong> We want people who make us feel something while they're navigating whatever wild setting you’ve built.</p>
@@ -179,10 +155,11 @@
           </tr>
           <tr>
             <td>How to Submit</td>
-<td>Email your story as a .doc, .docx, or .pdf to
-  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>.
-  Please include the word <strong>"Submission"</strong> in the subject line.
-</td>
+            <td>
+              Email your story as a .doc, .docx, or .pdf to
+              <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>.
+              Please include the word <strong>"Submission"</strong> in the subject line.
+            </td>
           </tr>
         </table>
 
@@ -190,7 +167,7 @@
         <p>Please feel free to submit your work to any other publications while you're waiting to hear back from us—just let us know if it gets picked up. If we take a while to respond, we haven't forgotten your work, we're just moving through the backlog. Thanks for your patience.</p>
       </section>
 
-      <!-- Art Panel -->
+      <!-- Art -->
       <section id="panel-art" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-art" hidden>
         <h2 class="gradient-heading-blue" style="margin-top: 0;">Art Guidelines</h2>
         <p>We’re accepting cyberpunk-themed visual art for digital publication. Any medium is welcome—digital, hand-drawn, or mixed—except photography. If it feels cyberpunk, we want to see it.</p>
@@ -206,10 +183,11 @@
           </tr>
           <tr>
             <td>How to Submit</td>
-<td>Email <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>
-  with a link to your artwork wherever it's hosted (ArtStation portfolio, Reddit post, etc.).
-  Please include the word <strong>"Submission"</strong> in the subject line.
-</td>
+            <td>
+              Email <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>
+              with a link to your artwork wherever it's hosted (ArtStation portfolio, Reddit post, etc.).
+              Please include the word <strong>"Submission"</strong> in the subject line.
+            </td>
           </tr>
         </table>
 
@@ -255,12 +233,27 @@
   </footer>
 
   <script>
-    function toggleMenu() {
+    // Mobile nav (guarded)
+    (function () {
+      const hamburger = document.getElementById('hamburger');
       const nav = document.getElementById('site-nav');
-      nav.classList.toggle('active');
-    }
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          const isActive = nav.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            if (nav.classList.contains('active')) {
+              nav.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+    })();
 
-    // === Tabs logic with hash support ===
+    // Tabs with hash support
     (function () {
       const tabs = Array.from(document.querySelectorAll('.tab'));
       const panels = {
@@ -285,7 +278,7 @@
         }
       }
 
-      // Click handling
+      // Click + arrow key nav
       tabs.forEach(t => {
         t.addEventListener('click', () => selectTab(t.id, true));
         t.addEventListener('keydown', (e) => {
@@ -300,15 +293,12 @@
         });
       });
 
-      // Hash -> initial tab
+      // Initial tab from hash
       const hash = (location.hash || '').toLowerCase();
-      if (hash === '#art') {
-        selectTab('tab-art', false);
-      } else {
-        selectTab('tab-fiction', false);
-      }
+      if (hash === '#art') selectTab('tab-art', false);
+      else selectTab('tab-fiction', false);
 
-      // If someone changes hash manually
+      // Respond to manual hash changes
       window.addEventListener('hashchange', () => {
         const h = (location.hash || '').toLowerCase();
         if (h === '#art') selectTab('tab-art', false);
