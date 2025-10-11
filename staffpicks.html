@@ -11,7 +11,7 @@
   <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page-specific styles only -->
+  <!-- Page styles -->
   <style>
     .gradient-heading{
       font-size: 2.5rem;
@@ -25,13 +25,9 @@
       text-align: center;
     }
 
-    .content {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-    }
+    .content { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
 
-    /* ==== Tabs (match Submit page style) ==== */
+    /* Tabs (match Submit page) */
     .tabs { margin-top: 0.5rem; }
     .tablist {
       display: flex;
@@ -72,177 +68,109 @@
       background-color: var(--card);
       border-radius: 10px;
       padding: 1rem;
-      display: none; /* hidden until filtered on */
+      display: none; /* hidden until filtered */
       position: relative;
       overflow: hidden;
       cursor: pointer;
       transition: transform .15s ease, box-shadow .15s ease;
     }
-    .story-card:focus-visible{
-      outline: 2px solid var(--cyan);
-      outline-offset: 4px;
-    }
-    .story-card:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(0,0,0,.35);
-    }
+    .story-card:focus-visible{ outline: 2px solid var(--cyan); outline-offset: 4px; }
+    .story-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.35); }
     .story-card.active { display: block; }
-    .story-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 0.8rem;
-      display: block;
-    }
-    .story-card h3 {
-      color: var(--cyan);
-      font-size: 1.1rem;
-      margin: 0.25rem 0 0.25rem;
-    }
-    .story-card small {
-      color: #9aa;
-      font-size: 0.85rem;
-    }
+    .story-card img { width: 100%; border-radius: 8px; margin-bottom: 0.8rem; display: block; }
+    .story-card h3 { color: var(--cyan); font-size: 1.1rem; margin: 0.25rem 0 0.25rem; }
+    .story-card small { color: #9aa; font-size: 0.85rem; }
 
     .card-overlay { display: none !important; }
 
-   /* Stack tabs on narrow screens */
-@media (max-width: 520px) {
-  .tablist {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0.6rem;
-    border-bottom: 0;
-    padding-bottom: 0;
-    overflow-x: visible;
-  }
-  .tab {
-    width: 100%;
-    text-align: center;
-    border-radius: 12px;
-    padding: 0.7rem 1rem;
-    font-size: 1rem;
-  }
-}
+    /* Stack tabs on narrow screens */
+    @media (max-width: 520px) {
+      .tablist {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0.6rem;
+        border-bottom: 0;
+        padding-bottom: 0;
+        overflow-x: visible;
+      }
+      .tab {
+        width: 100%;
+        text-align: center;
+        border-radius: 12px;
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
+      }
+    }
 
     /* Modal */
     .modal-backdrop {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(0,0,0,.6);
       display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      padding: 1rem;
+      align-items: center; justify-content: center;
+      z-index: 2000; padding: 1rem;
     }
     .modal-backdrop.show { display: flex; }
     .modal {
-      background: #171a2a;
-      color: var(--text);
-      width: min(720px, 100%);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.6);
-      max-height: 90vh;
+      background: #171a2a; color: var(--text);
+      width: min(720px, 100%); border-radius: 14px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6); max-height: 90vh;
 
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: auto auto auto 1fr;
-      grid-template-areas:
-        "media"
-        "header"
-        "byline"
-        "body";
+      grid-template-areas: "media" "header" "byline" "body";
     }
     .modal-media { grid-area: media; position: relative; }
     .modal-media img { width: 100%; height: auto; display: block; }
     .modal-close {
-      position: absolute;
-      top: 8px; right: 8px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(0,0,0,0.6); color: #fff; border: none;
+      font-size: 1.5rem; cursor: pointer; line-height: 1;
+      padding: 0.25rem 0.5rem; border-radius: 4px;
     }
     .modal-close:hover { background: rgba(0,0,0,0.8); }
-    .modal-header{
-      grid-area: header;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.25rem 0.5rem;
-    }
+    .modal-header{ grid-area: header; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem 0.5rem; }
     .modal-title{ margin: 0; font-size: 1.25rem; color: var(--cyan); }
-    .modal-byline{
-      grid-area: byline;
-      margin: 0 0 0.5rem 0;
-      color: #b7c0d1;
-      font-size: 0.9rem;
-      padding: 0 1.25rem;
-    }
-    .modal-body{
-      grid-area: body;
-      padding: 0 1.25rem 1.25rem;
-      overflow: auto;
-      line-height: 1.55;
-    }
+    .modal-byline{ grid-area: byline; margin: 0 0 0.5rem 0; color: #b7c0d1; font-size: 0.9rem; padding: 0 1.25rem; }
+    .modal-body{ grid-area: body; padding: 0 1.25rem 1.25rem; overflow: auto; line-height: 1.55; }
+
     body.modal-open{ overflow: hidden; }
 
     .steam-link{ margin-top: 0.75rem; margin-bottom: 0; }
     .steam-link a{
       background: linear-gradient(90deg, var(--cyan), #008cff);
-      -webkit-background-clip: text;
-      background-clip: text;
+      -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-decoration: none;
-      font-weight: bold;
+      text-decoration: none; font-weight: bold;
     }
     .steam-link a:hover{ text-decoration: underline; }
 
-    /* Modal variant for books */
+    /* Modal variant: books */
     .modal.modal--book{
       width: min(960px, 100%);
       grid-template-columns: 38% 62%;
       grid-template-rows: auto auto 1fr;
-      grid-template-areas:
-        "media header"
-        "media byline"
-        "media body";
+      grid-template-areas: "media header" "media byline" "media body";
     }
-    .modal.modal--book .modal-media img{
-      width: 100%; height: 100%;
-      object-fit: contain; background: #111522;
-    }
+    .modal.modal--book .modal-media img{ width: 100%; height: 100%; object-fit: contain; background: #111522; }
     .modal.modal--book .modal-body{ overflow: auto; }
 
     @media (min-width: 721px){
       .modal.modal--book { position: relative; }
       .modal.modal--book .modal-media { position: static; }
-      .modal.modal--book .modal-close {
-        position: absolute; top: 10px; right: 10px; z-index: 2;
-      }
+      .modal.modal--book .modal-close { position: absolute; top: 10px; right: 10px; z-index: 2; }
     }
     @media (max-width: 720px){
       .modal.modal--book{
         width: min(720px, 100%);
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto 1fr;
-        grid-template-areas:
-          "media"
-          "header"
-          "byline"
-          "body";
+        grid-template-areas: "media" "header" "byline" "body";
       }
       .modal.modal--book .modal-media {
-        position: relative;
-        display: flex; align-items: center; justify-content: center;
-        padding: 0.5rem 0;
+        position: relative; display: flex; align-items: center; justify-content: center; padding: 0.5rem 0;
       }
       .modal.modal--book .modal-media img{
         max-width: 90%; max-height: 50vh; width: auto; height: auto;
@@ -260,9 +188,10 @@
       <span>BURNLINE</span>
     </a>
 
-<div class="hamburger" id="hamburger" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle menu">
-  <div></div><div></div><div></div>
-</div>
+    <!-- Mobile menu trigger -->
+    <div class="hamburger" id="hamburger" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle menu">
+      <div></div><div></div><div></div>
+    </div>
 
     <nav class="site-nav" id="site-nav">
       <a href="issues.html">Issues</a>
@@ -287,338 +216,316 @@
       </div>
     </div>
 
-    <!-- Single panel showing grid; filtering switches visible cards -->
+    <!-- Single panel with filterable grid -->
     <div id="panel-grid" class="story-grid" role="tabpanel" tabindex="0" aria-labelledby="tab-games">
-<!-- Games -->
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for 1000xRESIST">
-  <img src="1000xResist.png" alt="">
-  <h3>1000xRESIST</h3>
-  <small>Reikon Games</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>This game follows Watcher, a clone of the “Allmother,” who was one of the only people immune to an alien-borne pandemic that ravaged the earth many generations prior. Watcher and her many sisters, all clones of the Allmother, survive together in their cult-like, subterranean society, where they determine their future together.</p>
-      <p><strong>Why I like it:</strong> 1000xRESIST is one small step beyond a visual novel with its very simple gameplay, 99% of which is walking and talking. But man, the walking and talking in this game is fantastic. The world and the way it has descended are very vague, but that only adds to the intrigue that the developers provided with such a good visual setting and such incredible dialogue.</p>
-      <p>In the beginning, I thought what a cool concept and nice vibe. By the end, I found myself saying it was one of my favorite games of all time because of the depth that every single character has, despite being the same character (kind of). I enjoy the characters and the world of 1000xRESIST as much or more as those from any movie or book that I’ve ever consumed.</p>
-      <p>I will admit that 1000xRESIST is cyberpunk-adjacent rather than falling squarely within the genre, but it executes on its ideas so spectacularly that it still garners mention here. Plus, it’s my website, so I can write whatever I want.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/1675830/1000xRESIST/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <!-- Games -->
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for 1000xRESIST">
+        <img src="1000xResist.png" alt="">
+        <h3>1000xRESIST</h3>
+        <small>Reikon Games</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>This game follows Watcher, a clone of the “Allmother,” who was one of the only people immune to an alien-borne pandemic that ravaged the earth many generations prior. Watcher and her many sisters, all clones of the Allmother, survive together in their cult-like, subterranean society, where they determine their future together.</p>
+            <p><strong>Why I like it:</strong> 1000xRESIST is one small step beyond a visual novel with its very simple gameplay, 99% of which is walking and talking. But man, the walking and talking in this game is fantastic. The world and the way it has descended are very vague, but that only adds to the intrigue that the developers provided with such a good visual setting and such incredible dialogue.</p>
+            <p>In the beginning, I thought what a cool concept and nice vibe. By the end, I found myself saying it was one of my favorite games of all time because of the depth that every single character has, despite being the same character (kind of). I enjoy the characters and the world of 1000xRESIST as much or more as those from any movie or book that I’ve ever consumed.</p>
+            <p>I will admit that 1000xRESIST is cyberpunk-adjacent rather than falling squarely within the genre, but it executes on its ideas so spectacularly that it still garners mention here. Plus, it’s my website, so I can write whatever I want.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/1675830/1000xRESIST/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Citizen Sleeper">
-  <img src="CS Keyart.png" alt="">
-  <h3>Citizen Sleeper</h3>
-  <small>Jump Over the Age / Fellow Traveller</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Citizen Sleeper is a role-playing game where you, a Sleeper, wake up aboard a space station foreign to you, where many of the corporate-owned inhabitants see you as less than human. By rolling dice and making choices on how you spend each day aboard the station, you explore the best way to make important relationships, cut deals, and leave the ship in hopes of regaining your freedom.</p>
-      <p><strong>Why I like it:</strong> The dice role and decision management aspects of this game haven’t been my style in the past, which kept me away from Citizen Sleeper for far too long. It didn’t take long to hook me once I started, though. Right away, Citizen Sleeper delivers good characters, a great plot, and an excellent source of motivation to keep rolling dice and hoping for the best outcome.</p>
-      <p>This is one of those games where the music, the art direction, and the incredible writing come together in such a cohesive way that it seems like the developers knew exactly what game they were trying to make from the first day they began working on it. If you’ve ever enjoyed a visual novel, I’d urge you to try this game. The mechanics are simple to learn and pleasant once you understand the systems, and the writing is second to none.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/1578650/Citizen_Sleeper/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Citizen Sleeper">
+        <img src="CS Keyart.png" alt="">
+        <h3>Citizen Sleeper</h3>
+        <small>Jump Over the Age / Fellow Traveller</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Citizen Sleeper is a role-playing game where you, a Sleeper, wake up aboard a space station foreign to you, where many of the corporate-owned inhabitants see you as less than human. By rolling dice and making choices on how you spend each day aboard the station, you explore the best way to make important relationships, cut deals, and leave the ship in hopes of regaining your freedom.</p>
+            <p><strong>Why I like it:</strong> The dice role and decision management aspects of this game haven’t been my style in the past, which kept me away from Citizen Sleeper for far too long. It didn’t take long to hook me once I started, though. Right away, Citizen Sleeper delivers good characters, a great plot, and an excellent source of motivation to keep rolling dice and hoping for the best outcome.</p>
+            <p>This is one of those games where the music, the art direction, and the incredible writing come together in such a cohesive way that it seems like the developers knew exactly what game they were trying to make from the first day they began working on it. If you’ve ever enjoyed a visual novel, I’d urge you to try this game. The mechanics are simple to learn and pleasant once you understand the systems, and the writing is second to none.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/1578650/Citizen_Sleeper/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cloudpunk">
-  <img src="Cloudpunk Keyart.jpg" alt="">
-  <h3>Cloudpunk</h3>
-  <small>ION Lands</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Cloudpunk puts you in the role of Rania, a delivery driver working for a semi-legal courier service in a sprawling, vertical cyberpunk city. Over the course of a night, you ferry packages, meet eccentric residents, and slowly piece together the human and inhuman stories that fill the neon skyline.</p>
-      <p><strong>Why I like it:</strong> Sometimes a game doesn’t need complex systems, sometimes it just needs atmosphere. Cloudpunk nails atmosphere. The voxel art shouldn’t work as well as it does in the cyberpunk genre where tech is everything, but it’s beautiful; the writing shouldn’t matter in a delivery sim, but it's genuinely good. Driving through the rain and neon while listening to strangers tell their stories captures a kind of quiet, lived-in cyberpunk that most games miss.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/746850/Cloudpunk/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cloudpunk">
+        <img src="Cloudpunk Keyart.jpg" alt="">
+        <h3>Cloudpunk</h3>
+        <small>ION Lands</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Cloudpunk puts you in the role of Rania, a delivery driver working for a semi-legal courier service in a sprawling, vertical cyberpunk city. Over the course of a night, you ferry packages, meet eccentric residents, and slowly piece together the human and inhuman stories that fill the neon skyline.</p>
+            <p><strong>Why I like it:</strong> Sometimes a game doesn’t need complex systems, sometimes it just needs atmosphere. Cloudpunk nails atmosphere. The voxel art shouldn’t work as well as it does in the cyberpunk genre where tech is everything, but it’s beautiful; the writing shouldn’t matter in a delivery sim, but it's genuinely good. Driving through the rain and neon while listening to strangers tell their stories captures a kind of quiet, lived-in cyberpunk that most games miss.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/746850/Cloudpunk/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cyberpunk 2077">
-  <img src="CP2077 Keyart.jpg" alt="">
-  <h3>Cyberpunk 2077</h3>
-  <small>CD Projekt Red</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>You know what this game is and don’t need me to describe it to you.</p>
-      <p><strong>Why I like it:</strong> Fact: Cyberpunk 2077 had a remarkably bad release. Another fact: Cyberpunk 2077 has become an excellent game after countless updates and corrections and is well worth playing if you like open world action RPGs. You can read anyone’s review of Cyberpunk 2077 and get the picture; fun game, great voice acting, excellent story. If you were a fan of the cyberpunk subgenre before playing it though, I think it goes much, much further than that.</p>
-      <p>I enjoyed cyberpunk so much because it provided the largest-scale, most immersive version of all of the cyberpunk stuff that I already loved. I hate when people use the phrase, “a love letter to the genre,” because it’s usually reductive. But with as many clear influences that this game highlights instead of shying away from, I think it’s appropriate to say.</p>
-      <p>This game took every concept that worked well from all of the most successful entries in the subgenre—from console cowboys to AI unification to running from the sword-wielding, motorcycle-riding gang that’s chasing you down—and put $175 million of development budget into putting them on-screen. It’s not perfect, but it’s the best way you can possibly pretend to be Henry Case running around Chiba City.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Cyberpunk 2077">
+        <img src="CP2077 Keyart.jpg" alt="">
+        <h3>Cyberpunk 2077</h3>
+        <small>CD Projekt Red</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>You know what this game is and don’t need me to describe it to you.</p>
+            <p><strong>Why I like it:</strong> Fact: Cyberpunk 2077 had a remarkably bad release. Another fact: Cyberpunk 2077 has become an excellent game after countless updates and corrections and is well worth playing if you like open world action RPGs. You can read anyone’s review of Cyberpunk 2077 and get the picture; fun game, great voice acting, excellent story. If you were a fan of the cyberpunk subgenre before playing it though, I think it goes much, much further than that.</p>
+            <p>I enjoyed cyberpunk so much because it provided the largest-scale, most immersive version of all of the cyberpunk stuff that I already loved. I hate when people use the phrase, “a love letter to the genre,” because it’s usually reductive. But with as many clear influences that this game highlights instead of shying away from, I think it’s appropriate to say.</p>
+            <p>This game took every concept that worked well from all of the most successful entries in the subgenre—from console cowboys to AI unification to running from the sword-wielding, motorcycle-riding gang that’s chasing you down—and put $175 million of development budget into putting them on-screen. It’s not perfect, but it’s the best way you can possibly pretend to be Henry Case running around Chiba City.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Far Cry 3: Blood Dragon">
-  <img src="FC3 Blood Dragon.jpg" alt="">
-  <h3>Far Cry 3: Blood Dragon</h3>
-  <small>Ubisoft</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Blood Dragon is a standalone expansion of Far Cry 3 that dials everything up to absurdity. You play Rex “Power” Colt, a cyborg soldier in a neon-drenched parody of ‘80s action films, fighting laser raptors, cyber-sharks, and a mad scientist villain.</p>
-      <p><strong>Why I like it:</strong> Blood Dragon is ridiculous, self-aware, and an absolute blast. It’s not “serious” cyberpunk, but it’s dripping in neon, synths, and tongue-in-cheek homage. For every clunky line of dialogue, there’s a moment where you fight a giant monster while Michael Biehn growls one-liners in your ear. Plus, it has that excellent chain kill mechanic from the first game where you sneak-melee kill three guys and then throw a knife at a fourth. Far Cry is bad now, but was once great.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/233270/Far_Cry_3_Blood_Dragon/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Far Cry 3: Blood Dragon">
+        <img src="FC3 Blood Dragon.jpg" alt="">
+        <h3>Far Cry 3: Blood Dragon</h3>
+        <small>Ubisoft</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Blood Dragon is a standalone expansion of Far Cry 3 that dials everything up to absurdity. You play Rex “Power” Colt, a cyborg soldier in a neon-drenched parody of ‘80s action films, fighting laser raptors, cyber-sharks, and a mad scientist villain.</p>
+            <p><strong>Why I like it:</strong> Blood Dragon is ridiculous, self-aware, and an absolute blast. It’s not “serious” cyberpunk, but it’s dripping in neon, synths, and tongue-in-cheek homage. For every clunky line of dialogue, there’s a moment where you fight a giant monster while Michael Biehn growls one-liners in your ear. Plus, it has that excellent chain kill mechanic from the first game where you sneak-melee kill three guys and then throw a knife at a fourth. Far Cry is bad now, but was once great.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/233270/Far_Cry_3_Blood_Dragon/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ghostrunner">
-  <img src="Ghostrunner Keyart.jpg" alt="">
-  <h3>Ghostrunner</h3>
-  <small>One More Level</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Ghostrunner casts you as a cybernetic ninja ascending a massive tower city, armed with nothing but a katana, lightning reflexes, and a grappling hook.</p>
-      <p><strong>Why I like it:</strong> You go so fast! You kill seven people with a cybernetic sword and die! You go so fast again! Even coming from someone who isn't a huge fan of the first-person platforming speed games, this one is so well made and so specifically in the genre that this editor loved it.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/1139900/Ghostrunner/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ghostrunner">
+        <img src="Ghostrunner Keyart.jpg" alt="">
+        <h3>Ghostrunner</h3>
+        <small>One More Level</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Ghostrunner casts you as a cybernetic ninja ascending a massive tower city, armed with nothing but a katana, lightning reflexes, and a grappling hook.</p>
+            <p><strong>Why I like it:</strong> You go so fast! You kill seven people with a cybernetic sword and die! You go so fast again! Even coming from someone who isn't a huge fan of the first-person platforming speed games, this one is so well made and so specifically in the genre that this editor loved it.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/1139900/Ghostrunner/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Perfect Dark (Xbox 360)">
-  <img src="Perfect Dark.jpg" alt="">
-  <h3>Perfect Dark (Xbox 360)</h3>
-  <small>Rare</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>This remaster of the original N64 classic follows Joanna Dark, a secret agent caught in a conspiracy involving corporations, aliens, and cutting-edge weapons.</p>
-      <p><strong>Why I like it:</strong> A spiritual successor to GoldenEye 007 (yes, that's real), Perfect Dark was the sci-fi twist on early first-person shooters. That's right, this editor's nostalgic! Perfect Dark (the 2010 remake for Xbox 360) is ridiculous and awesome. It's so plot thin and stupid, just as it should be. What a moment in time.</p>
-      <p class="steam-link">
-        <a href="https://www.xbox.com/en-US/games/store/perfect-dark/C0SWGV4560W1/0001" target="_blank" rel="noopener noreferrer">Check it out here.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Perfect Dark (Xbox 360)">
+        <img src="Perfect Dark.jpg" alt="">
+        <h3>Perfect Dark (Xbox 360)</h3>
+        <small>Rare</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>This remaster of the original N64 classic follows Joanna Dark, a secret agent caught in a conspiracy involving corporations, aliens, and cutting-edge weapons.</p>
+            <p><strong>Why I like it:</strong> A spiritual successor to GoldenEye 007 (yes, that's real), Perfect Dark was the sci-fi twist on early first-person shooters. That's right, this editor's nostalgic! Perfect Dark (the 2010 remake for Xbox 360) is ridiculous and awesome. It's so plot thin and stupid, just as it should be. What a moment in time.</p>
+            <p class="steam-link"><a href="https://www.xbox.com/en-US/games/store/perfect-dark/C0SWGV4560W1/0001" target="_blank" rel="noopener noreferrer">Check it out here.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ruiner">
-  <img src="Ruiner Keyart.jpg" alt="">
-  <h3>Ruiner</h3>
-  <small>Reikon Games</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Ruiner is a fast-paced twin-stick shooter where you play as a helmeted antihero on a mission to rescue his kidnapped brother. The gameplay is a mix of fast-paced melee and gun combat, all wrapped in a pounding synth soundtrack and blood-red visuals.</p>
-      <p><strong>Why I like it:</strong> Ruiner is grim cyberpunk turned up as high as the dial goes. The story is minimal, the characters are archetypal, but the vibe is fits perfectly within the genre, just with more red than neon. It’s the kind of game you play less for the plot and more for the feeling of being a killing machine. Super well made game.</p>
-      <p class="steam-link">
-        <a href="https://store.steampowered.com/app/464060/RUINER/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a>
-      </p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="games" tabindex="0" aria-label="Open details for Ruiner">
+        <img src="Ruiner Keyart.jpg" alt="">
+        <h3>Ruiner</h3>
+        <small>Reikon Games</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Ruiner is a fast-paced twin-stick shooter where you play as a helmeted antihero on a mission to rescue his kidnapped brother. The gameplay is a mix of fast-paced melee and gun combat, all wrapped in a pounding synth soundtrack and blood-red visuals.</p>
+            <p><strong>Why I like it:</strong> Ruiner is grim cyberpunk turned up as high as the dial goes. The story is minimal, the characters are archetypal, but the vibe fits perfectly within the genre—just with more red than neon. It’s the kind of game you play less for the plot and more for the feeling of being a killing machine. Super well made game.</p>
+            <p class="steam-link"><a href="https://store.steampowered.com/app/464060/RUINER/" target="_blank" rel="noopener noreferrer">Check it out on Steam.</a></p>
+          </div>
+        </div>
+      </div>
 
-    <!-- Books -->
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Altered Carbon">
-  <img src="Altered Carbon.jpg" alt="">
-  <h3>Altered Carbon</h3>
-  <small>Richard K. Morgan</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>In Richard Morgan’s version of the future, people’s consciousness can be transferred into new bodies (or “sleeves”), making death escapable for the lucky few who are rich enough to afford the process. Takeshi Kovacs, a former elite soldier turned private investigator, is hired to investigate the murder of one such person.</p>
-      <p><strong>Why I like it:</strong> Altered Carbon is full of tropes in the genre, but its core concept, the idea of “resleeving” your mind into a new body to escape death, is executed so well that the whole consciousness transfer thing feels original. The gritty main character isn’t wholly original and the bad guy isn’t the best I’ve ever read, but the world and the execution of ideas are excellent. This is one of the most successful entities in the cyberpunk subgenre for a good reason.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <!-- Books -->
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Altered Carbon">
+        <img src="Altered Carbon.jpg" alt="">
+        <h3>Altered Carbon</h3>
+        <small>Richard K. Morgan</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>In Richard Morgan’s version of the future, people’s consciousness can be transferred into new bodies (or “sleeves”), making death escapable for the lucky few who are rich enough to afford the process. Takeshi Kovacs, a former elite soldier turned private investigator, is hired to investigate the murder of one such person.</p>
+            <p><strong>Why I like it:</strong> Altered Carbon is full of tropes in the genre, but its core concept, the idea of “resleeving” your mind into a new body to escape death, is executed so well that the whole consciousness transfer thing feels original. The gritty main character isn’t wholly original and the villain isn’t the best I’ve ever read, but the world and the execution of ideas are excellent. This is one of the most successful entries in the cyberpunk subgenre for a good reason.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Blame!">
-  <img src="Blame!.jpg" alt="">
-  <h3>Blame!</h3>
-  <small>Tsutomu Nihei</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Blame! follows Killy, a silent wanderer armed with an impossibly powerful gun, as he searches for humans with the Net Terminal Gene across a vast megastructure. Dialogue is sparse, characters are fleeting, and the environment is the main mode of storytelling, where bleak structures stretch on endlessly.</p>
-      <p><strong>Why I like it:</strong> Blame! is one of those works where you’re given very little, but that feeds into your intrigue while you flip through pages showing you vast, lifeless expanses. That lack of explanation becomes the point: the world is too big, too far gone, to be grasped.</p>
-      <p>Cyberpunk is often about cityscapes and tech gone wrong, but Blame! shows what would happen if the dystopian city evolved and evolved and evolved, then outlived people, then kept evolving into nothing. I’m not a huge fan of manga nor am I very well read in that space, but Blame! really stuck with me.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Blame!">
+        <img src="Blame!.jpg" alt="">
+        <h3>Blame!</h3>
+        <small>Tsutomu Nihei</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Blame! follows Killy, a silent wanderer armed with an impossibly powerful gun, as he searches for humans with the Net Terminal Gene across a vast megastructure. Dialogue is sparse, characters are fleeting, and the environment is the main mode of storytelling, where bleak structures stretch on endlessly.</p>
+            <p><strong>Why I like it:</strong> Blame! is one of those works where you’re given very little, but that feeds into your intrigue while you flip through pages showing vast, lifeless expanses. That lack of explanation becomes the point: the world is too big, too far gone, to be grasped.</p>
+            <p>Cyberpunk is often about cityscapes and tech gone wrong, but Blame! shows what would happen if the dystopian city kept evolving, outlived people, and then kept evolving into nothing. I’m not a huge manga reader, but Blame! really stuck with me.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Burning Chrome">
-  <img src="Burning Chrome.png" alt="">
-  <h3>Burning Chrome</h3>
-  <small>William Gibson</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>This short story collection by William Gibson gathers some of his earliest and most defining works. The title story, co-written with Bruce Sterling, brings in the genre-defining tropes of cyberpunk: console cowboys, ice-breaking, and big-city crime at night. That story alone would deserve to be featured on this page, but other stories in the collection like “Johnny Mnemonic” and “New Rose Hotel” further sketch the outline of what would later become full-fledged cyberpunk.</p>
-      <p><strong>Why I like it:</strong> Burning Chrome is pure cyberpunk before the genre knew exactly what it was. Not every story is perfect, but the good ones are staples in the subgenre. The title story alone captures everything that makes Gibson great: it gets to the point without an ounce of unnecessary exposition, the tech is cool in the Gibson way, and some guys are doing some crime. If Neuromancer is the perfect finished product, Burning Chrome is the early concept work that set up the foundation for the whole thing.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Burning Chrome">
+        <img src="Burning Chrome.png" alt="">
+        <h3>Burning Chrome</h3>
+        <small>William Gibson</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>This short story collection by William Gibson gathers some of his earliest and most defining works. The title story, co-written with Bruce Sterling, brings in genre-defining tropes: console cowboys, ice-breaking, and big-city crime at night. Other stories like “Johnny Mnemonic” and “New Rose Hotel” further sketch the outline of what would later become full-fledged cyberpunk.</p>
+            <p><strong>Why I like it:</strong> Burning Chrome is pure cyberpunk before the genre knew exactly what it was. Not every story is perfect, but the good ones are staples. The title story alone captures everything that makes Gibson great: it gets to the point without bloat, the tech is cool in the Gibson way, and some guys are doing some crime. If Neuromancer is the perfect finished product, Burning Chrome is the concept work that set the foundation.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Count Zero">
-  <img src="Count Zero.jpg" alt="">
-  <h3>Count Zero</h3>
-  <small>William Gibson</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Seven years after the events of Neuromancer, the second entry in Gibson’s Sprawl trilogy weaves together three storylines: a mercenary caught in a corporate double-cross, a young hacker who stumbles into a job way above his head, and an art dealer hunting a mysterious painter. As the threads converge, the novel explores the evolving relationship between humans and AIs, including strange voodoo-like digital entities.</p>
-      <p><strong>Why I like it:</strong> Count Zero is often overshadowed by Neuromancer, perhaps because it’s a bit less on-the-rails. Neuromancer tells a singularly linear story, while Count Zero gives multiple views of a time and place. As a result, Neuromancer’s follow-up feels undeniably different, but I think that’s its strength.</p>
-      <p>By splitting the narrative into multiple perspectives, Gibson opened up the world and made it feel less like Case’s story and more like an ecosystem of interconnected players. The Haitian-inspired AI is one of the coolest cyberpunk concepts I’ve ever read, and it gives the book a mystical edge without losing its grounded, gritty feeling. Part one of the Sprawl gave a very clear definition of what cyberpunk should look like moving forward. Then part two (Count Zero), asked, “what if it looked a little different?”</p>
-      <p>It’s kooky. I love it.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Count Zero">
+        <img src="Count Zero.jpg" alt="">
+        <h3>Count Zero</h3>
+        <small>William Gibson</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Seven years after Neuromancer, the second entry in Gibson’s Sprawl trilogy weaves together three storylines: a mercenary caught in a corporate double-cross, a young hacker in over his head, and an art dealer hunting a mysterious painter. As the threads converge, the novel explores the evolving relationship between humans and AIs, including strange voodoo-like digital entities.</p>
+            <p><strong>Why I like it:</strong> Often overshadowed by Neuromancer, Count Zero’s multi-perspective approach opens the world up into an ecosystem of interconnected players. The Haitian-inspired AI concept is one of the coolest I’ve read—giving the book a mystical edge without losing its grit.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Mirrorshades">
-  <img src="Mirrorshades.jpg" alt="">
-  <h3>Mirrorshades</h3>
-  <small>Edited by Bruce Sterling</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Edited by Bruce Sterling, Mirrorshades is an anthology that brings together many of those early voices from the original cyberpunk movement (Gibson, Cadigan, Sterling himself, and more). Each story experiments with different aspects of the genre, from body modification and AI, to street-level rebellion against sprawling corporations.</p>
-      <p><strong>Why I like it:</strong> I feel like most entries in the cyberpunk subgenre (including games, TV, film, books…all of it) fall into one of two categories: a weak story leaning on the well-worn cyberpunk setting, or weak characters leaning on neon-noir tropes to move the plot forward. The pieces of media that are strong in all of the above are the standouts that became classics, and I don’t think there are a ton of those.</p>
-      <p>That’s why I love anthologies, though—they don’t give stories enough time to wear their setting or genre tropes too thin, so they’re easier for me to buy into if they’re not perfect. The stories in Mirrorshades aren’t perfect, but they really capture the punk/rebellious sense that I imagine when I think of the genre. Sometimes short fiction is a great way to get back into a reading groove, too.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Mirrorshades">
+        <img src="Mirrorshades.jpg" alt="">
+        <h3>Mirrorshades</h3>
+        <small>Edited by Bruce Sterling</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Edited by Bruce Sterling, Mirrorshades brings together many of the early voices from the original cyberpunk movement (Gibson, Cadigan, Sterling, and more). Each story experiments with different aspects of the genre—from body modification and AI to street-level rebellion against sprawling corporations.</p>
+            <p><strong>Why I like it:</strong> Anthologies avoid wearing their settings thin; you get sharp bursts of ideas without bloat. These stories aren’t perfect, but they capture the punk/rebellious energy I picture when I think of the genre.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Neuromancer">
-  <img src="Neuromancer.jpg" alt="">
-  <h3>Neuromancer</h3>
-  <small>William Gibson</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Neuromancer follows Case, a high-tech, low-life hacker who’s just trying to survive after an angry former employer disabled the the tech within his central nervous system. After a shadowy US ex-military officer and a razorgirl approach him, Case agrees to join the crew for a high stakes heist in hopes of restoring his own tech once again.</p>
-      <p><strong>Why I like it:</strong> What can you say about Neuromancer that hasn’t already been said? I’d love to have a more original take, but sincerely, this is my single favorite piece of cyberpunk media I’ve ever consumed. I know there’s a debate on what really kicked off the subgenre, but I don’t think there should be any debate on what its true staple is. To me, this is it.</p>
-      <p>Neuromancer is exactly what I picture when I hear “cyberpunk,” and it delivers that world and the concepts we all love in sub-300 pages. How? If this book was written today, it would be 700 pages of world building and exposition. Case is such a good protagonist because he’s not overdone. He’s not avenging his father or some other bullshit, he’s just acting out of need. The same can be said for Molly, the same for Armitage and even Wintermute. When it matters, you get answers that make the plot hold weight. When it doesn’t, you don’t. That feels exceedingly rare in sci-fi today.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Neuromancer">
+        <img src="Neuromancer.jpg" alt="">
+        <h3>Neuromancer</h3>
+        <small>William Gibson</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Neuromancer follows Case, a high-tech, low-life hacker trying to survive after a former employer disabled the tech within his nervous system. After a shadowy ex-military officer and a razorgirl approach him, Case agrees to a high-stakes heist in hopes of restoring himself.</p>
+            <p><strong>Why I like it:</strong> It’s my favorite piece of cyberpunk media. Tight, sub-300 pages, zero fluff. Case isn’t overdone; he acts out of need. The story answers what matters and leaves the rest implied—rare in modern sci-fi.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Schismatrix Plus">
-  <img src="Schismatrix Plus.jpg" alt="">
-  <h3>Schismatrix Plus</h3>
-  <small>Bruce Sterling</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Bruce Sterling’s Schismatrix Plus follows Abelard Lindsay, a rogue political manipulator navigating the power struggles between two factions of posthumanity: the Shapers, who embrace genetic modification, and the Mechanists, who embrace cybernetics. Across decades and shifting alliances, Lindsay witnesses humanity’s evolution beyond Earth, and beyond flesh.</p>
-      <p><strong>Why I like it:</strong> This one feels like it was Sterling’s grand vision of where cyberpunk could go given enough time. It’s dense and philosophical, sometimes a bit too much, but it pays off with sheer scope. Much of the genre is so grounded in that street-level crime way, but Schismatrix expands beyonmd that in a really cool way. Reading it is work, but the reward is getting to read one of the bolder expansions of the genre in this editor's eyes.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Schismatrix Plus">
+        <img src="Schismatrix Plus.jpg" alt="">
+        <h3>Schismatrix Plus</h3>
+        <small>Bruce Sterling</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Abelard Lindsay navigates power struggles between two posthuman factions: Shapers (genetic modification) and Mechanists (cybernetics). Across decades and shifting alliances, humanity evolves beyond Earth—and flesh.</p>
+            <p><strong>Why I like it:</strong> Sterling’s big, philosophical take on where cyberpunk can go. Dense, but rewarding in scope. Much of the genre is street-level; Schismatrix looks beyond that in a bold way.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Synners">
-  <img src="Synners.jpg" alt="">
-  <h3>Synners</h3>
-  <small>Pat Cadigan</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>In Synners, Pat Cadigan envisions a future where people directly plug into entertainment and media streams until the boundaries between human consciousness and digital content dissolve. What begins as an exploration of hackers and musicians colliding with new tech spirals into a crisis where society itself risks collapsing under information overload.</p>
-      <p><strong>Why I like it:</strong> Synners is pretty chaotic and a bit overwhelming, but in a way that fits into the genre quite well for whatever reason. Cadigan almost writes like she’s channeling the very overload she’s describing. Reading this book a decade ago, it felt dystopian. Reading it today, it felt like a pretty apt piece of commentary, where everyone is jacked in and overstimulated, blurring the line between online life and actual life. Cadigan nailed the feel of living inside the idea this editor had of cyberpunk when they were a kid.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Synners">
+        <img src="Synners.jpg" alt="">
+        <h3>Synners</h3>
+        <small>Pat Cadigan</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>People directly plug into entertainment streams until the boundary between human consciousness and digital content dissolves. What begins as hackers colliding with new tech spirals into a crisis where society risks collapsing under information overload.</p>
+            <p><strong>Why I like it:</strong> Chaotic in a way that fits the theme. A decade ago it felt dystopian; today it feels like commentary. Cadigan nails the feeling of living inside a constant stream.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Titanium Noir">
-  <img src="Titanium Noir.jpg" alt="">
-  <h3>Titanium Noir</h3>
-  <small>Nick Harkaway</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Set in a city where biotech has created a class of “Titans” — genetically modified elites who live far above everyone else — Titanium Noir follows a weary detective pulled into a murder case involving one of these giants. It's a classic noir setup placed in a cyberpunk future.</p>
-      <p><strong>Why I like it:</strong> Titanium Noir is effortlessly readable because it's quite simple (compliment). It doesn’t try to reinvent the wheel, but instead merges noir tropes with sci-fi tropes, each of which are quite well done. The class-struggle metaphors that come along with the concept of titans were quite reminiscent of those found in Altered carbon (again, compliment). This editor breezed through this book and enjoyed it the whole time.</p>
-      <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="books" tabindex="0" aria-label="Open details for Titanium Noir">
+        <img src="Titanium Noir.jpg" alt="">
+        <h3>Titanium Noir</h3>
+        <small>Nick Harkaway</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>In a city where biotech created a class of “Titans”—genetically modified elites— a detective is pulled into a murder involving one of them. Classic noir setup meets a cyberpunk future.</p>
+            <p><strong>Why I like it:</strong> Effortlessly readable and confidently simple (compliment). It merges noir and sci-fi tropes cleanly; the class-struggle angle echoes Altered Carbon. Breezy and fun the whole way.</p>
+            <p><em>Please don't buy this from an online megaretailer. Instead, buy it from an independent bookstore with a good sci-fi section.</em></p>
+          </div>
+        </div>
+      </div>
 
-      <!-- Film and TV -->
-<div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Blade Runner 2049">
-  <img src="BR 2049.jpg" alt="">
-  <h3>Blade Runner 2049</h3>
-  <small>Denis Villeneuve</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Set thirty years after the original, Blade Runner 2049 follows K, a replicant blade runner who uncovers a secret that could change the balance between humans and replicants forever. Along the way, he confronts questions of identity, memory, and what it means to be real.</p>
-      <p><strong>Why I like it:</strong> Making a sequel to Blade Runner was an incredibly tall order, but Villeneuve pulled it off. After rewatching both the original and 2049 recently, this editor strongly prefers Villeneuve's entry. Today, Ridley Scott's original Blade Runner feels hamstrung by the time periuod it lives in, in that its proposed future doesn't feel so far off. 2049, however, operates with a much different degree of scale (as do all of Villeneuve's movies). The tech is incredible, the setting is bleak, and Ryan Gosling is as me as he's ever been. Without a doubt, this is one of the best pieces of media in the cyberpunk genre.</p>
-    </div>
-  </div>
-</div>
+      <!-- Film / TV -->
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Blade Runner 2049">
+        <img src="BR 2049.jpg" alt="">
+        <h3>Blade Runner 2049</h3>
+        <small>Denis Villeneuve</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Thirty years after the original, K—a replicant blade runner—uncovers a secret that could change the balance between humans and replicants. It’s a story about identity, memory, and what it means to be real.</p>
+            <p><strong>Why I like it:</strong> Making a sequel to Blade Runner was a tall order, but Villeneuve pulled it off. The scale, the bleak setting, the design—peak cyberpunk cinema. One of the best entries in the genre.</p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Cyberpunk Edgerunners">
-  <img src="CP Edgerunners.jpg" alt="">
-  <h3>Cyberpunk Edgerunners</h3>
-  <small>Studio Trigger / CD Projekt</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Set in the same world as Cyberpunk 2077, Edgerunners tells the story of David Martinez, a street kid who implants illegal tech into his body and spirals into the mercenary life of Night City. Over ten episodes, he and his crew rise and fall in their fight against the corporate machine.</p>
-      <p><strong>Why I like it:</strong> I was very skeptical to watch a cyberpunk 2077 TV show, which felt like it could've just been a cash grab, but wow I love this show. Edgerunners works because it knows exactly how short its run is. The characters' motivations are clear fast, and it doesn't take long to get to some good ole anime violence. Upon seeing the first trailer, it was clear that Studio Trigger put somethiong together that was highly stylized and gorgeous. It wasn't clear, however, how emotional this one would actually be. Camp for sure, but still well written.</p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Cyberpunk Edgerunners">
+        <img src="CP Edgerunners.jpg" alt="">
+        <h3>Cyberpunk Edgerunners</h3>
+        <small>Studio Trigger / CD Projekt</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Set in the world of Cyberpunk 2077, Edgerunners follows David Martinez, a street kid who implants illegal tech and spirals into Night City’s mercenary life.</p>
+            <p><strong>Why I like it:</strong> I was skeptical, but it rules. The short run keeps it tight; motivations are clear, the style is gorgeous (Trigger!), and it’s surprisingly emotional. Campy moments, sure—still well written.</p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell (1995 film)">
-  <img src="Ghost in the Shell.jpg" alt="">
-  <h3>Ghost in the Shell (1995 film)</h3>
-  <small>Mamoru Oshii</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>Motoko Kusanagi, a cyborg working for Section 9, hunts a mysterious hacker known as the Puppet Master.</p>
-      <p><strong>Why I like it:</strong> This movie is painted as a political thriller, but is really a meditation on identity, consciousness, and the nature of the soul in a cybernetic body. Like many 90s sci-fi anime, Ghost in the Shell's plot follows some murky and poorly-explained factions or governments or organizations or whatever. But who cares? If this story hinged on its political intrigue, it would fail. But it doesn't - it hinges on iconic frames that silhouette Kusanagi in front of a beautiful and grim skyline while she questions what it really means to live. This movie is beautiful, UNLESS you watch it in English. DO NOT WATCH THIS MOVIE IN ENGLISH!</p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell (1995 film)">
+        <img src="Ghost in the Shell.jpg" alt="">
+        <h3>Ghost in the Shell (1995 film)</h3>
+        <small>Mamoru Oshii</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Major Motoko Kusanagi, a cyborg with Section 9, hunts a mysterious hacker known as the Puppet Master.</p>
+            <p><strong>Why I like it:</strong> Less about politics, more about identity and consciousness in a cybernetic body. Iconic frames, a beautiful/bleak skyline, and an existential core. (Watch subbed.)</p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell: Stand Alone Complex">
-  <img src="Ghost in the Shell SAC.png" alt="">
-  <h3>Ghost in the Shell: Stand Alone Complex</h3>
-  <small>Kenji Kamiyama / Production I.G.</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>This anime series expands the Ghost in the Shell universe, following Major Kusanagi and her Section 9 team through a mix of episodic cases and overarching plots.</p>
-      <p><strong>Why I like it:</strong> SAC watches like a cyberpunk Cowboy Bepop to this editor in the way that the world is laid out for you, but the only throughline to the different plots and philosophies taking place is the characters that you know. This isn't a show that changed television forever, but it's more than just a derivative of it's namesake. If you like Ghost in the Shell and want more of it, look no further.</p>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="film" tabindex="0" aria-label="Open details for Ghost in the Shell: Stand Alone Complex">
+        <img src="Ghost in the Shell SAC.png" alt="">
+        <h3>Ghost in the Shell: Stand Alone Complex</h3>
+        <small>Kenji Kamiyama / Production I.G.</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>Expands the GITS universe with episodic cases and arcs following Major Kusanagi and Section 9.</p>
+            <p><strong>Why I like it:</strong> Like a cyberpunk Cowboy Bebop: the world is laid out, and the characters are your throughline. Not just derivative of the film; if you want more GITS, this is it.</p>
+          </div>
+        </div>
+      </div>
 
       <!-- Other -->
-<div class="story-card" data-category="other" tabindex="0" aria-label="Open details for Neon_Rising">
-  <img src="Neon Rising.png" alt="">
-  <h3>The_Future_Is_Now / Neon_Rising</h3>
-  <small>Deathburger</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>The_Future_Is_Now / Neon_Rising is a cyberpunk art book that mixes narrative with wordless visuals. The art alone tells stories, but there’s just enough lore to make the world feel alive.</p>
-      <p><strong>Why I like it:</strong> Sometimes you just want to look at cyberpunk, and this book scratches that itch. Artist Josan Gonzalez, whose work you already know from iconic new covers for Gibson's Sprawl Trilogy, put together this incredibly detailed 200+ page art page that shows a loose narrative of characters moving through a cyberpunk world. Without exaggerating, this is the single visual book of any variety that I have flipped through most. It's worth every penny if you like this stuff.</p>
-            <p class="steam-link">
-      <a href="https://citadel9.com/products/the-future-is-now_neon-rising" target="_blank" rel="noopener noreferrer">Check it out on the artist's website.</a>
-    </div>
-  </div>
-</div>
+      <div class="story-card" data-category="other" tabindex="0" aria-label="Open details for Neon_Rising">
+        <img src="Neon Rising.png" alt="">
+        <h3>The_Future_Is_Now / Neon_Rising</h3>
+        <small>Deathburger</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>An art book that mixes narrative with wordless visuals. The art alone tells stories, with just enough lore to make the world feel alive.</p>
+            <p><strong>Why I like it:</strong> Sometimes you just want to look at cyberpunk—this scratches that itch. Josan Gonzalez (who did those new Sprawl covers) packs 200+ pages with dense, gorgeous scenes. My most-flipped visual book.</p>
+            <p class="steam-link"><a href="https://citadel9.com/products/the-future-is-now_neon-rising" target="_blank" rel="noopener noreferrer">Check it out on the artist's website.</a></p>
+          </div>
+        </div>
+      </div>
 
-<div class="story-card" data-category="other" tabindex="0" aria-label="Open details for TO:KY:OO">
-  <img src="Tokyo.png" alt="">
-  <h3>TO:KY:OO</h3>
-  <small>Liam Wong</small>
-  <div class="card-overlay">
-    <div class="overlay-content">
-      <p>This photography book captures Tokyo at night, transforming real streets into scenes that look like they belong in a cyberpunk movie. Through color, framing, and timing, Wong finds crazy beauty in the city at night.</p>
-      <p><strong>Why I like it:</strong> Liam Wong, who was a successful video game designer and art director before he began professional photography, left no room for doubt after publishing this book: the dude knows how to make stuff look good. I can't say anything to better convince you to check this book of photography than you could see for yourself, so you should see it for yourself. This one sits on my desk and I open it about once a week.</p>
-                  <p class="steam-link">     
-      <a href="https://www.liamwong.com/book" target="_blank" rel="noopener noreferrer">Check it out on the artist's website.</a>
-
+      <div class="story-card" data-category="other" tabindex="0" aria-label="Open details for TO:KY:OO">
+        <img src="Tokyo.png" alt="">
+        <h3>TO:KY:OO</h3>
+        <small>Liam Wong</small>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <p>A photography book capturing Tokyo at night—real streets framed like cyberpunk scenes.</p>
+            <p><strong>Why I like it:</strong> Wong proves he knows how to make things look good. It lives on my desk; I open it weekly.</p>
+            <p class="steam-link"><a href="https://www.liamwong.com/book" target="_blank" rel="noopener noreferrer">Check it out on the artist's website.</a></p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   </section>
 
-  <!-- Modal (reused for all cards) -->
+  <!-- Modal (reused) -->
   <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal" role="document" tabindex="-1" id="modal">
       <div class="modal-media">
@@ -661,54 +568,52 @@
   </footer>
 
   <script>
-    // Mobile nav (toggle .active on #site-nav)
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('site-nav');
-    hamburger.addEventListener('click', () => {
-      const isActive = nav.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-    });
-    nav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        if (nav.classList.contains('active')) {
-          nav.classList.remove('active');
-          hamburger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
+    // Mobile nav (guarded)
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const nav = document.getElementById('site-nav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          const isActive = nav.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            if (nav.classList.contains('active')) {
+              nav.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+    })();
 
     // Cards reference
     const cards = Array.from(document.querySelectorAll('.story-card'));
 
-    // Tabs logic + filtering + hash support
+    // Tabs + filtering + hash support
     (function () {
       const tabs = Array.from(document.querySelectorAll('.tab'));
       const panel = document.getElementById('panel-grid');
 
       function setSelected(tabEl, pushHash = true) {
-        // Update aria-selected and panel label
         tabs.forEach(t => t.setAttribute('aria-selected', t === tabEl ? 'true' : 'false'));
         panel.setAttribute('aria-labelledby', tabEl.id);
 
-        // Filter cards
         const category = tabEl.getAttribute('data-filter');
         cards.forEach(card => {
           const isActive = card.getAttribute('data-category') === category;
           card.classList.toggle('active', isActive);
         });
 
-        // Hash
         if (pushHash) {
-          const hash = '#' + (tabEl.id.replace('tab-','')); // books, games, film, other
-          if (history.replaceState) {
-            history.replaceState(null, '', hash);
-          } else {
-            location.hash = hash;
-          }
+          const hash = '#' + tabEl.id.replace('tab-',''); // books, games, film, other
+          if (history.replaceState) history.replaceState(null, '', hash);
+          else location.hash = hash;
         }
       }
 
-      // Click + keyboard
+      // Click + arrow keys
       tabs.forEach((t, i) => {
         t.addEventListener('click', () => setSelected(t, true));
         t.addEventListener('keydown', (e) => {
@@ -722,12 +627,12 @@
         });
       });
 
-      // Initial from hash (default to #games)
+      // Initial from hash (default: games)
       const hash = (location.hash || '#games').toLowerCase().replace('#','');
-      const initialTab = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'games'));
-      setSelected(initialTab, false);
+      const initial = document.getElementById('tab-' + (['books','games','film','other'].includes(hash) ? hash : 'games'));
+      setSelected(initial, false);
 
-      // Hash changes (default to #games)
+      // React to hash changes
       window.addEventListener('hashchange', () => {
         const h = (location.hash || '#games').toLowerCase().replace('#','');
         const hTab = document.getElementById('tab-' + (['books','games','film','other'].includes(h) ? h : 'games'));
@@ -735,61 +640,63 @@
       });
     })();
 
-    // Modal logic
-    const backdrop = document.getElementById('modal-backdrop');
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    const modalTitle = document.getElementById('modal-title');
-    const modalByline = document.getElementById('modal-byline');
-    const modalBody = document.getElementById('modal-body');
-    const modalClose = document.getElementById('modal-close');
-    let lastFocusedEl = null;
+    // Modal
+    (function () {
+      const backdrop = document.getElementById('modal-backdrop');
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalTitle = document.getElementById('modal-title');
+      const modalByline = document.getElementById('modal-byline');
+      const modalBody = document.getElementById('modal-body');
+      const modalClose = document.getElementById('modal-close');
+      let lastFocusedEl = null;
 
-    function openModalFromCard(card){
-      lastFocusedEl = document.activeElement;
-      const img = card.querySelector('img');
-      const title = card.querySelector('h3')?.textContent?.trim() || '';
-      const byline = card.querySelector('small')?.textContent?.trim() || '';
-      const overlayHTML = card.querySelector('.overlay-content')?.innerHTML || '';
-      const isBook = card.getAttribute('data-category') === 'books';
+      function openModalFromCard(card){
+        lastFocusedEl = document.activeElement;
+        const img = card.querySelector('img');
+        const title = card.querySelector('h3')?.textContent?.trim() || '';
+        const byline = card.querySelector('small')?.textContent?.trim() || '';
+        const overlayHTML = card.querySelector('.overlay-content')?.innerHTML || '';
+        const isBook = card.getAttribute('data-category') === 'books';
 
-      modalImg.src = img ? (img.getAttribute('src') || '') : '';
-      modalImg.alt = img ? (img.getAttribute('alt') || '') : '';
-      modalTitle.textContent = title;
-      modalByline.textContent = byline;
-      modalBody.innerHTML = overlayHTML;
-      modal.classList.toggle('modal--book', isBook);
+        modalImg.src = img ? (img.getAttribute('src') || '') : '';
+        modalImg.alt = img ? (img.getAttribute('alt') || '') : '';
+        modalTitle.textContent = title;
+        modalByline.textContent = byline;
+        modalBody.innerHTML = overlayHTML;
+        modal.classList.toggle('modal--book', isBook);
 
-      document.body.classList.add('modal-open');
-      backdrop.classList.add('show');
-      backdrop.setAttribute('aria-hidden','false');
-      modal.focus();
-    }
+        document.body.classList.add('modal-open');
+        backdrop.classList.add('show');
+        backdrop.setAttribute('aria-hidden','false');
+        modal.focus();
+      }
 
-    function closeModal(){
-      backdrop.classList.remove('show');
-      backdrop.setAttribute('aria-hidden','true');
-      document.body.classList.remove('modal-open');
-      if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){ lastFocusedEl.focus(); }
-    }
+      function closeModal(){
+        backdrop.classList.remove('show');
+        backdrop.setAttribute('aria-hidden','true');
+        document.body.classList.remove('modal-open');
+        if(lastFocusedEl && typeof lastFocusedEl.focus === 'function'){ lastFocusedEl.focus(); }
+      }
 
-    // Open modal on card click or Enter/Space
-    cards.forEach(card => {
-      card.addEventListener('click', () => openModalFromCard(card));
-      card.addEventListener('keydown', (e) => {
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          openModalFromCard(card);
-        }
+      // Open on click or Enter/Space
+      cards.forEach(card => {
+        card.addEventListener('click', () => openModalFromCard(card));
+        card.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            openModalFromCard(card);
+          }
+        });
       });
-    });
 
-    // Close handlers
-    modalClose.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', (e) => { if(e.target === backdrop){ closeModal(); } });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && backdrop.classList.contains('show')){ closeModal(); }
-    });
+      // Close handlers
+      modalClose.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', (e) => { if(e.target === backdrop){ closeModal(); } });
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && backdrop.classList.contains('show')){ closeModal(); }
+      });
+    })();
   </script>
 </body>
 </html>
