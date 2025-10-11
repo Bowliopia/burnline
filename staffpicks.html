@@ -77,7 +77,22 @@
     .story-card:focus-visible{ outline: 2px solid var(--cyan); outline-offset: 4px; }
     .story-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.35); }
     .story-card.active { display: block; }
-    .story-card img { width: 100%; border-radius: 8px; margin-bottom: 0.8rem; display: block; }
+
+    /* UNIFORM THUMBNAIL CROPPING */
+    .story-card img{
+      width: 100%;
+      height: clamp(180px, 24vw, 220px); /* responsive but consistent */
+      object-fit: cover;                 /* fills box, crops overflow */
+      object-position: center;           /* center the crop */
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    /* Slightly taller crop for book covers while keeping uniformity */
+    .story-card[data-category="books"] img{
+      height: clamp(220px, 28vw, 280px);
+    }
+
     .story-card h3 { color: var(--cyan); font-size: 1.1rem; margin: 0.25rem 0 0.25rem; }
     .story-card small { color: #9aa; font-size: 0.85rem; }
 
