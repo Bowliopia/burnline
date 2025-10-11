@@ -88,10 +88,9 @@
       margin-bottom: 0.8rem;
       display: block;
     }
-    /* Slightly taller crop for book covers while keeping uniformity */
-    .story-card[data-category="books"] img{
-      height: clamp(220px, 28vw, 280px);
-    }
+.story-card[data-category="books"] img{
+  height: clamp(320px, 50vw, 520px); /* was clamp(220px, 28vw, 280px) */
+}
 
     .story-card h3 { color: var(--cyan); font-size: 1.1rem; margin: 0.25rem 0 0.25rem; }
     .story-card small { color: #9aa; font-size: 0.85rem; }
