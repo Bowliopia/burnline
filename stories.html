@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Featured Stories – Burnline</title>
 
-  <!-- Fonts (match site) -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page-specific styles only -->
+  <!-- Page styles -->
   <style>
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* Layout caps to match Art/Home spacing */
+    /* Layout caps (match Art/Home) */
     :root{
       --page-max: 1100px;
       --narrow-max: 800px;
@@ -29,7 +29,7 @@
     }
     .wrap--narrow{ max-width: var(--narrow-max); }
 
-    /* Intro (full-bleed bg, capped inner) */
+    /* Intro band: full-bleed; content capped */
     .page-intro {
       padding: 6rem 0 4rem;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
@@ -47,26 +47,26 @@
       -webkit-text-fill-color: transparent;
       margin: 0 0 1rem 0;
       font-family: 'Orbitron', sans-serif;
-      text-align: center; /* keep just the heading centered */
+      text-align: center;
     }
     .page-intro p {
       font-size: 1.1rem;
       color: var(--text-muted);
       margin: 0 0 1.2rem 0;
       line-height: 1.7;
-      text-align: left; /* left-align body text */
+      text-align: left;
     }
     .intro-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       margin-top: 0.5rem;
-      justify-content: flex-start; /* left-align CTA row */
+      justify-content: flex-start;
     }
 
-    /* Grid band (full-bleed bg; inner capped) */
+    /* Grid band: full-bleed; content capped via .wrap */
     .grid {
-      padding: 6rem 0;                /* side padding handled by .wrap */
+      padding: 6rem 0;
       background-color: var(--bg-deep-1);
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='24'><rect x='0' y='12' width='120' height='2' fill='%230df6e3' opacity='0.08'/></svg>");
       background-repeat: repeat;
@@ -76,7 +76,7 @@
     }
     .grid-inner{
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3 per row on large screens */
+      grid-template-columns: repeat(3, 1fr);
       gap: 2.5rem;
     }
     @media (max-width: 1200px) { .grid-inner { grid-template-columns: repeat(2, 1fr); } }
@@ -98,11 +98,13 @@
     }
     .card h3 { color: var(--cyan); margin-bottom: 0.5rem; font-family: 'Orbitron', sans-serif; }
     .card p { color: var(--text-muted-2); }
+
     .card-link { text-decoration: none; color: inherit; display: block; }
     .card-link:hover .card {
       transform: scale(1.02);
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
+
     .story-card .story-excerpt { margin: 0.35rem 0 0.75rem; }
     .story-meta {
       font-size: 0.9rem;
@@ -110,31 +112,29 @@
       margin-top: 0.25rem;
     }
 
-    /* Load more sits inside the capped grid */
+    /* Load More: full-width row inside grid */
     .load-more {
-      grid-column: 1 / -1; /* full-width row inside the grid */
+      grid-column: 1 / -1;
       text-align: center;
       padding: 1rem 0 0.5rem;
     }
     .is-hidden { display: none !important; }
 
-    /* Optional: only if needed */
-.site-header .hamburger { background: none; border: 0; padding: 0; }
-.site-header .hamburger span { display:block; width:24px; height:3px; border-radius:2px; background: var(--ink-dark); }
-.site-header .hamburger span + span { margin-top:5px; }
-
+    /* Optional hamburger tweaks (if needed on this page) */
+    .site-header .hamburger { background: none; border: 0; padding: 0; }
+    .site-header .hamburger span { display:block; width:24px; height:3px; border-radius:2px; background: var(--ink-dark); }
+    .site-header .hamburger span + span { margin-top:5px; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="site-header">
     <a href="index.html" class="logo-title">
       <img src="Flame logo-1.png.png" alt="Burnline logo">
       <span>BURNLINE</span>
     </a>
 
-    <!-- Use spans (matches global CSS used on other pages) -->
+    <!-- Mobile menu trigger -->
     <button class="hamburger" id="hamburger" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
@@ -148,11 +148,11 @@
     </nav>
   </header>
 
-  <!-- Intro (full-bleed band, capped inner) -->
+  <!-- Intro -->
   <section class="page-intro">
     <div class="intro-inner">
       <h1 class="gradient-heading">Featured Stories</h1>
-      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline. This page features standout stories in one place so that you can read them in-browser instead of via digital flipbook, if you'd prefer.</p>
+      <p><strong>Editor-selected cyberpunk short fiction</strong> from across Burnline. This page features standout stories in one place so you can read them in-browser instead of via flipbook, if you prefer.</p>
       <p>
         Interested in having your work featured in the next issue?
         <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
@@ -160,7 +160,7 @@
     </div>
   </section>
 
-  <!-- Story Grid (full-bleed bg, capped inner) -->
+  <!-- Story grid -->
   <section class="grid" id="stories">
     <div class="wrap">
       <div class="grid-inner">
@@ -193,12 +193,12 @@
           </div>
         </a>
 
-        <!-- Load More appears directly after the 3rd card (first row) -->
+        <!-- Load More placed after the 3rd card -->
         <div class="load-more">
           <button id="load-more" class="btn">Load More Stories</button>
         </div>
 
-        <!-- Everything from the 4th card onward starts hidden -->
+        <!-- Hidden cards (revealed by Load More) -->
         <a href="https://bowliopia.github.io/burnline/stories/story-4.html" class="card-link story-card is-hidden">
           <div class="card">
             <img src="Placeholder 5.png" alt="Story artwork" loading="lazy">
@@ -230,7 +230,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -258,23 +257,27 @@
   </footer>
 
 <script>
-  // Mobile nav
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('site-nav');
-  hamburger.addEventListener('click', () => {
-    const isActive = nav.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-  });
-  nav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      if (nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
+  // Mobile nav (guarded for absent elements)
+  (function () {
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('site-nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        const isActive = nav.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+  })();
 
-  // Load More
+  // Load More (reveals hidden cards, then hides itself)
   (function(){
     const btn = document.getElementById('load-more');
     if (!btn) return;
@@ -282,19 +285,14 @@
     const loadMoreRow = btn.closest('.load-more');
 
     function revealAllAndHide() {
-      // Reveal ALL hidden story cards
       document.querySelectorAll('.story-card.is-hidden').forEach(el => el.classList.remove('is-hidden'));
-
-      // Hide the button and its row immediately
       btn.disabled = true;
       btn.style.display = 'none';
       if (loadMoreRow) loadMoreRow.style.display = 'none';
     }
 
-    // Ensure it only ever runs once
     btn.addEventListener('click', revealAllAndHide, { once: true });
 
-    // If nothing is hidden on load (edge case), hide the row
     if (document.querySelectorAll('.story-card.is-hidden').length === 0 && loadMoreRow) {
       loadMoreRow.style.display = 'none';
     }
