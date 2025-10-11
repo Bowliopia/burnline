@@ -11,11 +11,11 @@
   <!-- Global header/footer/vars -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page-specific styles (hero, grid, cards, buttons) -->
+  <!-- Page styles: hero, grid, cards, buttons -->
   <style>
     html { scroll-behavior: smooth; }
 
-    /* Layout caps to match Art page feel */
+    /* Layout caps (match Art page) */
     :root{
       --page-max: 1100px;
       --narrow-max: 800px;
@@ -34,7 +34,7 @@
     h2 { font-size: 2.2rem; }
     h3 { font-size: 1.5rem; }
 
-    /* Hero (full-bleed background, capped inner content) */
+    /* Hero: full-bleed band; capped content */
     .hero {
       padding: 6rem 0;
       background: linear-gradient(to right, var(--bg-deep-2), var(--bg-hero-2));
@@ -71,7 +71,7 @@
     }
     .hero a img:hover { opacity: 0.9; }
 
-    /* Grid band (full-bleed background; inner content capped by .wrap) */
+    /* Grid band: full-bleed; content capped via .wrap */
     .grid {
       padding: 6rem 0;
       background-color: var(--bg-deep-1);
@@ -82,7 +82,7 @@
       border-bottom: 1px solid var(--border-dark);
     }
 
-    /* Legacy card styles (safe to keep; not used by new bottom cards) */
+    /* Deprecated card styles (unused) – kept for reference */
     .grid-inner{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -128,7 +128,7 @@
       box-shadow: 0 0 25px rgba(13, 246, 227, 0.2);
     }
 
-    /* Buttons/inputs */
+    /* Buttons / inputs */
     .btn {
       background: var(--cyan);
       color: var(--ink-dark);
@@ -178,8 +178,8 @@
     }
     .newsletter-button:hover { background: var(--cyan-hover); }
 
-    /* --- Bottom image cards: make taller + mirror Art page spacing --- */
-    /* Doubled visual height by halving aspect ratio from ~16:9 to 8:9 */
+    /* Bottom image cards: taller; mirror Art page spacing */
+    /* Increase height: 16:9 → 8:9 */
     .home-cards { gap: 2rem; margin-top: 1.25rem; }
     .edge-card { aspect-ratio: 8 / 9; }
 
@@ -199,7 +199,7 @@
     <span>BURNLINE</span>
   </a>
 
-  <!-- Add id and remove inline onclick -->
+  <!-- Mobile menu trigger -->
   <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
     <div></div><div></div><div></div>
   </div>
@@ -213,10 +213,10 @@
   </nav>
 </header>
 
-  <!-- HERO (full-bleed band, capped inner content) -->
+  <!-- Hero (full-bleed; capped content) -->
   <section class="hero">
     <div class="hero-inner wrap">
-      <!-- Cover image opens Heyzine in a new tab -->
+      <!-- Cover opens Heyzine in new tab -->
       <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener">
         <img src="New Cover.png" alt="Latest issue cover" />
       </a>
@@ -254,10 +254,10 @@
     </div>
   </section>
 
-  <!-- Feature cards (full-bleed band, capped inner content) -->
+  <!-- Feature cards (full-bleed; capped content) -->
   <section class="grid" id="features">
     <div class="wrap">
-      <!-- New image-only, edge-to-edge cards -->
+      <!-- Image-only edge-to-edge cards -->
       <section class="home-cards">
         <!-- Issue Library -->
         <a class="edge-card" href="issues.html" aria-label="Open the Issue Library">
@@ -307,7 +307,7 @@
   </footer>
 
 <script>
-  // --- Mobile nav (guarded so it won't throw if elements are missing) ---
+  // Mobile nav (guarded for absent elements)
   (function () {
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('site-nav');
@@ -327,7 +327,7 @@
     }
   })();
 
-  // --- Remove/guard any "Load More" logic (it doesn't exist on this page) ---
+  // "Load More" guard (not used on this page)
   (function () {
     const btn = document.getElementById('load-more');
     if (!btn) return;
