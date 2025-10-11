@@ -1,27 +1,31 @@
-/* ===== Root Variables ===== */
+/* == Root variables == */
 :root {
   --bg-deep-1:#0f0f1c;
   --bg-deep-2:#1b1e35;
   --bg-hero-2:#2d2b4a;
   --card:#22253e;
+
   --text:#f0f0f0;
   --text-muted:#cccccc;
   --text-muted-2:#bbbbbb;
+
   --footer-muted:#aaaaaa;
   --footer-subtle:#555555;
+
   --ink-dark:#0f0f1c;
+
   --cyan:#0df6e3;
   --cyan-hover:#0ad3c6;
   --magenta:#f72585;
   --purple:#7209b7;
   --border-dark:#222;
 
-  /* Unified H1 sizing */
+  /* Page title sizing (used by h1 clamp) */
   --h1-min: 2.25rem;
   --h1-max: 3.75rem;
 }
 
-/* ===== Base ===== */
+/* == Base == */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -34,15 +38,12 @@ h1, h2, h3, h4, nav a, header {
   line-height: 1.4;
 }
 
-/* Gradient headers (site-wide) */
+/* Headings (global gradient styles) */
 h1 {
-  /* unified size for all page titles */
   font-size: clamp(var(--h1-min), 2.2vw + 1.2rem, var(--h1-max));
   line-height: 1.1;
   margin: 0 0 0.75rem;
   font-weight: 600;
-
-  /* pink → purple gradient */
   background: linear-gradient(90deg, var(--magenta), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -51,8 +52,7 @@ h1 {
 }
 
 h2 {
-  /* keep your h2 look */
-  background: linear-gradient(90deg, var(--cyan), #56ccf2); /* cyan → light blue */
+  background: linear-gradient(90deg, var(--cyan), #56ccf2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -60,29 +60,27 @@ h2 {
   font-weight: 600;
 }
 
-/* Compact gradient title (matches Fiction "Issue Library") */
+/* Compact gradient title helper */
 .gradient-heading {
-  /* keep gradient decorative; just normalize size/margins */
-  font-size: 2.2rem;       /* same as Fiction page */
+  font-size: 2.2rem;
   line-height: 1.2;
   margin: 0 0 1rem;
 }
 
-/* Optional utility for explicit page titles if you need it */
+/* Optional page title passthrough */
 .page-title { font-size: inherit; }
 
-/* Global content paragraphs */
+/* Paragraphs in .content sections */
 .content p {
   line-height: 1.7;
   color: var(--text-muted);
   margin-bottom: 1.2rem;
 }
 
-.content h1 {
-  text-align: center;
-}
+/* Center main page h1s by default */
+.content h1 { text-align: center; }
 
-/* Utility: screen-reader only (keeps accessible labels while hiding visually) */
+/* Screen-reader-only utility */
 .sr-only {
   position: absolute !important;
   width: 1px; height: 1px;
@@ -91,40 +89,39 @@ h2 {
   white-space: nowrap; border: 0;
 }
 
-/* Home bottom cards: edge-to-edge images */
-.home-cards { 
-  display: grid; 
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 1rem; 
+/* == Home edge cards == */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   max-width: var(--page-max, 1100px);
   margin: 0 auto;
 }
 
-/* The clickable card */
+/* Clickable, full-bleed image card */
 .edge-card {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;        /* adjust if you want taller/shorter cards */
-  border: none;
+  aspect-ratio: 16 / 9;
+  border: 0;
   background: none;
   padding: 0;
-  overflow: hidden;             /* hides any overflow from hover scale */
-  border-radius: 16px;          /* optional rounded corners—remove if you want sharp edges */
-  box-shadow: none;             /* remove any default shadow; add your own if desired */
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: none;
 }
 
-/* Make the image fill the card completely */
 .edge-card > img,
 .edge-card > picture,
 .edge-card > picture > img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;            /* the key to full-bleed */
+  object-fit: cover;
 }
 
-/* Optional: subtle hover lift (respects reduced motion) */
+/* Motion-safe hover lift */
 @media (hover:hover) and (pointer:fine) {
   .edge-card img { transition: transform 300ms ease; }
   .edge-card:hover img { transform: scale(1.03); }
@@ -133,7 +130,7 @@ h2 {
   .edge-card img { transition: none !important; }
 }
 
-/* If your existing card component had padding/background/border, neutralize it */
+/* Neutralize legacy card padding if reused inside .home-cards */
 .home-cards .card {
   background: none !important;
   border: none !important;
@@ -141,26 +138,22 @@ h2 {
   box-shadow: none !important;
 }
 
-
-/* ===== Utilities (site-wide) ===== */
-/* Blue gradient text for inline links (e.g., "Visit our Submit page.") */
+/* == Inline gradient link utilities == */
 a.gradient-blue-text,
 .gradient-blue-text {
   background: linear-gradient(90deg, var(--cyan), #56ccf2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;      /* required for the clip to show */
+  color: transparent;
   font-weight: 700;
-  display: inline-block;   /* improves rendering across browsers */
-  text-decoration: none;   /* keep clean by default */
+  display: inline-block;
+  text-decoration: none;
 }
 a.gradient-blue-text:hover,
-.gradient-blue-text:hover {
-  filter: brightness(1.05);
-}
+.gradient-blue-text:hover { filter: brightness(1.05); }
 
-/* Blue gradient for email links in page body only (works in tables & paragraphs) */
+/* Mailto links inside content (tables/paragraphs) */
 .content a[href^="mailto:"],
 .content p a[href^="mailto:"],
 .content td a[href^="mailto:"] {
@@ -168,10 +161,10 @@ a.gradient-blue-text:hover,
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;                 /* required for the clip to show */
+  color: transparent;
   font-weight: 700;
   text-decoration: none;
-  display: inline-block;              /* WebKit needs this inside tables */
+  display: inline-block;
 }
 .content a[href^="mailto:"]:visited {
   -webkit-text-fill-color: transparent;
@@ -182,7 +175,7 @@ a.gradient-blue-text:hover,
   transform: translateY(-0.5px);
 }
 
-/* Optional: blue gradient heading helper used on Art page */
+/* Secondary gradient heading helper (cyan → blue) */
 .gradient-heading-blue {
   font-size: 1.5rem;
   background: linear-gradient(90deg, var(--cyan), #1e90ff);
@@ -194,7 +187,7 @@ a.gradient-blue-text:hover,
   font-weight: 600;
 }
 
-/* ===== Header ===== */
+/* == Header == */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -212,10 +205,7 @@ a.gradient-blue-text:hover,
   text-decoration: none;
   color: inherit;
 }
-.logo-title img {
-  height: 60px;
-  width: auto;
-}
+.logo-title img { height: 60px; width: auto; }
 
 .site-nav {
   display: flex;
@@ -228,25 +218,21 @@ a.gradient-blue-text:hover,
   font-weight: bold;
   transition: color 0.3s;
 }
-.site-nav a:hover {
-  color: var(--purple); /* purple hover */
-}
+.site-nav a:hover { color: var(--purple); }
 
 .hamburger {
   display: none;
   flex-direction: column;
   cursor: pointer;
-  width: 30px;
-  height: 25px;
-  gap: 5px;
+  width: 30px; height: 25px; gap: 5px;
 }
 .hamburger div {
   background: var(--ink-dark);
-  height: 4px;
-  width: 100%;
+  height: 4px; width: 100%;
   border-radius: 2px;
 }
 
+/* Mobile header layout */
 @media (max-width: 768px) {
   .site-nav {
     flex-direction: column;
@@ -260,7 +246,7 @@ a.gradient-blue-text:hover,
   .hamburger { display: flex; }
 }
 
-/* ===== Global Buttons ===== */
+/* == Buttons == */
 .btn {
   background: var(--cyan);
   color: var(--ink-dark);
@@ -274,14 +260,19 @@ a.gradient-blue-text:hover,
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  transition: background-color 0.25s ease, transform 0.05s ease;
+  transition: background-color 0.25s ease, transform 0.05s ease, box-shadow 0.2s ease;
 }
-.btn:hover {
-  background: var(--cyan-hover);
+.btn:hover { background: var(--cyan-hover); }
+.btn:active { transform: translateY(1px); }
+
+/* Keyboard focus (consistent across anchors and buttons) */
+.btn:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 10px;
 }
-.btn:active {
-  transform: translateY(1px);
-}
+
 .btn.secondary {
   background: transparent;
   color: var(--cyan);
@@ -294,11 +285,11 @@ a.gradient-blue-text:hover,
   flex-wrap: wrap;
 }
 
-/* ===== Footer ===== */
+/* == Footer == */
 footer {
   background: var(--bg-deep-1);
   padding: 5rem 2rem 3rem;
-  color: var(--footer-muted);   /* base grey for footer text */
+  color: var(--footer-muted);
   font-size: 0.9rem;
 }
 
@@ -311,28 +302,17 @@ footer {
   margin: auto;
 }
 
-.footer-column {
-  flex: 1 1 250px;
-  min-width: 200px;
-}
-
+.footer-column { flex: 1 1 250px; min-width: 200px; }
 .footer-column h4 {
   margin: 0 0 .75rem;
   color: var(--cyan);
   letter-spacing: .5px;
 }
+.footer-column p { margin: .4rem 0; color: inherit; }
 
-.footer-column p {
-  margin: .4rem 0;
-  color: inherit; /* ensure it matches footer base color */
-}
+.footer-logo { height: 100px; margin-bottom: 1rem; }
 
-.footer-logo {
-  height: 100px;
-  margin-bottom: 1rem;
-}
-
-/* Newsletter (footer – match homepage) */
+/* Newsletter form (footer) */
 .newsletter-input {
   padding: 0.6rem 1rem;
   border-radius: 4px;
@@ -343,9 +323,7 @@ footer {
   color: var(--text);
   outline: none;
 }
-.newsletter-input::placeholder {
-  color: var(--footer-muted);
-}
+.newsletter-input::placeholder { color: var(--footer-muted); }
 
 .newsletter-button {
   padding: 0.6rem 1.2rem;
@@ -357,20 +335,18 @@ footer {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-.newsletter-button:hover {
-  background: var(--cyan-hover);
-}
+.newsletter-button:hover { background: var(--cyan-hover); }
 
 /* Footer links */
 .footer-column a,
 .footer-column a:visited {
-  color: var(--footer-muted);   /* same grey as email */
+  color: var(--footer-muted);
   text-decoration: none;
 }
 .footer-column a:hover,
 .footer-column a:focus {
-  color: var(--purple);         /* purple hover */
-  text-decoration: none;        /* no underline */
+  color: var(--purple);
+  text-decoration: none;
 }
 
 .footer-bottom {
