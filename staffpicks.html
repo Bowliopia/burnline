@@ -199,6 +199,46 @@
         max-width: 90%; max-height: 50vh; width: auto; height: auto;
         object-fit: contain; background: #111522; margin: 0 auto; display: block;
       }
+      /* Make the whole modal scroll together */
+.modal{
+  max-height: 90vh;
+  overflow: auto;                 /* <-- unified scroll area */
+  -webkit-overflow-scrolling: touch; /* iOS momentum */
+  overscroll-behavior: contain;   /* stop background from bouncing */
+}
+
+/* Stop nested scrolling inside the text area */
+.modal-body{
+  overflow: visible !important;   /* was auto */
+}
+
+/* Books variant: same rule */
+.modal.modal--book .modal-body{
+  overflow: visible !important;
+}
+
+/* Mobile tweaks: keep image visible but not dominant */
+@media (max-width: 720px){
+  .modal{
+    display: block;               /* simpler flow on small screens */
+  }
+  .modal-media{
+    max-height: 55vh;             /* image won’t swallow the viewport */
+  }
+  .modal-media img{
+    width: 100%;
+    height: auto;
+    max-height: 55vh;             /* scroll continues right into the text */
+    object-fit: contain;
+  }
+}
+
+/* (Optional) Desktop nicety: allow the grid version but still one scroll */
+@media (min-width: 721px){
+  .modal{
+    overflow: auto;               /* keeps unified scroll on tall content */
+  }
+}
     }
   </style>
 </head>
