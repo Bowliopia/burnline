@@ -504,7 +504,7 @@ a.gradient-blue-text:hover,
   width: 42px;
   height: 42px;
   object-fit: contain;
-  filter: sepia(0.15) saturate(0.8) hue-rotate(72deg) brightness(0.72);
+  filter: sepia(0.15) saturate(0.7) hue-rotate(65deg) brightness(1.9);
 }
 
 .logo-title span {
