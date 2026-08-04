@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -89,10 +89,7 @@
     }
 
     .library-hero-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(250px, .65fr);
-      align-items: end;
-      gap: clamp(2.5rem, 7vw, 7rem);
+      display: block;
     }
 
     .eyebrow {
@@ -307,9 +304,11 @@
     }
 
     .issue-cover img {
+      display: block;
       width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
+      height: auto;
+      aspect-ratio: auto;
+      object-fit: contain;
       border-radius: 3px 14px 3px 14px;
     }
 
@@ -453,13 +452,8 @@
     }
 
     @media (max-width: 900px) {
-      .library-hero-inner,
       .issue-entry {
         grid-template-columns: 1fr;
-      }
-
-      .library-note {
-        justify-self: start;
       }
 
       .issue-cover-wrap {
@@ -483,10 +477,6 @@
 
       .library-title {
         font-size: clamp(3.15rem, 17vw, 5rem);
-      }
-
-      .library-note {
-        transform: none;
       }
 
       .issue-entry {
@@ -576,11 +566,6 @@
             Read each issue of Burnline from cover to cover—fiction and art about communities adapting, rebuilding, and imagining ways of living that are more generous, resilient, and alive.
           </p>
         </div>
-
-        <aside class="library-note" aria-label="About the issue library">
-          <strong>Read at your own pace</strong>
-          <p>Every issue is available as an interactive flipbook and a downloadable PDF.</p>
-        </aside>
       </div>
     </section>
 
