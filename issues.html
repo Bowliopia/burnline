@@ -3,115 +3,562 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4efd9" />
+  <meta
+    name="description"
+    content="Browse complete issues of Burnline, an independent magazine publishing solarpunk fiction and art about brighter, more livable futures."
+  />
   <title>Issue Library – Burnline</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page styles -->
   <style>
-    * { box-sizing: border-box; }
+    /* ====================================================================
+       ISSUE LIBRARY
+       Page-specific styles layered onto the global Burnline design system.
+       ==================================================================== */
 
-    .gradient-heading {
-      font-size: 2.2rem;
-      background: linear-gradient(90deg, var(--magenta), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 0 0 1rem 0;
-      font-family: 'Orbitron', sans-serif;
+    .announcement {
+      position: relative;
+      z-index: 60;
+      padding: .62rem var(--page-pad);
+      color: var(--paper-soft);
+      background: var(--forest);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      line-height: 1.5;
+      text-transform: uppercase;
     }
 
-    .content { max-width: 1200px; margin: 2rem auto 4rem; padding: 0 2rem; }
-    .section-intro { text-align: center; margin: 2rem 0 3rem; }
-
-    /* Issue feature block */
-    .issue-hero{
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      margin-bottom: 2.5rem;
+    .site-nav a[aria-current="page"]::after {
+      right: 0;
     }
-    .issue-hero .cover{
-      flex: 0 0 380px;
-      max-width: 380px;
-      background: var(--card);
-      border-radius: 12px;
+
+    .library-hero {
+      position: relative;
+      isolation: isolate;
       overflow: hidden;
+      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(4.5rem, 8vw, 7rem);
+      background:
+        radial-gradient(circle at 84% 22%, rgba(240, 184, 74, .72) 0 7.5%, transparent 7.8%),
+        radial-gradient(ellipse at 11% 90%, rgba(116, 173, 179, .22) 0 19%, transparent 19.4%),
+        linear-gradient(120deg, #fffaf0 0%, #f5efd9 61%, #e8ebcb 100%);
+      border-bottom: 1px solid var(--line);
     }
-    .issue-hero .cover img{
-      width: 100%;
-      height: auto;
+
+    .library-hero::before,
+    .library-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .library-hero::before {
+      width: min(44vw, 630px);
+      height: min(31vw, 430px);
+      right: -8vw;
+      bottom: -13vw;
+      border: 2px solid rgba(35, 77, 61, .15);
+      border-radius: 52% 48% 0 0 / 70% 76% 0 0;
+      box-shadow:
+        -56px -44px 0 -54px rgba(35, 77, 61, .23),
+        -112px -82px 0 -110px rgba(35, 77, 61, .15),
+        -170px -116px 0 -168px rgba(35, 77, 61, .1);
+      transform: rotate(-6deg);
+    }
+
+    .library-hero::after {
+      width: 285px;
+      height: 285px;
+      left: -118px;
+      top: 15%;
+      border-radius: 50%;
+      opacity: .48;
+      background: repeating-radial-gradient(
+        circle at center,
+        transparent 0 15px,
+        rgba(79, 125, 87, .22) 16px 17px
+      );
+    }
+
+    .library-hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(250px, .65fr);
+      align-items: end;
+      gap: clamp(2.5rem, 7vw, 7rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0 0 1.25rem;
+      color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--clay);
+    }
+
+    .library-title {
+      max-width: 810px;
+      margin-bottom: 1.35rem;
+      color: var(--forest);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+    }
+
+    .library-title em {
+      position: relative;
+      color: var(--clay);
+      font-style: normal;
+      white-space: nowrap;
+    }
+
+    .library-title em::after {
+      content: "";
+      position: absolute;
+      right: -2%;
+      bottom: .05em;
+      left: 1%;
+      z-index: -1;
+      height: .18em;
+      border-radius: 999px;
+      background: var(--sun-soft);
+      transform: rotate(-1.2deg);
+    }
+
+    .library-intro {
+      max-width: 700px;
+      margin-bottom: 0;
+      color: var(--ink-soft);
+      font-size: clamp(1.05rem, 1.7vw, 1.24rem);
+      line-height: 1.75;
+    }
+
+    .library-note {
+      position: relative;
+      max-width: 340px;
+      justify-self: end;
+      padding: 1.6rem 1.7rem 1.55rem;
+      color: var(--paper-soft);
+      background: var(--leaf);
+      border-radius: 8px 28px 8px 28px;
+      box-shadow: var(--shadow-small);
+      transform: rotate(1.5deg);
+    }
+
+    .library-note::before {
+      content: "";
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      right: 22px;
+      top: -20px;
+      border: 2px solid var(--sun-soft);
+      border-radius: 50% 50% 50% 5%;
+      transform: rotate(34deg);
+    }
+
+    .library-note strong {
       display: block;
+      margin-bottom: .55rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .library-note p {
+      margin: 0;
+      color: rgba(255, 250, 240, .88);
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .issue-archive {
+      position: relative;
+      padding: clamp(5rem, 9vw, 8.5rem) 0;
+      background:
+        linear-gradient(rgba(23, 56, 45, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 56, 45, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 38px 38px;
+    }
+
+    .archive-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .archive-heading h2 {
+      max-width: 680px;
+      margin-bottom: 0;
+      color: var(--forest);
+    }
+
+    .archive-heading > p {
+      max-width: 410px;
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .issue-entry {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(250px, 380px) minmax(0, 1fr);
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      background: rgba(255, 250, 240, .83);
+      border: 1px solid rgba(23, 56, 45, .14);
+      border-radius: 42px 12px 42px 12px;
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .issue-entry::before {
+      content: "01";
+      position: absolute;
+      right: clamp(1.2rem, 3vw, 2.4rem);
+      top: clamp(1rem, 2vw, 1.8rem);
+      color: rgba(35, 77, 61, .08);
+      font-family: 'Fraunces', serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      font-weight: 700;
+      line-height: .8;
+      pointer-events: none;
+    }
+
+    .issue-cover-wrap {
+      position: relative;
+      width: min(100%, 360px);
+      justify-self: center;
+    }
+
+    .issue-cover-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 7% -10% -8% 10%;
+      z-index: 0;
+      border-radius: 48% 52% 46% 54% / 58% 43% 57% 42%;
+      background: var(--sky);
+      opacity: .38;
+      transform: rotate(5deg);
+    }
+
+    .issue-cover-wrap::after {
+      content: "DIGITAL EDITION";
+      position: absolute;
+      right: -1rem;
+      bottom: 2rem;
+      z-index: 2;
+      padding: .58rem .72rem;
+      color: var(--paper-soft);
+      background: var(--clay);
+      border-radius: 7px;
+      box-shadow: var(--shadow-small);
+      font-family: 'Space Mono', monospace;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      transform: rotate(-4deg);
+    }
+
+    .issue-cover {
+      position: relative;
+      z-index: 1;
+      display: block;
+      padding: 12px;
+      background: var(--paper-soft);
+      border: 1px solid rgba(23, 56, 45, .14);
+      border-radius: 7px 24px 7px 24px;
+      box-shadow: var(--shadow);
+      transform: rotate(-1.5deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .issue-cover:hover,
+    .issue-cover:focus-visible {
+      transform: translateY(-7px) rotate(-.5deg);
+      box-shadow: 0 25px 60px rgba(35, 77, 61, .2);
+    }
+
+    .issue-cover img {
+      width: 100%;
       aspect-ratio: 3 / 4;
       object-fit: cover;
+      border-radius: 3px 14px 3px 14px;
     }
-    .issue-hero .text{
-      flex: 1;
+
+    .issue-details {
+      position: relative;
+      z-index: 1;
       max-width: 700px;
-      display: flex;
-      flex-direction: column;
     }
-    .issue-hero .two-col{
+
+    .issue-meta {
       display: flex;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 0.5rem;
-    }
-    .issue-hero .two-col > div{ flex: 1 1 300px; }
-    .issue-hero h3{
+      gap: .55rem 1rem;
       margin-bottom: 1rem;
-      font-size: 1.1rem;
+      color: var(--leaf);
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .09em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #888;
-      font-family: 'Orbitron', sans-serif;
     }
-    .issue-hero ul{ list-style: none; padding: 0; margin: 0; color: var(--text-muted); }
-    .issue-hero li{ margin-bottom: .75rem; }
-    .issue-hero li strong{ color: #fff; }
 
-    /* CTAs */
-    .issue-hero .cta,
-    .button-row{
-      width: 100%;
+    .issue-meta span + span::before {
+      content: "•";
+      margin-right: 1rem;
+      color: var(--clay);
+    }
+
+    .issue-details h2 {
+      margin-bottom: .75rem;
+      color: var(--forest);
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+    }
+
+    .issue-deck {
+      max-width: 620px;
+      margin-bottom: 2rem;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .issue-contents {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(190px, .75fr);
+      gap: clamp(1.6rem, 4vw, 3.5rem);
+      padding: clamp(1.3rem, 3vw, 1.8rem);
+      background: rgba(246, 240, 219, .62);
+      border: 1px solid var(--line);
+      border-radius: 8px 24px 8px 24px;
+    }
+
+    .content-group h3 {
+      margin-bottom: .9rem;
+      color: var(--leaf);
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .content-group ul {
+      display: grid;
+      gap: .7rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .content-group li {
+      position: relative;
+      padding-left: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .content-group li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .53em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--sprout);
+      transform: rotate(-35deg);
+    }
+
+    .content-group strong {
+      color: var(--ink);
+    }
+
+    .issue-entry .button-row {
+      justify-content: flex-start;
+      margin-top: 1.8rem;
+    }
+
+    .btn.read-button::after {
+      content: "↗";
+    }
+
+    .btn.download-button::after {
+      content: "↓";
+    }
+
+    .growing-archive {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: clamp(2.5rem, 6vw, 5rem);
+      color: var(--ink-soft);
+    }
+
+    .growing-archive::before,
+    .growing-archive::after {
+      content: "";
+      height: 1px;
+      background: var(--line);
+    }
+
+    .growing-archive-inner {
+      max-width: 580px;
+      padding: 1.15rem 1.35rem;
       text-align: center;
-      margin-top: 2.5rem;
-      display: flex;
-      gap: .75rem;
-      justify-content: center;
-      flex-wrap: wrap;
     }
 
-    /* Responsive */
-    @media (max-width: 980px){
-      .issue-hero{ flex-direction: column; }
-      .issue-hero .cover{ max-width: 100%; flex: 0 0 auto; }
+    .growing-archive strong {
+      display: block;
+      margin-bottom: .35rem;
+      color: var(--forest);
+      font-family: 'Fraunces', serif;
+      font-size: 1.35rem;
+    }
+
+    .growing-archive p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .95rem;
+    }
+
+    @media (max-width: 900px) {
+      .library-hero-inner,
+      .issue-entry {
+        grid-template-columns: 1fr;
+      }
+
+      .library-note {
+        justify-self: start;
+      }
+
+      .issue-cover-wrap {
+        width: min(82%, 360px);
+      }
+
+      .archive-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .announcement {
+        font-size: .64rem;
+      }
+
+      .library-hero {
+        padding-top: 4.5rem;
+      }
+
+      .library-title {
+        font-size: clamp(3.15rem, 17vw, 5rem);
+      }
+
+      .library-note {
+        transform: none;
+      }
+
+      .issue-entry {
+        padding: 1.2rem;
+        border-radius: 28px 8px 28px 8px;
+      }
+
+      .issue-entry::before {
+        display: none;
+      }
+
+      .issue-cover-wrap {
+        width: min(88%, 330px);
+      }
+
+      .issue-cover-wrap::after {
+        right: -.5rem;
+        bottom: 1.5rem;
+      }
+
+      .issue-contents {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .issue-entry .button-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .issue-entry .btn {
+        width: 100%;
+      }
+
+      .growing-archive {
+        grid-template-columns: 1fr;
+      }
+
+      .growing-archive::before,
+      .growing-archive::after {
+        width: 72%;
+        margin-inline: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="announcement">Independent stories for brighter, stranger, more livable futures</div>
 
   <header class="site-header">
-    <a href="index.html" class="logo-title">
-      <img src="Flame logo-1.png.png" alt="Burnline logo">
+    <a href="index.html" class="logo-title" aria-label="Burnline home">
+      <img src="Flame logo-1.png.png" alt="" aria-hidden="true">
       <span>BURNLINE</span>
     </a>
 
-    <!-- Mobile menu trigger -->
-    <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
-      <div></div><div></div><div></div>
-    </div>
+    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
 
-    <nav class="site-nav" id="site-nav">
-      <a href="issues.html">Issues</a>
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="issues.html" aria-current="page">Issues</a>
       <a href="stories.html">Stories</a>
       <a href="art.html">Art</a>
       <a href="about.html">About</a>
@@ -119,96 +566,158 @@
     </nav>
   </header>
 
-  <main class="content">
-    <div class="section-intro">
-      <h1 class="gradient-heading">Issue Library</h1>
-    </div>
-
-    <!-- Issue 01 -->
-    <section class="issue-hero" id="issue-001">
-      <!-- Cover opens Heyzine in new tab -->
-      <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener" class="cover" aria-label="Open Issue 01 flipbook">
-        <img src="New Cover.png" alt="Issue 01 cover" loading="lazy" width="900" height="1200">
-      </a>
-
-      <div class="text">
-        <h1 class="gradient-heading" style="margin-bottom: 1rem;">Issue 01</h1>
-
-        <div class="two-col">
-          <div>
-            <h3>Fiction</h3>
-            <ul>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-              <li><strong>[Story Title]</strong> by [Author Name]</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Artwork</h3>
-            <ul>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-              <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
-            </ul>
-          </div>
+  <main>
+    <section class="library-hero" aria-labelledby="library-title">
+      <div class="library-hero-inner wrap">
+        <div>
+          <p class="eyebrow">The Burnline collection</p>
+          <h1 class="library-title" id="library-title">A library of <em>possible futures.</em></h1>
+          <p class="library-intro">
+            Read each issue of Burnline from cover to cover—fiction and art about communities adapting, rebuilding, and imagining ways of living that are more generous, resilient, and alive.
+          </p>
         </div>
 
-        <div class="button-row" style="width: 100%; margin-top: 2.5rem;">
-          <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener" class="btn">Read This Issue</a>
-          <a href="Placeholder%20Mag.pdf" download class="btn secondary">Download PDF</a>
-        </div>
+        <aside class="library-note" aria-label="About the issue library">
+          <strong>Read at your own pace</strong>
+          <p>Every issue is available as an interactive flipbook and a downloadable PDF.</p>
+        </aside>
       </div>
     </section>
 
+    <section class="issue-archive" aria-labelledby="archive-title">
+      <div class="wrap">
+        <div class="archive-heading">
+          <div>
+            <p class="eyebrow">Complete editions</p>
+            <h2 id="archive-title">Begin at the beginning.</h2>
+          </div>
+          <p>
+            Each edition gathers original short fiction and artwork into one shared vision of what might come next.
+          </p>
+        </div>
+
+        <article class="issue-entry" id="issue-001">
+          <div class="issue-cover-wrap">
+            <a
+              href="https://heyzine.com/flip-book/f23a012d4f.html"
+              target="_blank"
+              rel="noopener"
+              class="issue-cover"
+              aria-label="Open Burnline Issue 01 flipbook in a new tab"
+            >
+              <img src="New Cover.png" alt="Cover of Burnline Issue 01" width="900" height="1200">
+            </a>
+          </div>
+
+          <div class="issue-details">
+            <div class="issue-meta">
+              <span>Issue 01</span>
+              <span>Digital edition</span>
+            </div>
+
+            <h2>Issue 01</h2>
+            <p class="issue-deck">
+              The first complete collection from Burnline, bringing original speculative fiction and artwork together in one digital edition.
+            </p>
+
+            <div class="issue-contents">
+              <div class="content-group">
+                <h3>Fiction</h3>
+                <ul>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                </ul>
+              </div>
+
+              <div class="content-group">
+                <h3>Artwork</h3>
+                <ul>
+                  <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
+                  <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
+                  <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <a
+                href="https://heyzine.com/flip-book/f23a012d4f.html"
+                target="_blank"
+                rel="noopener"
+                class="btn read-button"
+              >Read this issue</a>
+              <a href="Placeholder%20Mag.pdf" download class="btn secondary download-button">Download PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <div class="growing-archive" aria-label="More issues coming in the future">
+          <div class="growing-archive-inner">
+            <strong>The archive is still growing.</strong>
+            <p>Future editions will take root here as new collections are published.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, we promise.</p>
-        <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+        <h3>Keep a light on for the future.</h3>
+        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <form class="newsletter-form">
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
+
       <div class="footer-column">
-        <h4>Get In Touch</h4>
-        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
+        <h4>Get in touch</h4>
+        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
       </div>
+
       <div class="footer-column">
         <h4>Read</h4>
-        <p><a href="https://bowliopia.github.io/burnline/issues.html">Issue Library</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
+        <p><a href="issues.html">Issue Library</a></p>
+        <p><a href="stories.html">Featured Stories</a></p>
+        <p><a href="staffpicks.html">Staff Picks</a></p>
       </div>
     </div>
+
     <div class="footer-bottom">
-      &copy; 2025 Burnline Magazine — All rights reserved
+      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
     </div>
   </footer>
 
   <script>
-    // Mobile nav (guarded for absent elements)
     (function () {
       const hamburger = document.getElementById('hamburger');
       const nav = document.getElementById('site-nav');
+
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+          hamburger.setAttribute('aria-expanded', String(isActive));
+          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
         });
-        nav.querySelectorAll('a').forEach(a => {
-          a.addEventListener('click', () => {
-            if (nav.classList.contains('active')) {
-              nav.classList.remove('active');
-              hamburger.setAttribute('aria-expanded', 'false');
-            }
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open menu');
           });
         });
       }
+
+      const year = document.getElementById('copyright-year');
+      if (year) year.textContent = new Date().getFullYear();
     })();
   </script>
 </body>
