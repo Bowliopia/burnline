@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -476,7 +476,21 @@
       }
 
       .library-title {
-        font-size: clamp(3.15rem, 17vw, 5rem);
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(2.6rem, 13vw, 3.8rem);
+        overflow-wrap: anywhere;
+        word-break: normal;
+      }
+
+      /* The highlighted phrase was previously forced onto one line, which
+         made the title wider than portrait phone screens. */
+      .library-title em {
+        white-space: normal;
+      }
+
+      .library-title em::after {
+        display: none;
       }
 
       .issue-entry {
