@@ -3,393 +3,1132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Art – Burnline</title>
+  <meta name="theme-color" content="#f4efd9" />
+  <meta
+    name="description"
+    content="Explore solarpunk illustration, issue covers, and visual worldbuilding from Burnline Magazine."
+  />
+  <title>Art Gallery – Burnline</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page styles -->
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f1c, #1b1e35);
-      color: #f0f0f0;
-    }
+    /* ====================================================================
+       BURNLINE ART GALLERY
+       Page-specific styles layered onto the global Dear Alice design system.
+       ==================================================================== */
 
-    html { scroll-behavior: smooth; }
-
-    h1, h2, h3, h4, nav a, header { font-family: 'Orbitron', sans-serif; }
-
-    /* Header */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #0df6e3;
-      color: #0f0f1c;
-      padding: 1rem 2rem;
-      flex-wrap: wrap;
+    .announcement {
       position: relative;
+      z-index: 60;
+      padding: .62rem var(--page-pad);
+      color: var(--paper-soft);
+      background: var(--forest);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      line-height: 1.5;
+      text-transform: uppercase;
     }
 
-    .logo-title { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; }
-    .logo-title img { height: 60px; width: auto; }
-
-    .site-nav { display: flex; gap: 2rem; font-size: 1rem; }
-    .site-nav a { color: #0f0f1c; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-    .site-nav a:hover { color: #ff4ac2; }
-
-    .hamburger { display: none; flex-direction: column; justify-content: center; cursor: pointer; width: 30px; height: 25px; gap: 5px; }
-    .hamburger div { background: #0f0f1c; height: 4px; width: 100%; border-radius: 2px; }
-
-    @media (max-width: 768px){
-      .site-nav{
-        flex-direction: column; width: 100%; display: none; background: #0df6e3;
-        padding: 1rem 0; margin-top: 1rem;
-      }
-      .site-nav.active{ display: flex; }
-      .hamburger{ display: flex; }
+    .site-nav a[aria-current="page"]::after {
+      right: 0;
     }
 
-    /* Containers */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    /* Hero -------------------------------------------------------------- */
+    .art-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(5rem, 8vw, 7.5rem);
+      background:
+        radial-gradient(circle at 86% 17%, rgba(240, 184, 74, .78) 0 6.5%, transparent 6.8%),
+        radial-gradient(ellipse at 8% 98%, rgba(116, 173, 179, .28) 0 18%, transparent 18.4%),
+        linear-gradient(126deg, #fffaf0 0%, #f5eed5 56%, #e5ebc8 100%);
+      border-bottom: 1px solid var(--line);
+    }
 
-    /* Intro */
-    .content { max-width: 800px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
-    .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, #f72585, #7209b7);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+    .art-hero::before,
+    .art-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
     }
-    .gradient-heading-blue {
-      font-size: 1.5rem;
-      background: linear-gradient(90deg, #0df6e3, #1e90ff);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-    .content p { line-height: 1.7; color: #ccc; margin-bottom: 1.2rem; }
 
-    /* Cover gallery */
-    .cover-galley {
-      padding: 2rem 0 1rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
+    .art-hero::before {
+      width: min(43vw, 590px);
+      aspect-ratio: 1;
+      right: -12vw;
+      bottom: -23vw;
+      border: 2px solid rgba(35, 77, 61, .17);
+      border-radius: 50% 50% 0 0;
+      box-shadow:
+        -58px -52px 0 -56px rgba(35, 77, 61, .19),
+        -116px -100px 0 -114px rgba(35, 77, 61, .12),
+        -174px -144px 0 -172px rgba(35, 77, 61, .08);
+      transform: rotate(-8deg);
     }
-    .cover-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    .art-hero::after {
+      width: 265px;
+      height: 265px;
+      left: -120px;
+      top: 15%;
+      border-radius: 50%;
+      opacity: .5;
+      background: repeating-radial-gradient(
+        circle at center,
+        transparent 0 14px,
+        rgba(79, 125, 87, .21) 15px 16px
+      );
+    }
+
+    .art-hero-inner {
+      max-width: 910px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0 0 1.25rem;
+      color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--clay);
+    }
+
+    .art-title {
+      max-width: 875px;
+      margin-bottom: 1.4rem;
+      color: var(--forest);
+      font-size: clamp(3.45rem, 8vw, 7rem);
+      overflow-wrap: anywhere;
+    }
+
+    .art-title em {
+      position: relative;
+      color: var(--clay);
+      font-style: normal;
+    }
+
+    .art-title em::after {
+      content: "";
+      position: absolute;
+      right: -1%;
+      bottom: .04em;
+      left: 1%;
+      z-index: -1;
+      height: .18em;
+      border-radius: 999px;
+      background: var(--sun-soft);
+      transform: rotate(-1deg);
+    }
+
+    .art-intro {
+      max-width: 730px;
+      margin-bottom: 1.75rem;
+      color: var(--ink-soft);
+      font-size: clamp(1.05rem, 1.7vw, 1.24rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      min-height: 46px;
+      padding: .65rem .35rem;
+      color: var(--forest);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(35, 77, 61, .34);
+    }
+
+    .hero-link::after {
+      content: "→";
+      transition: transform .2s ease;
+    }
+
+    .hero-link:hover::after,
+    .hero-link:focus-visible::after {
+      transform: translateX(4px);
+    }
+
+    /* Gallery background ------------------------------------------------ */
+    .gallery-shell {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(5rem, 9vw, 8rem) 0 clamp(6rem, 10vw, 9rem);
+      background:
+        linear-gradient(rgba(23, 56, 45, .033) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 56, 45, .033) 1px, transparent 1px),
+        var(--paper);
+      background-size: 38px 38px;
+    }
+
+    .gallery-shell::before {
+      content: "";
+      position: absolute;
+      top: 48%;
+      left: -65px;
+      width: 155px;
+      height: 220px;
+      opacity: .11;
+      background:
+        radial-gradient(ellipse at 50% 13%, var(--forest) 0 10%, transparent 11%),
+        radial-gradient(ellipse at 26% 38%, var(--leaf) 0 13%, transparent 14%),
+        radial-gradient(ellipse at 74% 43%, var(--leaf) 0 13%, transparent 14%),
+        radial-gradient(ellipse at 31% 68%, var(--sprout) 0 12%, transparent 13%),
+        radial-gradient(ellipse at 69% 72%, var(--sprout) 0 12%, transparent 13%),
+        linear-gradient(90deg, transparent 48%, var(--forest) 49% 51%, transparent 52%);
+      transform: rotate(-10deg);
+      pointer-events: none;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
       gap: 2rem;
-      margin-top: 1.25rem;
+      margin-bottom: clamp(2.4rem, 5vw, 4.3rem);
     }
-    /* Desktop: 3-up; left-align short rows */
-    @media (min-width: 900px) {
-      .cover-grid {
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: start;
-      }
-      .cover-grid:has(> .cover-tile:only-child) > .cover-tile { grid-column: 1; }
+
+    .section-heading h2 {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: var(--forest);
     }
-    .cover-tile { cursor: pointer; transition: transform 0.25s ease; }
-    .cover-tile:hover { transform: scale(1.02); }
-    .cover-tile img {
+
+    .section-heading > p {
+      max-width: 420px;
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    /* Cover exhibition -------------------------------------------------- */
+    .cover-exhibition {
+      margin-bottom: clamp(6rem, 10vw, 9rem);
+    }
+
+    .cover-feature {
+      display: grid;
+      grid-template-columns: minmax(250px, 390px) minmax(0, 1fr);
+      gap: clamp(2.2rem, 6vw, 6.4rem);
+      align-items: center;
+      padding: clamp(1.3rem, 3.5vw, 3rem);
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 42px 12px 42px 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .cover-frame {
+      position: relative;
+      width: 100%;
+      cursor: zoom-in;
+    }
+
+    .cover-frame::before {
+      content: "";
+      position: absolute;
+      inset: 7% -7% -6% 9%;
+      z-index: 0;
+      border-radius: 45% 55% 47% 53% / 53% 44% 56% 47%;
+      background: var(--sun-soft);
+      transform: rotate(3deg);
+    }
+
+    .cover-frame::after {
+      content: "";
+      position: absolute;
+      top: -4%;
+      left: -5%;
+      z-index: 2;
+      width: 72px;
+      height: 72px;
+      border-radius: 50% 50% 12% 50%;
+      background: var(--clay);
+      opacity: .92;
+      transform: rotate(-14deg);
+    }
+
+    .cover-frame img {
+      position: relative;
+      z-index: 1;
       width: 100%;
       height: auto;
-      display: block;
+      border: 8px solid var(--paper-soft);
       border-radius: 8px;
-      object-fit: contain;
+      box-shadow: 0 22px 45px rgba(35, 77, 61, .2);
+      transition: transform .28s ease, box-shadow .28s ease;
     }
 
-    /* Artwork grid */
-    .section-heading { text-align: left; margin-top: 2.5rem; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 2rem 0 1rem;
-    }
-    .art-tile {
-      background: #1a1c30;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .art-tile:hover { transform: scale(1.02); box-shadow: 0 0 25px rgba(13, 246, 227, 0.15); }
-    .art-tile img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
+    .cover-frame:hover img,
+    .cover-frame:focus-visible img {
+      transform: translateY(-5px) rotate(-.4deg);
+      box-shadow: 0 29px 55px rgba(35, 77, 61, .24);
     }
 
-    /* Load more */
-    .load-more-wrap { text-align: center; padding: 0 0 3rem; }
-    .btn {
-      appearance: none;
-      border: none;
-      border-radius: 8px;
-      padding: 0.75rem 1.25rem;
+    .cover-copy {
+      max-width: 570px;
+    }
+
+    .cover-label,
+    .art-label {
+      margin: 0 0 .75rem;
+      color: var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .71rem;
       font-weight: 700;
-      cursor: pointer;
-      background: #0df6e3;
-      color: #0f0f1c;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      letter-spacing: .11em;
+      text-transform: uppercase;
     }
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,246,227,0.25); }
-    .btn:active { transform: translateY(0); box-shadow: none; }
-    .hidden { display: none !important; }
 
-    /* Modal */
+    .cover-copy h3 {
+      margin-bottom: 1rem;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+    }
+
+    .cover-copy > p:not(.cover-label) {
+      color: var(--ink-soft);
+      font-size: 1.06rem;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem 1.2rem;
+      margin: 1.6rem 0 0;
+      padding-top: 1.25rem;
+      color: var(--forest);
+      border-top: 1px solid var(--line);
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    /* Artwork tiles ----------------------------------------------------- */
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.45rem, 3vw, 2.3rem);
+    }
+
+    .art-tile {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: var(--paper-soft);
+      border: 1px solid var(--line);
+      border-radius: 30px 8px 30px 8px;
+      box-shadow: var(--shadow-small);
+      transition: transform .24s ease, box-shadow .24s ease;
+    }
+
+    .art-tile:nth-child(2n) {
+      border-radius: 8px 30px 8px 30px;
+    }
+
+    .art-tile:nth-child(3n) {
+      border-radius: 30px 30px 8px 30px;
+    }
+
+    .art-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--paper-deep);
+    }
+
+    .art-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(23, 56, 45, .13), transparent 48%);
+      pointer-events: none;
+    }
+
+    .art-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.88) sepia(.06) contrast(.96);
+      transition: transform .55s cubic-bezier(.2, .7, .25, 1), filter .35s ease;
+    }
+
+    .art-number {
+      position: absolute;
+      top: .85rem;
+      left: .85rem;
+      z-index: 2;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border-radius: 50% 50% 12% 50%;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      transform: rotate(-6deg);
+    }
+
+    .art-caption {
+      padding: 1.25rem 1.35rem 1.45rem;
+    }
+
+    .art-caption h3 {
+      margin-bottom: .35rem;
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+    }
+
+    .art-artist {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .92rem;
+    }
+
+    .art-artist strong {
+      color: var(--forest);
+    }
+
+    .art-tile:hover,
+    .art-tile:focus-visible {
+      transform: translateY(-7px) rotate(-.2deg);
+      box-shadow: 0 20px 42px rgba(35, 77, 61, .17);
+    }
+
+    .art-tile:hover .art-image img,
+    .art-tile:focus-visible .art-image img {
+      transform: scale(1.055);
+      filter: saturate(1) sepia(0) contrast(1);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    .load-more {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1.2rem;
+      align-items: center;
+      margin-top: clamp(2.8rem, 6vw, 4.8rem);
+    }
+
+    .load-more::before,
+    .load-more::after {
+      content: "";
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* Closing invitation ------------------------------------------------ */
+    .art-note {
+      max-width: 870px;
+      margin: clamp(6rem, 10vw, 9rem) auto 0;
+      padding: clamp(2.2rem, 5vw, 4.5rem);
+      text-align: center;
+      background: var(--forest);
+      border-radius: 46px 12px 46px 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .art-note h2 {
+      margin-bottom: 1rem;
+      color: var(--paper-soft);
+    }
+
+    .art-note p {
+      max-width: 630px;
+      margin: 0 auto 1.7rem;
+      color: rgba(255, 250, 240, .74);
+    }
+
+    .art-note .btn.secondary {
+      color: var(--paper-soft);
+      border-color: rgba(255, 250, 240, .46);
+    }
+
+    .art-note .btn.secondary:hover,
+    .art-note .btn.secondary:focus-visible {
+      color: var(--forest);
+      background: var(--paper-soft);
+    }
+
+    /* Lightbox ---------------------------------------------------------- */
+    body.modal-open {
+      overflow: hidden;
+    }
+
     .modal {
-      display: flex; align-items: center; justify-content: center; flex-direction: column;
-      opacity: 0; visibility: hidden; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.9); transition: opacity 0.4s ease;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 4vw, 3rem);
+      opacity: 0;
+      visibility: hidden;
+      background: rgba(20, 48, 39, .94);
+      backdrop-filter: blur(10px);
+      transition: opacity .25s ease, visibility .25s ease;
     }
-    .modal.show { opacity: 1; visibility: visible; }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-dialog {
+      position: relative;
+      display: grid;
+      width: min(1080px, 100%);
+      max-height: calc(100vh - 2rem);
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+    }
+
+    .modal-image-wrap {
+      display: grid;
+      min-width: 0;
+      max-width: 100%;
+      place-items: center;
+    }
+
     .modal-content {
-      max-width: 90%; max-height: 80vh; border-radius: 10px;
-      box-shadow: 0 0 30px rgba(13, 246, 227, 0.2);
-      background: #0b0c17; object-fit: contain;
+      width: auto;
+      max-width: min(100%, 940px);
+      max-height: min(72vh, 820px);
+      object-fit: contain;
+      background: var(--paper-soft);
+      border: 8px solid var(--paper-soft);
+      border-radius: 8px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .36);
     }
-    .close {
-      position: absolute; top: 20px; right: 35px; color: #0df6e3;
-      font-size: 40px; font-weight: bold; cursor: pointer;
+
+    .modal-caption {
+      max-width: 760px;
+      margin-top: 1rem;
+      color: var(--paper-soft);
+      text-align: center;
     }
-    .modal-caption { color: #ccc; margin-top: 1rem; text-align: center; max-width: 80%; }
-    .modal-caption h3 { margin: 0; color: #0df6e3; }
-    .modal-caption p { margin: 0.5rem 0 0; }
+
+    .modal-caption h3 {
+      margin: 0 0 .25rem;
+      color: var(--paper-soft);
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+    }
+
+    .modal-caption p {
+      margin: 0;
+      color: rgba(255, 250, 240, .7);
+    }
+
+    .modal-close,
+    .nav-arrow {
+      position: fixed;
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      color: var(--forest);
+      background: var(--paper-soft);
+      border: 0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .2);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus-visible,
+    .nav-arrow:hover,
+    .nav-arrow:focus-visible {
+      color: var(--paper-soft);
+      background: var(--clay);
+      transform: scale(1.06);
+    }
+
+    .modal-close {
+      top: clamp(1rem, 3vw, 2rem);
+      right: clamp(1rem, 3vw, 2rem);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
 
     .nav-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem;
-      color: #0df6e3; background: none; border: none; cursor: pointer; z-index: 1000;
+      top: 50%;
+      width: 52px;
+      height: 52px;
+      border-radius: 50% 50% 15% 50%;
+      font-size: 1.65rem;
+      transform: translateY(-50%);
     }
-    .nav-arrow.left { left: 2%; }
-    .nav-arrow.right { right: 2%; }
 
-    /* Footer styles are centralized in css/style.css */
-    .gradient-blue-text {
-      background: linear-gradient(90deg, #0df6e3, #56ccf2);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; color: transparent; font-weight: bold;
+    .nav-arrow:hover,
+    .nav-arrow:focus-visible {
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .nav-arrow.left {
+      left: clamp(.75rem, 2.5vw, 2rem);
+    }
+
+    .nav-arrow.right {
+      right: clamp(.75rem, 2.5vw, 2rem);
+      border-radius: 50% 50% 50% 15%;
+    }
+
+    /* Responsive -------------------------------------------------------- */
+    @media (max-width: 960px) {
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading > p {
+        margin-top: 1rem;
+      }
+
+      .cover-feature {
+        grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
+        gap: 3rem;
+      }
+
+      .art-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .announcement {
+        font-size: .64rem;
+        letter-spacing: .055em;
+      }
+
+      .art-hero {
+        padding-top: 4.8rem;
+      }
+
+      .art-title {
+        max-width: 100%;
+        font-size: clamp(3rem, 13.5vw, 4.45rem);
+      }
+
+      .art-title em {
+        white-space: normal;
+      }
+
+      .cover-feature {
+        grid-template-columns: 1fr;
+        gap: 3.2rem;
+        border-radius: 30px 9px 30px 9px;
+      }
+
+      .cover-frame {
+        width: min(86%, 350px);
+        margin-inline: auto;
+      }
+
+      .cover-copy {
+        max-width: none;
+      }
+
+      .art-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .art-tile {
+        border-radius: 26px 8px 26px 8px;
+      }
+
+      .load-more {
+        grid-template-columns: 1fr;
+      }
+
+      .load-more::before,
+      .load-more::after {
+        width: 72%;
+        margin-inline: auto;
+      }
+
+      .load-more .btn {
+        width: 100%;
+      }
+
+      .modal {
+        padding: 4.5rem .85rem 5.5rem;
+      }
+
+      .modal-content {
+        max-height: 65vh;
+        border-width: 5px;
+      }
+
+      .modal-close {
+        width: 43px;
+        height: 43px;
+      }
+
+      .nav-arrow {
+        top: auto;
+        bottom: 1rem;
+        width: 46px;
+        height: 46px;
+        transform: none;
+      }
+
+      .nav-arrow:hover,
+      .nav-arrow:focus-visible {
+        transform: scale(1.06);
+      }
+
+      .nav-arrow.left {
+        left: calc(50% - 58px);
+      }
+
+      .nav-arrow.right {
+        right: calc(50% - 58px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="announcement">Illustration, cover art, and visual worlds for a future in bloom</div>
 
   <header class="site-header">
-    <a href="index.html" class="logo-title">
-      <img src="Flame logo-1.png.png" alt="Burnline logo">
+    <a href="index.html" class="logo-title" aria-label="Burnline home">
+      <img src="Flame logo-1.png.png" alt="" aria-hidden="true">
       <span>BURNLINE</span>
     </a>
 
-    <!-- Mobile menu trigger -->
-    <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
-      <div></div><div></div><div></div>
-    </div>
+    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
 
-    <nav class="site-nav" id="site-nav">
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
       <a href="issues.html">Issues</a>
       <a href="stories.html">Stories</a>
-      <a href="art.html">Art</a>
+      <a href="art.html" aria-current="page">Art</a>
       <a href="about.html">About</a>
       <a href="submit.html">Submit</a>
     </nav>
   </header>
 
-  <!-- Intro -->
-  <section class="content">
-    <h1 class="gradient-heading">Featured Art</h1>
-    <p>
-      Interested in having your art featured in the next issue?
-      <a href="submit.html" class="gradient-blue-text">Visit our Submit page.</a>
-    </p>
-  </section>
-
-  <!-- Cover gallery -->
-  <section class="cover-galley">
-    <div class="container">
-      <h2 class="gradient-heading-blue" style="text-align:left;">Cover Gallery</h2>
-      <div class="cover-grid">
-        <div class="cover-tile" data-title="Burnline — Issue 01" data-artist="Burnline Editorial">
-          <img src="New Cover.png" alt="Burnline Issue 01 cover">
+  <main>
+    <section class="art-hero" aria-labelledby="art-title">
+      <div class="art-hero-inner wrap">
+        <p class="eyebrow">Featured art</p>
+        <h1 class="art-title" id="art-title">A gallery of worlds <em>in bloom.</em></h1>
+        <p class="art-intro">
+          Explore the covers, illustrations, and visual experiments that give Burnline’s possible futures their shape—art grounded in community, ecology, invention, and wonder.
+        </p>
+        <div class="hero-actions">
+          <a href="#cover-gallery" class="btn">Enter the gallery</a>
+          <a href="submit.html" class="hero-link">Share your art with Burnline</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Issue art -->
-  <section class="container">
-    <div class="section-heading">
-      <h2 class="gradient-heading-blue">Issue Art</h2>
-    </div>
-    <div class="gallery-grid" id="issueArtGrid">
-      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
-        <img src="Placeholder 1.png" alt="Art 1">
-      </div>
-      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
-        <img src="Placeholder 2.png" alt="Art 2">
-      </div>
-      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
-        <img src="Placeholder 3.png" alt="Art 3">
-      </div>
-      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
-        <img src="Placeholder 1.png" alt="Art 5">
-      </div>
-      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
-        <img src="Placeholder 2.png" alt="Art 8">
-      </div>
-      <div class="art-tile" data-title="Placeholder Image" data-artist="Artist Name">
-        <img src="Placeholder 3.png" alt="Art 9">
-      </div>
-    </div>
-    <div class="load-more-wrap">
-      <button id="loadMoreBtn" class="btn">Load More</button>
-    </div>
-  </section>
+    <section class="gallery-shell">
+      <div class="wrap">
+        <section class="cover-exhibition" id="cover-gallery" aria-labelledby="cover-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Cover collection</p>
+              <h2 id="cover-title">The face of each issue.</h2>
+            </div>
+            <p>
+              Every Burnline edition begins with one image that invites readers into the world held inside.
+            </p>
+          </div>
 
-  <!-- Modal -->
-  <div id="imageModal" class="modal" aria-hidden="true">
-    <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
-    <button class="nav-arrow left" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
-    <img class="modal-content" id="modalImage" alt="Expanded artwork">
-    <button class="nav-arrow right" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
-    <div class="modal-caption">
-      <h3 id="modalTitle"></h3>
-      <p id="modalArtist"></p>
+          <article class="cover-feature">
+            <div
+              class="cover-frame gallery-item"
+              role="button"
+              tabindex="0"
+              data-title="Burnline — Issue 01"
+              data-artist="Burnline Editorial"
+              aria-label="Enlarge the cover for Burnline Issue 01"
+            >
+              <img src="New Cover.png" alt="Cover artwork for Burnline Issue 01">
+            </div>
+
+            <div class="cover-copy">
+              <p class="cover-label">Issue 01 · Cover art</p>
+              <h3>Burnline — Issue 01</h3>
+              <p>
+                The first image in the Burnline archive—and the opening visual statement for a collection of speculative fiction and art.
+              </p>
+              <div class="cover-meta">
+                <span>Digital edition</span>
+                <span>Burnline Editorial</span>
+                <span>2026</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section aria-labelledby="issue-art-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">From the issues</p>
+              <h2 id="issue-art-title">Art that makes the future visible.</h2>
+            </div>
+            <p>
+              Select an image to view it at full size and move through the complete gallery.
+            </p>
+          </div>
+
+          <div class="art-grid" id="issueArtGrid">
+            <article
+              class="art-tile gallery-item"
+              role="button"
+              tabindex="0"
+              data-title="[Artwork Title]"
+              data-artist="[Artist Name]"
+              aria-label="Enlarge artwork 1"
+            >
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">01</span>
+                <img src="Placeholder 1.png" alt="Featured artwork 1" loading="lazy">
+              </div>
+              <div class="art-caption">
+                <p class="art-label">Issue artwork</p>
+                <h3>[Artwork Title]</h3>
+                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+              </div>
+            </article>
+
+            <article
+              class="art-tile gallery-item"
+              role="button"
+              tabindex="0"
+              data-title="[Artwork Title]"
+              data-artist="[Artist Name]"
+              aria-label="Enlarge artwork 2"
+            >
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">02</span>
+                <img src="Placeholder 2.png" alt="Featured artwork 2" loading="lazy">
+              </div>
+              <div class="art-caption">
+                <p class="art-label">Issue artwork</p>
+                <h3>[Artwork Title]</h3>
+                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+              </div>
+            </article>
+
+            <article
+              class="art-tile gallery-item"
+              role="button"
+              tabindex="0"
+              data-title="[Artwork Title]"
+              data-artist="[Artist Name]"
+              aria-label="Enlarge artwork 3"
+            >
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">03</span>
+                <img src="Placeholder 3.png" alt="Featured artwork 3" loading="lazy">
+              </div>
+              <div class="art-caption">
+                <p class="art-label">Issue artwork</p>
+                <h3>[Artwork Title]</h3>
+                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+              </div>
+            </article>
+
+            <article
+              class="art-tile gallery-item is-hidden"
+              role="button"
+              tabindex="0"
+              data-title="[Artwork Title]"
+              data-artist="[Artist Name]"
+              aria-label="Enlarge artwork 4"
+            >
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">04</span>
+                <img src="Placeholder 1.png" alt="Featured artwork 4" loading="lazy">
+              </div>
+              <div class="art-caption">
+                <p class="art-label">Issue artwork</p>
+                <h3>[Artwork Title]</h3>
+                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+              </div>
+            </article>
+
+            <article
+              class="art-tile gallery-item is-hidden"
+              role="button"
+              tabindex="0"
+              data-title="[Artwork Title]"
+              data-artist="[Artist Name]"
+              aria-label="Enlarge artwork 5"
+            >
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">05</span>
+                <img src="Placeholder 2.png" alt="Featured artwork 5" loading="lazy">
+              </div>
+              <div class="art-caption">
+                <p class="art-label">Issue artwork</p>
+                <h3>[Artwork Title]</h3>
+                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+              </div>
+            </article>
+
+            <article
+              class="art-tile gallery-item is-hidden"
+              role="button"
+              tabindex="0"
+              data-title="[Artwork Title]"
+              data-artist="[Artist Name]"
+              aria-label="Enlarge artwork 6"
+            >
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">06</span>
+                <img src="Placeholder 3.png" alt="Featured artwork 6" loading="lazy">
+              </div>
+              <div class="art-caption">
+                <p class="art-label">Issue artwork</p>
+                <h3>[Artwork Title]</h3>
+                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+              </div>
+            </article>
+          </div>
+
+          <div class="load-more" id="load-more-row">
+            <button id="loadMoreBtn" class="btn" type="button">Load more artwork</button>
+          </div>
+        </section>
+
+        <section class="art-note" aria-labelledby="art-note-title">
+          <h2 id="art-note-title">Help us picture another future.</h2>
+          <p>
+            Burnline welcomes illustration, cover concepts, and visual storytelling that feels hopeful, strange, practical, and alive.
+          </p>
+          <a href="submit.html" class="btn secondary">View art submissions</a>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close gallery">&times;</button>
+    <button class="nav-arrow left" id="previousArt" type="button" aria-label="Previous artwork">&#10094;</button>
+
+    <div class="modal-dialog">
+      <div class="modal-image-wrap">
+        <img class="modal-content" id="modalImage" src="" alt="">
+      </div>
+      <div class="modal-caption">
+        <h3 id="modalTitle"></h3>
+        <p id="modalArtist"></p>
+      </div>
     </div>
+
+    <button class="nav-arrow right" id="nextArt" type="button" aria-label="Next artwork">&#10095;</button>
   </div>
 
   <footer>
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, we promise.</p>
-        <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+        <h3>Keep a light on for the future.</h3>
+        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <form class="newsletter-form">
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
+
       <div class="footer-column">
-        <h4>Get In Touch</h4>
-        <p>contact@burnlinemag.com<br><span style="font-size: 0.8rem;"></span></p>
+        <h4>Get in touch</h4>
+        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
       </div>
+
       <div class="footer-column">
         <h4>Read</h4>
-        <p><a href="https://bowliopia.github.io/burnline/issues.html">Issue Library</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
+        <p><a href="issues.html">Issue Library</a></p>
+        <p><a href="stories.html">Featured Stories</a></p>
+        <p><a href="staffpicks.html">Staff Picks</a></p>
       </div>
     </div>
+
     <div class="footer-bottom">
-      &copy; 2025 Burnline Magazine — All rights reserved
+      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
     </div>
   </footer>
 
   <script>
-    // Mobile nav (guarded)
     (function () {
       const hamburger = document.getElementById('hamburger');
       const nav = document.getElementById('site-nav');
+
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+          hamburger.setAttribute('aria-expanded', String(isActive));
+          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
         });
-        nav.querySelectorAll('a').forEach(a => {
-          a.addEventListener('click', () => {
-            if (nav.classList.contains('active')) {
-              nav.classList.remove('active');
-              hamburger.setAttribute('aria-expanded', 'false');
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open menu');
+          });
+        });
+      }
+
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalArtist = document.getElementById('modalArtist');
+      const modalClose = document.getElementById('modalClose');
+      const previousArt = document.getElementById('previousArt');
+      const nextArt = document.getElementById('nextArt');
+      const loadMoreButton = document.getElementById('loadMoreBtn');
+      const loadMoreRow = document.getElementById('load-more-row');
+
+      let galleryItems = [];
+      let currentIndex = 0;
+      let lastFocusedElement = null;
+
+      function getVisibleGalleryItems() {
+        galleryItems = Array.from(document.querySelectorAll('.gallery-item:not(.is-hidden)'));
+      }
+
+      function updateModal(index) {
+        if (!galleryItems.length) return;
+
+        currentIndex = (index + galleryItems.length) % galleryItems.length;
+        const item = galleryItems[currentIndex];
+        const image = item.querySelector('img');
+
+        modalImage.src = image.currentSrc || image.src;
+        modalImage.alt = image.alt || 'Expanded Burnline artwork';
+        modalTitle.textContent = item.dataset.title || 'Untitled artwork';
+        modalArtist.textContent = item.dataset.artist ? `by ${item.dataset.artist}` : '';
+      }
+
+      function openModal(item) {
+        getVisibleGalleryItems();
+        const index = galleryItems.indexOf(item);
+        if (index < 0) return;
+
+        lastFocusedElement = document.activeElement;
+        updateModal(index);
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modalClose.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        modalImage.src = '';
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function bindGalleryItems() {
+        document.querySelectorAll('.gallery-item').forEach((item) => {
+          if (item.dataset.bound === 'true') return;
+          item.dataset.bound = 'true';
+
+          item.addEventListener('click', () => openModal(item));
+          item.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              openModal(item);
             }
           });
         });
       }
-    })();
 
-    // Gallery modal + Load More
-    let currentIndex = 0;
-    let tiles = [];
+      modalClose.addEventListener('click', closeModal);
+      previousArt.addEventListener('click', () => updateModal(currentIndex - 1));
+      nextArt.addEventListener('click', () => updateModal(currentIndex + 1));
 
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalArtist = document.getElementById('modalArtist');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-
-    function buildTilesAndBindClicks() {
-      tiles = Array.from(document.querySelectorAll('.cover-tile, .art-tile:not(.hidden)'));
-      tiles.forEach((tile, i) => {
-        tile.onclick = () => openModal(i);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
       });
-    }
 
-    function openModal(index) {
-      currentIndex = index;
-      const tile = tiles[currentIndex];
-      const img = tile.querySelector('img');
-      modalImg.src = img.src;
-      modalTitle.textContent = tile.dataset.title || '';
-      modalArtist.textContent = tile.dataset.artist || '';
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-    }
+      document.addEventListener('keydown', (event) => {
+        if (!modal.classList.contains('show')) return;
 
-    function closeModal() {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-
-    function changeSlide(direction) {
-      if (!tiles.length) return;
-      currentIndex = (currentIndex + direction + tiles.length) % tiles.length;
-      const tile = tiles[currentIndex];
-      const img = tile.querySelector('img');
-      modalImg.src = img.src;
-      modalTitle.textContent = tile.dataset.title || '';
-      modalArtist.textContent = tile.dataset.artist || '';
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (!modal.classList.contains('show')) return;
-      if (e.key === 'ArrowRight') changeSlide(1);
-      if (e.key === 'ArrowLeft') changeSlide(-1);
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Show only first 3 Issue Art items initially
-    function initIssueArtVisibility() {
-      const issueArtItems = Array.from(document.querySelectorAll('#issueArtGrid .art-tile'));
-      issueArtItems.forEach((item, idx) => {
-        if (idx > 2) item.classList.add('hidden');
+        if (event.key === 'Escape') closeModal();
+        if (event.key === 'ArrowLeft') updateModal(currentIndex - 1);
+        if (event.key === 'ArrowRight') updateModal(currentIndex + 1);
       });
-      if (issueArtItems.length <= 3) {
-        loadMoreBtn.classList.add('hidden');
+
+      if (loadMoreButton) {
+        loadMoreButton.addEventListener('click', () => {
+          document.querySelectorAll('#issueArtGrid .art-tile.is-hidden').forEach((item) => {
+            item.classList.remove('is-hidden');
+          });
+
+          getVisibleGalleryItems();
+          if (loadMoreRow) loadMoreRow.remove();
+        }, { once: true });
+
+        if (document.querySelectorAll('#issueArtGrid .art-tile.is-hidden').length === 0 && loadMoreRow) {
+          loadMoreRow.remove();
+        }
       }
-    }
 
-    // Reveal remaining items
-    function attachLoadMore() {
-      loadMoreBtn.addEventListener('click', () => {
-        const hiddenItems = document.querySelectorAll('#issueArtGrid .art-tile.hidden');
-        hiddenItems.forEach(el => el.classList.remove('hidden'));
-        loadMoreBtn.classList.add('hidden');
-        buildTilesAndBindClicks();
-      });
-    }
+      bindGalleryItems();
+      getVisibleGalleryItems();
 
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-      initIssueArtVisibility();
-      attachLoadMore();
-      buildTilesAndBindClicks();
-    });
+      const year = document.getElementById('copyright-year');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
