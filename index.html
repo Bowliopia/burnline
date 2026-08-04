@@ -1,4 +1,13 @@
-  <!DOCTYPE html>
+Library
+/
+Burnline
+/
+burnline-home-no-staff-picks.html
+
+
+
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -627,9 +636,10 @@
 
     .home-cards {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(1.15rem, 2.5vw, 2rem);
-      margin-top: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      width: min(100%, 900px);
+      margin: 0 auto;
     }
 
     .edge-card {
@@ -648,7 +658,6 @@
     }
 
     .edge-card:nth-child(2) { border-radius: 8px 28px 8px 28px; }
-    .edge-card:nth-child(3) { border-radius: 28px 28px 8px 28px; }
 
     .edge-card::before,
     .edge-card::after {
@@ -1050,7 +1059,7 @@
             <p class="eyebrow">Explore Burnline</p>
             <h2 id="explore-title">Enter the growing archive.</h2>
           </div>
-          <p>Read complete issues, discover individual stories, and find the pieces our editors keep returning to.</p>
+          <p>Read complete digital issues or begin with an individual story from the growing Burnline archive.</p>
         </div>
 
         <div class="home-cards">
@@ -1067,14 +1076,6 @@
             <span class="edge-card-content">
               <span class="edge-card-kicker">Start with one story</span>
               <span class="edge-card-title">Featured Stories</span>
-            </span>
-          </a>
-
-          <a class="edge-card" href="staffpicks.html" aria-label="Open Staff Picks">
-            <img src="Frame 23.png" alt="" loading="lazy">
-            <span class="edge-card-content">
-              <span class="edge-card-kicker">From the editors</span>
-              <span class="edge-card-title">Staff Picks</span>
             </span>
           </a>
         </div>
@@ -1104,7 +1105,6 @@
         <h4>Read</h4>
         <p><a href="issues.html">Issue Library</a></p>
         <p><a href="stories.html">Featured Stories</a></p>
-        <p><a href="staffpicks.html">Staff Picks</a></p>
       </div>
     </div>
 
