@@ -3,123 +3,654 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4efd9" />
+  <meta
+    name="description"
+    content="Submit solarpunk fiction and visual art to Burnline, an independent digital magazine for brighter, stranger, more livable futures."
+  />
   <title>Submit – Burnline</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Global header/footer/vars/buttons/newsletter -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Page styles -->
   <style>
-    .content { max-width: 800px; margin: 4rem auto; padding: 0 2rem; text-align: center; }
+    /* ====================================================================
+       SUBMIT TO BURNLINE
+       Page-specific styles layered onto the global Burnline design system.
+       ==================================================================== */
 
-    .gradient-heading {
-      font-size: 2rem;
-      background: linear-gradient(90deg, var(--magenta), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', sans-serif;
+    .announcement {
+      position: relative;
+      z-index: 60;
+      padding: .62rem var(--page-pad);
+      color: var(--paper-soft);
+      background: var(--forest);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      line-height: 1.5;
+      text-transform: uppercase;
     }
-    .gradient-heading-blue {
-      font-size: 1.5rem;
-      background: linear-gradient(90deg, var(--cyan), #1e90ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', sans-serif;
-    }
-    .content p { line-height: 1.7; color: var(--text-muted); margin-bottom: 1.2rem; }
 
-    /* Tabs */
-    .tabs { margin-top: 2rem; text-align: left; }
-    .tablist {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border-dark);
-      margin-bottom: 1.25rem;
-      overflow-x: auto;
-      padding-bottom: 0.25rem;
+    .site-nav a[aria-current="page"]::after {
+      right: 0;
     }
-    .tab {
-      appearance: none;
-      border: 1px solid var(--border-dark);
-      background: var(--card);
-      color: var(--text);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      padding: 0.6rem 1rem;
+
+    /* Hero ------------------------------------------------------------- */
+    .submit-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(4.5rem, 8vw, 7rem);
+      background:
+        radial-gradient(circle at 87% 21%, rgba(240, 184, 74, .72) 0 7%, transparent 7.3%),
+        radial-gradient(ellipse at 8% 94%, rgba(116, 173, 179, .24) 0 21%, transparent 21.4%),
+        linear-gradient(125deg, #fffaf0 0%, #f6f0db 58%, #e7ebc9 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .submit-hero::before,
+    .submit-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .submit-hero::before {
+      width: min(44vw, 600px);
+      height: min(35vw, 470px);
+      right: -8vw;
+      bottom: -17vw;
+      border: 2px solid rgba(35, 77, 61, .14);
+      border-radius: 52% 48% 0 0 / 70% 76% 0 0;
+      box-shadow:
+        -60px -48px 0 -58px rgba(35, 77, 61, .2),
+        -122px -91px 0 -120px rgba(35, 77, 61, .12),
+        -184px -132px 0 -182px rgba(35, 77, 61, .08);
+      transform: rotate(-7deg);
+    }
+
+    .submit-hero::after {
+      width: 250px;
+      height: 250px;
+      left: -112px;
+      top: 18%;
+      border-radius: 50%;
+      opacity: .42;
+      background: repeating-radial-gradient(
+        circle at center,
+        transparent 0 15px,
+        rgba(79, 125, 87, .2) 16px 17px
+      );
+    }
+
+    .submit-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(270px, .42fr);
+      gap: clamp(2.5rem, 7vw, 6.5rem);
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0 0 1.25rem;
+      color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
       border-radius: 999px;
-      cursor: pointer;
-      transition: transform 120ms ease, background 150ms ease, border-color 150ms ease;
+      background: var(--clay);
+    }
+
+    .submit-title {
+      max-width: 850px;
+      margin-bottom: 1.5rem;
+      color: var(--forest);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+    }
+
+    .submit-title em {
+      position: relative;
+      color: var(--clay);
+      font-style: normal;
       white-space: nowrap;
     }
-    .tab:hover { transform: translateY(-1px); }
+
+    .submit-title em::after {
+      content: "";
+      position: absolute;
+      right: -1%;
+      bottom: .04em;
+      left: 1%;
+      z-index: -1;
+      height: .18em;
+      border-radius: 999px;
+      background: var(--sun-soft);
+      transform: rotate(-1deg);
+    }
+
+    .submit-lede {
+      max-width: 740px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: clamp(1.08rem, 1.8vw, 1.3rem);
+      line-height: 1.78;
+    }
+
+    .status-card {
+      position: relative;
+      padding: 1.65rem;
+      background: var(--forest);
+      color: var(--paper-soft);
+      border-radius: 8px 30px 8px 30px;
+      box-shadow: 0 18px 44px rgba(35, 77, 61, .18);
+      transform: rotate(1deg);
+    }
+
+    .status-card::before {
+      content: "";
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--sun);
+      box-shadow: 0 0 0 6px rgba(240, 184, 74, .16);
+    }
+
+    .status-card .label {
+      display: block;
+      margin-bottom: .9rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .status-card h2 {
+      margin-bottom: .75rem;
+      color: var(--paper-soft);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+    }
+
+    .status-card p {
+      margin: 0;
+      color: rgba(255, 250, 240, .76);
+      line-height: 1.68;
+    }
+
+    /* Guidelines ------------------------------------------------------- */
+    .guidelines {
+      position: relative;
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      background:
+        linear-gradient(rgba(23, 56, 45, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 56, 45, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 38px 38px;
+    }
+
+    .guidelines-header {
+      max-width: 770px;
+      margin-bottom: 2.5rem;
+    }
+
+    .guidelines-header h2 {
+      margin-bottom: 1rem;
+      color: var(--forest);
+    }
+
+    .guidelines-header p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      line-height: 1.76;
+    }
+
+    .tabs-shell {
+      overflow: hidden;
+      background: rgba(255, 250, 240, .9);
+      border: 1px solid rgba(23, 56, 45, .16);
+      border-radius: 34px 9px 34px 9px;
+      box-shadow: var(--shadow);
+    }
+
+    .tablist {
+      display: flex;
+      gap: .6rem;
+      padding: .85rem;
+      background: rgba(232, 227, 200, .72);
+      border-bottom: 1px solid rgba(23, 56, 45, .14);
+    }
+
+    .tab {
+      appearance: none;
+      min-height: 48px;
+      padding: .72rem 1.15rem;
+      color: var(--forest);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .93rem;
+      font-weight: 700;
+      transition: background-color .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .tab:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 250, 240, .7);
+    }
+
     .tab[aria-selected="true"] {
-      background: linear-gradient(90deg, var(--cyan), #1e90ff);
-      color: var(--ink-dark);
-      border-color: transparent;
+      color: var(--paper-soft);
+      background: var(--forest);
+      box-shadow: 0 7px 18px rgba(35, 77, 61, .17);
     }
-    .tabpanel { display: block; }
-    .tabpanel[hidden] { display: none !important; }
 
-    /* Panel tables */
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2rem;
-      max-width: 700px;
+    .tab:focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 2px;
     }
-    .info-table td { padding: 0.5rem; vertical-align: top; }
-    .info-table td:first-child { font-weight: bold; width: 32%; min-width: 160px; }
-    .info-table tr:nth-child(2n) { background: var(--bg-deep-2); }
 
-    /* Narrow screens: stack tabs */
-    @media (max-width: 520px) {
-      .tablist {
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 0.6rem;
-        border-bottom: 0;
-        padding-bottom: 0;
-        overflow-x: visible;
+    .tabpanel {
+      padding: clamp(1.6rem, 5vw, 3.6rem);
+    }
+
+    .tabpanel[hidden] {
+      display: none !important;
+    }
+
+    .panel-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, .36fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+      margin-bottom: 2.6rem;
+    }
+
+    .panel-heading h3 {
+      margin-bottom: .85rem;
+      color: var(--forest);
+      font-size: clamp(2.15rem, 4vw, 3.5rem);
+    }
+
+    .panel-heading p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.76;
+    }
+
+    .panel-note {
+      padding: 1.25rem 1.35rem;
+      color: var(--forest);
+      background: var(--sun-soft);
+      border-radius: 7px 24px 7px 24px;
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    .panel-note strong {
+      display: block;
+      margin-bottom: .35rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .looking-for {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.6rem;
+    }
+
+    .looking-card {
+      min-height: 100%;
+      padding: 1.35rem;
+      background: var(--paper);
+      border: 1px solid rgba(23, 56, 45, .14);
+      border-radius: 23px 7px 23px 7px;
+    }
+
+    .looking-card:nth-child(2) {
+      border-radius: 7px 23px 7px 23px;
+    }
+
+    .looking-card span {
+      display: block;
+      margin-bottom: .65rem;
+      color: var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .looking-card h4 {
+      margin-bottom: .55rem;
+      color: var(--forest);
+      font-size: 1.04rem;
+    }
+
+    .looking-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    /* Requirements list ------------------------------------------------ */
+    .requirements {
+      display: grid;
+      gap: .8rem;
+      margin: 0;
+    }
+
+    .requirement {
+      display: grid;
+      grid-template-columns: minmax(150px, .32fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid rgba(23, 56, 45, .14);
+    }
+
+    .requirement:last-child {
+      border-bottom: 1px solid rgba(23, 56, 45, .14);
+    }
+
+    .requirement dt {
+      color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: .71rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .requirement dd {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.72;
+    }
+
+    .requirement a {
+      color: var(--leaf);
+      font-weight: 700;
+    }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.4rem;
+    }
+
+    .policy-card {
+      padding: 1.45rem;
+      background: rgba(154, 183, 91, .13);
+      border: 1px solid rgba(79, 125, 87, .22);
+      border-radius: 25px 7px 25px 7px;
+    }
+
+    .policy-card:nth-child(2) {
+      background: rgba(116, 173, 179, .13);
+      border-color: rgba(116, 173, 179, .34);
+      border-radius: 7px 25px 7px 25px;
+    }
+
+    .policy-card h4 {
+      margin-bottom: .55rem;
+      color: var(--forest);
+      font-size: 1.05rem;
+    }
+
+    .policy-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .94rem;
+      line-height: 1.68;
+    }
+
+    /* Cover letters ---------------------------------------------------- */
+    .cover-letters {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      color: var(--paper-soft);
+      background: var(--forest);
+    }
+
+    .cover-letters::before {
+      content: "";
+      position: absolute;
+      top: -170px;
+      right: -140px;
+      width: 450px;
+      height: 450px;
+      border: 1px solid rgba(255, 250, 240, .14);
+      border-radius: 48% 52% 50% 50%;
+      box-shadow:
+        -55px 55px 0 -53px rgba(240, 184, 74, .23),
+        -110px 110px 0 -108px rgba(116, 173, 179, .15);
+      transform: rotate(18deg);
+    }
+
+    .cover-letter-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, .5fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: center;
+    }
+
+    .cover-letters .eyebrow {
+      color: var(--sun-soft);
+    }
+
+    .cover-letters .eyebrow::before {
+      background: var(--sky);
+    }
+
+    .cover-letters h2 {
+      max-width: 720px;
+      color: var(--paper-soft);
+    }
+
+    .cover-letters p {
+      max-width: 720px;
+      margin-bottom: 0;
+      color: rgba(255, 250, 240, .77);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .simple-card {
+      padding: 2rem;
+      color: var(--forest);
+      background: var(--sun-soft);
+      border-radius: 8px 30px 8px 30px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, .15);
+      transform: rotate(1deg);
+    }
+
+    .simple-card .label {
+      display: block;
+      margin-bottom: .75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .simple-card strong {
+      display: block;
+      margin-bottom: .55rem;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.6rem;
+      line-height: 1.15;
+    }
+
+    .simple-card p {
+      margin: 0;
+      color: rgba(23, 56, 45, .78);
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    /* Final CTA -------------------------------------------------------- */
+    .submit-cta {
+      padding: clamp(5.5rem, 10vw, 9rem) 0;
+      text-align: center;
+      background:
+        radial-gradient(circle at 12% 84%, rgba(116, 173, 179, .2) 0 15%, transparent 15.4%),
+        radial-gradient(circle at 88% 12%, rgba(240, 184, 74, .25) 0 8%, transparent 8.4%),
+        var(--paper-soft);
+    }
+
+    .submit-cta-inner {
+      max-width: 760px;
+    }
+
+    .submit-cta .eyebrow {
+      justify-content: center;
+    }
+
+    .submit-cta h2 {
+      margin-bottom: 1.1rem;
+      color: var(--forest);
+    }
+
+    .submit-cta p {
+      max-width: 650px;
+      margin: 0 auto 2rem;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      line-height: 1.78;
+    }
+
+    .submit-cta .btn {
+      min-width: 210px;
+    }
+
+    /* Responsive ------------------------------------------------------- */
+    @media (max-width: 900px) {
+      .submit-hero-grid,
+      .panel-heading,
+      .cover-letter-grid {
+        grid-template-columns: 1fr;
       }
+
+      .status-card,
+      .simple-card {
+        max-width: 560px;
+        transform: none;
+      }
+
+      .looking-for {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .announcement {
+        font-size: .62rem;
+      }
+
+      .submit-hero {
+        padding-top: 4.5rem;
+      }
+
+      .submit-title {
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(2.75rem, 14.5vw, 4.1rem);
+        overflow-wrap: anywhere;
+      }
+
+      .submit-title em {
+        white-space: normal;
+      }
+
+      .submit-title em::after {
+        display: none;
+      }
+
+      .tablist {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
       .tab {
         width: 100%;
-        text-align: center;
         border-radius: 12px;
-        padding: 0.7rem 1rem;
-        font-size: 1rem;
+      }
+
+      .tabpanel {
+        padding: 1.4rem;
+      }
+
+      .requirement {
+        grid-template-columns: 1fr;
+        gap: .35rem;
+      }
+
+      .policy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs-shell {
+        border-radius: 24px 7px 24px 7px;
       }
     }
 
-    /* Minor size tweaks */
-    @media (max-width: 560px) {
-      .tab { font-size: 0.9rem; padding: 0.55rem 0.9rem; }
-      .gradient-heading { font-size: 1.8rem; }
-      .gradient-heading-blue { font-size: 1.25rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .tab {
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="announcement">Independent stories for brighter, stranger, more livable futures</div>
 
   <header class="site-header">
-    <a href="index.html" class="logo-title">
-      <img src="Flame logo-1.png.png" alt="Burnline logo">
+    <a href="index.html" class="logo-title" aria-label="Burnline home">
+      <img src="Flame logo-1.png.png" alt="" aria-hidden="true">
       <span>BURNLINE</span>
     </a>
 
-    <!-- Mobile menu trigger -->
-    <div id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
-      <div></div><div></div><div></div>
-    </div>
+    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
 
-    <nav class="site-nav" id="site-nav">
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
       <a href="issues.html">Issues</a>
       <a href="stories.html">Stories</a>
       <a href="art.html">Art</a>
@@ -128,182 +659,319 @@
     </nav>
   </header>
 
-  <section class="content">
-    <h1 class="gradient-heading">Submit to Burnline</h1>
+  <main>
+    <section class="submit-hero">
+      <div class="submit-hero-grid wrap">
+        <div>
+          <p class="eyebrow">Submissions</p>
+          <h1 class="submit-title">Send us a future worth <em>tending.</em></h1>
+          <p class="submit-lede">
+            Burnline is looking for solarpunk fiction and visual art rooted in character, ecological imagination, collective possibility, and the complicated work of building a more livable world.
+          </p>
+        </div>
 
-    <!-- Tabs -->
-    <div class="tabs" id="guidelines-tabs">
-      <div class="tablist" role="tablist" aria-label="Submission guideline tabs">
-        <button class="tab" id="tab-fiction" role="tab" aria-selected="true" aria-controls="panel-fiction">Fiction Guidelines</button>
-        <button class="tab" id="tab-art" role="tab" aria-selected="false" aria-controls="panel-art">Art Guidelines</button>
+        <aside class="status-card" aria-label="Current submission status">
+          <span class="label">Submission status</span>
+          <h2>Open</h2>
+          <p>We are currently accepting short fiction and visual art for future digital issues of Burnline.</p>
+        </aside>
       </div>
+    </section>
 
-      <!-- Fiction -->
-      <section id="panel-fiction" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-fiction">
-        <h2 class="gradient-heading-blue" style="margin-top: 0;">Fiction Guidelines</h2>
-        <p>We’re excited about cyberpunk in all its forms—classic and modern, urban and off-world, sleek and gritty. In fiction, we're looking for what you'd expect; near-future worlds with corporate control, people altered by tech-implants, you get it. <strong>Above all however, we care about character.</strong> We want people who make us feel something while they're navigating whatever wild setting you’ve built.</p>
-        <p style="margin-top: -0.5rem;">We're less interested in anything outside of the cyberpunk subgenre for this magazine. If you're submitting, please make sure you'd classify your work as cyberpunk specifically.</p>
+    <section class="guidelines" aria-labelledby="guidelines-title">
+      <div class="wrap">
+        <header class="guidelines-header">
+          <p class="eyebrow">Before you send</p>
+          <h2 id="guidelines-title">Choose a category and read the full guidelines.</h2>
+          <p>
+            We care more about the work than a polished pitch. The details below explain what Burnline is seeking, what files to send, and what contributors can expect.
+          </p>
+        </header>
 
-        <table class="info-table">
-          <tr>
-            <td>Word Limit</td>
-            <td>500 – 10,000 words</td>
-          </tr>
-          <tr>
-            <td>Pay Rate</td>
-            <td>Because this is a free magazine without ads, we can't offer any payment at this time. It’s our goal to eventually pay a competitive per-word rate, but we’re not quite there yet. We get it if that's a non-starter for you.</td>
-          </tr>
-          <tr>
-            <td>How to Submit</td>
-            <td>
-              Email your story as a .doc, .docx, or .pdf to
-              <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>.
-              Please include the word <strong>"Submission"</strong> in the subject line.
-            </td>
-          </tr>
-        </table>
+        <div class="tabs-shell" id="guidelines-tabs">
+          <div class="tablist" role="tablist" aria-label="Submission guideline categories">
+            <button class="tab" id="tab-fiction" type="button" role="tab" aria-selected="true" aria-controls="panel-fiction" tabindex="0">Fiction guidelines</button>
+            <button class="tab" id="tab-art" type="button" role="tab" aria-selected="false" aria-controls="panel-art" tabindex="-1">Art guidelines</button>
+          </div>
 
-        <p style="margin-top: 1.5rem;"><strong>No AI-generated or AI-assisted work will be accepted.</strong> We only want human-created fiction. There's irony somewhere in here.</p>
-        <p>Please feel free to submit your work to any other publications while you're waiting to hear back from us—just let us know if it gets picked up. If we take a while to respond, we haven't forgotten your work, we're just moving through the backlog. Thanks for your patience.</p>
-      </section>
+          <section id="panel-fiction" class="tabpanel" role="tabpanel" aria-labelledby="tab-fiction" tabindex="0">
+            <div class="panel-heading">
+              <div>
+                <h3>Fiction</h3>
+                <p>
+                  We are interested in solarpunk across a wide range of tones and settings: urban or rural, intimate or expansive, near-future or far beyond it. Above all, we care about character. Give us people who want something, risk something, and make us feel the stakes of the world they are trying to inhabit or change.
+                </p>
+              </div>
+              <aside class="panel-note">
+                <strong>Genre fit</strong>
+                Please submit work you would specifically describe as solarpunk or closely aligned ecological speculation.
+              </aside>
+            </div>
 
-      <!-- Art -->
-      <section id="panel-art" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-art" hidden>
-        <h2 class="gradient-heading-blue" style="margin-top: 0;">Art Guidelines</h2>
-        <p>We’re accepting cyberpunk-themed visual art for digital publication. Any medium is welcome—digital, hand-drawn, or mixed—except photography. If it feels cyberpunk, we want to see it.</p>
+            <div class="looking-for" aria-label="What Burnline seeks in fiction">
+              <article class="looking-card">
+                <span>01 · People</span>
+                <h4>Character before concept</h4>
+                <p>Strong ideas matter most when they shape recognizable lives, relationships, choices, and consequences.</p>
+              </article>
+              <article class="looking-card">
+                <span>02 · Systems</span>
+                <h4>Futures with texture</h4>
+                <p>Show us how communities live, organize, repair, distribute, grow, travel, care, or come into conflict.</p>
+              </article>
+              <article class="looking-card">
+                <span>03 · Possibility</span>
+                <h4>Hope that has been earned</h4>
+                <p>The world can remain difficult. We are drawn to stories that still leave room for agency and change.</p>
+              </article>
+            </div>
 
-        <table class="info-table">
-          <tr>
-            <td>Artwork Specs</td>
-            <td>Cover art should be portrait-oriented, sized at 8.5&quot; × 11&quot; (2550 × 3300 px) at 300 dpi. Please have a PNG or high-quality JPG available if selected. Inner-issue art can be any dimension.</td>
-          </tr>
-          <tr>
-            <td>Pay Rate</td>
-            <td>Because this is a free magazine without ads, we can't offer any payment at this time. It’s our goal to eventually pay a competitive rate, but we’re not quite there yet. We get it if that's a non-starter for you.</td>
-          </tr>
-          <tr>
-            <td>How to Submit</td>
-            <td>
-              Email <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>
-              with a link to your artwork wherever it's hosted (ArtStation portfolio, Reddit post, etc.).
-              Please include the word <strong>"Submission"</strong> in the subject line.
-            </td>
-          </tr>
-        </table>
+            <dl class="requirements">
+              <div class="requirement">
+                <dt>Word limit</dt>
+                <dd>500–10,000 words.</dd>
+              </div>
+              <div class="requirement">
+                <dt>Pay rate</dt>
+                <dd>
+                  Because Burnline is currently a free magazine without advertising, we cannot offer payment at this time. Our goal is to eventually pay a competitive per-word rate, but we are not there yet. We understand if that makes submission a non-starter for you.
+                </dd>
+              </div>
+              <div class="requirement">
+                <dt>How to submit</dt>
+                <dd>
+                  Email your story as a <strong>.doc</strong>, <strong>.docx</strong>, or <strong>.pdf</strong> to
+                  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>. Include the word <strong>“Submission”</strong> in the subject line.
+                </dd>
+              </div>
+            </dl>
 
-        <p>If selected, your artwork will be added to the digital issue of the magazine and included on our Art page. You'll be fully credited on the magazine and site, including whatever name and profile/social handles you'd like to include.</p>
-        <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
-      </section>
-    </div>
+            <div class="policy-grid">
+              <article class="policy-card">
+                <h4>Human-created work only</h4>
+                <p><strong>No AI-generated or AI-assisted work will be accepted.</strong> Burnline is interested in fiction created by people.</p>
+              </article>
+              <article class="policy-card">
+                <h4>Simultaneous submissions are welcome</h4>
+                <p>Please submit elsewhere while you wait. Just let us know promptly if another publication accepts the story.</p>
+              </article>
+            </div>
+          </section>
 
-    <!-- Shared note -->
-    <div style="text-align: left; margin-top: 3rem;">
-      <h3>Cover Letters</h3>
-      <p>Emails and cover letters are <em>much less important</em> to us than your fiction or artwork. If a part of your personal story contributes to what you've made, we’d love to hear about it—but otherwise, keep it simple. We're here for the work itself.</p>
-    </div>
-  </section>
+          <section id="panel-art" class="tabpanel" role="tabpanel" aria-labelledby="tab-art" tabindex="0" hidden>
+            <div class="panel-heading">
+              <div>
+                <h3>Visual art</h3>
+                <p>
+                  We are accepting solarpunk-themed visual art for digital publication. Digital, hand-drawn, painted, collage, and mixed-media work are welcome. Photography is not currently being considered.
+                </p>
+              </div>
+              <aside class="panel-note">
+                <strong>Selected work</strong>
+                Artwork may appear in a digital issue and in Burnline’s online Art gallery, with full creator credit.
+              </aside>
+            </div>
+
+            <div class="looking-for" aria-label="What Burnline seeks in visual art">
+              <article class="looking-card">
+                <span>01 · Worlds</span>
+                <h4>Places that feel inhabited</h4>
+                <p>We welcome landscapes, interiors, infrastructure, neighborhoods, and everyday scenes shaped by ecological futures.</p>
+              </article>
+              <article class="looking-card">
+                <span>02 · People</span>
+                <h4>Life within the future</h4>
+                <p>Portraits, communities, rituals, labor, play, repair, and the relationships that make a world feel alive.</p>
+              </article>
+              <article class="looking-card">
+                <span>03 · Forms</span>
+                <h4>Organic and unexpected</h4>
+                <p>We are open to work that is bright, quiet, strange, imperfect, highly rendered, graphic, or experimental.</p>
+              </article>
+            </div>
+
+            <dl class="requirements">
+              <div class="requirement">
+                <dt>Artwork specs</dt>
+                <dd>
+                  Cover art should be portrait-oriented at 8.5 × 11 inches (2550 × 3300 px) and 300 dpi. Please have a PNG or high-quality JPG available if selected. Interior artwork may use any dimensions.
+                </dd>
+              </div>
+              <div class="requirement">
+                <dt>Pay rate</dt>
+                <dd>
+                  Because Burnline is currently a free magazine without advertising, we cannot offer payment at this time. Our goal is to eventually pay a competitive rate, but we are not there yet. We understand if that makes submission a non-starter for you.
+                </dd>
+              </div>
+              <div class="requirement">
+                <dt>How to submit</dt>
+                <dd>
+                  Email <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a> with a link to the artwork wherever it is hosted, such as a portfolio or public post. Include the word <strong>“Submission”</strong> in the subject line.
+                </dd>
+              </div>
+              <div class="requirement">
+                <dt>Credit</dt>
+                <dd>
+                  Selected artists will be fully credited in the magazine and on the site using the name, portfolio link, and profile or social handles they would like included.
+                </dd>
+              </div>
+            </dl>
+
+            <div class="policy-grid">
+              <article class="policy-card">
+                <h4>Human-created work only</h4>
+                <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
+              </article>
+              <article class="policy-card">
+                <h4>Send a link first</h4>
+                <p>Please do not attach large artwork files to the initial email. A portfolio or hosted-image link is enough for review.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="cover-letters" aria-labelledby="cover-letter-title">
+      <div class="cover-letter-grid wrap">
+        <div>
+          <p class="eyebrow">Cover letters</p>
+          <h2 id="cover-letter-title">Keep it simple. The work comes first.</h2>
+          <p>
+            Emails and cover letters are much less important to Burnline than the fiction or artwork itself. If part of your personal story meaningfully informs the work, we would be glad to hear about it. Otherwise, a brief hello and the essential submission information are enough.
+          </p>
+        </div>
+
+        <aside class="simple-card" aria-label="Suggested cover letter guidance">
+          <span class="label">A good submission email</span>
+          <strong>Clear, brief, human.</strong>
+          <p>Tell us what you are sending, include the requested file or link, and make sure “Submission” appears in the subject line.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="submit-cta" aria-labelledby="submit-cta-title">
+      <div class="submit-cta-inner wrap">
+        <p class="eyebrow">Ready when you are</p>
+        <h2 id="submit-cta-title">Share what you have been building.</h2>
+        <p>
+          Send your fiction or artwork to Burnline once you have reviewed the relevant guidelines. If you are unsure whether a project fits, a concise question is welcome.
+        </p>
+        <a class="btn" href="mailto:contact@burnlinemag.com?subject=Submission">Email your submission</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-container">
       <div class="footer-column">
         <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <p>Get issue updates from Burnline straight to your inbox. No spam or anything, we promise.</p>
-        <form style="margin-top: 1rem;">
-          <input type="email" placeholder="Email Address" class="newsletter-input"><br>
+        <h3>Keep a light on for the future.</h3>
+        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <form class="newsletter-form">
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
           <button type="submit" class="newsletter-button">Subscribe</button>
         </form>
       </div>
 
       <div class="footer-column">
-        <h4>Get In Touch</h4>
-        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a><br><span style="font-size: 0.8rem;"></span></p>
+        <h4>Get in touch</h4>
+        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
       </div>
 
       <div class="footer-column">
         <h4>Read</h4>
-        <p><a href="https://bowliopia.github.io/burnline/issues.html">Issue Library</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/stories.html">Featured Stories</a></p>
-        <p><a href="https://bowliopia.github.io/burnline/staffpicks.html">Staff Picks</a></p>
+        <p><a href="issues.html">Issue Library</a></p>
+        <p><a href="stories.html">Featured Stories</a></p>
+        <p><a href="staffpicks.html">Staff Picks</a></p>
       </div>
     </div>
 
     <div class="footer-bottom">
-      &copy; 2025 Burnline Magazine — All rights reserved
+      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
     </div>
   </footer>
 
   <script>
-    // Mobile nav (guarded)
     (function () {
       const hamburger = document.getElementById('hamburger');
       const nav = document.getElementById('site-nav');
+
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+          hamburger.setAttribute('aria-expanded', String(isActive));
+          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
         });
-        nav.querySelectorAll('a').forEach(a => {
-          a.addEventListener('click', () => {
-            if (nav.classList.contains('active')) {
-              nav.classList.remove('active');
-              hamburger.setAttribute('aria-expanded', 'false');
-            }
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open menu');
           });
         });
       }
-    })();
 
-    // Tabs with hash support
-    (function () {
-      const tabs = Array.from(document.querySelectorAll('.tab'));
-      const panels = {
-        'tab-fiction': document.getElementById('panel-fiction'),
-        'tab-art': document.getElementById('panel-art')
-      };
+      const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
 
-      function selectTab(tabId, pushHash = true) {
-        tabs.forEach(t => {
-          const selected = t.id === tabId;
-          t.setAttribute('aria-selected', selected ? 'true' : 'false');
-          panels[t.id].hidden = !selected;
+      function activateTab(tab, updateHash = true) {
+        tabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute('aria-selected', String(selected));
+          item.setAttribute('tabindex', selected ? '0' : '-1');
         });
 
-        if (pushHash) {
-          const hash = tabId === 'tab-art' ? '#art' : '#fiction';
-          if (history.replaceState) {
-            history.replaceState(null, '', hash);
-          } else {
-            location.hash = hash;
-          }
+        panels.forEach((panel) => {
+          panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+        });
+
+        if (updateHash) {
+          const hash = tab.id === 'tab-art' ? '#art' : '#fiction';
+          if (history.replaceState) history.replaceState(null, '', hash);
+          else window.location.hash = hash;
         }
       }
 
-      // Click + arrow key nav
-      tabs.forEach(t => {
-        t.addEventListener('click', () => selectTab(t.id, true));
-        t.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-            e.preventDefault();
-            const idx = tabs.indexOf(t);
-            const next = e.key === 'ArrowRight'
-              ? tabs[(idx + 1) % tabs.length]
-              : tabs[(idx - 1 + tabs.length) % tabs.length];
-            next.focus();
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(tab));
+
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = null;
+
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            nextIndex = (index + 1) % tabs.length;
+          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            nextIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (event.key === 'Home') {
+            nextIndex = 0;
+          } else if (event.key === 'End') {
+            nextIndex = tabs.length - 1;
+          }
+
+          if (nextIndex !== null) {
+            event.preventDefault();
+            tabs[nextIndex].focus();
+            activateTab(tabs[nextIndex]);
           }
         });
       });
 
-      // Initial tab from hash
-      const hash = (location.hash || '').toLowerCase();
-      if (hash === '#art') selectTab('tab-art', false);
-      else selectTab('tab-fiction', false);
+      function selectFromHash() {
+        const target = window.location.hash.toLowerCase() === '#art'
+          ? document.getElementById('tab-art')
+          : document.getElementById('tab-fiction');
 
-      // Respond to manual hash changes
-      window.addEventListener('hashchange', () => {
-        const h = (location.hash || '').toLowerCase();
-        if (h === '#art') selectTab('tab-art', false);
-        else selectTab('tab-fiction', false);
-      });
+        if (target) activateTab(target, false);
+      }
+
+      window.addEventListener('hashchange', selectFromHash);
+      selectFromHash();
+
+      const year = document.getElementById('copyright-year');
+      if (year) year.textContent = String(new Date().getFullYear());
     })();
   </script>
 </body>
