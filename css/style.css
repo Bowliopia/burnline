@@ -926,3 +926,8 @@ a:focus-visible {
     animation-iteration-count: 1 !important;
   }
 }
+
+.site-header .logo-title img,
+footer .footer-logo {
+  filter: none !important;
+}
