@@ -17,10 +17,6 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* ====================================================================
-       BURNLINE ART GALLERY
-       Page-specific styles layered onto the global Dear Alice design system.
-       ==================================================================== */
 
     .announcement {
       position: relative;
@@ -118,7 +114,7 @@
     .art-title {
       max-width: 875px;
       margin-bottom: 1.4rem;
-      color: var(--forest);
+      color: var(--clay);
       font-size: clamp(3.45rem, 8vw, 7rem);
       overflow-wrap: anywhere;
     }
@@ -230,7 +226,8 @@
       color: var(--ink-soft);
     }
 
-    /* Cover exhibition -------------------------------------------------- */
+    /* Gallery sections -------------------------------------------------- */
+    .issue-art-exhibition,
     .cover-exhibition {
       margin-bottom: clamp(6rem, 10vw, 9rem);
     }
@@ -758,13 +755,12 @@
   <main>
     <section class="art-hero" aria-labelledby="art-title">
       <div class="art-hero-inner wrap">
-        <p class="eyebrow">Featured art</p>
-        <h1 class="art-title" id="art-title">A gallery of worlds <em>in bloom.</em></h1>
+        <h1 class="art-title" id="art-title">Art Gallery</h1>
         <p class="art-intro">
-          Explore the covers, illustrations, and visual experiments that give Burnline’s possible futures their shape—art grounded in community, ecology, invention, and wonder.
+          Check out editor-selected solarpunk art from across Burnline.
         </p>
         <div class="hero-actions">
-          <a href="#cover-gallery" class="btn">Enter the gallery</a>
+          <a href="#art-gallery" class="btn">Enter the gallery</a>
           <a href="submit.html" class="hero-link">Share your art with Burnline</a>
         </div>
       </div>
@@ -772,49 +768,11 @@
 
     <section class="gallery-shell">
       <div class="wrap">
-        <section class="cover-exhibition" id="cover-gallery" aria-labelledby="cover-title">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Cover collection</p>
-              <h2 id="cover-title">The face of each issue.</h2>
-            </div>
-            <p>
-              Every Burnline edition begins with one image that invites readers into the world held inside.
-            </p>
-          </div>
-
-          <article class="cover-feature">
-            <div
-              class="cover-frame gallery-item"
-              role="button"
-              tabindex="0"
-              data-title="Burnline — Issue 01"
-              data-artist="Burnline Editorial"
-              aria-label="Enlarge the cover for Burnline Issue 01"
-            >
-              <img src="New Cover.png" alt="Cover artwork for Burnline Issue 01">
-            </div>
-
-            <div class="cover-copy">
-              <p class="cover-label">Issue 01 · Cover art</p>
-              <h3>Burnline — Issue 01</h3>
-              <p>
-                The first image in the Burnline archive—and the opening visual statement for a collection of speculative fiction and art.
-              </p>
-              <div class="cover-meta">
-                <span>Digital edition</span>
-                <span>Burnline Editorial</span>
-                <span>2026</span>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section aria-labelledby="issue-art-title">
+        <section class="issue-art-exhibition" id="art-gallery" aria-labelledby="issue-art-title">
           <div class="section-heading">
             <div>
               <p class="eyebrow">From the issues</p>
-              <h2 id="issue-art-title">Art that makes the future visible.</h2>
+              <h2 id="issue-art-title">Art Gallery</h2>
             </div>
             <p>
               Select an image to view it at full size and move through the complete gallery.
@@ -940,6 +898,42 @@
           <div class="load-more" id="load-more-row">
             <button id="loadMoreBtn" class="btn" type="button">Load more artwork</button>
           </div>
+        </section>
+
+
+        <section class="cover-exhibition" id="cover-gallery" aria-labelledby="cover-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Cover collection</p>
+              <h2 id="cover-title">Cover Gallery</h2>
+            </div>
+          </div>
+
+          <article class="cover-feature">
+            <div
+              class="cover-frame gallery-item"
+              role="button"
+              tabindex="0"
+              data-title="Burnline — Issue 01"
+              data-artist="Burnline Editorial"
+              aria-label="Enlarge the cover for Burnline Issue 01"
+            >
+              <img src="New Cover.png" alt="Cover artwork for Burnline Issue 01">
+            </div>
+
+            <div class="cover-copy">
+              <p class="cover-label">Issue 01 · Cover art</p>
+              <h3>Burnline — Issue 01</h3>
+              <p>
+                The first image in the Burnline archive—and the opening visual statement for a collection of speculative fiction and art.
+              </p>
+              <div class="cover-meta">
+                <span>Digital edition</span>
+                <span>Burnline Editorial</span>
+                <span>2026</span>
+              </div>
+            </div>
+          </article>
         </section>
 
         <section class="art-note" aria-labelledby="art-note-title">
