@@ -112,7 +112,7 @@
     .stories-title {
       max-width: 810px;
       margin-bottom: 1.35rem;
-      color: var(--forest);
+      color: var(--clay);
       font-size: clamp(3.5rem, 8vw, 7rem);
     }
 
@@ -182,23 +182,11 @@
     }
 
     .library-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 2rem;
       margin-bottom: clamp(2.6rem, 5vw, 4.6rem);
     }
 
-    .library-heading h2 {
-      max-width: 680px;
+    .library-heading .eyebrow {
       margin-bottom: 0;
-      color: var(--forest);
-    }
-
-    .library-heading > p {
-      max-width: 410px;
-      margin: 0;
-      color: var(--ink-soft);
     }
 
     .story-grid {
@@ -402,10 +390,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .library-heading {
-        align-items: start;
-        flex-direction: column;
-      }
     }
 
     @media (max-width: 640px) {
@@ -502,7 +486,7 @@
       <div class="stories-hero-inner wrap">
         <h1 class="stories-title" id="stories-title">Featured Stories</h1>
         <p class="stories-intro">
-          Check out editor-selected solarpunk fiction and artwork across Burnline.
+          Read editor-selected solarpunk short stories from across Burnline right in your browser.
         </p>
         <div class="hero-actions">
           <a href="#story-collection" class="btn">Browse the stories</a>
@@ -514,13 +498,7 @@
     <section class="story-library" id="story-collection" aria-labelledby="collection-title">
       <div class="wrap">
         <div class="library-heading">
-          <div>
-            <p class="eyebrow">Read in your browser</p>
-            <h2 id="collection-title">Hopeful, unruly, and alive.</h2>
-          </div>
-          <p>
-            These stories are selected from complete Burnline issues and presented individually for easy reading.
-          </p>
+          <p class="eyebrow" id="collection-title">Read in your browser</p>
         </div>
 
         <div class="story-grid">
