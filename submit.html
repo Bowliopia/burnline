@@ -17,79 +17,94 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
+    :root {
+      --page-max: 1160px;
+      --narrow-max: 780px;
+      --page-pad: clamp(18px, 4vw, 38px);
 
-    .announcement {
-      position: relative;
-      z-index: 60;
-      padding: .62rem var(--page-pad);
-      color: var(--paper-soft);
-      background: var(--forest);
-      text-align: center;
-      font-family: 'Space Mono', monospace;
-      font-size: .72rem;
-      letter-spacing: .08em;
-      line-height: 1.5;
-      text-transform: uppercase;
+      --paper: #f6f0db;
+      --paper-soft: #fffaf0;
+      --paper-deep: #e8e3c8;
+      --ink: #17382d;
+      --ink-soft: #53655a;
+      --forest: #234d3d;
+      --leaf: #4f7d57;
+      --sprout: #9ab75b;
+      --sun: #f0b84a;
+      --sun-soft: #f7d47d;
+      --clay: #cf7558;
+      --sky: #74adb3;
+      --line: rgba(23, 56, 45, 0.18);
+      --shadow: 12px 12px 0 rgba(35, 77, 61, 0.2);
+      --shadow-small: 6px 6px 0 rgba(35, 77, 61, 0.22);
     }
 
-    .site-nav a[aria-current="page"]::after {
-      right: 0;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
-    /* Hero ------------------------------------------------------------- */
-    .submit-hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(4.5rem, 8vw, 7rem);
-      background:
-        radial-gradient(circle at 87% 21%, rgba(240, 184, 74, .72) 0 7%, transparent 7.3%),
-        radial-gradient(ellipse at 8% 94%, rgba(116, 173, 179, .24) 0 21%, transparent 21.4%),
-        linear-gradient(125deg, #fffaf0 0%, #f6f0db 58%, #e7ebc9 100%);
-      border-bottom: 1px solid var(--line);
+    html {
+      scroll-behavior: smooth;
     }
 
-    .submit-hero::before,
-    .submit-hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    .submit-hero::before {
-      width: min(44vw, 600px);
-      height: min(35vw, 470px);
-      right: -8vw;
-      bottom: -17vw;
-      border: 2px solid rgba(35, 77, 61, .14);
-      border-radius: 52% 48% 0 0 / 70% 76% 0 0;
-      box-shadow:
-        -60px -48px 0 -58px rgba(35, 77, 61, .2),
-        -122px -91px 0 -120px rgba(35, 77, 61, .12),
-        -184px -132px 0 -182px rgba(35, 77, 61, .08);
-      transform: rotate(-7deg);
+    body::before {
+      content: none;
     }
 
-    .submit-hero::after {
-      width: 250px;
-      height: 250px;
-      left: -112px;
-      top: 18%;
-      border-radius: 50%;
-      opacity: .42;
-      background: repeating-radial-gradient(
-        circle at center,
-        transparent 0 15px,
-        rgba(79, 125, 87, .2) 16px 17px
-      );
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    .submit-hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(270px, .42fr);
-      gap: clamp(2.5rem, 7vw, 6.5rem);
-      align-items: end;
+    a {
+      color: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 7.5vw, 6.8rem);
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+    }
+
+    .wrap {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
     }
 
     .eyebrow {
@@ -101,7 +116,7 @@
       font-family: 'Space Mono', monospace;
       font-size: .74rem;
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: .15em;
       line-height: 1.4;
       text-transform: uppercase;
     }
@@ -109,16 +124,174 @@
     .eyebrow::before {
       content: "";
       width: 34px;
-      height: 2px;
-      border-radius: 999px;
+      height: 4px;
       background: var(--clay);
+      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 20;
+      padding: .58rem var(--page-pad) .68rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border-bottom: 3px solid var(--sun);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      padding: 0 max(
+        var(--page-pad),
+        calc((100vw - var(--page-max)) / 2 + var(--page-pad))
+      );
+      color: var(--ink);
+      background: rgba(246, 240, 219, 0.97);
+      border-bottom: 2px solid var(--ink);
+      box-shadow: 0 4px 0 rgba(207, 117, 88, .62);
+    }
+
+    .logo-title {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-title img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: sepia(.15) saturate(.8) hue-rotate(72deg) brightness(.72);
+    }
+
+    .logo-title span {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-shadow: 1px 1px 0 var(--sun-soft);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.2vw, 2rem);
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: .45rem .1rem;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: .18rem;
+      height: 2px;
+      background: var(--clay);
+      transition: right .22s ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus-visible::after {
+      right: 0;
+    }
+
+    .site-nav a:last-child {
+      padding: .62rem 1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sun);
+      transform: rotate(-1deg);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .site-nav a:last-child::after {
+      display: none;
+    }
+
+    .site-nav a:last-child:hover,
+    .site-nav a:last-child:focus-visible {
+      transform: translate(2px, 2px) rotate(0);
+      box-shadow: 2px 2px 0 var(--sun);
+    }
+
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      background: var(--paper-soft);
+      box-shadow: 3px 3px 0 var(--clay);
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin: 4px 0;
+      background: var(--ink);
+    }
+
+    .submit-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 84% 25%,
+          var(--sun) 0 7%,
+          transparent 7.2%
+        ),
+        linear-gradient(
+          108deg,
+          #f8f3df 0 67%,
+          rgba(154, 183, 91, .24) 67% 83%,
+          rgba(116, 173, 179, .22) 83% 100%
+        );
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .submit-hero::before,
+    .submit-hero::after {
+      content: none;
+    }
+
+    .submit-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(270px, .42fr);
+      gap: clamp(2.5rem, 7vw, 6rem);
+      align-items: center;
     }
 
     .submit-title {
       max-width: 850px;
       margin-bottom: 1.5rem;
       color: var(--forest);
-      font-size: clamp(3.5rem, 8vw, 7rem);
     }
 
     .submit-title em {
@@ -131,14 +304,14 @@
     .submit-title em::after {
       content: "";
       position: absolute;
-      right: -1%;
-      bottom: .04em;
-      left: 1%;
+      left: 2%;
+      right: -2%;
+      bottom: .01em;
       z-index: -1;
-      height: .18em;
-      border-radius: 999px;
+      height: .24em;
       background: var(--sun-soft);
-      transform: rotate(-1deg);
+      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
+      transform: rotate(-1.5deg);
     }
 
     .submit-lede {
@@ -151,24 +324,27 @@
 
     .status-card {
       position: relative;
-      padding: 1.65rem;
-      background: var(--forest);
+      padding: clamp(1.6rem, 3vw, 2.1rem);
       color: var(--paper-soft);
-      border-radius: 8px 30px 8px 30px;
-      box-shadow: 0 18px 44px rgba(35, 77, 61, .18);
+      background: var(--forest);
+      border: 2px solid var(--ink);
+      box-shadow:
+        8px 8px 0 var(--sun),
+        11px 11px 0 var(--clay);
       transform: rotate(1deg);
     }
 
     .status-card::before {
       content: "";
       position: absolute;
-      top: 17px;
-      right: 17px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--sun);
-      box-shadow: 0 0 0 6px rgba(240, 184, 74, .16);
+      top: -11px;
+      right: 12%;
+      width: 72px;
+      height: 18px;
+      background: rgba(207, 117, 88, .82);
+      border-left: 1px solid rgba(23, 56, 45, .3);
+      border-right: 1px solid rgba(23, 56, 45, .3);
+      transform: rotate(2deg);
     }
 
     .status-card .label {
@@ -190,24 +366,18 @@
 
     .status-card p {
       margin: 0;
-      color: rgba(255, 250, 240, .76);
+      color: rgba(255, 250, 240, .78);
       line-height: 1.68;
     }
 
-    /* Guidelines ------------------------------------------------------- */
     .guidelines {
-      position: relative;
       padding: clamp(5rem, 9vw, 8rem) 0;
-      background:
-        linear-gradient(rgba(23, 56, 45, .035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 56, 45, .035) 1px, transparent 1px),
-        var(--paper);
-      background-size: 38px 38px;
+      background: var(--paper);
     }
 
     .guidelines-header {
-      max-width: 770px;
-      margin-bottom: 2.5rem;
+      max-width: 790px;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
     }
 
     .guidelines-header h2 {
@@ -223,50 +393,59 @@
     }
 
     .tabs-shell {
-      overflow: hidden;
-      background: rgba(255, 250, 240, .9);
-      border: 1px solid rgba(23, 56, 45, .16);
-      border-radius: 34px 9px 34px 9px;
-      box-shadow: var(--shadow);
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow:
+        10px 10px 0 var(--sun-soft),
+        13px 13px 0 var(--ink);
     }
 
     .tablist {
       display: flex;
-      gap: .6rem;
-      padding: .85rem;
-      background: rgba(232, 227, 200, .72);
-      border-bottom: 1px solid rgba(23, 56, 45, .14);
+      gap: 0;
+      padding: 0;
+      background: var(--paper-deep);
+      border-bottom: 2px solid var(--ink);
     }
 
     .tab {
       appearance: none;
-      min-height: 48px;
-      padding: .72rem 1.15rem;
+      flex: 1 1 0;
+      min-height: 58px;
+      padding: .9rem 1.2rem;
       color: var(--forest);
       background: transparent;
-      border: 1px solid transparent;
-      border-radius: 999px;
+      border: 0;
+      border-right: 2px solid var(--ink);
       cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .93rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .76rem;
       font-weight: 700;
-      transition: background-color .2s ease, color .2s ease, transform .2s ease;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition:
+        background-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .tab:last-child {
+      border-right: 0;
     }
 
     .tab:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 250, 240, .7);
+      background: var(--sun-soft);
     }
 
     .tab[aria-selected="true"] {
       color: var(--paper-soft);
       background: var(--forest);
-      box-shadow: 0 7px 18px rgba(35, 77, 61, .17);
+      box-shadow: inset 0 -5px 0 var(--clay);
     }
 
     .tab:focus-visible {
       outline: 3px solid var(--sun);
-      outline-offset: 2px;
+      outline-offset: -5px;
     }
 
     .tabpanel {
@@ -279,10 +458,10 @@
 
     .panel-heading {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, .36fr);
+      grid-template-columns: minmax(0, 1fr) minmax(220px, .38fr);
       gap: clamp(2rem, 5vw, 4rem);
       align-items: start;
-      margin-bottom: 2.6rem;
+      margin-bottom: clamp(2.4rem, 5vw, 3.5rem);
     }
 
     .panel-heading h3 {
@@ -299,10 +478,13 @@
     }
 
     .panel-note {
-      padding: 1.25rem 1.35rem;
+      position: relative;
+      padding: 1.35rem 1.45rem;
       color: var(--forest);
       background: var(--sun-soft);
-      border-radius: 7px 24px 7px 24px;
+      border: 2px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--clay);
+      transform: rotate(1deg);
       font-size: .94rem;
       line-height: 1.65;
     }
@@ -319,26 +501,30 @@
     .looking-for {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-bottom: 2.6rem;
+      gap: 1.25rem;
+      margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
     }
 
     .looking-card {
       min-height: 100%;
-      padding: 1.35rem;
+      padding: 1.45rem;
       background: var(--paper);
-      border: 1px solid rgba(23, 56, 45, .14);
-      border-radius: 23px 7px 23px 7px;
+      border: 2px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--clay);
     }
 
     .looking-card:nth-child(2) {
-      border-radius: 7px 23px 7px 23px;
+      box-shadow: 6px 6px 0 var(--sky);
+    }
+
+    .looking-card:nth-child(3) {
+      box-shadow: 6px 6px 0 var(--sun);
     }
 
     .looking-card span {
       display: block;
-      margin-bottom: .65rem;
-      color: var(--clay);
+      margin-bottom: .7rem;
+      color: var(--leaf);
       font-family: 'Space Mono', monospace;
       font-size: .66rem;
       font-weight: 700;
@@ -359,23 +545,23 @@
       line-height: 1.65;
     }
 
-    /* Requirements list ------------------------------------------------ */
     .requirements {
       display: grid;
-      gap: .8rem;
+      gap: 0;
       margin: 0;
+      border-top: 2px solid var(--ink);
     }
 
     .requirement {
       display: grid;
       grid-template-columns: minmax(150px, .32fr) minmax(0, 1fr);
       gap: 1.4rem;
-      padding: 1.2rem 0;
-      border-top: 1px solid rgba(23, 56, 45, .14);
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--line);
     }
 
     .requirement:last-child {
-      border-bottom: 1px solid rgba(23, 56, 45, .14);
+      border-bottom: 2px solid var(--ink);
     }
 
     .requirement dt {
@@ -402,21 +588,20 @@
     .policy-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 2.4rem;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
     }
 
     .policy-card {
-      padding: 1.45rem;
+      padding: 1.5rem;
       background: rgba(154, 183, 91, .13);
-      border: 1px solid rgba(79, 125, 87, .22);
-      border-radius: 25px 7px 25px 7px;
+      border: 2px solid var(--forest);
+      box-shadow: 5px 5px 0 var(--sprout);
     }
 
     .policy-card:nth-child(2) {
       background: rgba(116, 173, 179, .13);
-      border-color: rgba(116, 173, 179, .34);
-      border-radius: 7px 25px 7px 25px;
+      box-shadow: 5px 5px 0 var(--sky);
     }
 
     .policy-card h4 {
@@ -432,35 +617,24 @@
       line-height: 1.68;
     }
 
-    /* Cover letters ---------------------------------------------------- */
     .cover-letters {
       position: relative;
       overflow: hidden;
       padding: clamp(5rem, 9vw, 8rem) 0;
       color: var(--paper-soft);
       background: var(--forest);
+      border-top: 8px solid var(--clay);
+      border-bottom: 8px solid var(--sun);
     }
 
-    .cover-letters::before {
-      content: "";
-      position: absolute;
-      top: -170px;
-      right: -140px;
-      width: 450px;
-      height: 450px;
-      border: 1px solid rgba(255, 250, 240, .14);
-      border-radius: 48% 52% 50% 50%;
-      box-shadow:
-        -55px 55px 0 -53px rgba(240, 184, 74, .23),
-        -110px 110px 0 -108px rgba(116, 173, 179, .15);
-      transform: rotate(18deg);
+    .cover-letters::before,
+    .cover-letters::after {
+      content: none;
     }
 
     .cover-letter-grid {
-      position: relative;
-      z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, .5fr);
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .6fr);
       gap: clamp(3rem, 7vw, 7rem);
       align-items: center;
     }
@@ -470,29 +644,47 @@
     }
 
     .cover-letters .eyebrow::before {
-      background: var(--sky);
+      background: var(--sun);
     }
 
     .cover-letters h2 {
       max-width: 720px;
+      margin-bottom: 1.2rem;
       color: var(--paper-soft);
+      text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
     }
 
     .cover-letters p {
       max-width: 720px;
       margin-bottom: 0;
-      color: rgba(255, 250, 240, .77);
+      color: rgba(255, 250, 240, .78);
       font-size: 1.05rem;
       line-height: 1.8;
     }
 
     .simple-card {
+      position: relative;
       padding: 2rem;
       color: var(--forest);
       background: var(--sun-soft);
-      border-radius: 8px 30px 8px 30px;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, .15);
+      border: 2px solid var(--ink);
+      box-shadow:
+        8px 8px 0 var(--clay),
+        11px 11px 0 var(--paper-soft);
       transform: rotate(1deg);
+    }
+
+    .simple-card::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      right: 12%;
+      width: 72px;
+      height: 18px;
+      background: rgba(207, 117, 88, .82);
+      border-left: 1px solid rgba(23, 56, 45, .3);
+      border-right: 1px solid rgba(23, 56, 45, .3);
+      transform: rotate(2deg);
     }
 
     .simple-card .label {
@@ -508,34 +700,33 @@
     .simple-card strong {
       display: block;
       margin-bottom: .55rem;
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Fraunces', serif;
       font-size: 1.6rem;
       line-height: 1.15;
     }
 
     .simple-card p {
       margin: 0;
-      color: rgba(23, 56, 45, .78);
+      color: rgba(23, 56, 45, .8);
       font-size: .94rem;
       line-height: 1.65;
     }
 
-    /* Final CTA -------------------------------------------------------- */
     .submit-cta {
-      padding: clamp(5.5rem, 10vw, 9rem) 0;
-      text-align: center;
+      position: relative;
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0;
       background:
-        radial-gradient(circle at 12% 84%, rgba(116, 173, 179, .2) 0 15%, transparent 15.4%),
-        radial-gradient(circle at 88% 12%, rgba(240, 184, 74, .25) 0 8%, transparent 8.4%),
-        var(--paper-soft);
+        linear-gradient(
+          102deg,
+          transparent 0 72%,
+          rgba(116, 173, 179, .13) 72% 88%,
+          transparent 88%
+        ),
+        var(--paper);
     }
 
     .submit-cta-inner {
-      max-width: 760px;
-    }
-
-    .submit-cta .eyebrow {
-      justify-content: center;
+      max-width: 820px;
     }
 
     .submit-cta h2 {
@@ -545,18 +736,223 @@
 
     .submit-cta p {
       max-width: 650px;
-      margin: 0 auto 2rem;
+      margin-bottom: 2rem;
       color: var(--ink-soft);
       font-size: 1.05rem;
       line-height: 1.78;
     }
 
-    .submit-cta .btn {
-      min-width: 210px;
+    .btn,
+    .newsletter-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      min-height: 46px;
+      padding: .72rem 1.1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .035em;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition:
+        transform .2s ease,
+        background-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
     }
 
-    /* Responsive ------------------------------------------------------- */
-    @media (max-width: 900px) {
+    .btn::after {
+      content: "↗";
+      font-size: .95em;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--paper-soft);
+      background: var(--leaf);
+      border-color: var(--leaf);
+      box-shadow: 2px 2px 0 var(--clay);
+      transform: translate(2px, 2px);
+    }
+
+    footer {
+      margin: 0;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 0;
+      color: rgba(255, 250, 240, .82);
+      background: #16372c;
+      border-top: 8px solid var(--clay);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr .8fr;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 0 var(--page-pad) clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .footer-column {
+      min-width: 0;
+    }
+
+    .footer-logo {
+      width: 58px;
+      margin-bottom: 1.25rem;
+      filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
+      transform: rotate(-4deg);
+    }
+
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .footer-column p {
+      margin-bottom: .55rem;
+      color: rgba(255, 250, 240, .7);
+    }
+
+    .footer-column a {
+      color: rgba(255, 250, 240, .78);
+      text-decoration: none;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus-visible {
+      color: var(--sun-soft);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin-top: 1.3rem;
+      padding: 5px;
+      background: rgba(255, 250, 240, .08);
+      border: 2px solid rgba(255, 250, 240, .72);
+      box-shadow: 6px 6px 0 rgba(207, 117, 88, .75);
+    }
+
+    .newsletter-input {
+      min-width: 0;
+      flex: 1 1 auto;
+      width: auto;
+      margin: 0;
+      padding: .7rem 1rem;
+      color: var(--paper-soft);
+      background: transparent;
+      border: 0;
+      font: inherit;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 250, 240, .5);
+    }
+
+    .newsletter-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding-inline: 1rem;
+      color: var(--ink);
+      background: var(--sun-soft);
+      border-color: var(--sun-soft);
+      box-shadow: none;
+    }
+
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--ink);
+      background: var(--sun);
+      border-color: var(--sun);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .footer-bottom {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 1.25rem var(--page-pad) 1.8rem;
+      color: rgba(255, 250, 240, .48);
+      background: transparent;
+      border-top: 2px dashed rgba(255, 250, 240, .2);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .04em;
+      text-align: left;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .site-header {
+        min-height: 72px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .site-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: var(--page-pad);
+        right: var(--page-pad);
+        display: none;
+        align-items: stretch;
+        gap: .2rem;
+        padding: .8rem;
+        background: var(--paper-soft);
+        border: 2px solid var(--ink);
+        border-top: 0;
+        box-shadow: var(--shadow-small);
+      }
+
+      .site-nav.active {
+        display: grid;
+      }
+
+      .site-nav a {
+        padding: .85rem 1rem;
+      }
+
+      .site-nav a:hover {
+        background: var(--paper-deep);
+      }
+
+      .site-nav a::after {
+        display: none;
+      }
+
       .submit-hero-grid,
       .panel-heading,
       .cover-letter-grid {
@@ -565,18 +961,34 @@
 
       .status-card,
       .simple-card {
-        max-width: 560px;
-        transform: none;
+        max-width: 580px;
       }
 
       .looking-for {
         grid-template-columns: 1fr;
       }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: 1 / -1;
+      }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 650px) {
       .announcement {
-        font-size: .62rem;
+        font-size: .63rem;
+      }
+
+      .logo-title span {
+        font-size: 1.32rem;
+      }
+
+      .logo-title img {
+        width: 36px;
+        height: 36px;
       }
 
       .submit-hero {
@@ -586,7 +998,7 @@
       .submit-title {
         width: 100%;
         max-width: 100%;
-        font-size: clamp(2.75rem, 14.5vw, 4.1rem);
+        font-size: clamp(3rem, 15vw, 4.4rem);
         overflow-wrap: anywhere;
       }
 
@@ -594,8 +1006,9 @@
         white-space: normal;
       }
 
-      .submit-title em::after {
-        display: none;
+      .status-card,
+      .simple-card {
+        transform: none;
       }
 
       .tablist {
@@ -605,11 +1018,20 @@
 
       .tab {
         width: 100%;
-        border-radius: 12px;
+        border-right: 0;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .tab:last-child {
+        border-bottom: 0;
       }
 
       .tabpanel {
-        padding: 1.4rem;
+        padding: 1.3rem;
+      }
+
+      .panel-note {
+        transform: none;
       }
 
       .requirement {
@@ -621,20 +1043,49 @@
         grid-template-columns: 1fr;
       }
 
-      .tabs-shell {
-        border-radius: 24px 7px 24px 7px;
+      .submit-cta .btn {
+        width: 100%;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: auto;
+      }
+
+      .newsletter-form {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .newsletter-button {
+        width: 100%;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .tab {
-        transition: none;
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="announcement">Independent stories for brighter, stranger, more livable futures</div>
+  <div class="announcement">
+    Independent stories for brighter, stranger, more livable futures
+  </div>
 
   <header class="site-header">
     <a href="index.html" class="logo-title" aria-label="Burnline home">
@@ -642,8 +1093,17 @@
       <span>BURNLINE</span>
     </a>
 
-    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span><span></span>
+    <button
+      id="hamburger"
+      class="hamburger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -656,235 +1116,470 @@
   </header>
 
   <main>
+
     <section class="submit-hero">
       <div class="submit-hero-grid wrap">
+
         <div>
           <p class="eyebrow">Submissions</p>
-          <h1 class="submit-title">Send us a future worth <em>tending.</em></h1>
+
+          <h1 class="submit-title">
+            Send us a future worth <em>tending.</em>
+          </h1>
+
           <p class="submit-lede">
             Burnline is looking for solarpunk fiction and visual art rooted in character, ecological imagination, collective possibility, and the complicated work of building a more livable world.
           </p>
         </div>
 
-        <aside class="status-card" aria-label="Current submission status">
-          <span class="label">Submission status</span>
+        <aside
+          class="status-card"
+          aria-label="Current submission status"
+        >
+          <span class="label">
+            Submission status
+          </span>
+
           <h2>Open</h2>
-          <p>We are currently accepting short fiction and visual art for future digital issues of Burnline.</p>
+
+          <p>
+            We are currently accepting short fiction and visual art for future digital issues of Burnline.
+          </p>
         </aside>
+
       </div>
     </section>
 
-    <section class="guidelines" aria-labelledby="guidelines-title">
+    <section
+      class="guidelines"
+      aria-labelledby="guidelines-title"
+    >
       <div class="wrap">
+
         <header class="guidelines-header">
-          <p class="eyebrow">Before you send</p>
-          <h2 id="guidelines-title">Choose a category and read the full guidelines.</h2>
+          <p class="eyebrow">
+            Before you send
+          </p>
+
+          <h2 id="guidelines-title">
+            Choose a category and read the full guidelines.
+          </h2>
+
           <p>
             We care more about the work than a polished pitch. The details below explain what Burnline is seeking, what files to send, and what contributors can expect.
           </p>
         </header>
 
-        <div class="tabs-shell" id="guidelines-tabs">
-          <div class="tablist" role="tablist" aria-label="Submission guideline categories">
-            <button class="tab" id="tab-fiction" type="button" role="tab" aria-selected="true" aria-controls="panel-fiction" tabindex="0">Fiction guidelines</button>
-            <button class="tab" id="tab-art" type="button" role="tab" aria-selected="false" aria-controls="panel-art" tabindex="-1">Art guidelines</button>
+        <div
+          class="tabs-shell"
+          id="guidelines-tabs"
+        >
+          <div
+            class="tablist"
+            role="tablist"
+            aria-label="Submission guideline categories"
+          >
+            <button
+              class="tab"
+              id="tab-fiction"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-fiction"
+              tabindex="0"
+            >
+              Fiction guidelines
+            </button>
+
+            <button
+              class="tab"
+              id="tab-art"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-art"
+              tabindex="-1"
+            >
+              Art guidelines
+            </button>
           </div>
 
-          <section id="panel-fiction" class="tabpanel" role="tabpanel" aria-labelledby="tab-fiction" tabindex="0">
+          <section
+            id="panel-fiction"
+            class="tabpanel"
+            role="tabpanel"
+            aria-labelledby="tab-fiction"
+            tabindex="0"
+          >
             <div class="panel-heading">
+
               <div>
                 <h3>Fiction</h3>
+
                 <p>
                   We are interested in solarpunk across a wide range of tones and settings: urban or rural, intimate or expansive, near-future or far beyond it. Above all, we care about character. Give us people who want something, risk something, and make us feel the stakes of the world they are trying to inhabit or change.
                 </p>
               </div>
+
               <aside class="panel-note">
                 <strong>Genre fit</strong>
                 Please submit work you would specifically describe as solarpunk or closely aligned ecological speculation.
               </aside>
+
             </div>
 
-            <div class="looking-for" aria-label="What Burnline seeks in fiction">
+            <div
+              class="looking-for"
+              aria-label="What Burnline seeks in fiction"
+            >
               <article class="looking-card">
                 <span>01 · People</span>
+
                 <h4>Character before concept</h4>
-                <p>Strong ideas matter most when they shape recognizable lives, relationships, choices, and consequences.</p>
+
+                <p>
+                  Strong ideas matter most when they shape recognizable lives, relationships, choices, and consequences.
+                </p>
               </article>
+
               <article class="looking-card">
                 <span>02 · Systems</span>
+
                 <h4>Futures with texture</h4>
-                <p>Show us how communities live, organize, repair, distribute, grow, travel, care, or come into conflict.</p>
+
+                <p>
+                  Show us how communities live, organize, repair, distribute, grow, travel, care, or come into conflict.
+                </p>
               </article>
+
               <article class="looking-card">
                 <span>03 · Possibility</span>
+
                 <h4>Hope that has been earned</h4>
-                <p>The world can remain difficult. We are drawn to stories that still leave room for agency and change.</p>
+
+                <p>
+                  The world can remain difficult. We are drawn to stories that still leave room for agency and change.
+                </p>
               </article>
             </div>
 
             <dl class="requirements">
+
               <div class="requirement">
                 <dt>Word limit</dt>
                 <dd>500–10,000 words.</dd>
               </div>
+
               <div class="requirement">
                 <dt>Pay rate</dt>
+
                 <dd>
                   Because Burnline is currently a free magazine without advertising, we cannot offer payment at this time. Our goal is to eventually pay a competitive per-word rate, but we are not there yet. We understand if that makes submission a non-starter for you.
                 </dd>
               </div>
+
               <div class="requirement">
                 <dt>How to submit</dt>
+
                 <dd>
                   Email your story as a <strong>.doc</strong>, <strong>.docx</strong>, or <strong>.pdf</strong> to
-                  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>. Include the word <strong>“Submission”</strong> in the subject line.
+                  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>.
+                  Include the word <strong>“Submission”</strong> in the subject line.
                 </dd>
               </div>
+
             </dl>
 
             <div class="policy-grid">
+
               <article class="policy-card">
                 <h4>Human-created work only</h4>
-                <p><strong>No AI-generated or AI-assisted work will be accepted.</strong> Burnline is interested in fiction created by people.</p>
+
+                <p>
+                  <strong>No AI-generated or AI-assisted work will be accepted.</strong> Burnline is interested in fiction created by people.
+                </p>
               </article>
+
               <article class="policy-card">
                 <h4>Simultaneous submissions are welcome</h4>
-                <p>Please submit elsewhere while you wait. Just let us know promptly if another publication accepts the story.</p>
+
+                <p>
+                  Please submit elsewhere while you wait. Just let us know promptly if another publication accepts the story.
+                </p>
               </article>
+
             </div>
           </section>
 
-          <section id="panel-art" class="tabpanel" role="tabpanel" aria-labelledby="tab-art" tabindex="0" hidden>
+          <section
+            id="panel-art"
+            class="tabpanel"
+            role="tabpanel"
+            aria-labelledby="tab-art"
+            tabindex="0"
+            hidden
+          >
             <div class="panel-heading">
+
               <div>
                 <h3>Visual art</h3>
+
                 <p>
                   We are accepting solarpunk-themed visual art for digital publication. Digital, hand-drawn, painted, collage, and mixed-media work are welcome. Photography is not currently being considered.
                 </p>
               </div>
+
               <aside class="panel-note">
                 <strong>Selected work</strong>
                 Artwork may appear in a digital issue and in Burnline’s online Art gallery, with full creator credit.
               </aside>
+
             </div>
 
-            <div class="looking-for" aria-label="What Burnline seeks in visual art">
+            <div
+              class="looking-for"
+              aria-label="What Burnline seeks in visual art"
+            >
               <article class="looking-card">
                 <span>01 · Worlds</span>
+
                 <h4>Places that feel inhabited</h4>
-                <p>We welcome landscapes, interiors, infrastructure, neighborhoods, and everyday scenes shaped by ecological futures.</p>
+
+                <p>
+                  We welcome landscapes, interiors, infrastructure, neighborhoods, and everyday scenes shaped by ecological futures.
+                </p>
               </article>
+
               <article class="looking-card">
                 <span>02 · People</span>
+
                 <h4>Life within the future</h4>
-                <p>Portraits, communities, rituals, labor, play, repair, and the relationships that make a world feel alive.</p>
+
+                <p>
+                  Portraits, communities, rituals, labor, play, repair, and the relationships that make a world feel alive.
+                </p>
               </article>
+
               <article class="looking-card">
                 <span>03 · Forms</span>
+
                 <h4>Organic and unexpected</h4>
-                <p>We are open to work that is bright, quiet, strange, imperfect, highly rendered, graphic, or experimental.</p>
+
+                <p>
+                  We are open to work that is bright, quiet, strange, imperfect, highly rendered, graphic, or experimental.
+                </p>
               </article>
             </div>
 
             <dl class="requirements">
+
               <div class="requirement">
                 <dt>Artwork specs</dt>
+
                 <dd>
                   Cover art should be portrait-oriented at 8.5 × 11 inches (2550 × 3300 px) and 300 dpi. Please have a PNG or high-quality JPG available if selected. Interior artwork may use any dimensions.
                 </dd>
               </div>
+
               <div class="requirement">
                 <dt>Pay rate</dt>
+
                 <dd>
                   Because Burnline is currently a free magazine without advertising, we cannot offer payment at this time. Our goal is to eventually pay a competitive rate, but we are not there yet. We understand if that makes submission a non-starter for you.
                 </dd>
               </div>
+
               <div class="requirement">
                 <dt>How to submit</dt>
+
                 <dd>
-                  Email <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a> with a link to the artwork wherever it is hosted, such as a portfolio or public post. Include the word <strong>“Submission”</strong> in the subject line.
+                  Email
+                  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>
+                  with a link to the artwork wherever it is hosted, such as a portfolio or public post. Include the word <strong>“Submission”</strong> in the subject line.
                 </dd>
               </div>
+
               <div class="requirement">
                 <dt>Credit</dt>
+
                 <dd>
                   Selected artists will be fully credited in the magazine and on the site using the name, portfolio link, and profile or social handles they would like included.
                 </dd>
               </div>
+
             </dl>
 
             <div class="policy-grid">
+
               <article class="policy-card">
                 <h4>Human-created work only</h4>
-                <p><strong>No AI-generated or AI-assisted work will be accepted.</strong></p>
+
+                <p>
+                  <strong>No AI-generated or AI-assisted work will be accepted.</strong>
+                </p>
               </article>
+
               <article class="policy-card">
                 <h4>Send a link first</h4>
-                <p>Please do not attach large artwork files to the initial email. A portfolio or hosted-image link is enough for review.</p>
+
+                <p>
+                  Please do not attach large artwork files to the initial email. A portfolio or hosted-image link is enough for review.
+                </p>
               </article>
+
             </div>
           </section>
+
         </div>
       </div>
     </section>
 
-    <section class="cover-letters" aria-labelledby="cover-letter-title">
+    <section
+      class="cover-letters"
+      aria-labelledby="cover-letter-title"
+    >
       <div class="cover-letter-grid wrap">
+
         <div>
-          <p class="eyebrow">Cover letters</p>
-          <h2 id="cover-letter-title">Keep it simple. The work comes first.</h2>
+          <p class="eyebrow">
+            Cover letters
+          </p>
+
+          <h2 id="cover-letter-title">
+            Keep it simple. The work comes first.
+          </h2>
+
           <p>
             Emails and cover letters are much less important to Burnline than the fiction or artwork itself. If part of your personal story meaningfully informs the work, we would be glad to hear about it. Otherwise, a brief hello and the essential submission information are enough.
           </p>
         </div>
 
-        <aside class="simple-card" aria-label="Suggested cover letter guidance">
-          <span class="label">A good submission email</span>
-          <strong>Clear, brief, human.</strong>
-          <p>Tell us what you are sending, include the requested file or link, and make sure “Submission” appears in the subject line.</p>
+        <aside
+          class="simple-card"
+          aria-label="Suggested cover letter guidance"
+        >
+          <span class="label">
+            A good submission email
+          </span>
+
+          <strong>
+            Clear, brief, human.
+          </strong>
+
+          <p>
+            Tell us what you are sending, include the requested file or link, and make sure “Submission” appears in the subject line.
+          </p>
         </aside>
+
       </div>
     </section>
 
-    <section class="submit-cta" aria-labelledby="submit-cta-title">
+    <section
+      class="submit-cta"
+      aria-labelledby="submit-cta-title"
+    >
       <div class="submit-cta-inner wrap">
-        <p class="eyebrow">Ready when you are</p>
-        <h2 id="submit-cta-title">Share what you have been building.</h2>
+
+        <p class="eyebrow">
+          Ready when you are
+        </p>
+
+        <h2 id="submit-cta-title">
+          Share what you have been building.
+        </h2>
+
         <p>
           Send your fiction or artwork to Burnline once you have reviewed the relevant guidelines. If you are unsure whether a project fits, a concise question is welcome.
         </p>
-        <a class="btn" href="mailto:contact@burnlinemag.com?subject=Submission">Email your submission</a>
+
+        <a
+          class="btn"
+          href="mailto:contact@burnlinemag.com?subject=Submission"
+        >
+          Email your submission
+        </a>
+
       </div>
     </section>
+
   </main>
 
   <footer>
     <div class="footer-container">
+
       <div class="footer-column">
-        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <h3>Keep a light on for the future.</h3>
-        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <img
+          src="Flame logo-1.png.png"
+          alt="Burnline Logo"
+          class="footer-logo"
+        >
+
+        <h3>
+          Read more from a better future.
+        </h3>
+
+        <p>
+          Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.
+        </p>
+
         <form class="newsletter-form">
-          <label class="sr-only" for="newsletter-email">Email address</label>
-          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
-          <button type="submit" class="newsletter-button">Subscribe</button>
+          <label
+            class="sr-only"
+            for="newsletter-email"
+          >
+            Email address
+          </label>
+
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="Email address"
+            class="newsletter-input"
+            autocomplete="email"
+            required
+          >
+
+          <button
+            type="submit"
+            class="newsletter-button"
+          >
+            Subscribe
+          </button>
         </form>
       </div>
 
       <div class="footer-column">
         <h4>Get in touch</h4>
-        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
+
+        <p>
+          <a href="mailto:contact@burnlinemag.com">
+            contact@burnlinemag.com
+          </a>
+        </p>
       </div>
 
       <div class="footer-column">
         <h4>Read</h4>
-        <p><a href="issues.html">Issue Library</a></p>
-        <p><a href="stories.html">Featured Stories</a></p>
+
+        <p>
+          <a href="issues.html">
+            Issue Library
+          </a>
+        </p>
+
+        <p>
+          <a href="stories.html">
+            Featured Stories
+          </a>
+        </p>
       </div>
+
     </div>
 
     <div class="footer-bottom">
-      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
+      &copy;
+      <span id="copyright-year">2026</span>
+      Burnline Magazine — All rights reserved
     </div>
   </footer>
 
@@ -896,8 +1591,16 @@
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', String(isActive));
-          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
+
+          hamburger.setAttribute(
+            'aria-expanded',
+            String(isActive)
+          );
+
+          hamburger.setAttribute(
+            'aria-label',
+            isActive ? 'Close menu' : 'Open menu'
+          );
         });
 
         nav.querySelectorAll('a').forEach((link) => {
@@ -909,37 +1612,70 @@
         });
       }
 
-      const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-      const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+      const tabs = Array.from(
+        document.querySelectorAll('[role="tab"]')
+      );
+
+      const panels = Array.from(
+        document.querySelectorAll('[role="tabpanel"]')
+      );
 
       function activateTab(tab, updateHash = true) {
         tabs.forEach((item) => {
           const selected = item === tab;
-          item.setAttribute('aria-selected', String(selected));
-          item.setAttribute('tabindex', selected ? '0' : '-1');
+
+          item.setAttribute(
+            'aria-selected',
+            String(selected)
+          );
+
+          item.setAttribute(
+            'tabindex',
+            selected ? '0' : '-1'
+          );
         });
 
         panels.forEach((panel) => {
-          panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+          panel.hidden =
+            panel.id !== tab.getAttribute('aria-controls');
         });
 
         if (updateHash) {
-          const hash = tab.id === 'tab-art' ? '#art' : '#fiction';
-          if (history.replaceState) history.replaceState(null, '', hash);
-          else window.location.hash = hash;
+          const hash =
+            tab.id === 'tab-art'
+              ? '#art'
+              : '#fiction';
+
+          if (history.replaceState) {
+            history.replaceState(null, '', hash);
+          } else {
+            window.location.hash = hash;
+          }
         }
       }
 
       tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => activateTab(tab));
+        tab.addEventListener(
+          'click',
+          () => activateTab(tab)
+        );
 
         tab.addEventListener('keydown', (event) => {
           let nextIndex = null;
 
-          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-            nextIndex = (index + 1) % tabs.length;
-          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-            nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (
+            event.key === 'ArrowRight' ||
+            event.key === 'ArrowDown'
+          ) {
+            nextIndex =
+              (index + 1) % tabs.length;
+          } else if (
+            event.key === 'ArrowLeft' ||
+            event.key === 'ArrowUp'
+          ) {
+            nextIndex =
+              (index - 1 + tabs.length) %
+              tabs.length;
           } else if (event.key === 'Home') {
             nextIndex = 0;
           } else if (event.key === 'End') {
@@ -948,6 +1684,7 @@
 
           if (nextIndex !== null) {
             event.preventDefault();
+
             tabs[nextIndex].focus();
             activateTab(tabs[nextIndex]);
           }
@@ -955,18 +1692,30 @@
       });
 
       function selectFromHash() {
-        const target = window.location.hash.toLowerCase() === '#art'
-          ? document.getElementById('tab-art')
-          : document.getElementById('tab-fiction');
+        const target =
+          window.location.hash.toLowerCase() === '#art'
+            ? document.getElementById('tab-art')
+            : document.getElementById('tab-fiction');
 
-        if (target) activateTab(target, false);
+        if (target) {
+          activateTab(target, false);
+        }
       }
 
-      window.addEventListener('hashchange', selectFromHash);
+      window.addEventListener(
+        'hashchange',
+        selectFromHash
+      );
+
       selectFromHash();
 
-      const year = document.getElementById('copyright-year');
-      if (year) year.textContent = String(new Date().getFullYear());
+      const year =
+        document.getElementById('copyright-year');
+
+      if (year) {
+        year.textContent =
+          new Date().getFullYear();
+      }
     })();
   </script>
 </body>
