@@ -17,76 +17,94 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
+    :root {
+      --page-max: 1160px;
+      --narrow-max: 780px;
+      --page-pad: clamp(18px, 4vw, 38px);
 
-    .announcement {
-      position: relative;
-      z-index: 60;
-      padding: .62rem var(--page-pad);
-      color: var(--paper-soft);
-      background: var(--forest);
-      text-align: center;
-      font-family: 'Space Mono', monospace;
-      font-size: .72rem;
-      letter-spacing: .08em;
-      line-height: 1.5;
-      text-transform: uppercase;
+      --paper: #f6f0db;
+      --paper-soft: #fffaf0;
+      --paper-deep: #e8e3c8;
+      --ink: #17382d;
+      --ink-soft: #53655a;
+      --forest: #234d3d;
+      --leaf: #4f7d57;
+      --sprout: #9ab75b;
+      --sun: #f0b84a;
+      --sun-soft: #f7d47d;
+      --clay: #cf7558;
+      --sky: #74adb3;
+      --line: rgba(23, 56, 45, 0.18);
+      --shadow: 12px 12px 0 rgba(35, 77, 61, 0.2);
+      --shadow-small: 6px 6px 0 rgba(35, 77, 61, 0.22);
     }
 
-    .site-nav a[aria-current="page"]::after {
-      right: 0;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
-    /* Hero -------------------------------------------------------------- */
-    .art-hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(5rem, 8vw, 7.5rem);
-      background:
-        radial-gradient(circle at 86% 17%, rgba(240, 184, 74, .78) 0 6.5%, transparent 6.8%),
-        radial-gradient(ellipse at 8% 98%, rgba(116, 173, 179, .28) 0 18%, transparent 18.4%),
-        linear-gradient(126deg, #fffaf0 0%, #f5eed5 56%, #e5ebc8 100%);
-      border-bottom: 1px solid var(--line);
+    html {
+      scroll-behavior: smooth;
     }
 
-    .art-hero::before,
-    .art-hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    .art-hero::before {
-      width: min(43vw, 590px);
-      aspect-ratio: 1;
-      right: -12vw;
-      bottom: -23vw;
-      border: 2px solid rgba(35, 77, 61, .17);
-      border-radius: 50% 50% 0 0;
-      box-shadow:
-        -58px -52px 0 -56px rgba(35, 77, 61, .19),
-        -116px -100px 0 -114px rgba(35, 77, 61, .12),
-        -174px -144px 0 -172px rgba(35, 77, 61, .08);
-      transform: rotate(-8deg);
+    body::before {
+      content: none;
     }
 
-    .art-hero::after {
-      width: 265px;
-      height: 265px;
-      left: -120px;
-      top: 15%;
-      border-radius: 50%;
-      opacity: .5;
-      background: repeating-radial-gradient(
-        circle at center,
-        transparent 0 14px,
-        rgba(79, 125, 87, .21) 15px 16px
-      );
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    .art-hero-inner {
-      max-width: 910px;
+    a {
+      color: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 7.5vw, 6.8rem);
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+    }
+
+    .wrap {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
     }
 
     .eyebrow {
@@ -98,7 +116,7 @@
       font-family: 'Space Mono', monospace;
       font-size: .74rem;
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: .15em;
       line-height: 1.4;
       text-transform: uppercase;
     }
@@ -106,41 +124,197 @@
     .eyebrow::before {
       content: "";
       width: 34px;
-      height: 2px;
-      border-radius: 999px;
+      height: 4px;
       background: var(--clay);
+      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 20;
+      padding: .58rem var(--page-pad) .68rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border-bottom: 3px solid var(--sun);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      padding: 0 max(
+        var(--page-pad),
+        calc((100vw - var(--page-max)) / 2 + var(--page-pad))
+      );
+      color: var(--ink);
+      background: rgba(246, 240, 219, 0.97);
+      border-bottom: 2px solid var(--ink);
+      box-shadow: 0 4px 0 rgba(207, 117, 88, .62);
+    }
+
+    .logo-title {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-title img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: sepia(.15) saturate(.8) hue-rotate(72deg) brightness(.72);
+    }
+
+    .logo-title span {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-shadow: 1px 1px 0 var(--sun-soft);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.2vw, 2rem);
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: .45rem .1rem;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: .18rem;
+      height: 2px;
+      background: var(--clay);
+      transition: right .22s ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus-visible::after,
+    .site-nav a[aria-current="page"]::after {
+      right: 0;
+    }
+
+    .site-nav a:last-child {
+      padding: .62rem 1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sun);
+      transform: rotate(-1deg);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .site-nav a:last-child::after {
+      display: none;
+    }
+
+    .site-nav a:last-child:hover,
+    .site-nav a:last-child:focus-visible {
+      transform: translate(2px, 2px) rotate(0);
+      box-shadow: 2px 2px 0 var(--sun);
+    }
+
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      background: var(--paper-soft);
+      box-shadow: 3px 3px 0 var(--clay);
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin: 4px 0;
+      background: var(--ink);
+    }
+
+    .art-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 84% 25%,
+          var(--sun) 0 7%,
+          transparent 7.2%
+        ),
+        linear-gradient(
+          108deg,
+          #f8f3df 0 67%,
+          rgba(154, 183, 91, .24) 67% 83%,
+          rgba(116, 173, 179, .22) 83% 100%
+        );
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .art-hero::before,
+    .art-hero::after {
+      content: none;
+    }
+
+    .art-hero-inner {
+      width: min(100%, 920px);
     }
 
     .art-title {
-      max-width: 875px;
-      margin-bottom: 1.4rem;
-      color: var(--clay);
-      font-size: clamp(3.45rem, 8vw, 7rem);
-      overflow-wrap: anywhere;
+      max-width: 850px;
+      margin-bottom: 1.35rem;
+      color: var(--forest);
     }
 
     .art-title em {
       position: relative;
       color: var(--clay);
       font-style: normal;
+      white-space: nowrap;
     }
 
     .art-title em::after {
       content: "";
       position: absolute;
-      right: -1%;
-      bottom: .04em;
-      left: 1%;
+      left: 2%;
+      right: -2%;
+      bottom: .01em;
       z-index: -1;
-      height: .18em;
-      border-radius: 999px;
+      height: .24em;
       background: var(--sun-soft);
-      transform: rotate(-1deg);
+      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
+      transform: rotate(-1.5deg);
     }
 
     .art-intro {
       max-width: 730px;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
       color: var(--ink-soft);
       font-size: clamp(1.05rem, 1.7vw, 1.24rem);
       line-height: 1.75;
@@ -149,61 +323,76 @@
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: .75rem;
       align-items: center;
+      gap: .85rem;
     }
 
-    .hero-link {
+    .btn,
+    .newsletter-button {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
+      justify-content: center;
+      gap: .55rem;
       min-height: 46px;
-      padding: .65rem .35rem;
-      color: var(--forest);
+      padding: .72rem 1.1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
       font-weight: 700;
+      letter-spacing: .035em;
+      text-align: center;
       text-decoration: none;
-      border-bottom: 1px solid rgba(35, 77, 61, .34);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition:
+        transform .2s ease,
+        background-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
     }
 
-    .hero-link::after {
+    .btn::after {
+      content: "↗";
+      font-size: .95em;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--paper-soft);
+      background: var(--leaf);
+      border-color: var(--leaf);
+      box-shadow: 2px 2px 0 var(--clay);
+      transform: translate(2px, 2px);
+    }
+
+    .btn.secondary {
+      color: var(--forest);
+      background: var(--paper-soft);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sky);
+    }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      color: var(--forest);
+      background: var(--sun-soft);
+      border-color: var(--forest);
+      box-shadow: 2px 2px 0 var(--sky);
+    }
+
+    .hero-actions .btn.secondary::after {
       content: "→";
-      transition: transform .2s ease;
     }
 
-    .hero-link:hover::after,
-    .hero-link:focus-visible::after {
-      transform: translateX(4px);
-    }
-
-    /* Gallery background ------------------------------------------------ */
     .gallery-shell {
       position: relative;
-      overflow: hidden;
       padding: clamp(5rem, 9vw, 8rem) 0 clamp(6rem, 10vw, 9rem);
-      background:
-        linear-gradient(rgba(23, 56, 45, .033) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 56, 45, .033) 1px, transparent 1px),
-        var(--paper);
-      background-size: 38px 38px;
-    }
-
-    .gallery-shell::before {
-      content: "";
-      position: absolute;
-      top: 48%;
-      left: -65px;
-      width: 155px;
-      height: 220px;
-      opacity: .11;
-      background:
-        radial-gradient(ellipse at 50% 13%, var(--forest) 0 10%, transparent 11%),
-        radial-gradient(ellipse at 26% 38%, var(--leaf) 0 13%, transparent 14%),
-        radial-gradient(ellipse at 74% 43%, var(--leaf) 0 13%, transparent 14%),
-        radial-gradient(ellipse at 31% 68%, var(--sprout) 0 12%, transparent 13%),
-        radial-gradient(ellipse at 69% 72%, var(--sprout) 0 12%, transparent 13%),
-        linear-gradient(90deg, transparent 48%, var(--forest) 49% 51%, transparent 52%);
-      transform: rotate(-10deg);
-      pointer-events: none;
+      background: var(--paper);
     }
 
     .section-heading {
@@ -211,7 +400,7 @@
       align-items: end;
       justify-content: space-between;
       gap: 2rem;
-      margin-bottom: clamp(2.4rem, 5vw, 4.3rem);
+      margin-bottom: clamp(2.4rem, 5vw, 4rem);
     }
 
     .section-heading h2 {
@@ -226,52 +415,198 @@
       color: var(--ink-soft);
     }
 
-    /* Gallery sections -------------------------------------------------- */
-    .issue-art-exhibition,
+    .issue-art-exhibition {
+      margin-bottom: clamp(6rem, 10vw, 9rem);
+    }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.7rem, 3vw, 2.7rem);
+    }
+
+    .art-tile {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--clay);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .art-tile:nth-child(2n) {
+      box-shadow: 8px 8px 0 var(--sky);
+    }
+
+    .art-tile:nth-child(3n) {
+      box-shadow: 8px 8px 0 var(--sun);
+    }
+
+    .art-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--paper-deep);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .art-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(23, 56, 45, .12),
+        transparent 48%
+      );
+      pointer-events: none;
+    }
+
+    .art-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.88) sepia(.06) contrast(.96);
+      transition:
+        transform .55s cubic-bezier(.2, .7, .25, 1),
+        filter .35s ease;
+    }
+
+    .art-number {
+      position: absolute;
+      top: .9rem;
+      left: .9rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 46px;
+      min-height: 34px;
+      padding: .35rem .55rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--paper-soft);
+      box-shadow: 3px 3px 0 var(--sun);
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      transform: rotate(-2deg);
+    }
+
+    .art-caption {
+      padding: 1.3rem 1.4rem 1.5rem;
+    }
+
+    .art-label,
+    .cover-label {
+      margin: 0 0 .65rem;
+      color: var(--leaf);
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .art-caption h3 {
+      margin-bottom: .4rem;
+      color: var(--forest);
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
+    }
+
+    .art-artist {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .92rem;
+    }
+
+    .art-artist strong {
+      color: var(--ink);
+    }
+
+    .art-tile:hover,
+    .art-tile:focus-visible {
+      transform: translate(-3px, -5px) rotate(-.3deg);
+      box-shadow: 12px 13px 0 var(--sun);
+    }
+
+    .art-tile:hover .art-image img,
+    .art-tile:focus-visible .art-image img {
+      transform: scale(1.055);
+      filter: saturate(1) sepia(0) contrast(1);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    .load-more {
+      display: flex;
+      justify-content: center;
+      margin-top: clamp(2.8rem, 6vw, 4.8rem);
+    }
+
+    .load-more .btn::after {
+      content: "+";
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
     .cover-exhibition {
       margin-bottom: clamp(6rem, 10vw, 9rem);
     }
 
     .cover-feature {
       display: grid;
-      grid-template-columns: minmax(250px, 390px) minmax(0, 1fr);
-      gap: clamp(2.2rem, 6vw, 6.4rem);
+      grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
+      gap: clamp(2.5rem, 6vw, 6rem);
       align-items: center;
-      padding: clamp(1.3rem, 3.5vw, 3rem);
-      background: rgba(255, 250, 240, .76);
-      border: 1px solid var(--line);
-      border-radius: 42px 12px 42px 12px;
-      box-shadow: var(--shadow);
+      padding: clamp(1.8rem, 4vw, 3rem);
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow:
+        10px 10px 0 var(--sun-soft),
+        13px 13px 0 var(--ink);
     }
 
     .cover-frame {
       position: relative;
-      width: 100%;
+      width: min(100%, 355px);
       cursor: zoom-in;
+      justify-self: center;
     }
 
     .cover-frame::before {
       content: "";
       position: absolute;
-      inset: 7% -7% -6% 9%;
+      inset: 7% -11% -8% 9%;
       z-index: 0;
-      border-radius: 45% 55% 47% 53% / 53% 44% 56% 47%;
-      background: var(--sun-soft);
-      transform: rotate(3deg);
+      border: 2px solid var(--ink);
+      background: var(--sky);
+      clip-path: polygon(3% 2%, 98% 7%, 94% 98%, 0 91%);
+      opacity: .64;
+      transform: rotate(3.5deg);
     }
 
     .cover-frame::after {
-      content: "";
+      content: "ISSUE 01";
       position: absolute;
-      top: -4%;
-      left: -5%;
+      right: -1.35rem;
+      bottom: 2.2rem;
       z-index: 2;
-      width: 72px;
-      height: 72px;
-      border-radius: 50% 50% 12% 50%;
+      padding: .6rem .75rem;
+      color: var(--paper-soft);
       background: var(--clay);
-      opacity: .92;
-      transform: rotate(-14deg);
+      border: 2px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--sun);
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      transform: rotate(-5deg);
     }
 
     .cover-frame img {
@@ -279,35 +614,29 @@
       z-index: 1;
       width: 100%;
       height: auto;
-      border: 8px solid var(--paper-soft);
-      border-radius: 8px;
-      box-shadow: 0 22px 45px rgba(35, 77, 61, .2);
-      transition: transform .28s ease, box-shadow .28s ease;
+      padding: 10px;
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow: var(--shadow);
+      transform: rotate(-2.2deg);
+      transition: transform .3s ease, box-shadow .3s ease;
     }
 
     .cover-frame:hover img,
     .cover-frame:focus-visible img {
-      transform: translateY(-5px) rotate(-.4deg);
-      box-shadow: 0 29px 55px rgba(35, 77, 61, .24);
+      transform: translateY(-7px) rotate(-.7deg);
+      box-shadow: 16px 16px 0 rgba(35, 77, 61, .2);
     }
 
     .cover-copy {
-      max-width: 570px;
-    }
-
-    .cover-label,
-    .art-label {
-      margin: 0 0 .75rem;
-      color: var(--clay);
-      font-family: 'Space Mono', monospace;
-      font-size: .71rem;
-      font-weight: 700;
-      letter-spacing: .11em;
-      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      max-width: 590px;
     }
 
     .cover-copy h3 {
       margin-bottom: 1rem;
+      color: var(--forest);
       font-size: clamp(2rem, 4vw, 3.6rem);
     }
 
@@ -323,165 +652,56 @@
       margin: 1.6rem 0 0;
       padding-top: 1.25rem;
       color: var(--forest);
-      border-top: 1px solid var(--line);
+      border-top: 2px solid var(--line);
       font-family: 'Space Mono', monospace;
-      font-size: .75rem;
-      letter-spacing: .04em;
+      font-size: .72rem;
+      letter-spacing: .05em;
       text-transform: uppercase;
     }
 
-    /* Artwork tiles ----------------------------------------------------- */
-    .art-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(1.45rem, 3vw, 2.3rem);
-    }
-
-    .art-tile {
-      position: relative;
-      min-width: 0;
-      overflow: hidden;
-      cursor: zoom-in;
-      background: var(--paper-soft);
-      border: 1px solid var(--line);
-      border-radius: 30px 8px 30px 8px;
-      box-shadow: var(--shadow-small);
-      transition: transform .24s ease, box-shadow .24s ease;
-    }
-
-    .art-tile:nth-child(2n) {
-      border-radius: 8px 30px 8px 30px;
-    }
-
-    .art-tile:nth-child(3n) {
-      border-radius: 30px 30px 8px 30px;
-    }
-
-    .art-image {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 4 / 3;
-      background: var(--paper-deep);
-    }
-
-    .art-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(23, 56, 45, .13), transparent 48%);
-      pointer-events: none;
-    }
-
-    .art-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(.88) sepia(.06) contrast(.96);
-      transition: transform .55s cubic-bezier(.2, .7, .25, 1), filter .35s ease;
-    }
-
-    .art-number {
-      position: absolute;
-      top: .85rem;
-      left: .85rem;
-      z-index: 2;
-      display: grid;
-      width: 42px;
-      height: 42px;
-      place-items: center;
+    .art-note {
+      max-width: 850px;
+      margin: clamp(6rem, 10vw, 9rem) auto 0;
+      padding: clamp(2rem, 5vw, 4rem);
       color: var(--paper-soft);
       background: var(--forest);
-      border-radius: 50% 50% 12% 50%;
-      font-family: 'Space Mono', monospace;
-      font-size: .72rem;
-      font-weight: 700;
-      transform: rotate(-6deg);
-    }
-
-    .art-caption {
-      padding: 1.25rem 1.35rem 1.45rem;
-    }
-
-    .art-caption h3 {
-      margin-bottom: .35rem;
-      font-size: clamp(1.35rem, 2vw, 1.8rem);
-    }
-
-    .art-artist {
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: .92rem;
-    }
-
-    .art-artist strong {
-      color: var(--forest);
-    }
-
-    .art-tile:hover,
-    .art-tile:focus-visible {
-      transform: translateY(-7px) rotate(-.2deg);
-      box-shadow: 0 20px 42px rgba(35, 77, 61, .17);
-    }
-
-    .art-tile:hover .art-image img,
-    .art-tile:focus-visible .art-image img {
-      transform: scale(1.055);
-      filter: saturate(1) sepia(0) contrast(1);
-    }
-
-    .is-hidden {
-      display: none !important;
-    }
-
-    .load-more {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 1.2rem;
-      align-items: center;
-      margin-top: clamp(2.8rem, 6vw, 4.8rem);
-    }
-
-    .load-more::before,
-    .load-more::after {
-      content: "";
-      height: 1px;
-      background: var(--line);
-    }
-
-    /* Closing invitation ------------------------------------------------ */
-    .art-note {
-      max-width: 870px;
-      margin: clamp(6rem, 10vw, 9rem) auto 0;
-      padding: clamp(2.2rem, 5vw, 4.5rem);
-      text-align: center;
-      background: var(--forest);
-      border-radius: 46px 12px 46px 12px;
-      box-shadow: var(--shadow);
+      border: 2px solid var(--ink);
+      border-top: 8px solid var(--clay);
+      border-bottom: 8px solid var(--sun);
+      box-shadow: 10px 10px 0 rgba(35, 77, 61, .2);
+      text-align: left;
     }
 
     .art-note h2 {
       margin-bottom: 1rem;
       color: var(--paper-soft);
+      text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
     }
 
     .art-note p {
       max-width: 630px;
-      margin: 0 auto 1.7rem;
-      color: rgba(255, 250, 240, .74);
+      margin-bottom: 1.7rem;
+      color: rgba(255, 250, 240, .78);
     }
 
     .art-note .btn.secondary {
-      color: var(--paper-soft);
-      border-color: rgba(255, 250, 240, .46);
+      color: var(--forest);
+      background: var(--paper-soft);
+      border-color: var(--paper-soft);
+      box-shadow: 4px 4px 0 var(--clay);
+    }
+
+    .art-note .btn.secondary::after {
+      content: "→";
     }
 
     .art-note .btn.secondary:hover,
     .art-note .btn.secondary:focus-visible {
       color: var(--forest);
-      background: var(--paper-soft);
+      background: var(--sun-soft);
+      border-color: var(--sun-soft);
     }
 
-    /* Lightbox ---------------------------------------------------------- */
     body.modal-open {
       overflow: hidden;
     }
@@ -495,8 +715,7 @@
       padding: clamp(1rem, 4vw, 3rem);
       opacity: 0;
       visibility: hidden;
-      background: rgba(20, 48, 39, .94);
-      backdrop-filter: blur(10px);
+      background: rgba(20, 48, 39, .95);
       transition: opacity .25s ease, visibility .25s ease;
     }
 
@@ -526,21 +745,23 @@
       max-width: min(100%, 940px);
       max-height: min(72vh, 820px);
       object-fit: contain;
+      padding: 8px;
       background: var(--paper-soft);
-      border: 8px solid var(--paper-soft);
-      border-radius: 8px;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, .36);
+      border: 2px solid var(--paper-soft);
+      box-shadow:
+        9px 9px 0 var(--clay),
+        12px 12px 0 var(--sun);
     }
 
     .modal-caption {
       max-width: 760px;
-      margin-top: 1rem;
+      margin-top: 1.4rem;
       color: var(--paper-soft);
       text-align: center;
     }
 
     .modal-caption h3 {
-      margin: 0 0 .25rem;
+      margin: 0 0 .3rem;
       color: var(--paper-soft);
       font-size: clamp(1.45rem, 3vw, 2.2rem);
     }
@@ -558,10 +779,13 @@
       place-items: center;
       color: var(--forest);
       background: var(--paper-soft);
-      border: 0;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, .2);
+      border: 2px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--clay);
       cursor: pointer;
-      transition: transform .2s ease, background .2s ease;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
     }
 
     .modal-close:hover,
@@ -570,7 +794,7 @@
     .nav-arrow:focus-visible {
       color: var(--paper-soft);
       background: var(--clay);
-      transform: scale(1.06);
+      box-shadow: 2px 2px 0 var(--sun);
     }
 
     .modal-close {
@@ -578,7 +802,6 @@
       right: clamp(1rem, 3vw, 2rem);
       width: 48px;
       height: 48px;
-      border-radius: 50%;
       font-size: 1.8rem;
       line-height: 1;
     }
@@ -587,14 +810,13 @@
       top: 50%;
       width: 52px;
       height: 52px;
-      border-radius: 50% 50% 15% 50%;
       font-size: 1.65rem;
       transform: translateY(-50%);
     }
 
     .nav-arrow:hover,
     .nav-arrow:focus-visible {
-      transform: translateY(-50%) scale(1.06);
+      transform: translate(2px, calc(-50% + 2px));
     }
 
     .nav-arrow.left {
@@ -603,17 +825,180 @@
 
     .nav-arrow.right {
       right: clamp(.75rem, 2.5vw, 2rem);
-      border-radius: 50% 50% 50% 15%;
     }
 
-    /* Responsive -------------------------------------------------------- */
+    footer {
+      margin: 0;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 0;
+      color: rgba(255, 250, 240, .82);
+      background: #16372c;
+      border-top: 8px solid var(--clay);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr .8fr;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 0 var(--page-pad) clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .footer-column {
+      min-width: 0;
+    }
+
+    .footer-logo {
+      width: 58px;
+      margin-bottom: 1.25rem;
+      filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
+      transform: rotate(-4deg);
+    }
+
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .footer-column p {
+      margin-bottom: .55rem;
+      color: rgba(255, 250, 240, .7);
+    }
+
+    .footer-column a {
+      color: rgba(255, 250, 240, .78);
+      text-decoration: none;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus-visible {
+      color: var(--sun-soft);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin-top: 1.3rem;
+      padding: 5px;
+      background: rgba(255, 250, 240, .08);
+      border: 2px solid rgba(255, 250, 240, .72);
+      box-shadow: 6px 6px 0 rgba(207, 117, 88, .75);
+    }
+
+    .newsletter-input {
+      min-width: 0;
+      flex: 1 1 auto;
+      width: auto;
+      margin: 0;
+      padding: .7rem 1rem;
+      color: var(--paper-soft);
+      background: transparent;
+      border: 0;
+      font: inherit;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 250, 240, .5);
+    }
+
+    .newsletter-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding-inline: 1rem;
+      color: var(--ink);
+      background: var(--sun-soft);
+      border-color: var(--sun-soft);
+      box-shadow: none;
+    }
+
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--ink);
+      background: var(--sun);
+      border-color: var(--sun);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .footer-bottom {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 1.25rem var(--page-pad) 1.8rem;
+      color: rgba(255, 250, 240, .48);
+      background: transparent;
+      border-top: 2px dashed rgba(255, 250, 240, .2);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .04em;
+      text-align: left;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 4px;
+    }
+
     @media (max-width: 960px) {
-      .section-heading {
+      .site-header {
+        min-height: 72px;
+      }
+
+      .hamburger {
         display: block;
       }
 
-      .section-heading > p {
-        margin-top: 1rem;
+      .site-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: var(--page-pad);
+        right: var(--page-pad);
+        display: none;
+        align-items: stretch;
+        gap: .2rem;
+        padding: .8rem;
+        background: var(--paper-soft);
+        border: 2px solid var(--ink);
+        border-top: 0;
+        box-shadow: var(--shadow-small);
+      }
+
+      .site-nav.active {
+        display: grid;
+      }
+
+      .site-nav a {
+        padding: .85rem 1rem;
+      }
+
+      .site-nav a:hover {
+        background: var(--paper-deep);
+      }
+
+      .site-nav a::after {
+        display: none;
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: .8rem;
       }
 
       .cover-feature {
@@ -624,36 +1009,67 @@
       .art-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: 1 / -1;
+      }
     }
 
     @media (max-width: 720px) {
       .announcement {
-        font-size: .64rem;
-        letter-spacing: .055em;
+        font-size: .63rem;
+      }
+
+      .logo-title span {
+        font-size: 1.32rem;
+      }
+
+      .logo-title img {
+        width: 36px;
+        height: 36px;
       }
 
       .art-hero {
-        padding-top: 4.8rem;
+        padding-top: 4.5rem;
       }
 
       .art-title {
+        width: 100%;
         max-width: 100%;
-        font-size: clamp(3rem, 13.5vw, 4.45rem);
+        font-size: clamp(3rem, 15vw, 4.4rem);
+        overflow-wrap: anywhere;
       }
 
       .art-title em {
         white-space: normal;
       }
 
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
       .cover-feature {
         grid-template-columns: 1fr;
-        gap: 3.2rem;
-        border-radius: 30px 9px 30px 9px;
+        gap: 3.5rem;
+        padding: 1.2rem;
       }
 
       .cover-frame {
-        width: min(86%, 350px);
-        margin-inline: auto;
+        width: min(82%, 330px);
+      }
+
+      .cover-frame::after {
+        right: -.4rem;
+        bottom: 1.2rem;
       }
 
       .cover-copy {
@@ -664,21 +1080,15 @@
         grid-template-columns: 1fr;
       }
 
-      .art-tile {
-        border-radius: 26px 8px 26px 8px;
-      }
-
-      .load-more {
-        grid-template-columns: 1fr;
-      }
-
-      .load-more::before,
-      .load-more::after {
-        width: 72%;
-        margin-inline: auto;
-      }
-
       .load-more .btn {
+        width: 100%;
+      }
+
+      .art-note {
+        padding: 1.5rem;
+      }
+
+      .art-note .btn {
         width: 100%;
       }
 
@@ -688,7 +1098,7 @@
 
       .modal-content {
         max-height: 65vh;
-        border-width: 5px;
+        padding: 5px;
       }
 
       .modal-close {
@@ -706,7 +1116,7 @@
 
       .nav-arrow:hover,
       .nav-arrow:focus-visible {
-        transform: scale(1.06);
+        transform: translate(2px, 2px);
       }
 
       .nav-arrow.left {
@@ -716,12 +1126,33 @@
       .nav-arrow.right {
         right: calc(50% - 58px);
       }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: auto;
+      }
+
+      .newsletter-form {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .newsletter-button {
+        width: 100%;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
+      html {
+        scroll-behavior: auto;
+      }
 
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
         animation-duration: .01ms !important;
@@ -730,8 +1161,11 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="announcement">Illustration, cover art, and visual worlds for a future in bloom</div>
+  <div class="announcement">
+    Independent stories for brighter, stranger, more livable futures
+  </div>
 
   <header class="site-header">
     <a href="index.html" class="logo-title" aria-label="Burnline home">
@@ -739,8 +1173,17 @@
       <span>BURNLINE</span>
     </a>
 
-    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span><span></span>
+    <button
+      id="hamburger"
+      class="hamburger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -755,31 +1198,53 @@
   <main>
     <section class="art-hero" aria-labelledby="art-title">
       <div class="art-hero-inner wrap">
-        <h1 class="art-title" id="art-title">Art Gallery</h1>
+
+        <p class="eyebrow">
+          Burnline Magazine · Visual art
+        </p>
+
+        <h1 class="art-title" id="art-title">
+          Art <em>Gallery</em>
+        </h1>
+
         <p class="art-intro">
           Check out editor-selected solarpunk art from across Burnline.
         </p>
+
         <div class="hero-actions">
-          <a href="#art-gallery" class="btn">Enter the gallery</a>
-          <a href="submit.html" class="hero-link">Share your art with Burnline</a>
+          <a href="#art-gallery" class="btn">
+            Enter the gallery
+          </a>
+
+          <a href="submit.html#art" class="btn secondary">
+            Share your art
+          </a>
         </div>
+
       </div>
     </section>
 
     <section class="gallery-shell">
       <div class="wrap">
-        <section class="issue-art-exhibition" id="art-gallery" aria-labelledby="issue-art-title">
+
+        <section
+          class="issue-art-exhibition"
+          id="art-gallery"
+          aria-labelledby="issue-art-title"
+        >
           <div class="section-heading">
             <div>
               <p class="eyebrow">From the issues</p>
               <h2 id="issue-art-title">Art Gallery</h2>
             </div>
+
             <p>
               Select an image to view it at full size and move through the complete gallery.
             </p>
           </div>
 
           <div class="art-grid" id="issueArtGrid">
+
             <article
               class="art-tile gallery-item"
               role="button"
@@ -790,12 +1255,19 @@
             >
               <div class="art-image">
                 <span class="art-number" aria-hidden="true">01</span>
-                <img src="Placeholder 1.png" alt="Featured artwork 1" loading="lazy">
+                <img
+                  src="Placeholder 1.png"
+                  alt="Featured artwork 1"
+                  loading="lazy"
+                >
               </div>
+
               <div class="art-caption">
                 <p class="art-label">Issue artwork</p>
                 <h3>[Artwork Title]</h3>
-                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+                <p class="art-artist">
+                  by <strong>[Artist Name]</strong>
+                </p>
               </div>
             </article>
 
@@ -809,12 +1281,19 @@
             >
               <div class="art-image">
                 <span class="art-number" aria-hidden="true">02</span>
-                <img src="Placeholder 2.png" alt="Featured artwork 2" loading="lazy">
+                <img
+                  src="Placeholder 2.png"
+                  alt="Featured artwork 2"
+                  loading="lazy"
+                >
               </div>
+
               <div class="art-caption">
                 <p class="art-label">Issue artwork</p>
                 <h3>[Artwork Title]</h3>
-                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+                <p class="art-artist">
+                  by <strong>[Artist Name]</strong>
+                </p>
               </div>
             </article>
 
@@ -828,12 +1307,19 @@
             >
               <div class="art-image">
                 <span class="art-number" aria-hidden="true">03</span>
-                <img src="Placeholder 3.png" alt="Featured artwork 3" loading="lazy">
+                <img
+                  src="Placeholder 3.png"
+                  alt="Featured artwork 3"
+                  loading="lazy"
+                >
               </div>
+
               <div class="art-caption">
                 <p class="art-label">Issue artwork</p>
                 <h3>[Artwork Title]</h3>
-                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+                <p class="art-artist">
+                  by <strong>[Artist Name]</strong>
+                </p>
               </div>
             </article>
 
@@ -847,12 +1333,19 @@
             >
               <div class="art-image">
                 <span class="art-number" aria-hidden="true">04</span>
-                <img src="Placeholder 1.png" alt="Featured artwork 4" loading="lazy">
+                <img
+                  src="Placeholder 1.png"
+                  alt="Featured artwork 4"
+                  loading="lazy"
+                >
               </div>
+
               <div class="art-caption">
                 <p class="art-label">Issue artwork</p>
                 <h3>[Artwork Title]</h3>
-                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+                <p class="art-artist">
+                  by <strong>[Artist Name]</strong>
+                </p>
               </div>
             </article>
 
@@ -866,12 +1359,19 @@
             >
               <div class="art-image">
                 <span class="art-number" aria-hidden="true">05</span>
-                <img src="Placeholder 2.png" alt="Featured artwork 5" loading="lazy">
+                <img
+                  src="Placeholder 2.png"
+                  alt="Featured artwork 5"
+                  loading="lazy"
+                >
               </div>
+
               <div class="art-caption">
                 <p class="art-label">Issue artwork</p>
                 <h3>[Artwork Title]</h3>
-                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+                <p class="art-artist">
+                  by <strong>[Artist Name]</strong>
+                </p>
               </div>
             </article>
 
@@ -885,23 +1385,40 @@
             >
               <div class="art-image">
                 <span class="art-number" aria-hidden="true">06</span>
-                <img src="Placeholder 3.png" alt="Featured artwork 6" loading="lazy">
+                <img
+                  src="Placeholder 3.png"
+                  alt="Featured artwork 6"
+                  loading="lazy"
+                >
               </div>
+
               <div class="art-caption">
                 <p class="art-label">Issue artwork</p>
                 <h3>[Artwork Title]</h3>
-                <p class="art-artist">by <strong>[Artist Name]</strong></p>
+                <p class="art-artist">
+                  by <strong>[Artist Name]</strong>
+                </p>
               </div>
             </article>
+
           </div>
 
           <div class="load-more" id="load-more-row">
-            <button id="loadMoreBtn" class="btn" type="button">Load more artwork</button>
+            <button
+              id="loadMoreBtn"
+              class="btn"
+              type="button"
+            >
+              Load more artwork
+            </button>
           </div>
         </section>
 
-
-        <section class="cover-exhibition" id="cover-gallery" aria-labelledby="cover-title">
+        <section
+          class="cover-exhibition"
+          id="cover-gallery"
+          aria-labelledby="cover-title"
+        >
           <div class="section-heading">
             <div>
               <p class="eyebrow">Cover collection</p>
@@ -910,6 +1427,7 @@
           </div>
 
           <article class="cover-feature">
+
             <div
               class="cover-frame gallery-item"
               role="button"
@@ -918,79 +1436,179 @@
               data-artist="Burnline Editorial"
               aria-label="Enlarge the cover for Burnline Issue 01"
             >
-              <img src="New Cover.png" alt="Cover artwork for Burnline Issue 01">
+              <img
+                src="New Cover.png"
+                alt="Cover artwork for Burnline Issue 01"
+              >
             </div>
 
             <div class="cover-copy">
-              <p class="cover-label">Issue 01 · Cover art</p>
+              <p class="cover-label">
+                Issue 01 · Cover art
+              </p>
+
               <h3>Burnline — Issue 01</h3>
+
               <p>
                 The first image in the Burnline archive—and the opening visual statement for a collection of speculative fiction and art.
               </p>
+
               <div class="cover-meta">
                 <span>Digital edition</span>
                 <span>Burnline Editorial</span>
                 <span>2026</span>
               </div>
             </div>
+
           </article>
         </section>
 
-        <section class="art-note" aria-labelledby="art-note-title">
-          <h2 id="art-note-title">Help us picture another future.</h2>
+        <section
+          class="art-note"
+          aria-labelledby="art-note-title"
+        >
+          <h2 id="art-note-title">
+            Help us picture another future.
+          </h2>
+
           <p>
             Burnline welcomes illustration, cover concepts, and visual storytelling that feels hopeful, strange, practical, and alive.
           </p>
-          <a href="submit.html#art" class="btn secondary">View art submissions</a>
+
+          <a
+            href="submit.html#art"
+            class="btn secondary"
+          >
+            View art submissions
+          </a>
         </section>
+
       </div>
     </section>
   </main>
 
-  <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" type="button" aria-label="Close gallery">&times;</button>
-    <button class="nav-arrow left" id="previousArt" type="button" aria-label="Previous artwork">&#10094;</button>
+  <div
+    id="imageModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="modalTitle"
+  >
+    <button
+      class="modal-close"
+      id="modalClose"
+      type="button"
+      aria-label="Close gallery"
+    >
+      &times;
+    </button>
+
+    <button
+      class="nav-arrow left"
+      id="previousArt"
+      type="button"
+      aria-label="Previous artwork"
+    >
+      &#10094;
+    </button>
 
     <div class="modal-dialog">
       <div class="modal-image-wrap">
-        <img class="modal-content" id="modalImage" src="" alt="">
+        <img
+          class="modal-content"
+          id="modalImage"
+          src=""
+          alt=""
+        >
       </div>
+
       <div class="modal-caption">
         <h3 id="modalTitle"></h3>
         <p id="modalArtist"></p>
       </div>
     </div>
 
-    <button class="nav-arrow right" id="nextArt" type="button" aria-label="Next artwork">&#10095;</button>
+    <button
+      class="nav-arrow right"
+      id="nextArt"
+      type="button"
+      aria-label="Next artwork"
+    >
+      &#10095;
+    </button>
   </div>
 
   <footer>
     <div class="footer-container">
+
       <div class="footer-column">
-        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <h3>Keep a light on for the future.</h3>
-        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <img
+          src="Flame logo-1.png.png"
+          alt="Burnline Logo"
+          class="footer-logo"
+        >
+
+        <h3>Read more from a better future.</h3>
+
+        <p>
+          Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.
+        </p>
+
         <form class="newsletter-form">
-          <label class="sr-only" for="newsletter-email">Email address</label>
-          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
-          <button type="submit" class="newsletter-button">Subscribe</button>
+          <label
+            class="sr-only"
+            for="newsletter-email"
+          >
+            Email address
+          </label>
+
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="Email address"
+            class="newsletter-input"
+            autocomplete="email"
+            required
+          >
+
+          <button
+            type="submit"
+            class="newsletter-button"
+          >
+            Subscribe
+          </button>
         </form>
       </div>
 
       <div class="footer-column">
         <h4>Get in touch</h4>
-        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
+
+        <p>
+          <a href="mailto:contact@burnlinemag.com">
+            contact@burnlinemag.com
+          </a>
+        </p>
       </div>
 
       <div class="footer-column">
         <h4>Read</h4>
-        <p><a href="issues.html">Issue Library</a></p>
-        <p><a href="stories.html">Featured Stories</a></p>
+
+        <p>
+          <a href="issues.html">Issue Library</a>
+        </p>
+
+        <p>
+          <a href="stories.html">Featured Stories</a>
+        </p>
       </div>
+
     </div>
 
     <div class="footer-bottom">
-      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
+      &copy;
+      <span id="copyright-year">2026</span>
+      Burnline Magazine — All rights reserved
     </div>
   </footer>
 
@@ -1002,8 +1620,16 @@
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', String(isActive));
-          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
+
+          hamburger.setAttribute(
+            'aria-expanded',
+            String(isActive)
+          );
+
+          hamburger.setAttribute(
+            'aria-label',
+            isActive ? 'Close menu' : 'Open menu'
+          );
         });
 
         nav.querySelectorAll('a').forEach((link) => {
@@ -1030,32 +1656,48 @@
       let lastFocusedElement = null;
 
       function getVisibleGalleryItems() {
-        galleryItems = Array.from(document.querySelectorAll('.gallery-item:not(.is-hidden)'));
+        galleryItems = Array.from(
+          document.querySelectorAll('.gallery-item:not(.is-hidden)')
+        );
       }
 
       function updateModal(index) {
         if (!galleryItems.length) return;
 
-        currentIndex = (index + galleryItems.length) % galleryItems.length;
+        currentIndex =
+          (index + galleryItems.length) % galleryItems.length;
+
         const item = galleryItems[currentIndex];
         const image = item.querySelector('img');
 
         modalImage.src = image.currentSrc || image.src;
-        modalImage.alt = image.alt || 'Expanded Burnline artwork';
-        modalTitle.textContent = item.dataset.title || 'Untitled artwork';
-        modalArtist.textContent = item.dataset.artist ? `by ${item.dataset.artist}` : '';
+        modalImage.alt =
+          image.alt || 'Expanded Burnline artwork';
+
+        modalTitle.textContent =
+          item.dataset.title || 'Untitled artwork';
+
+        modalArtist.textContent =
+          item.dataset.artist
+            ? `by ${item.dataset.artist}`
+            : '';
       }
 
       function openModal(item) {
         getVisibleGalleryItems();
+
         const index = galleryItems.indexOf(item);
+
         if (index < 0) return;
 
         lastFocusedElement = document.activeElement;
+
         updateModal(index);
+
         modal.classList.add('show');
         modal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open');
+
         modalClose.focus();
       }
 
@@ -1063,55 +1705,106 @@
         modal.classList.remove('show');
         modal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open');
+
         modalImage.src = '';
 
-        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        if (
+          lastFocusedElement &&
+          typeof lastFocusedElement.focus === 'function'
+        ) {
           lastFocusedElement.focus();
         }
       }
 
       function bindGalleryItems() {
-        document.querySelectorAll('.gallery-item').forEach((item) => {
-          if (item.dataset.bound === 'true') return;
-          item.dataset.bound = 'true';
+        document
+          .querySelectorAll('.gallery-item')
+          .forEach((item) => {
+            if (item.dataset.bound === 'true') return;
 
-          item.addEventListener('click', () => openModal(item));
-          item.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              openModal(item);
-            }
+            item.dataset.bound = 'true';
+
+            item.addEventListener(
+              'click',
+              () => openModal(item)
+            );
+
+            item.addEventListener(
+              'keydown',
+              (event) => {
+                if (
+                  event.key === 'Enter' ||
+                  event.key === ' '
+                ) {
+                  event.preventDefault();
+                  openModal(item);
+                }
+              }
+            );
           });
-        });
       }
 
       modalClose.addEventListener('click', closeModal);
-      previousArt.addEventListener('click', () => updateModal(currentIndex - 1));
-      nextArt.addEventListener('click', () => updateModal(currentIndex + 1));
+
+      previousArt.addEventListener(
+        'click',
+        () => updateModal(currentIndex - 1)
+      );
+
+      nextArt.addEventListener(
+        'click',
+        () => updateModal(currentIndex + 1)
+      );
 
       modal.addEventListener('click', (event) => {
-        if (event.target === modal) closeModal();
+        if (event.target === modal) {
+          closeModal();
+        }
       });
 
       document.addEventListener('keydown', (event) => {
         if (!modal.classList.contains('show')) return;
 
-        if (event.key === 'Escape') closeModal();
-        if (event.key === 'ArrowLeft') updateModal(currentIndex - 1);
-        if (event.key === 'ArrowRight') updateModal(currentIndex + 1);
+        if (event.key === 'Escape') {
+          closeModal();
+        }
+
+        if (event.key === 'ArrowLeft') {
+          updateModal(currentIndex - 1);
+        }
+
+        if (event.key === 'ArrowRight') {
+          updateModal(currentIndex + 1);
+        }
       });
 
       if (loadMoreButton) {
-        loadMoreButton.addEventListener('click', () => {
-          document.querySelectorAll('#issueArtGrid .art-tile.is-hidden').forEach((item) => {
-            item.classList.remove('is-hidden');
-          });
+        loadMoreButton.addEventListener(
+          'click',
+          () => {
+            document
+              .querySelectorAll(
+                '#issueArtGrid .art-tile.is-hidden'
+              )
+              .forEach((item) => {
+                item.classList.remove('is-hidden');
+              });
 
-          getVisibleGalleryItems();
-          if (loadMoreRow) loadMoreRow.remove();
-        }, { once: true });
+            getVisibleGalleryItems();
 
-        if (document.querySelectorAll('#issueArtGrid .art-tile.is-hidden').length === 0 && loadMoreRow) {
+            if (loadMoreRow) {
+              loadMoreRow.remove();
+            }
+          },
+          { once: true }
+        );
+
+        if (
+          document.querySelectorAll(
+            '#issueArtGrid .art-tile.is-hidden'
+          ).length === 0 &&
+          loadMoreRow
+        ) {
           loadMoreRow.remove();
         }
       }
@@ -1120,7 +1813,10 @@
       getVisibleGalleryItems();
 
       const year = document.getElementById('copyright-year');
-      if (year) year.textContent = new Date().getFullYear();
+
+      if (year) {
+        year.textContent = new Date().getFullYear();
+      }
     })();
   </script>
 </body>
