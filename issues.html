@@ -17,74 +17,86 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    .announcement {
-      position: relative;
-      z-index: 60;
-      padding: .62rem var(--page-pad);
-      color: var(--paper-soft);
-      background: var(--forest);
-      text-align: center;
-      font-family: 'Space Mono', monospace;
-      font-size: .72rem;
-      letter-spacing: .08em;
-      line-height: 1.5;
-      text-transform: uppercase;
+    :root {
+      --page-max: 1160px;
+      --narrow-max: 780px;
+      --page-pad: clamp(18px, 4vw, 38px);
+
+      --paper: #f6f0db;
+      --paper-soft: #fffaf0;
+      --paper-deep: #e8e3c8;
+      --ink: #17382d;
+      --ink-soft: #53655a;
+      --forest: #234d3d;
+      --leaf: #4f7d57;
+      --sprout: #9ab75b;
+      --sun: #f0b84a;
+      --sun-soft: #f7d47d;
+      --clay: #cf7558;
+      --sky: #74adb3;
+      --line: rgba(23, 56, 45, 0.18);
+      --shadow: 12px 12px 0 rgba(35, 77, 61, 0.2);
+      --shadow-small: 6px 6px 0 rgba(35, 77, 61, 0.22);
     }
 
-    .site-nav a[aria-current="page"]::after {
-      right: 0;
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
 
-    .library-hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(4.5rem, 8vw, 7rem);
-      background:
-        radial-gradient(circle at 84% 22%, rgba(240, 184, 74, .72) 0 7.5%, transparent 7.8%),
-        radial-gradient(ellipse at 11% 90%, rgba(116, 173, 179, .22) 0 19%, transparent 19.4%),
-        linear-gradient(120deg, #fffaf0 0%, #f5efd9 61%, #e8ebcb 100%);
-      border-bottom: 1px solid var(--line);
+    html {
+      scroll-behavior: smooth;
     }
 
-    .library-hero::before,
-    .library-hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    .library-hero::before {
-      width: min(44vw, 630px);
-      height: min(31vw, 430px);
-      right: -8vw;
-      bottom: -13vw;
-      border: 2px solid rgba(35, 77, 61, .15);
-      border-radius: 52% 48% 0 0 / 70% 76% 0 0;
-      box-shadow:
-        -56px -44px 0 -54px rgba(35, 77, 61, .23),
-        -112px -82px 0 -110px rgba(35, 77, 61, .15),
-        -170px -116px 0 -168px rgba(35, 77, 61, .1);
-      transform: rotate(-6deg);
+    body::before {
+      content: none;
     }
 
-    .library-hero::after {
-      width: 285px;
-      height: 285px;
-      left: -118px;
-      top: 15%;
-      border-radius: 50%;
-      opacity: .48;
-      background: repeating-radial-gradient(
-        circle at center,
-        transparent 0 15px,
-        rgba(79, 125, 87, .22) 16px 17px
-      );
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    .library-hero-inner {
-      max-width: 900px;
+    a {
+      color: inherit;
+    }
+
+    h1, h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 7.5vw, 6.8rem);
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+    }
+
+    .wrap {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
     }
 
     .eyebrow {
@@ -96,7 +108,7 @@
       font-family: 'Space Mono', monospace;
       font-size: .74rem;
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: .15em;
       line-height: 1.4;
       text-transform: uppercase;
     }
@@ -104,20 +116,172 @@
     .eyebrow::before {
       content: "";
       width: 34px;
-      height: 2px;
-      border-radius: 999px;
+      height: 4px;
       background: var(--clay);
+      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 20;
+      padding: .58rem var(--page-pad) .68rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border-bottom: 3px solid var(--sun);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      padding: 0 max(
+        var(--page-pad),
+        calc((100vw - var(--page-max)) / 2 + var(--page-pad))
+      );
+      color: var(--ink);
+      background: rgba(246, 240, 219, 0.97);
+      border-bottom: 2px solid var(--ink);
+      box-shadow: 0 4px 0 rgba(207, 117, 88, .62);
+    }
+
+    .logo-title {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-title img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: sepia(.15) saturate(.8) hue-rotate(72deg) brightness(.72);
+    }
+
+    .logo-title span {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-shadow: 1px 1px 0 var(--sun-soft);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.2vw, 2rem);
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: .45rem .1rem;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: .18rem;
+      height: 2px;
+      background: var(--clay);
+      transition: right .22s ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus-visible::after,
+    .site-nav a[aria-current="page"]::after {
+      right: 0;
+    }
+
+    .site-nav a:last-child {
+      padding: .62rem 1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sun);
+      transform: rotate(-1deg);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .site-nav a:last-child::after {
+      display: none;
+    }
+
+    .site-nav a:last-child:hover,
+    .site-nav a:last-child:focus-visible {
+      transform: translate(2px, 2px) rotate(0);
+      box-shadow: 2px 2px 0 var(--sun);
+    }
+
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      background: var(--paper-soft);
+      box-shadow: 3px 3px 0 var(--clay);
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin: 4px 0;
+      background: var(--ink);
+    }
+
+    .library-hero {
+      position: relative;
+      isolation: isolate;
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 84% 25%,
+          var(--sun) 0 7%,
+          transparent 7.2%
+        ),
+        linear-gradient(
+          108deg,
+          #f8f3df 0 67%,
+          rgba(154, 183, 91, .24) 67% 83%,
+          rgba(116, 173, 179, .22) 83% 100%
+        );
+      border-bottom: 3px solid var(--ink);
+      overflow: hidden;
+    }
+
+    .library-hero::before,
+    .library-hero::after {
+      content: none;
+    }
+
+    .library-hero-inner {
+      width: min(100%, 920px);
     }
 
     .library-title {
       max-width: 810px;
       margin-bottom: 1.35rem;
       color: var(--forest);
-      font-size: clamp(3.5rem, 8vw, 7rem);
-    }
-
-    .library-hero .stories-title {
-      color: var(--clay);
     }
 
     .library-title em {
@@ -130,14 +294,14 @@
     .library-title em::after {
       content: "";
       position: absolute;
+      left: 2%;
       right: -2%;
-      bottom: .05em;
-      left: 1%;
+      bottom: .01em;
       z-index: -1;
-      height: .18em;
-      border-radius: 999px;
+      height: .24em;
       background: var(--sun-soft);
-      transform: rotate(-1.2deg);
+      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
+      transform: rotate(-1.5deg);
     }
 
     .library-intro {
@@ -148,91 +312,24 @@
       line-height: 1.75;
     }
 
-    .library-note {
-      position: relative;
-      max-width: 340px;
-      justify-self: end;
-      padding: 1.6rem 1.7rem 1.55rem;
-      color: var(--paper-soft);
-      background: var(--leaf);
-      border-radius: 8px 28px 8px 28px;
-      box-shadow: var(--shadow-small);
-      transform: rotate(1.5deg);
-    }
-
-    .library-note::before {
-      content: "";
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      right: 22px;
-      top: -20px;
-      border: 2px solid var(--sun-soft);
-      border-radius: 50% 50% 50% 5%;
-      transform: rotate(34deg);
-    }
-
-    .library-note strong {
-      display: block;
-      margin-bottom: .55rem;
-      color: var(--sun-soft);
-      font-family: 'Space Mono', monospace;
-      font-size: .7rem;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .library-note p {
-      margin: 0;
-      color: rgba(255, 250, 240, .88);
-      font-family: 'Fraunces', serif;
-      font-size: clamp(1.2rem, 2vw, 1.55rem);
-      font-weight: 600;
-      line-height: 1.25;
-    }
-
     .issue-archive {
       position: relative;
       padding: clamp(5rem, 9vw, 8.5rem) 0;
-      background:
-        linear-gradient(rgba(23, 56, 45, .035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 56, 45, .035) 1px, transparent 1px),
-        var(--paper);
-      background-size: 38px 38px;
-    }
-
-    .archive-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
-    }
-
-    .archive-heading h2 {
-      max-width: 680px;
-      margin-bottom: 0;
-      color: var(--forest);
-    }
-
-    .archive-heading > p {
-      max-width: 410px;
-      margin: 0;
-      color: var(--ink-soft);
+      background: var(--paper);
     }
 
     .issue-entry {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(250px, 380px) minmax(0, 1fr);
+      grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
       gap: clamp(2.5rem, 6vw, 6rem);
       align-items: center;
-      padding: clamp(1.5rem, 4vw, 3rem);
-      background: rgba(255, 250, 240, .83);
-      border: 1px solid rgba(23, 56, 45, .14);
-      border-radius: 42px 12px 42px 12px;
-      box-shadow: var(--shadow);
-      overflow: visible;
+      padding: clamp(1.8rem, 4vw, 3rem);
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow:
+        10px 10px 0 var(--sun-soft),
+        13px 13px 0 var(--ink);
     }
 
     .issue-entry::before {
@@ -240,7 +337,7 @@
       position: absolute;
       right: clamp(1.2rem, 3vw, 2.4rem);
       top: clamp(1rem, 2vw, 1.8rem);
-      color: rgba(35, 77, 61, .08);
+      color: rgba(35, 77, 61, .07);
       font-family: 'Fraunces', serif;
       font-size: clamp(5rem, 12vw, 10rem);
       font-weight: 700;
@@ -250,65 +347,62 @@
 
     .issue-cover-wrap {
       position: relative;
-      width: min(100%, 360px);
+      width: min(100%, 355px);
       justify-self: center;
     }
 
     .issue-cover-wrap::before {
       content: "";
       position: absolute;
-      inset: 7% -10% -8% 10%;
+      inset: 7% -11% -8% 9%;
       z-index: 0;
-      border-radius: 48% 52% 46% 54% / 58% 43% 57% 42%;
+      border: 2px solid var(--ink);
       background: var(--sky);
-      opacity: .38;
-      transform: rotate(5deg);
+      clip-path: polygon(3% 2%, 98% 7%, 94% 98%, 0 91%);
+      opacity: .64;
+      transform: rotate(3.5deg);
     }
 
     .issue-cover-wrap::after {
       content: "DIGITAL EDITION";
       position: absolute;
-      right: -1rem;
-      bottom: 2rem;
+      right: -1.35rem;
+      bottom: 2.2rem;
       z-index: 2;
-      padding: .58rem .72rem;
+      padding: .6rem .75rem;
       color: var(--paper-soft);
       background: var(--clay);
-      border-radius: 7px;
-      box-shadow: var(--shadow-small);
+      border: 2px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--sun);
       font-family: 'Space Mono', monospace;
-      font-size: .62rem;
+      font-size: .65rem;
       font-weight: 700;
       letter-spacing: .1em;
-      transform: rotate(-4deg);
+      transform: rotate(-5deg);
     }
 
     .issue-cover {
       position: relative;
       z-index: 1;
       display: block;
-      padding: 12px;
+      padding: 10px;
       background: var(--paper-soft);
-      border: 1px solid rgba(23, 56, 45, .14);
-      border-radius: 7px 24px 7px 24px;
+      border: 2px solid var(--ink);
       box-shadow: var(--shadow);
-      transform: rotate(-1.5deg);
+      transform: rotate(-2.2deg);
       transition: transform .3s ease, box-shadow .3s ease;
     }
 
     .issue-cover:hover,
     .issue-cover:focus-visible {
-      transform: translateY(-7px) rotate(-.5deg);
-      box-shadow: 0 25px 60px rgba(35, 77, 61, .2);
+      transform: translateY(-7px) rotate(-.7deg);
+      box-shadow: 16px 16px 0 rgba(35, 77, 61, .2);
     }
 
     .issue-cover img {
-      display: block;
       width: 100%;
       height: auto;
-      aspect-ratio: auto;
       object-fit: contain;
-      border-radius: 3px 14px 3px 14px;
     }
 
     .issue-details {
@@ -353,12 +447,18 @@
 
     .issue-contents {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(190px, .75fr);
-      gap: clamp(1.6rem, 4vw, 3.5rem);
+      grid-template-columns: 1.25fr .75fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
       padding: clamp(1.3rem, 3vw, 1.8rem);
-      background: rgba(246, 240, 219, .62);
-      border: 1px solid var(--line);
-      border-radius: 8px 24px 8px 24px;
+      background:
+        linear-gradient(
+          94deg,
+          rgba(116, 173, 179, .06),
+          transparent 28%
+        ),
+        var(--paper);
+      border: 2px solid var(--ink);
+      box-shadow: 6px 6px 0 rgba(116, 173, 179, .35);
     }
 
     .content-group h3 {
@@ -375,99 +475,300 @@
       gap: .7rem;
       margin: 0;
       padding: 0;
+      color: var(--ink-soft);
       list-style: none;
     }
 
     .content-group li {
       position: relative;
       padding-left: 1rem;
-      color: var(--ink-soft);
       line-height: 1.45;
     }
 
     .content-group li::before {
-      content: "";
+      content: "◆";
       position: absolute;
       left: 0;
-      top: .53em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50% 50% 50% 0;
-      background: var(--sprout);
-      transform: rotate(-35deg);
+      top: .18em;
+      color: var(--sprout);
+      font-size: .68rem;
     }
 
     .content-group strong {
       color: var(--ink);
     }
 
-    .issue-entry .button-row {
+    .button-row {
+      display: flex;
       justify-content: flex-start;
+      gap: .8rem;
+      flex-wrap: wrap;
       margin-top: 1.8rem;
     }
 
-    .btn.read-button::after {
-      content: "↗";
+    .btn,
+    .newsletter-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      min-height: 46px;
+      padding: .72rem 1.1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .035em;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition:
+        transform .2s ease,
+        background-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
     }
 
-    .btn.download-button::after {
+    .btn::after {
+      content: "↗";
+      font-size: .95em;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--paper-soft);
+      background: var(--leaf);
+      border-color: var(--leaf);
+      box-shadow: 2px 2px 0 var(--clay);
+      transform: translate(2px, 2px);
+    }
+
+    .btn.secondary {
+      color: var(--forest);
+      background: var(--paper-soft);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sky);
+    }
+
+    .btn.secondary::after {
       content: "↓";
     }
 
-    .growing-archive {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      align-items: center;
-      gap: clamp(1rem, 3vw, 2rem);
-      margin-top: clamp(2.5rem, 6vw, 5rem);
-      color: var(--ink-soft);
-    }
-
-    .growing-archive::before,
-    .growing-archive::after {
-      content: "";
-      height: 1px;
-      background: var(--line);
-    }
-
-    .growing-archive-inner {
-      max-width: 580px;
-      padding: 1.15rem 1.35rem;
-      text-align: center;
-    }
-
-    .growing-archive strong {
-      display: block;
-      margin-bottom: .35rem;
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
       color: var(--forest);
-      font-family: 'Fraunces', serif;
-      font-size: 1.35rem;
+      background: var(--sun-soft);
+      border-color: var(--forest);
+      box-shadow: 2px 2px 0 var(--sky);
     }
 
-    .growing-archive p {
+    footer {
       margin: 0;
-      color: var(--ink-soft);
-      font-size: .95rem;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 0;
+      color: rgba(255, 250, 240, .82);
+      background: #16372c;
+      border-top: 8px solid var(--clay);
     }
 
-    @media (max-width: 900px) {
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr .8fr;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 0 var(--page-pad) clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .footer-column {
+      min-width: 0;
+    }
+
+    .footer-logo {
+      width: 58px;
+      margin-bottom: 1.25rem;
+      filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
+      transform: rotate(-4deg);
+    }
+
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .footer-column p {
+      margin-bottom: .55rem;
+      color: rgba(255, 250, 240, .7);
+    }
+
+    .footer-column a {
+      color: rgba(255, 250, 240, .78);
+      text-decoration: none;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus-visible {
+      color: var(--sun-soft);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin-top: 1.3rem;
+      padding: 5px;
+      background: rgba(255, 250, 240, .08);
+      border: 2px solid rgba(255, 250, 240, .72);
+      box-shadow: 6px 6px 0 rgba(207, 117, 88, .75);
+    }
+
+    .newsletter-input {
+      min-width: 0;
+      flex: 1 1 auto;
+      width: auto;
+      margin: 0;
+      padding: .7rem 1rem;
+      color: var(--paper-soft);
+      background: transparent;
+      border: 0;
+      font: inherit;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 250, 240, .5);
+    }
+
+    .newsletter-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding-inline: 1rem;
+      color: var(--ink);
+      background: var(--sun-soft);
+      border-color: var(--sun-soft);
+      box-shadow: none;
+    }
+
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--ink);
+      background: var(--sun);
+      border-color: var(--sun);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .footer-bottom {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 1.25rem var(--page-pad) 1.8rem;
+      color: rgba(255, 250, 240, .48);
+      background: transparent;
+      border-top: 2px dashed rgba(255, 250, 240, .2);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .04em;
+      text-align: left;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .site-header {
+        min-height: 72px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .site-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: var(--page-pad);
+        right: var(--page-pad);
+        display: none;
+        align-items: stretch;
+        gap: .2rem;
+        padding: .8rem;
+        background: var(--paper-soft);
+        border: 2px solid var(--ink);
+        border-top: 0;
+        box-shadow: var(--shadow-small);
+      }
+
+      .site-nav.active {
+        display: grid;
+      }
+
+      .site-nav a {
+        padding: .85rem 1rem;
+      }
+
+      .site-nav a:hover {
+        background: var(--paper-deep);
+      }
+
+      .site-nav a::after {
+        display: none;
+      }
+
       .issue-entry {
         grid-template-columns: 1fr;
       }
 
       .issue-cover-wrap {
-        width: min(82%, 360px);
+        width: min(72vw, 340px);
       }
 
-      .archive-heading {
-        align-items: start;
-        flex-direction: column;
+      .issue-details {
+        max-width: none;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: 1 / -1;
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 650px) {
       .announcement {
-        font-size: .64rem;
+        font-size: .63rem;
+      }
+
+      .logo-title span {
+        font-size: 1.32rem;
+      }
+
+      .logo-title img {
+        width: 36px;
+        height: 36px;
       }
 
       .library-hero {
@@ -477,21 +778,16 @@
       .library-title {
         width: 100%;
         max-width: 100%;
-        font-size: clamp(2.6rem, 13vw, 3.8rem);
+        font-size: clamp(3rem, 15vw, 4.4rem);
         overflow-wrap: anywhere;
-        word-break: normal;
       }
+
       .library-title em {
         white-space: normal;
       }
 
-      .library-title em::after {
-        display: none;
-      }
-
       .issue-entry {
         padding: 1.2rem;
-        border-radius: 28px 8px 28px 8px;
       }
 
       .issue-entry::before {
@@ -499,43 +795,54 @@
       }
 
       .issue-cover-wrap {
-        width: min(88%, 330px);
+        width: min(82%, 330px);
       }
 
       .issue-cover-wrap::after {
-        right: -.5rem;
-        bottom: 1.5rem;
+        right: -.4rem;
+        bottom: 1.2rem;
       }
 
       .issue-contents {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.4rem;
       }
 
-      .issue-entry .button-row {
-        display: grid;
-        grid-template-columns: 1fr;
+      .button-row {
+        align-items: stretch;
+        flex-direction: column;
       }
 
-      .issue-entry .btn {
+      .btn {
         width: 100%;
       }
 
-      .growing-archive {
+      .footer-container {
         grid-template-columns: 1fr;
       }
 
-      .growing-archive::before,
-      .growing-archive::after {
-        width: 72%;
-        margin-inline: auto;
+      .footer-column:first-child {
+        grid-column: auto;
+      }
+
+      .newsletter-form {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .newsletter-button {
+        width: 100%;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
+      html {
+        scroll-behavior: auto;
+      }
 
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
         animation-duration: .01ms !important;
@@ -544,8 +851,11 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="announcement">Independent stories for brighter, stranger, more livable futures</div>
+  <div class="announcement">
+    Independent stories for brighter, stranger, more livable futures
+  </div>
 
   <header class="site-header">
     <a href="index.html" class="logo-title" aria-label="Burnline home">
@@ -553,8 +863,17 @@
       <span>BURNLINE</span>
     </a>
 
-    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span><span></span>
+    <button
+      id="hamburger"
+      class="hamburger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -569,9 +888,12 @@
   <main>
     <section class="library-hero" aria-labelledby="library-title">
       <div class="library-hero-inner wrap">
-        <h1 id="library-title" class="sr-only">Issue Library</h1>
-        <h1 class="stories-title" id="stories-title">Issue Library</h1>
-        
+        <p class="eyebrow">Burnline Magazine · Complete editions</p>
+
+        <h1 id="library-title" class="library-title">
+          Issue <em>Library</em>
+        </h1>
+
         <p class="library-intro">
           Each issue of Burnline contains a variety of original solarpunk fiction and artwork from creatives dreaming of a better future.
         </p>
@@ -581,6 +903,7 @@
     <section class="issue-archive">
       <div class="wrap">
         <article class="issue-entry" id="issue-001">
+
           <div class="issue-cover-wrap">
             <a
               href="https://heyzine.com/flip-book/f23a012d4f.html"
@@ -589,7 +912,12 @@
               class="issue-cover"
               aria-label="Open Burnline Issue 01 flipbook in a new tab"
             >
-              <img src="New Cover.png" alt="Cover of Burnline Issue 01" width="900" height="1200">
+              <img
+                src="New Cover.png"
+                alt="Cover of Burnline Issue 01"
+                width="900"
+                height="1200"
+              >
             </a>
           </div>
 
@@ -600,6 +928,7 @@
             </div>
 
             <h2>Issue 01</h2>
+
             <p class="issue-deck">
               The first complete collection from Burnline, bringing original speculative fiction and artwork together in one digital edition.
             </p>
@@ -607,6 +936,7 @@
             <div class="issue-contents">
               <div class="content-group">
                 <h3>Fiction</h3>
+
                 <ul>
                   <li><strong>[Story Title]</strong> by [Author Name]</li>
                   <li><strong>[Story Title]</strong> by [Author Name]</li>
@@ -618,6 +948,7 @@
 
               <div class="content-group">
                 <h3>Artwork</h3>
+
                 <ul>
                   <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
                   <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
@@ -631,33 +962,69 @@
                 href="https://heyzine.com/flip-book/f23a012d4f.html"
                 target="_blank"
                 rel="noopener"
-                class="btn read-button"
-              >Read this issue</a>
-              <a href="Placeholder%20Mag.pdf" download class="btn secondary download-button">Download PDF</a>
+                class="btn"
+              >
+                Read this issue
+              </a>
+
+              <a
+                href="Placeholder%20Mag.pdf"
+                download
+                class="btn secondary"
+              >
+                Download PDF
+              </a>
             </div>
           </div>
-        </article>
 
+        </article>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-container">
+
       <div class="footer-column">
-        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <h3>Keep a light on for the future.</h3>
-        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <img
+          src="Flame logo-1.png.png"
+          alt="Burnline Logo"
+          class="footer-logo"
+        >
+
+        <h3>Read more from a better future.</h3>
+
+        <p>
+          Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.
+        </p>
+
         <form class="newsletter-form">
-          <label class="sr-only" for="newsletter-email">Email address</label>
-          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
-          <button type="submit" class="newsletter-button">Subscribe</button>
+          <label class="sr-only" for="newsletter-email">
+            Email address
+          </label>
+
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="Email address"
+            class="newsletter-input"
+            autocomplete="email"
+            required
+          >
+
+          <button type="submit" class="newsletter-button">
+            Subscribe
+          </button>
         </form>
       </div>
 
       <div class="footer-column">
         <h4>Get in touch</h4>
-        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
+        <p>
+          <a href="mailto:contact@burnlinemag.com">
+            contact@burnlinemag.com
+          </a>
+        </p>
       </div>
 
       <div class="footer-column">
@@ -665,10 +1032,13 @@
         <p><a href="issues.html">Issue Library</a></p>
         <p><a href="stories.html">Featured Stories</a></p>
       </div>
+
     </div>
 
     <div class="footer-bottom">
-      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
+      &copy;
+      <span id="copyright-year">2026</span>
+      Burnline Magazine — All rights reserved
     </div>
   </footer>
 
@@ -680,8 +1050,16 @@
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', String(isActive));
-          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
+
+          hamburger.setAttribute(
+            'aria-expanded',
+            String(isActive)
+          );
+
+          hamburger.setAttribute(
+            'aria-label',
+            isActive ? 'Close menu' : 'Open menu'
+          );
         });
 
         nav.querySelectorAll('a').forEach((link) => {
@@ -694,7 +1072,10 @@
       }
 
       const year = document.getElementById('copyright-year');
-      if (year) year.textContent = new Date().getFullYear();
+
+      if (year) {
+        year.textContent = new Date().getFullYear();
+      }
     })();
   </script>
 </body>
