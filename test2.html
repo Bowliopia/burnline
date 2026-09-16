@@ -240,39 +240,10 @@
       overflow: hidden;
     }
 
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: min(48vw, 680px);
-      height: min(25vw, 360px);
-      right: -6vw;
-      bottom: -4vw;
-      border: 3px solid rgba(23, 56, 45, .46);
-      background:
-        repeating-linear-gradient(113deg, transparent 0 13px, rgba(23, 56, 45, .11) 13px 16px),
-        rgba(79, 125, 87, .18);
-      clip-path: polygon(4% 20%, 29% 0, 52% 17%, 72% 3%, 100% 31%, 100% 100%, 0 100%);
-      transform: rotate(-2deg);
-    }
-
-    .hero::after {
-      width: 190px;
-      height: 190px;
-      left: -92px;
-      top: 18%;
-      opacity: .7;
-      background:
-        linear-gradient(var(--clay), var(--clay)) center / 3px 100% no-repeat,
-        linear-gradient(90deg, var(--clay), var(--clay)) center / 100% 3px no-repeat,
-        repeating-radial-gradient(circle at center, transparent 0 20px, rgba(207, 117, 88, .45) 21px 23px);
-      transform: rotate(9deg);
-    }
+.hero::before,
+.hero::after {
+  content: none;
+}
 
     .hero-inner {
       position: relative;
