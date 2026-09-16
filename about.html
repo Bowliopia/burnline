@@ -17,76 +17,94 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
+    :root {
+      --page-max: 1160px;
+      --narrow-max: 780px;
+      --page-pad: clamp(18px, 4vw, 38px);
 
-    .announcement {
-      position: relative;
-      z-index: 60;
-      padding: .62rem var(--page-pad);
-      color: var(--paper-soft);
-      background: var(--forest);
-      text-align: center;
-      font-family: 'Space Mono', monospace;
-      font-size: .72rem;
-      letter-spacing: .08em;
-      line-height: 1.5;
-      text-transform: uppercase;
+      --paper: #f6f0db;
+      --paper-soft: #fffaf0;
+      --paper-deep: #e8e3c8;
+      --ink: #17382d;
+      --ink-soft: #53655a;
+      --forest: #234d3d;
+      --leaf: #4f7d57;
+      --sprout: #9ab75b;
+      --sun: #f0b84a;
+      --sun-soft: #f7d47d;
+      --clay: #cf7558;
+      --sky: #74adb3;
+      --line: rgba(23, 56, 45, 0.18);
+      --shadow: 12px 12px 0 rgba(35, 77, 61, 0.2);
+      --shadow-small: 6px 6px 0 rgba(35, 77, 61, 0.22);
     }
 
-    .site-nav a[aria-current="page"]::after {
-      right: 0;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
-    /* Hero ------------------------------------------------------------- */
-    .about-hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(5rem, 8vw, 7rem);
-      background:
-        radial-gradient(circle at 83% 24%, rgba(240, 184, 74, .76) 0 7%, transparent 7.25%),
-        radial-gradient(ellipse at 8% 96%, rgba(116, 173, 179, .25) 0 20%, transparent 20.4%),
-        linear-gradient(125deg, #fffaf0 0%, #f6f0db 58%, #e7ebc9 100%);
-      border-bottom: 1px solid var(--line);
+    html {
+      scroll-behavior: smooth;
     }
 
-    .about-hero::before,
-    .about-hero::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    .about-hero::before {
-      width: min(45vw, 620px);
-      height: min(34vw, 460px);
-      right: -9vw;
-      bottom: -16vw;
-      border: 2px solid rgba(35, 77, 61, .14);
-      border-radius: 52% 48% 0 0 / 70% 76% 0 0;
-      box-shadow:
-        -60px -48px 0 -58px rgba(35, 77, 61, .2),
-        -122px -91px 0 -120px rgba(35, 77, 61, .12),
-        -184px -132px 0 -182px rgba(35, 77, 61, .08);
-      transform: rotate(-7deg);
+    body::before {
+      content: none;
     }
 
-    .about-hero::after {
-      width: 270px;
-      height: 270px;
-      left: -120px;
-      top: 12%;
-      border-radius: 50%;
-      opacity: .42;
-      background: repeating-radial-gradient(
-        circle at center,
-        transparent 0 15px,
-        rgba(79, 125, 87, .2) 16px 17px
-      );
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    .about-hero-inner {
-      max-width: 980px;
+    a {
+      color: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 7.5vw, 6.8rem);
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+    }
+
+    .wrap {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
     }
 
     .eyebrow {
@@ -98,7 +116,7 @@
       font-family: 'Space Mono', monospace;
       font-size: .74rem;
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: .15em;
       line-height: 1.4;
       text-transform: uppercase;
     }
@@ -106,16 +124,174 @@
     .eyebrow::before {
       content: "";
       width: 34px;
-      height: 2px;
-      border-radius: 999px;
+      height: 4px;
       background: var(--clay);
+      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 20;
+      padding: .58rem var(--page-pad) .68rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border-bottom: 3px solid var(--sun);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      padding: 0 max(
+        var(--page-pad),
+        calc((100vw - var(--page-max)) / 2 + var(--page-pad))
+      );
+      color: var(--ink);
+      background: rgba(246, 240, 219, 0.97);
+      border-bottom: 2px solid var(--ink);
+      box-shadow: 0 4px 0 rgba(207, 117, 88, .62);
+    }
+
+    .logo-title {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-title img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: sepia(.15) saturate(.8) hue-rotate(72deg) brightness(.72);
+    }
+
+    .logo-title span {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-shadow: 1px 1px 0 var(--sun-soft);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.2vw, 2rem);
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: .45rem .1rem;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: .18rem;
+      height: 2px;
+      background: var(--clay);
+      transition: right .22s ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus-visible::after,
+    .site-nav a[aria-current="page"]::after {
+      right: 0;
+    }
+
+    .site-nav a:last-child {
+      padding: .62rem 1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sun);
+      transform: rotate(-1deg);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .site-nav a:last-child::after {
+      display: none;
+    }
+
+    .site-nav a:last-child:hover,
+    .site-nav a:last-child:focus-visible {
+      transform: translate(2px, 2px) rotate(0);
+      box-shadow: 2px 2px 0 var(--sun);
+    }
+
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      background: var(--paper-soft);
+      box-shadow: 3px 3px 0 var(--clay);
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin: 4px 0;
+      background: var(--ink);
+    }
+
+    /* Hero */
+
+    .about-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 84% 25%,
+          var(--sun) 0 7%,
+          transparent 7.2%
+        ),
+        linear-gradient(
+          108deg,
+          #f8f3df 0 67%,
+          rgba(154, 183, 91, .24) 67% 83%,
+          rgba(116, 173, 179, .22) 83% 100%
+        );
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .about-hero::before,
+    .about-hero::after {
+      content: none;
+    }
+
+    .about-hero-inner {
+      width: min(100%, 980px);
     }
 
     .about-title {
       max-width: 900px;
       margin-bottom: 1.5rem;
       color: var(--forest);
-      font-size: clamp(3.5rem, 8vw, 7rem);
     }
 
     .about-title em {
@@ -128,14 +304,14 @@
     .about-title em::after {
       content: "";
       position: absolute;
-      right: -1%;
-      bottom: .04em;
-      left: 1%;
+      left: 2%;
+      right: -2%;
+      bottom: .01em;
       z-index: -1;
-      height: .18em;
-      border-radius: 999px;
+      height: .24em;
       background: var(--sun-soft);
-      transform: rotate(-1deg);
+      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
+      transform: rotate(-1.5deg);
     }
 
     .about-lede {
@@ -146,27 +322,24 @@
       line-height: 1.78;
     }
 
-    /* Purpose ---------------------------------------------------------- */
+    /* Editor note */
+
     .purpose {
       position: relative;
       padding: clamp(5rem, 9vw, 8rem) 0;
-      background:
-        linear-gradient(rgba(23, 56, 45, .035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 56, 45, .035) 1px, transparent 1px),
-        var(--paper);
-      background-size: 38px 38px;
+      background: var(--paper);
     }
 
     .purpose-grid {
       display: grid;
-      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
       gap: clamp(3rem, 7vw, 7rem);
       align-items: start;
     }
 
     .purpose-heading {
       position: sticky;
-      top: 7rem;
+      top: 8rem;
     }
 
     .purpose-heading h2 {
@@ -175,11 +348,11 @@
     }
 
     .purpose-heading p {
-      max-width: 430px;
-      margin: 0 0 1.2rem;
+      max-width: 500px;
+      margin: 0 0 1.35rem;
       color: var(--ink-soft);
       font-size: 1.05rem;
-      line-height: 1.75;
+      line-height: 1.78;
     }
 
     .purpose-heading p:last-child {
@@ -188,52 +361,34 @@
 
     .purpose-copy {
       display: grid;
-      gap: 1.35rem;
+      gap: 1.7rem;
     }
 
     .purpose-card {
       position: relative;
       padding: clamp(1.6rem, 3vw, 2.35rem);
-      overflow: hidden;
-      background: rgba(255, 250, 240, .86);
-      border: 1px solid rgba(23, 56, 45, .15);
-      border-radius: 30px 8px 30px 8px;
-      box-shadow: var(--shadow-small);
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--clay);
     }
 
     .purpose-card:nth-child(2) {
-      border-radius: 8px 30px 8px 30px;
+      box-shadow: 8px 8px 0 var(--sky);
     }
 
     .purpose-card:nth-child(3) {
-      border-radius: 30px 30px 8px 30px;
-    }
-
-    .purpose-card::after {
-      content: "";
-      position: absolute;
-      right: -22px;
-      bottom: -28px;
-      width: 100px;
-      height: 100px;
-      border: 18px solid rgba(154, 183, 91, .11);
-      border-radius: 50%;
+      box-shadow: 8px 8px 0 var(--sun);
     }
 
     .purpose-number {
       display: block;
-      margin-bottom: 1.1rem;
-      color: var(--clay);
+      margin-bottom: 1rem;
+      color: var(--leaf);
       font-family: 'Space Mono', monospace;
-      font-size: .86rem;
+      font-size: .72rem;
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: .11em;
       text-transform: uppercase;
-    }
-
-    .purpose-card h3 {
-      margin-bottom: .8rem;
-      color: var(--forest);
     }
 
     .purpose-card p {
@@ -243,37 +398,28 @@
       line-height: 1.76;
     }
 
-    /* Independent section --------------------------------------------- */
+    /* Independent section */
+
     .independent {
       position: relative;
       overflow: hidden;
       padding: clamp(5rem, 9vw, 8rem) 0;
       color: var(--paper-soft);
       background: var(--forest);
+      border-top: 8px solid var(--clay);
+      border-bottom: 8px solid var(--sun);
     }
 
-    .independent::before {
-      content: "";
-      position: absolute;
-      top: -150px;
-      right: -120px;
-      width: 430px;
-      height: 430px;
-      border: 1px solid rgba(255, 250, 240, .14);
-      border-radius: 48% 52% 50% 50%;
-      box-shadow:
-        -55px 55px 0 -53px rgba(240, 184, 74, .23),
-        -110px 110px 0 -108px rgba(116, 173, 179, .15);
-      transform: rotate(18deg);
+    .independent::before,
+    .independent::after {
+      content: none;
     }
 
     .independent-grid {
-      position: relative;
-      z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, .75fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
       gap: clamp(3rem, 7vw, 7rem);
-      align-items: center;
+      align-items: start;
     }
 
     .independent .eyebrow {
@@ -281,59 +427,47 @@
     }
 
     .independent .eyebrow::before {
-      background: var(--sky);
+      background: var(--sun);
     }
 
     .independent h2 {
       max-width: 720px;
       margin-bottom: 1.4rem;
       color: var(--paper-soft);
+      text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
     }
 
     .independent-copy > p {
-      max-width: 680px;
-      color: rgba(255, 250, 240, .77);
+      max-width: 720px;
+      margin-bottom: 1.4rem;
+      color: rgba(255, 250, 240, .78);
       font-size: 1.05rem;
       line-height: 1.8;
     }
 
-    .principles {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .65rem;
-      margin-top: 1.8rem;
-    }
-
-    .principles span {
-      padding: .56rem .82rem;
-      color: var(--paper-soft);
-      border: 1px solid rgba(255, 250, 240, .23);
-      border-radius: 999px;
-      font-family: 'Space Mono', monospace;
-      font-size: .67rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
     .ad-free-card {
       position: relative;
-      padding: clamp(2rem, 4vw, 3rem);
+      padding: clamp(1.8rem, 4vw, 2.7rem);
+      color: var(--ink);
       background: var(--sun-soft);
-      border-radius: 8px 34px 8px 34px;
-      box-shadow: 0 22px 54px rgba(0, 0, 0, .16);
+      border: 2px solid var(--ink);
+      box-shadow:
+        8px 8px 0 var(--clay),
+        11px 11px 0 var(--paper-soft);
       transform: rotate(1.2deg);
     }
 
     .ad-free-card::before {
       content: "";
       position: absolute;
-      top: 19px;
-      right: 19px;
-      width: 18px;
+      top: -11px;
+      right: 12%;
+      width: 72px;
       height: 18px;
-      background: var(--clay);
-      border-radius: 50%;
+      background: rgba(207, 117, 88, .82);
+      border-left: 1px solid rgba(23, 56, 45, .3);
+      border-right: 1px solid rgba(23, 56, 45, .3);
+      transform: rotate(2deg);
     }
 
     .ad-free-card .label {
@@ -355,28 +489,27 @@
 
     .ad-free-card p {
       margin: 0;
-      color: rgba(23, 56, 45, .78);
+      color: rgba(23, 56, 45, .8);
       line-height: 1.72;
     }
 
-    /* Invitation ------------------------------------------------------- */
+    /* Invitation */
+
     .invitation {
       position: relative;
-      overflow: hidden;
-      padding: clamp(5.5rem, 10vw, 9rem) 0;
-      text-align: center;
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0;
       background:
-        radial-gradient(circle at 12% 84%, rgba(116, 173, 179, .2) 0 15%, transparent 15.4%),
-        radial-gradient(circle at 88% 12%, rgba(240, 184, 74, .25) 0 8%, transparent 8.4%),
-        var(--paper-soft);
+        linear-gradient(
+          102deg,
+          transparent 0 72%,
+          rgba(116, 173, 179, .13) 72% 88%,
+          transparent 88%
+        ),
+        var(--paper);
     }
 
     .invitation-inner {
-      max-width: 800px;
-    }
-
-    .invitation .eyebrow {
-      justify-content: center;
+      max-width: 850px;
     }
 
     .invitation h2 {
@@ -386,7 +519,7 @@
 
     .invitation p {
       max-width: 680px;
-      margin: 0 auto 2rem;
+      margin-bottom: 2rem;
       color: var(--ink-soft);
       font-size: 1.07rem;
       line-height: 1.78;
@@ -395,35 +528,245 @@
     .invitation-actions {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: .75rem;
+      gap: .85rem;
     }
 
-    .text-link {
+    /* Buttons */
+
+    .btn,
+    .newsletter-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: .45rem;
+      gap: .55rem;
       min-height: 46px;
-      padding: .68rem .35rem;
-      color: var(--forest);
+      padding: .72rem 1.1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
       font-weight: 700;
+      letter-spacing: .035em;
+      text-align: center;
       text-decoration: none;
-      border-bottom: 1px solid rgba(35, 77, 61, .34);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition:
+        transform .2s ease,
+        background-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
     }
 
-    .text-link::after {
+    .btn::after {
+      content: "↗";
+      font-size: .95em;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--paper-soft);
+      background: var(--leaf);
+      border-color: var(--leaf);
+      box-shadow: 2px 2px 0 var(--clay);
+      transform: translate(2px, 2px);
+    }
+
+    .btn.secondary {
+      color: var(--forest);
+      background: var(--paper-soft);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sky);
+    }
+
+    .btn.secondary::after {
       content: "→";
-      transition: transform .2s ease;
     }
 
-    .text-link:hover::after,
-    .text-link:focus-visible::after {
-      transform: translateX(4px);
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      color: var(--forest);
+      background: var(--sun-soft);
+      border-color: var(--forest);
+      box-shadow: 2px 2px 0 var(--sky);
     }
 
-    /* Responsive ------------------------------------------------------- */
-    @media (max-width: 900px) {
+    /* Footer */
+
+    footer {
+      margin: 0;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 0;
+      color: rgba(255, 250, 240, .82);
+      background: #16372c;
+      border-top: 8px solid var(--clay);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr .8fr;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 0 var(--page-pad) clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .footer-column {
+      min-width: 0;
+    }
+
+    .footer-logo {
+      width: 58px;
+      margin-bottom: 1.25rem;
+      filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
+      transform: rotate(-4deg);
+    }
+
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .footer-column p {
+      margin-bottom: .55rem;
+      color: rgba(255, 250, 240, .7);
+    }
+
+    .footer-column a {
+      color: rgba(255, 250, 240, .78);
+      text-decoration: none;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus-visible {
+      color: var(--sun-soft);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin-top: 1.3rem;
+      padding: 5px;
+      background: rgba(255, 250, 240, .08);
+      border: 2px solid rgba(255, 250, 240, .72);
+      box-shadow: 6px 6px 0 rgba(207, 117, 88, .75);
+    }
+
+    .newsletter-input {
+      min-width: 0;
+      flex: 1 1 auto;
+      width: auto;
+      margin: 0;
+      padding: .7rem 1rem;
+      color: var(--paper-soft);
+      background: transparent;
+      border: 0;
+      font: inherit;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 250, 240, .5);
+    }
+
+    .newsletter-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding-inline: 1rem;
+      color: var(--ink);
+      background: var(--sun-soft);
+      border-color: var(--sun-soft);
+      box-shadow: none;
+    }
+
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--ink);
+      background: var(--sun);
+      border-color: var(--sun);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .footer-bottom {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 1.25rem var(--page-pad) 1.8rem;
+      color: rgba(255, 250, 240, .48);
+      background: transparent;
+      border-top: 2px dashed rgba(255, 250, 240, .2);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .04em;
+      text-align: left;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 4px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 960px) {
+      .site-header {
+        min-height: 72px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .site-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: var(--page-pad);
+        right: var(--page-pad);
+        display: none;
+        align-items: stretch;
+        gap: .2rem;
+        padding: .8rem;
+        background: var(--paper-soft);
+        border: 2px solid var(--ink);
+        border-top: 0;
+        box-shadow: var(--shadow-small);
+      }
+
+      .site-nav.active {
+        display: grid;
+      }
+
+      .site-nav a {
+        padding: .85rem 1rem;
+      }
+
+      .site-nav a:hover {
+        background: var(--paper-deep);
+      }
+
+      .site-nav a::after {
+        display: none;
+      }
+
       .purpose-grid,
       .independent-grid {
         grid-template-columns: 1fr;
@@ -434,18 +777,34 @@
       }
 
       .purpose-heading p {
-        max-width: 690px;
+        max-width: 760px;
       }
 
       .ad-free-card {
-        max-width: 560px;
-        transform: none;
+        max-width: 580px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: 1 / -1;
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 650px) {
       .announcement {
-        font-size: .62rem;
+        font-size: .63rem;
+      }
+
+      .logo-title span {
+        font-size: 1.32rem;
+      }
+
+      .logo-title img {
+        width: 36px;
+        height: 36px;
       }
 
       .about-hero {
@@ -455,7 +814,7 @@
       .about-title {
         width: 100%;
         max-width: 100%;
-        font-size: clamp(2.85rem, 15vw, 4.2rem);
+        font-size: clamp(3rem, 15vw, 4.4rem);
         overflow-wrap: anywhere;
       }
 
@@ -463,15 +822,13 @@
         white-space: normal;
       }
 
-      .about-title em::after {
-        display: none;
+      .purpose-card {
+        padding: 1.4rem;
       }
 
-      .purpose-card,
-      .purpose-card:nth-child(2),
-      .purpose-card:nth-child(3),
       .ad-free-card {
-        border-radius: 22px 7px 22px 7px;
+        padding: 1.5rem;
+        transform: none;
       }
 
       .invitation-actions {
@@ -479,21 +836,49 @@
         flex-direction: column;
       }
 
-      .invitation-actions .btn,
-      .invitation-actions .text-link {
+      .invitation-actions .btn {
+        width: 100%;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-column:first-child {
+        grid-column: auto;
+      }
+
+      .newsletter-form {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .newsletter-button {
         width: 100%;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .text-link::after {
-        transition: none;
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="announcement">Independent stories for brighter, stranger, more livable futures</div>
+  <div class="announcement">
+    Independent stories for brighter, stranger, more livable futures
+  </div>
 
   <header class="site-header">
     <a href="index.html" class="logo-title" aria-label="Burnline home">
@@ -501,8 +886,17 @@
       <span>BURNLINE</span>
     </a>
 
-    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span><span></span>
+    <button
+      id="hamburger"
+      class="hamburger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -515,122 +909,247 @@
   </header>
 
   <main>
+
     <section class="about-hero">
       <div class="about-hero-inner wrap">
+
         <p class="eyebrow">About Burnline</p>
-        <h1 class="about-title">A home for futures worth <em>imagining.</em></h1>
+
+        <h1 class="about-title">
+          A home for futures worth <em>imagining.</em>
+        </h1>
+
         <p class="about-lede">
           Burnline is an independent magazine for solarpunk fiction and art where the goal is to help creative people tell stories about an optimistic future.
         </p>
+
       </div>
     </section>
 
     <section class="purpose" aria-labelledby="purpose-title">
       <div class="purpose-grid wrap">
+
         <div class="purpose-heading">
-          <p class="eyebrow">Why we are here</p>
-          <h2 id="purpose-title">A note from the editor</h2>
+
+          <p class="eyebrow">
+            Why we are here
+          </p>
+
+          <h2 id="purpose-title">
+            A note from the editor
+          </h2>
+
           <p>
             Burnline started after I (the editor) felt inundated by negativity in all varieties of media about the future, from short fiction to speculative novels to anything on screen. In a world where conservations about AI and resource extraction and fascism are becoming the norm and taking up more and more of the discussions I'm apart of, I found myself looking for a reprieve, and I struggled to find one in the format of short-form fiction and art that I enjoy.
           </p>
+
           <p>
             Does that mean there are no talented people writing stories and making art about an optimistically green and sunny future? Of course not. Reading works of fiction like Becky Chamber's <em>A Psalm for the Wild Built</em> were transformative for me as a reader. It was incredibly refreshing to read something fictional and ambitious that made me feel good about our place in the natural world.
           </p>
+
           <p>
             But then, in my pursuit of more content that made me feel that way, I found a weird gap in the marketplace. Where I expected to stumble upon a growing collection of optimistic works in the solarpunk sub-genre, I found very few examples (that is not to disparage the excellent work that has been done in this niche sub-genre, I just didn't find the space that stuck for me). So, Burnline Magazine is my attempt to create that space.
           </p>
+
         </div>
 
         <div class="purpose-copy">
+
           <article class="purpose-card">
-            <span class="purpose-number">01 · What we publish</span>
+            <span class="purpose-number">
+              01 · What we publish
+            </span>
+
             <p>
               We're interested in short fiction and artwork that tell stories in a future where people live alongside nature, not in contrast to it. These pieces don't have to convey a perfect utopia and they don't even have to center on environmentalism, but they should be set in a world where people no longer live extractive, exploitative lives against the natural world.
             </p>
           </article>
 
           <article class="purpose-card">
-            <span class="purpose-number">02 · What solarpunk means here</span>
+            <span class="purpose-number">
+              02 · What solarpunk means here
+            </span>
+
             <p>
               A solarpunk future should represent more than green architecture and fruit-picking robots (although I do love that aesthetic). If we really were to create the future imagined in this sub-genre, I'd expect that traditionally-marginalized communities would instead be accepted and thriving without making any concessions about their own culture. I'd love to see submissions that show off what that would look like.
             </p>
           </article>
 
           <article class="purpose-card">
-            <span class="purpose-number">03 · How it works</span>
+            <span class="purpose-number">
+              03 · How it works
+            </span>
+
             <p>
               At the time of writing, Burnline is run by a team of one (me). Because this is quite the undertaking and something I expect to make approximately 0 money making, it truly is a passion project. I'd appreciate your patience while I work the kinks to this thing and try to bring you the best product possible while also supporting the contributing creatives in the best ways I can.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
-    <section class="independent" aria-labelledby="independent-title">
+    <section
+      class="independent"
+      aria-labelledby="independent-title"
+    >
       <div class="independent-grid wrap">
+
         <div class="independent-copy">
-          <p class="eyebrow">Independent by design</p>
-          <h2 id="independent-title">I fucking hate ads!</h2>
+
+          <p class="eyebrow">
+            Independent by design
+          </p>
+
+          <h2 id="independent-title">
+            I fucking hate ads!
+          </h2>
+
           <p>
             Burnline is, and always will be, completely ad free. There is nothing in this world I detest more than trying to consume something positive or inspiring that is then interrupted by an ad designed to distract you or click something from a company that is most likely evil. I feel like creative people making things online are forced into a tough corner where they're required to sell their reader's/viewer's attention just so they can make a living to create the things they care about. Fuck that! For that reason, this magazine will always be 100% independent and ad-free.
           </p>
+
           <p>
             This thing operates with very low overhead cost because it's built and run by one person (me) who doesn't expect to make any real money from it. Any paid model for future issues of the magazine will serve two purposes. 1) To pay contributors for their work, and 2) to reset the idea that good creative work should come for free to consumers. My working theory is that if you're required to pay an inconsequential amount of money for something, you're more likely to consume it with attention and care. I think free content actually diminishes the value of the work by the creatives behind them.
           </p>
+
         </div>
 
-        <aside class="ad-free-card" aria-label="Burnline's ad-free commitment">
-          <span class="label">A standing promise</span>
+        <aside
+          class="ad-free-card"
+          aria-label="Burnline's ad-free commitment"
+        >
+          <span class="label">
+            A standing promise
+          </span>
+
           <h3>No ads. Ever.</h3>
+
           <p>
             The site and magazine will not be funded by cluttering the reading experience. Burnline would rather grow slowly and remain a place where the work comes first.
           </p>
         </aside>
+
       </div>
     </section>
 
-    <section class="invitation" aria-labelledby="invitation-title">
+    <section
+      class="invitation"
+      aria-labelledby="invitation-title"
+    >
       <div class="invitation-inner wrap">
-        <p class="eyebrow">Join the project</p>
-        <h2 id="invitation-title">Help us imagine what belongs here.</h2>
+
+        <p class="eyebrow">
+          Join the project
+        </p>
+
+        <h2 id="invitation-title">
+          Help us imagine what belongs here.
+        </h2>
+
         <p>
           Submit a story or artwork, propose a collaboration, point us toward something the magazine should be paying attention to, or simply say hello. Burnline is still growing into itself, and thoughtful ideas are welcome.
         </p>
+
         <div class="invitation-actions">
-          <a class="btn" href="submit.html">Visit the Submit page</a>
-          <a class="text-link" href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>
+
+          <a
+            class="btn"
+            href="submit.html"
+          >
+            Visit the Submit page
+          </a>
+
+          <a
+            class="btn secondary"
+            href="mailto:contact@burnlinemag.com"
+          >
+            Get in touch
+          </a>
+
         </div>
+
       </div>
     </section>
+
   </main>
 
   <footer>
     <div class="footer-container">
+
       <div class="footer-column">
-        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
-        <h3>Keep a light on for the future.</h3>
-        <p>Get new issues, submission calls, and occasional recommendations from Burnline.</p>
+        <img
+          src="Flame logo-1.png.png"
+          alt="Burnline Logo"
+          class="footer-logo"
+        >
+
+        <h3>
+          Read more from a better future.
+        </h3>
+
+        <p>
+          Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.
+        </p>
+
         <form class="newsletter-form">
-          <label class="sr-only" for="newsletter-email">Email address</label>
-          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
-          <button type="submit" class="newsletter-button">Subscribe</button>
+          <label
+            class="sr-only"
+            for="newsletter-email"
+          >
+            Email address
+          </label>
+
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="Email address"
+            class="newsletter-input"
+            autocomplete="email"
+            required
+          >
+
+          <button
+            type="submit"
+            class="newsletter-button"
+          >
+            Subscribe
+          </button>
         </form>
       </div>
 
       <div class="footer-column">
         <h4>Get in touch</h4>
-        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
+
+        <p>
+          <a href="mailto:contact@burnlinemag.com">
+            contact@burnlinemag.com
+          </a>
+        </p>
       </div>
 
       <div class="footer-column">
         <h4>Read</h4>
-        <p><a href="issues.html">Issue Library</a></p>
-        <p><a href="stories.html">Featured Stories</a></p>
+
+        <p>
+          <a href="issues.html">
+            Issue Library
+          </a>
+        </p>
+
+        <p>
+          <a href="stories.html">
+            Featured Stories
+          </a>
+        </p>
       </div>
+
     </div>
 
     <div class="footer-bottom">
-      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
+      &copy;
+      <span id="copyright-year">2026</span>
+      Burnline Magazine — All rights reserved
     </div>
   </footer>
 
@@ -642,8 +1161,16 @@
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           const isActive = nav.classList.toggle('active');
-          hamburger.setAttribute('aria-expanded', String(isActive));
-          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
+
+          hamburger.setAttribute(
+            'aria-expanded',
+            String(isActive)
+          );
+
+          hamburger.setAttribute(
+            'aria-label',
+            isActive ? 'Close menu' : 'Open menu'
+          );
         });
 
         nav.querySelectorAll('a').forEach((link) => {
@@ -656,7 +1183,10 @@
       }
 
       const year = document.getElementById('copyright-year');
-      if (year) year.textContent = String(new Date().getFullYear());
+
+      if (year) {
+        year.textContent = new Date().getFullYear();
+      }
     })();
   </script>
 </body>
