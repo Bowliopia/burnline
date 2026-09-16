@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4efd9" />
+  <meta
+    name="description"
+    content="Burnline is an independent magazine publishing solarpunk fiction and art about brighter, more livable futures."
+  />
+  <title>Burnline – Solarpunk Fiction &amp; Art</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --page-max: 1160px;
+      --narrow-max: 780px;
+      --page-pad: clamp(18px, 4vw, 38px);
+
+      --paper: #f6f0db;
+      --paper-soft: #fffaf0;
+      --paper-deep: #e8e3c8;
+      --ink: #17382d;
+      --ink-soft: #53655a;
+      --forest: #234d3d;
+      --leaf: #4f7d57;
+      --sprout: #9ab75b;
+      --sun: #f0b84a;
+      --sun-soft: #f7d47d;
+      --clay: #cf7558;
+      --sky: #74adb3;
+      --line: rgba(23, 56, 45, 0.18);
+      --shadow: 12px 12px 0 rgba(35, 77, 61, 0.2);
+      --shadow-small: 6px 6px 0 rgba(35, 77, 61, 0.22);
+      --radius-large: 0;
+      --radius-medium: 0;
+      --radius-small: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      background-image:
+        linear-gradient(93deg, rgba(23, 56, 45, .025), transparent 18%, rgba(207, 117, 88, .018) 78%, transparent),
+        repeating-linear-gradient(0deg, transparent 0 5px, rgba(23, 56, 45, .018) 5px 6px);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.3;
+      mix-blend-mode: multiply;
+      background-image:
+        radial-gradient(circle, rgba(23, 56, 45, .13) 0 .7px, transparent .9px),
+        linear-gradient(101deg, transparent 0 48%, rgba(207, 117, 88, .04) 49% 50%, transparent 51%);
+      background-size: 7px 7px, 91px 100%;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 { font-size: clamp(3.1rem, 7.5vw, 6.8rem); }
+    h2 { font-size: clamp(2.2rem, 4.5vw, 4rem); }
+    h3 { font-size: clamp(1.35rem, 2vw, 1.8rem); }
+
+    .wrap {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding-inline: var(--page-pad);
+    }
+
+    .wrap--narrow { max-width: var(--narrow-max); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0 0 1.25rem;
+      color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 4px;
+      background: var(--clay);
+      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
+    }
+
+    .announcement {
+      position: relative;
+      z-index: 20;
+      padding: .58rem var(--page-pad) .68rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border-bottom: 3px solid var(--sun);
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      padding: 0 max(var(--page-pad), calc((100vw - var(--page-max)) / 2 + var(--page-pad)));
+      color: var(--ink);
+      background: rgba(246, 240, 219, 0.97);
+      border-bottom: 2px solid var(--ink);
+      box-shadow: 0 4px 0 rgba(207, 117, 88, .62);
+    }
+
+    .logo-title {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-title img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: sepia(.15) saturate(.8) hue-rotate(72deg) brightness(.72);
+    }
+
+    .logo-title span {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-shadow: 1px 1px 0 var(--sun-soft);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.2vw, 2rem);
+    }
+
+    .site-nav a {
+      position: relative;
+      padding: .45rem .1rem;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: .18rem;
+      height: 2px;
+      background: var(--clay);
+      transition: right .22s ease;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a:focus-visible::after { right: 0; }
+
+    .site-nav a:last-child {
+      padding: .62rem 1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      border-radius: 0;
+      box-shadow: 4px 4px 0 var(--sun);
+      transform: rotate(-1deg);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .site-nav a:last-child::after { display: none; }
+
+    .site-nav a:last-child:hover,
+    .site-nav a:last-child:focus-visible {
+      transform: translate(2px, 2px) rotate(0);
+      box-shadow: 2px 2px 0 var(--sun);
+    }
+
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      background: var(--paper-soft);
+      box-shadow: 3px 3px 0 var(--clay);
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin: 4px 0;
+      background: var(--ink);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      padding: clamp(5.5rem, 10vw, 9rem) 0 clamp(5rem, 8vw, 8rem);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 82% 22%, var(--sun) 0 7.5%, transparent 7.7%),
+        radial-gradient(circle at 82% 22%, rgba(23, 56, 45, .34) 0 1px, transparent 1.4px) 0 0 / 8px 8px,
+        linear-gradient(108deg, #f8f3df 0 64%, rgba(154, 183, 91, .25) 64% 79%, rgba(116, 173, 179, .25) 79% 100%);
+      border-bottom: 3px solid var(--ink);
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: min(48vw, 680px);
+      height: min(25vw, 360px);
+      right: -6vw;
+      bottom: -4vw;
+      border: 3px solid rgba(23, 56, 45, .46);
+      background:
+        repeating-linear-gradient(113deg, transparent 0 13px, rgba(23, 56, 45, .11) 13px 16px),
+        rgba(79, 125, 87, .18);
+      clip-path: polygon(4% 20%, 29% 0, 52% 17%, 72% 3%, 100% 31%, 100% 100%, 0 100%);
+      transform: rotate(-2deg);
+    }
+
+    .hero::after {
+      width: 190px;
+      height: 190px;
+      left: -92px;
+      top: 18%;
+      opacity: .7;
+      background:
+        linear-gradient(var(--clay), var(--clay)) center / 3px 100% no-repeat,
+        linear-gradient(90deg, var(--clay), var(--clay)) center / 100% 3px no-repeat,
+        repeating-radial-gradient(circle at center, transparent 0 20px, rgba(207, 117, 88, .45) 21px 23px);
+      transform: rotate(9deg);
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(280px, .78fr) minmax(0, 1.35fr);
+      align-items: center;
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+
+    .issue-cover-wrap {
+      position: relative;
+      justify-self: center;
+      width: min(100%, 355px);
+    }
+
+    .issue-cover-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 7% -11% -8% 9%;
+      z-index: -1;
+      border: 2px solid var(--ink);
+      background:
+        radial-gradient(circle, rgba(23, 56, 45, .34) 0 1.1px, transparent 1.3px) 0 0 / 8px 8px,
+        var(--sky);
+      clip-path: polygon(3% 2%, 98% 7%, 94% 98%, 0 91%);
+      opacity: .64;
+      transform: rotate(3.5deg);
+    }
+
+    .issue-cover-wrap::after {
+      content: "ISSUE 01";
+      position: absolute;
+      right: -1.35rem;
+      bottom: 2.2rem;
+      padding: .6rem .75rem;
+      color: var(--paper-soft);
+      background: var(--clay);
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      box-shadow: 5px 5px 0 var(--sun);
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      transform: rotate(-5deg);
+    }
+
+    .issue-cover-link {
+      display: block;
+      padding: 10px;
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      box-shadow: var(--shadow);
+      transform: rotate(-2.2deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .issue-cover-link:hover,
+    .issue-cover-link:focus-visible {
+      transform: translateY(-7px) rotate(-.7deg);
+      box-shadow: 16px 16px 0 rgba(35, 77, 61, .2);
+    }
+
+    .issue-cover-link img {
+      width: 100%;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .hero-text {
+      max-width: 760px;
+    }
+
+    .hero-title {
+      max-width: 850px;
+      margin-bottom: 1.25rem;
+      color: var(--forest);
+      text-shadow: 2px 2px 0 rgba(240, 184, 74, .22);
+    }
+
+    .hero-title em {
+      position: relative;
+      color: var(--clay);
+      font-style: normal;
+      white-space: nowrap;
+    }
+
+    .hero-title em::after {
+      content: "";
+      position: absolute;
+      left: 2%;
+      right: -2%;
+      bottom: .01em;
+      z-index: -1;
+      height: .24em;
+      background: var(--sun-soft);
+      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
+      transform: rotate(-1.5deg);
+    }
+
+    .hero-intro {
+      max-width: 650px;
+      margin-bottom: 2rem;
+      color: var(--ink-soft);
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      line-height: 1.7;
+    }
+
+    .issue-panel {
+      position: relative;
+      padding: clamp(1.4rem, 3vw, 2rem);
+      background:
+        linear-gradient(94deg, rgba(116, 173, 179, .06), transparent 28%),
+        var(--paper-soft);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-medium);
+      box-shadow: 8px 8px 0 var(--sun-soft), 11px 11px 0 var(--ink);
+    }
+
+    .issue-panel::before {
+      content: "";
+      position: absolute;
+      width: 72px;
+      height: 18px;
+      top: -11px;
+      right: 9%;
+      background: rgba(207, 117, 88, .76);
+      border-left: 1px solid rgba(23, 56, 45, .3);
+      border-right: 1px solid rgba(23, 56, 45, .3);
+      transform: rotate(2deg);
+    }
+
+    .issue-panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.35rem;
+      padding-bottom: .85rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .issue-panel-header h2 {
+      margin: 0;
+      font-size: clamp(1.75rem, 3vw, 2.7rem);
+      color: var(--ink);
+    }
+
+    .issue-panel-header span {
+      color: var(--leaf);
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .issue-contents {
+      display: grid;
+      grid-template-columns: 1.35fr .85fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .content-group h3 {
+      margin-bottom: .9rem;
+      color: var(--leaf);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .content-group ul {
+      display: grid;
+      gap: .65rem;
+      margin: 0;
+      padding: 0;
+      color: var(--ink-soft);
+      list-style: none;
+    }
+
+    .content-group li {
+      position: relative;
+      padding-left: 1rem;
+      line-height: 1.4;
+    }
+
+    .content-group li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      top: .18em;
+      color: var(--sprout);
+      font-size: .68rem;
+    }
+
+    .content-group strong { color: var(--ink); }
+
+    .button-row {
+      display: flex;
+      justify-content: flex-start;
+      gap: .8rem;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+
+    .btn,
+    .newsletter-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      min-height: 46px;
+      padding: .72rem 1.1rem;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 2px solid var(--forest);
+      border-radius: 0;
+      box-shadow: 4px 4px 0 var(--clay);
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .035em;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+
+    .btn::after {
+      content: "↗";
+      font-size: .95em;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--paper-soft);
+      background: var(--leaf);
+      border-color: var(--leaf);
+      box-shadow: 2px 2px 0 var(--clay);
+      transform: translate(2px, 2px);
+    }
+
+    .btn.secondary {
+      color: var(--forest);
+      background: var(--paper-soft);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sky);
+    }
+
+    .btn.secondary::after { content: "↓"; }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      color: var(--forest);
+      background: var(--sun-soft);
+      border-color: var(--forest);
+      box-shadow: 2px 2px 0 var(--sky);
+    }
+
+    /* Editorial statement */
+    .statement {
+      position: relative;
+      padding: clamp(5rem, 9vw, 8.5rem) 0;
+      color: var(--paper-soft);
+      background:
+        radial-gradient(circle, rgba(255, 250, 240, .11) 0 1px, transparent 1.3px) 0 0 / 8px 8px,
+        var(--forest);
+      border-top: 8px solid var(--clay);
+      border-bottom: 8px solid var(--sun);
+      overflow: hidden;
+    }
+
+    .statement::before {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      left: -170px;
+      bottom: -260px;
+      border: 3px solid rgba(154, 183, 91, .52);
+      background: repeating-radial-gradient(circle, transparent 0 18px, rgba(154, 183, 91, .17) 19px 22px);
+      clip-path: polygon(5% 0, 100% 9%, 91% 100%, 0 92%);
+      transform: rotate(7deg);
+    }
+
+    .statement::after {
+      content: "";
+      position: absolute;
+      top: -160px;
+      right: -110px;
+      width: 390px;
+      height: 390px;
+      border: 3px solid rgba(255, 250, 240, .35);
+      background:
+        repeating-linear-gradient(45deg, transparent 0 12px, rgba(207, 117, 88, .28) 12px 16px),
+        rgba(207, 117, 88, .14);
+      opacity: .75;
+      clip-path: polygon(8% 6%, 91% 0, 100% 82%, 13% 100%);
+      transform: rotate(12deg);
+    }
+
+    .statement-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: .8fr 1.7fr;
+      gap: clamp(2rem, 6vw, 7rem);
+      align-items: start;
+    }
+
+    .statement .eyebrow { color: var(--sun-soft); }
+    .statement .eyebrow::before { background: var(--sun); }
+
+    .statement h2 {
+      max-width: 760px;
+      margin-bottom: 1.4rem;
+      color: var(--paper-soft);
+      text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
+    }
+
+    .statement p {
+      max-width: 650px;
+      color: rgba(255, 250, 240, .78);
+      font-size: 1.08rem;
+    }
+
+    .principles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: 2rem;
+    }
+
+    .principles span {
+      padding: .52rem .78rem;
+      color: var(--paper-soft);
+      border: 1px solid rgba(255, 250, 240, .45);
+      border-radius: 0;
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* Feature grid */
+    .grid {
+      position: relative;
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      background:
+        radial-gradient(circle, rgba(23, 56, 45, .10) 0 1px, transparent 1.25px) 0 0 / 9px 9px,
+        linear-gradient(102deg, transparent 0 72%, rgba(116, 173, 179, .13) 72% 88%, transparent 88%),
+        var(--paper);
+      background-attachment: scroll;
+      border: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-heading h2 {
+      max-width: 700px;
+      margin-bottom: 0;
+      color: var(--forest);
+    }
+
+    .section-heading p {
+      max-width: 390px;
+      margin-bottom: .35rem;
+      color: var(--ink-soft);
+    }
+
+    .home-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      width: min(100%, 900px);
+      margin: 0 auto;
+    }
+
+    .edge-card {
+      position: relative;
+      display: block;
+      aspect-ratio: 8 / 9;
+      overflow: hidden;
+      color: var(--paper-soft);
+      background: var(--forest);
+      border: 3px solid var(--ink);
+      border-radius: 0;
+      box-shadow: 9px 9px 0 var(--clay);
+      text-decoration: none;
+      isolation: isolate;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .edge-card:nth-child(1) { transform: rotate(-1deg); }
+
+    .edge-card:nth-child(2) {
+      box-shadow: 9px 9px 0 var(--sky);
+      transform: rotate(1.2deg);
+    }
+
+    .edge-card::before,
+    .edge-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .edge-card::before {
+      background:
+        linear-gradient(180deg, transparent 25%, rgba(23, 56, 45, .10) 58%, rgba(23, 56, 45, .42) 100%),
+        radial-gradient(circle, rgba(240, 184, 74, .15) 0 1px, transparent 1.2px) 0 0 / 7px 7px;
+    }
+
+    .edge-card::after {
+      inset: 11px;
+      border: 1px dashed rgba(255, 250, 240, .68);
+      border-radius: 0;
+    }
+
+    .edge-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.72) sepia(.13) contrast(.96) brightness(1.03);
+      transform: scale(1.02);
+      transition: transform .45s ease, filter .45s ease;
+    }
+
+    .edge-card-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      padding: 1.3rem 1.45rem 1.45rem;
+      background: rgba(23, 56, 45, .94);
+      border-top: 2px solid var(--paper-soft);
+    }
+
+    .edge-card-kicker {
+      display: block;
+      margin-bottom: .48rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .edge-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 0;
+      color: var(--paper-soft);
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+      line-height: 1.05;
+    }
+
+    .edge-card-title::after {
+      content: "↗";
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(255, 250, 240, .72);
+      border-radius: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+    }
+
+    .edge-card:hover,
+    .edge-card:focus-visible {
+      transform: translate(-3px, -5px) rotate(-.3deg);
+      box-shadow: 13px 14px 0 var(--sun);
+    }
+
+    .edge-card:hover img,
+    .edge-card:focus-visible img {
+      filter: saturate(.9) sepia(.05) contrast(.98) brightness(1.07);
+      transform: scale(1.07);
+    }
+
+    /* Footer */
+    footer {
+      margin: 0;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 0;
+      color: rgba(255, 250, 240, .82);
+      background:
+        repeating-linear-gradient(112deg, transparent 0 22px, rgba(255, 250, 240, .025) 22px 25px),
+        #16372c;
+      border-top: 8px solid var(--clay);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr .8fr;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 0 var(--page-pad) clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .footer-column { min-width: 0; }
+
+    .footer-logo {
+      width: 58px;
+      margin-bottom: 1.25rem;
+      filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
+      transform: rotate(-4deg);
+    }
+
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      color: var(--sun-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .footer-column p {
+      margin-bottom: .55rem;
+      color: rgba(255, 250, 240, .7);
+    }
+
+    .footer-column a {
+      color: rgba(255, 250, 240, .78);
+      text-decoration: underline;
+      text-decoration-color: rgba(240, 184, 74, .45);
+      text-decoration-style: wavy;
+      text-underline-offset: .22em;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus-visible { color: var(--sun-soft); }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin-top: 1.3rem;
+      padding: 5px;
+      background: rgba(255, 250, 240, .08);
+      border: 2px solid rgba(255, 250, 240, .72);
+      border-radius: 0;
+      box-shadow: 6px 6px 0 rgba(207, 117, 88, .75);
+    }
+
+    .newsletter-input {
+      min-width: 0;
+      flex: 1 1 auto;
+      width: auto;
+      margin: 0;
+      padding: .7rem 1rem;
+      color: var(--paper-soft);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      font: inherit;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder { color: rgba(255, 250, 240, .5); }
+
+    .newsletter-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding-inline: 1rem;
+      color: var(--ink);
+      background: var(--sun-soft);
+      border-color: var(--sun-soft);
+      box-shadow: none;
+    }
+
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      color: var(--ink);
+      background: var(--sun);
+      border-color: var(--sun);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .footer-bottom {
+      width: min(100%, var(--page-max));
+      margin-inline: auto;
+      padding: 1.25rem var(--page-pad) 1.8rem;
+      color: rgba(255, 250, 240, .48);
+      background: transparent;
+      border-top: 2px dashed rgba(255, 250, 240, .2);
+      font-family: 'Space Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .04em;
+      text-align: left;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .site-header { min-height: 72px; }
+
+      .hamburger {
+        display: block;
+      }
+
+      .site-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: var(--page-pad);
+        right: var(--page-pad);
+        display: none;
+        align-items: stretch;
+        gap: .2rem;
+        padding: .8rem;
+        background: var(--paper-soft);
+        border: 2px solid var(--ink);
+        border-top: 0;
+        border-radius: 0;
+        box-shadow: var(--shadow-small);
+      }
+
+      .site-nav.active { display: grid; }
+
+      .site-nav a {
+        padding: .85rem 1rem;
+        border-radius: 0;
+      }
+
+      .site-nav a:hover { background: var(--paper-deep); }
+      .site-nav a::after { display: none; }
+
+      .hero-inner,
+      .statement-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .issue-cover-wrap {
+        width: min(72vw, 340px);
+      }
+
+      .hero-text { max-width: none; }
+      .statement-inner { gap: 1.5rem; }
+      .statement p { max-width: 760px; }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: .8rem;
+      }
+
+      .home-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+      .footer-column:first-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 650px) {
+      .announcement { font-size: .63rem; }
+      .logo-title span { font-size: 1.32rem; }
+      .logo-title img { width: 36px; height: 36px; }
+
+      .hero { padding-top: 4.5rem; }
+      .hero-inner { gap: 3.5rem; }
+      .hero-title { font-size: clamp(3rem, 15vw, 4.4rem); }
+
+      .issue-cover-wrap::after {
+        right: -.4rem;
+        bottom: 1.2rem;
+      }
+
+      .issue-contents { grid-template-columns: 1fr; gap: 1.4rem; }
+      .issue-panel-header { align-items: start; flex-direction: column; gap: .3rem; }
+      .button-row { align-items: stretch; flex-direction: column; }
+      .btn { width: 100%; }
+
+      .home-cards { grid-template-columns: 1fr; }
+      .edge-card { aspect-ratio: 4 / 4.6; }
+
+      .footer-container { grid-template-columns: 1fr; }
+      .footer-column:first-child { grid-column: auto; }
+      .newsletter-form { align-items: stretch; flex-direction: column; border-radius: 0; }
+      .newsletter-button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">Independent stories for brighter, stranger, more livable futures</div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo-title" aria-label="Burnline home">
+      <img src="Flame logo-1.png.png" alt="" aria-hidden="true">
+      <span>BURNLINE</span>
+    </a>
+
+    <button id="hamburger" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="issues.html">Issues</a>
+      <a href="stories.html">Stories</a>
+      <a href="art.html">Art</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner wrap">
+        <div class="issue-cover-wrap">
+          <a class="issue-cover-link" href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener">
+            <img src="New Cover.png" alt="Cover of the latest issue of Burnline" />
+          </a>
+        </div>
+
+        <div class="hero-text">
+          <p class="eyebrow">Burnline Magazine · Solarpunk fiction &amp; art</p>
+          <h1 class="hero-title">Stories from a better <em>future.</em></h1>
+          <p class="hero-intro">
+            Burnline publishes imaginative solarpunk fiction and art about a better future where we live alongside the natural world, not in contrast to it.
+          </p>
+
+          <div class="issue-panel">
+            <div class="issue-panel-header">
+              <h2>The latest issue</h2>
+              <span>Quarterly · Digital</span>
+            </div>
+
+            <div class="issue-contents">
+              <div class="content-group">
+                <h3>Fiction</h3>
+                <ul>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                  <li><strong>[Story Title]</strong> by [Author Name]</li>
+                </ul>
+              </div>
+
+              <div class="content-group">
+                <h3>Artwork</h3>
+                <ul>
+                  <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
+                  <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
+                  <li><strong>[Artwork Name]</strong> by [Artist Name]</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <a href="https://heyzine.com/flip-book/f23a012d4f.html" target="_blank" rel="noopener" class="btn">Read this issue</a>
+              <a href="Placeholder Mag.pdf" download class="btn secondary">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement" aria-labelledby="statement-title">
+      <div class="statement-inner wrap">
+        <p class="eyebrow">Our point of view</p>
+        <div>
+          <h2 id="statement-title">The future doesn't have to be so grim.</h2>
+          <p>
+            Sci-fi often shows a future full of extraction and exploitation, but what if we get it right? Burnline's purpose is to help creative people show us what that world might look like. 
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="features" aria-labelledby="explore-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Explore Burnline</p>
+            <h2 id="explore-title">Check out the future.</h2>
+          </div>
+          <p>Read full digital issues or start with a single story you can read in your browser.</p>
+        </div>
+
+        <div class="home-cards">
+          <a class="edge-card" href="issues.html" aria-label="Open the Issue Library">
+            <img src="Placeholder Art.jpg" alt="" loading="lazy">
+            <span class="edge-card-content">
+              <span class="edge-card-kicker">Read cover to cover</span>
+              <span class="edge-card-title">Issue Library</span>
+            </span>
+          </a>
+
+          <a class="edge-card" href="stories.html" aria-label="Open Featured Stories">
+            <img src="Placeholder 4.png" alt="" loading="lazy">
+            <span class="edge-card-content">
+              <span class="edge-card-kicker">Start with one story</span>
+              <span class="edge-card-title">Featured Stories</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="Flame logo-1.png.png" alt="Burnline Logo" class="footer-logo">
+        <h3>Read more from a better future.</h3>
+        <p>Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.</p>
+        <form class="newsletter-form">
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="Email address" class="newsletter-input" autocomplete="email" required>
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+
+      <div class="footer-column">
+        <h4>Get in touch</h4>
+        <p><a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a></p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Read</h4>
+        <p><a href="issues.html">Issue Library</a></p>
+        <p><a href="stories.html">Featured Stories</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; <span id="copyright-year">2026</span> Burnline Magazine — All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const nav = document.getElementById('site-nav');
+
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          const isActive = nav.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', String(isActive));
+          hamburger.setAttribute('aria-label', isActive ? 'Close menu' : 'Open menu');
+        });
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open menu');
+          });
+        });
+      }
+
+      const year = document.getElementById('copyright-year');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
