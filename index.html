@@ -604,8 +604,14 @@
     .edge-card:nth-child(1) { transform: rotate(-1deg); }
 
     .edge-card:nth-child(2) {
+      border-radius: 0;
       box-shadow: 9px 9px 0 var(--sky);
       transform: rotate(1.2deg);
+    }
+
+    .edge-card:nth-child(2) img,
+    .edge-card:nth-child(2) .edge-card-content {
+      border-radius: 0;
     }
 
     .edge-card::before,
@@ -718,7 +724,6 @@ footer {
       width: 58px;
       margin-bottom: 1.25rem;
       filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
-      transform: rotate(-4deg);
     }
 
     .footer-column h4 {
@@ -1005,7 +1010,7 @@ footer {
       <div class="wrap">
         <div class="section-heading">
           <div>
-            <h2 id="explore-title">Check out the future.</h2>
+            <h2 id="explore-title">Check out the future</h2>
           </div>
         </div>
 
