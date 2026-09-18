@@ -107,27 +107,6 @@
       padding-inline: var(--page-pad);
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .7rem;
-      margin: 0 0 1.25rem;
-      color: var(--forest);
-      font-family: 'Space Mono', monospace;
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      line-height: 1.4;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 4px;
-      background: var(--clay);
-      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
-    }
 
     .announcement {
       position: relative;
@@ -500,8 +479,7 @@
       padding: 1.3rem 1.4rem 1.5rem;
     }
 
-    .art-label,
-    .cover-label {
+    .art-label {
       margin: 0 0 .65rem;
       color: var(--leaf);
       font-family: 'Space Mono', monospace;
@@ -555,151 +533,33 @@
       line-height: 1;
     }
 
-    .cover-exhibition {
-      margin-bottom: clamp(6rem, 10vw, 9rem);
-    }
 
-    .cover-feature {
-      display: grid;
-      grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
-      gap: clamp(2.5rem, 6vw, 6rem);
-      align-items: center;
-      padding: clamp(1.8rem, 4vw, 3rem);
+    .collection-note {
+      max-width: 720px;
+      margin: clamp(4rem, 8vw, 7rem) auto 0;
+      padding: clamp(1.8rem, 4vw, 2.6rem);
       background: var(--paper-soft);
       border: 2px solid var(--ink);
       box-shadow:
-        10px 10px 0 var(--sun-soft),
-        13px 13px 0 var(--ink);
-    }
-
-    .cover-frame {
-      position: relative;
-      width: min(100%, 355px);
-      cursor: zoom-in;
-      justify-self: center;
-    }
-
-    .cover-frame::before {
-      content: "";
-      position: absolute;
-      inset: 7% -11% -8% 9%;
-      z-index: 0;
-      border: 2px solid var(--ink);
-      background: var(--sky);
-      clip-path: polygon(3% 2%, 98% 7%, 94% 98%, 0 91%);
-      opacity: .64;
-      transform: rotate(3.5deg);
-    }
-
-    .cover-frame::after {
-      content: "ISSUE 01";
-      position: absolute;
-      right: -1.35rem;
-      bottom: 2.2rem;
-      z-index: 2;
-      padding: .6rem .75rem;
-      color: var(--paper-soft);
-      background: var(--clay);
-      border: 2px solid var(--ink);
-      box-shadow: 5px 5px 0 var(--sun);
-      font-family: 'Space Mono', monospace;
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      transform: rotate(-5deg);
-    }
-
-    .cover-frame img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: auto;
-      padding: 10px;
-      background: var(--paper-soft);
-      border: 2px solid var(--ink);
-      box-shadow: var(--shadow);
-      transform: rotate(-2.2deg);
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-
-    .cover-frame:hover img,
-    .cover-frame:focus-visible img {
-      transform: translateY(-7px) rotate(-.7deg);
-      box-shadow: 16px 16px 0 rgba(35, 77, 61, .2);
-    }
-
-    .cover-copy {
-      position: relative;
-      z-index: 1;
-      max-width: 590px;
-    }
-
-    .cover-copy h3 {
-      margin-bottom: 1rem;
-      color: var(--forest);
-      font-size: clamp(2rem, 4vw, 3.6rem);
-    }
-
-    .cover-copy > p:not(.cover-label) {
-      color: var(--ink-soft);
-      font-size: 1.06rem;
-    }
-
-    .cover-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem 1.2rem;
-      margin: 1.6rem 0 0;
-      padding-top: 1.25rem;
-      color: var(--forest);
-      border-top: 2px solid var(--line);
-      font-family: 'Space Mono', monospace;
-      font-size: .72rem;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-    }
-
-    .art-note {
-      max-width: 850px;
-      margin: clamp(6rem, 10vw, 9rem) auto 0;
-      padding: clamp(2rem, 5vw, 4rem);
-      color: var(--paper-soft);
-      background: var(--forest);
-      border: 2px solid var(--ink);
-      border-top: 8px solid var(--clay);
-      border-bottom: 8px solid var(--sun);
-      box-shadow: 10px 10px 0 rgba(35, 77, 61, .2);
+        8px 8px 0 var(--sun-soft),
+        11px 11px 0 var(--ink);
       text-align: left;
     }
 
-    .art-note h2 {
-      margin-bottom: 1rem;
-      color: var(--paper-soft);
-      text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
-    }
-
-    .art-note p {
-      max-width: 630px;
-      margin-bottom: 1.7rem;
-      color: rgba(255, 250, 240, .78);
-    }
-
-    .art-note .btn.secondary {
+    .collection-note h2 {
+      margin-bottom: .8rem;
       color: var(--forest);
-      background: var(--paper-soft);
-      border-color: var(--paper-soft);
-      box-shadow: 4px 4px 0 var(--clay);
+      font-size: clamp(2rem, 3.5vw, 3rem);
     }
 
-    .art-note .btn.secondary::after {
+    .collection-note p {
+      max-width: 590px;
+      margin-bottom: 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    .collection-note .btn.secondary::after {
       content: "→";
-    }
-
-    .art-note .btn.secondary:hover,
-    .art-note .btn.secondary:focus-visible {
-      color: var(--forest);
-      background: var(--sun-soft);
-      border-color: var(--sun-soft);
     }
 
     body.modal-open {
@@ -852,7 +712,6 @@
       width: 58px;
       margin-bottom: 1.25rem;
       filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
-      transform: rotate(-4deg);
     }
 
     .footer-column h4 {
@@ -1001,10 +860,6 @@
         gap: .8rem;
       }
 
-      .cover-feature {
-        grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
-        gap: 3rem;
-      }
 
       .art-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1057,25 +912,6 @@
         width: 100%;
       }
 
-      .cover-feature {
-        grid-template-columns: 1fr;
-        gap: 3.5rem;
-        padding: 1.2rem;
-      }
-
-      .cover-frame {
-        width: min(82%, 330px);
-      }
-
-      .cover-frame::after {
-        right: -.4rem;
-        bottom: 1.2rem;
-      }
-
-      .cover-copy {
-        max-width: none;
-      }
-
       .art-grid {
         grid-template-columns: 1fr;
       }
@@ -1084,11 +920,11 @@
         width: 100%;
       }
 
-      .art-note {
-        padding: 1.5rem;
+      .collection-note {
+        padding: 1.4rem;
       }
 
-      .art-note .btn {
+      .collection-note .btn {
         width: 100%;
       }
 
@@ -1199,10 +1035,6 @@
     <section class="art-hero" aria-labelledby="art-title">
       <div class="art-hero-inner wrap">
 
-        <p class="eyebrow">
-          Burnline Magazine · Visual art
-        </p>
-
         <h1 class="art-title" id="art-title">
           Art <em>Gallery</em>
         </h1>
@@ -1212,9 +1044,6 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#art-gallery" class="btn">
-            Enter the gallery
-          </a>
 
           <a href="submit.html#art" class="btn secondary">
             Share your art
@@ -1234,13 +1063,8 @@
         >
           <div class="section-heading">
             <div>
-              <p class="eyebrow">From the issues</p>
-              <h2 id="issue-art-title">Art Gallery</h2>
+              <h2 id="issue-art-title">Art from Burnline</h2>
             </div>
-
-            <p>
-              Select an image to view it at full size and move through the complete gallery.
-            </p>
           </div>
 
           <div class="art-grid" id="issueArtGrid">
@@ -1415,73 +1239,56 @@
         </section>
 
         <section
-          class="cover-exhibition"
+          class="issue-art-exhibition"
           id="cover-gallery"
           aria-labelledby="cover-title"
         >
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Cover collection</p>
               <h2 id="cover-title">Cover Gallery</h2>
             </div>
           </div>
 
-          <article class="cover-feature">
-
-            <div
-              class="cover-frame gallery-item"
+          <div class="art-grid">
+            <article
+              class="art-tile gallery-item"
               role="button"
               tabindex="0"
               data-title="Burnline — Issue 01"
               data-artist="Burnline Editorial"
               aria-label="Enlarge the cover for Burnline Issue 01"
             >
-              <img
-                src="New Cover.png"
-                alt="Cover artwork for Burnline Issue 01"
-              >
-            </div>
-
-            <div class="cover-copy">
-              <p class="cover-label">
-                Issue 01 · Cover art
-              </p>
-
-              <h3>Burnline — Issue 01</h3>
-
-              <p>
-                The first image in the Burnline archive—and the opening visual statement for a collection of speculative fiction and art.
-              </p>
-
-              <div class="cover-meta">
-                <span>Digital edition</span>
-                <span>Burnline Editorial</span>
-                <span>2026</span>
+              <div class="art-image">
+                <span class="art-number" aria-hidden="true">01</span>
+                <img
+                  src="New Cover.png"
+                  alt="Cover artwork for Burnline Issue 01"
+                  loading="lazy"
+                >
               </div>
-            </div>
 
-          </article>
+              <div class="art-caption">
+                <p class="art-label">Issue 01 · Cover art</p>
+                <h3>Burnline — Issue 01</h3>
+                <p class="art-artist">
+                  by <strong>Burnline Editorial</strong>
+                </p>
+              </div>
+            </article>
+          </div>
         </section>
 
-        <section
-          class="art-note"
-          aria-labelledby="art-note-title"
-        >
-          <h2 id="art-note-title">
-            Help us picture another future.
-          </h2>
+        <div class="collection-note">
+          <h2>Check out full magazine issues</h2>
 
           <p>
-            Burnline welcomes illustration, cover concepts, and visual storytelling that feels hopeful, strange, practical, and alive.
+            Each piece of short fiction and artwork also lives within a fully designed issue of Burnline Magazine!
           </p>
 
-          <a
-            href="submit.html#art"
-            class="btn secondary"
-          >
-            View art submissions
+          <a href="issues.html" class="btn secondary">
+            Visit the issue library
           </a>
-        </section>
+        </div>
 
       </div>
     </section>
