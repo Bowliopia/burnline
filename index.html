@@ -84,28 +84,6 @@
 
     .wrap--narrow { max-width: var(--narrow-max); }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .7rem;
-      margin: 0 0 1.25rem;
-      color: var(--forest);
-      font-family: 'Space Mono', monospace;
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      line-height: 1.4;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 4px;
-      background: var(--clay);
-      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
-    }
-
     .announcement {
       position: relative;
       z-index: 20;
@@ -531,13 +509,17 @@
       align-items: start;
     }
 
-    .statement .eyebrow { color: var(--sun-soft); }
-    .statement .eyebrow::before { background: var(--sun); }
+    .statement-heading {
+      margin: 0;
+      color: var(--sun-soft);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+    }
 
-    .statement h2 {
+    .statement-subhead {
       max-width: 760px;
       margin-bottom: 1.4rem;
       color: var(--paper-soft);
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
       text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
     }
 
@@ -965,10 +947,9 @@ footer {
         </div>
 
         <div class="hero-text">
-          <p class="eyebrow">Burnline Magazine · Solarpunk fiction &amp; art</p>
           <h1 class="hero-title">Stories from a better <em>future.</em></h1>
           <p class="hero-intro">
-            Burnline publishes imaginative solarpunk fiction and art about a better future where we live alongside the natural world, not in contrast to it.
+            Burnline Magazine aims to publish imaginative solarpunk short fiction and art about a better future where we live alongside the natural world, not in contrast to it.
           </p>
 
           <div class="issue-panel">
@@ -1010,11 +991,11 @@ footer {
 
     <section class="statement" aria-labelledby="statement-title">
       <div class="statement-inner wrap">
-        <p class="eyebrow">Our point of view</p>
+        <h2 class="statement-heading" id="statement-title">Our Point of View</h2>
         <div>
-          <h2 id="statement-title">The future doesn't have to be so grim.</h2>
+          <h3 class="statement-subhead">The future doesn't have to be so grim.</h3>
           <p>
-            Sci-fi often shows a future full of extraction and exploitation, but what if we get it right? Burnline's purpose is to help creative people show us what that world might look like. 
+            Sci-fi often shows a future full of extraction and exploitation, but what if humanity actually gets it right? It's our goal to help creative people show us what a world with a harmony between technology, the environment, and people could look like.
           </p>
         </div>
       </div>
@@ -1024,10 +1005,8 @@ footer {
       <div class="wrap">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Explore Burnline</p>
             <h2 id="explore-title">Check out the future.</h2>
           </div>
-          <p>Read full digital issues or start with a single story you can read in your browser.</p>
         </div>
 
         <div class="home-cards">
