@@ -107,27 +107,6 @@
       padding-inline: var(--page-pad);
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .7rem;
-      margin: 0 0 1.25rem;
-      color: var(--forest);
-      font-family: 'Space Mono', monospace;
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      line-height: 1.4;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 4px;
-      background: var(--clay);
-      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
-    }
 
     .announcement {
       position: relative;
@@ -294,25 +273,6 @@
       color: var(--forest);
     }
 
-    .submit-title em {
-      position: relative;
-      color: var(--clay);
-      font-style: normal;
-      white-space: nowrap;
-    }
-
-    .submit-title em::after {
-      content: "";
-      position: absolute;
-      left: 2%;
-      right: -2%;
-      bottom: .01em;
-      z-index: -1;
-      height: .24em;
-      background: var(--sun-soft);
-      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
-      transform: rotate(-1.5deg);
-    }
 
     .submit-lede {
       max-width: 740px;
@@ -375,22 +335,6 @@
       background: var(--paper);
     }
 
-    .guidelines-header {
-      max-width: 790px;
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-
-    .guidelines-header h2 {
-      margin-bottom: 1rem;
-      color: var(--forest);
-    }
-
-    .guidelines-header p {
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: 1.05rem;
-      line-height: 1.76;
-    }
 
     .tabs-shell {
       background: var(--paper-soft);
@@ -521,16 +465,6 @@
       box-shadow: 6px 6px 0 var(--sun);
     }
 
-    .looking-card span {
-      display: block;
-      margin-bottom: .7rem;
-      color: var(--leaf);
-      font-family: 'Space Mono', monospace;
-      font-size: .66rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
 
     .looking-card h4 {
       margin-bottom: .55rem;
@@ -585,6 +519,13 @@
       font-weight: 700;
     }
 
+    .submission-note {
+      max-width: 860px;
+      margin: 1.8rem 0 0;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+
     .policy-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -617,130 +558,7 @@
       line-height: 1.68;
     }
 
-    .cover-letters {
-      position: relative;
-      overflow: hidden;
-      padding: clamp(5rem, 9vw, 8rem) 0;
-      color: var(--paper-soft);
-      background: var(--forest);
-      border-top: 8px solid var(--clay);
-      border-bottom: 8px solid var(--sun);
-    }
 
-    .cover-letters::before,
-    .cover-letters::after {
-      content: none;
-    }
-
-    .cover-letter-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .6fr);
-      gap: clamp(3rem, 7vw, 7rem);
-      align-items: center;
-    }
-
-    .cover-letters .eyebrow {
-      color: var(--sun-soft);
-    }
-
-    .cover-letters .eyebrow::before {
-      background: var(--sun);
-    }
-
-    .cover-letters h2 {
-      max-width: 720px;
-      margin-bottom: 1.2rem;
-      color: var(--paper-soft);
-      text-shadow: 3px 3px 0 rgba(207, 117, 88, .55);
-    }
-
-    .cover-letters p {
-      max-width: 720px;
-      margin-bottom: 0;
-      color: rgba(255, 250, 240, .78);
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-
-    .simple-card {
-      position: relative;
-      padding: 2rem;
-      color: var(--forest);
-      background: var(--sun-soft);
-      border: 2px solid var(--ink);
-      box-shadow:
-        8px 8px 0 var(--clay),
-        11px 11px 0 var(--paper-soft);
-      transform: rotate(1deg);
-    }
-
-    .simple-card::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      right: 12%;
-      width: 72px;
-      height: 18px;
-      background: rgba(207, 117, 88, .82);
-      border-left: 1px solid rgba(23, 56, 45, .3);
-      border-right: 1px solid rgba(23, 56, 45, .3);
-      transform: rotate(2deg);
-    }
-
-    .simple-card .label {
-      display: block;
-      margin-bottom: .75rem;
-      font-family: 'Space Mono', monospace;
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .simple-card strong {
-      display: block;
-      margin-bottom: .55rem;
-      font-family: 'Fraunces', serif;
-      font-size: 1.6rem;
-      line-height: 1.15;
-    }
-
-    .simple-card p {
-      margin: 0;
-      color: rgba(23, 56, 45, .8);
-      font-size: .94rem;
-      line-height: 1.65;
-    }
-
-    .submit-cta {
-      position: relative;
-      padding: clamp(5.5rem, 10vw, 8.5rem) 0;
-      background:
-        linear-gradient(
-          102deg,
-          transparent 0 72%,
-          rgba(116, 173, 179, .13) 72% 88%,
-          transparent 88%
-        ),
-        var(--paper);
-    }
-
-    .submit-cta-inner {
-      max-width: 820px;
-    }
-
-    .submit-cta h2 {
-      margin-bottom: 1.1rem;
-      color: var(--forest);
-    }
-
-    .submit-cta p {
-      max-width: 650px;
-      margin-bottom: 2rem;
-      color: var(--ink-soft);
-      font-size: 1.05rem;
-      line-height: 1.78;
-    }
 
     .btn,
     .newsletter-button {
@@ -810,7 +628,6 @@
       width: 58px;
       margin-bottom: 1.25rem;
       filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
-      transform: rotate(-4deg);
     }
 
     .footer-column h4 {
@@ -954,13 +771,11 @@
       }
 
       .submit-hero-grid,
-      .panel-heading,
-      .cover-letter-grid {
+      .panel-heading {
         grid-template-columns: 1fr;
       }
 
-      .status-card,
-      .simple-card {
+      .status-card {
         max-width: 580px;
       }
 
@@ -1006,8 +821,7 @@
         white-space: normal;
       }
 
-      .status-card,
-      .simple-card {
+      .status-card {
         transform: none;
       }
 
@@ -1043,9 +857,6 @@
         grid-template-columns: 1fr;
       }
 
-      .submit-cta .btn {
-        width: 100%;
-      }
 
       .footer-container {
         grid-template-columns: 1fr;
@@ -1121,14 +932,13 @@
       <div class="submit-hero-grid wrap">
 
         <div>
-          <p class="eyebrow">Submissions</p>
 
           <h1 class="submit-title">
-            Send us a future worth <em>tending.</em>
+            Submit to Burnline
           </h1>
 
           <p class="submit-lede">
-            Burnline is looking for solarpunk fiction and visual art rooted in character, ecological imagination, collective possibility, and the complicated work of building a more livable world.
+            We're looking for any short fiction or art that you'd categorize as "solarpunk." Themes, characters, and plot could range to just about anything, but we prefer settings where we're all living in a more sustainable world.
           </p>
         </div>
 
@@ -1152,23 +962,8 @@
 
     <section
       class="guidelines"
-      aria-labelledby="guidelines-title"
     >
       <div class="wrap">
-
-        <header class="guidelines-header">
-          <p class="eyebrow">
-            Before you send
-          </p>
-
-          <h2 id="guidelines-title">
-            Choose a category and read the full guidelines.
-          </h2>
-
-          <p>
-            We care more about the work than a polished pitch. The details below explain what Burnline is seeking, what files to send, and what contributors can expect.
-          </p>
-        </header>
 
         <div
           class="tabs-shell"
@@ -1217,13 +1012,13 @@
                 <h3>Fiction</h3>
 
                 <p>
-                  We are interested in solarpunk across a wide range of tones and settings: urban or rural, intimate or expansive, near-future or far beyond it. Above all, we care about character. Give us people who want something, risk something, and make us feel the stakes of the world they are trying to inhabit or change.
+                  Please submit work you would specifically describe as solarpunk or closely aligned ecological speculation.
                 </p>
               </div>
 
               <aside class="panel-note">
-                <strong>Genre fit</strong>
-                Please submit work you would specifically describe as solarpunk or closely aligned ecological speculation.
+                <strong>Selected work</strong>
+                Accepted fiction may appear in a digital issue and in Burnline’s online Stories page, with full creator credit.
               </aside>
 
             </div>
@@ -1233,29 +1028,23 @@
               aria-label="What Burnline seeks in fiction"
             >
               <article class="looking-card">
-                <span>01 · People</span>
-
                 <h4>Character before concept</h4>
 
                 <p>
-                  Strong ideas matter most when they shape recognizable lives, relationships, choices, and consequences.
+                  We love stories where characters really come through, and we prefer people-focused stories over setting-focus stories (even though we've emphasized setting so much on this page).
                 </p>
               </article>
 
               <article class="looking-card">
-                <span>02 · Systems</span>
-
-                <h4>Futures with texture</h4>
+                <h4>Futures that feel real</h4>
 
                 <p>
-                  Show us how communities live, organize, repair, distribute, grow, travel, care, or come into conflict.
+                  We'd love to read about communities that feel real. A solarpunk future may be closer to utopia, but people are still people and will always have conflict.
                 </p>
               </article>
 
               <article class="looking-card">
-                <span>03 · Possibility</span>
-
-                <h4>Hope that has been earned</h4>
+                <h4>Hope should feel earned</h4>
 
                 <p>
                   The world can remain difficult. We are drawn to stories that still leave room for agency and change.
@@ -1288,6 +1077,14 @@
                 </dd>
               </div>
 
+              <div class="requirement">
+                <dt>Credit</dt>
+
+                <dd>
+                  Selected writers will be fully credited in the magazine and on the site using the name, portfolio link, and profile or social handles they would like included.
+                </dd>
+              </div>
+
             </dl>
 
             <div class="policy-grid">
@@ -1304,7 +1101,7 @@
                 <h4>Simultaneous submissions are welcome</h4>
 
                 <p>
-                  Please submit elsewhere while you wait. Just let us know promptly if another publication accepts the story.
+                  Please submit elsewhere while you wait! Just let us know promptly if another publication accepts the story.
                 </p>
               </article>
 
@@ -1334,41 +1131,6 @@
                 Artwork may appear in a digital issue and in Burnline’s online Art gallery, with full creator credit.
               </aside>
 
-            </div>
-
-            <div
-              class="looking-for"
-              aria-label="What Burnline seeks in visual art"
-            >
-              <article class="looking-card">
-                <span>01 · Worlds</span>
-
-                <h4>Places that feel inhabited</h4>
-
-                <p>
-                  We welcome landscapes, interiors, infrastructure, neighborhoods, and everyday scenes shaped by ecological futures.
-                </p>
-              </article>
-
-              <article class="looking-card">
-                <span>02 · People</span>
-
-                <h4>Life within the future</h4>
-
-                <p>
-                  Portraits, communities, rituals, labor, play, repair, and the relationships that make a world feel alive.
-                </p>
-              </article>
-
-              <article class="looking-card">
-                <span>03 · Forms</span>
-
-                <h4>Organic and unexpected</h4>
-
-                <p>
-                  We are open to work that is bright, quiet, strange, imperfect, highly rendered, graphic, or experimental.
-                </p>
-              </article>
             </div>
 
             <dl class="requirements">
@@ -1431,74 +1193,10 @@
           </section>
 
         </div>
-      </div>
-    </section>
 
-    <section
-      class="cover-letters"
-      aria-labelledby="cover-letter-title"
-    >
-      <div class="cover-letter-grid wrap">
-
-        <div>
-          <p class="eyebrow">
-            Cover letters
-          </p>
-
-          <h2 id="cover-letter-title">
-            Keep it simple. The work comes first.
-          </h2>
-
-          <p>
-            Emails and cover letters are much less important to Burnline than the fiction or artwork itself. If part of your personal story meaningfully informs the work, we would be glad to hear about it. Otherwise, a brief hello and the essential submission information are enough.
-          </p>
-        </div>
-
-        <aside
-          class="simple-card"
-          aria-label="Suggested cover letter guidance"
-        >
-          <span class="label">
-            A good submission email
-          </span>
-
-          <strong>
-            Clear, brief, human.
-          </strong>
-
-          <p>
-            Tell us what you are sending, include the requested file or link, and make sure “Submission” appears in the subject line.
-          </p>
-        </aside>
-
-      </div>
-    </section>
-
-    <section
-      class="submit-cta"
-      aria-labelledby="submit-cta-title"
-    >
-      <div class="submit-cta-inner wrap">
-
-        <p class="eyebrow">
-          Ready when you are
+        <p class="submission-note">
+          Cover letters are not at all necessary because we don't want to create any unneeded barriers to entry for submission. Writing is hard, submitting should be easy. If part of your personal story meaningfully informs the work, we would be glad to hear about it. Otherwise, a brief hello and the essential submission information are plenty!
         </p>
-
-        <h2 id="submit-cta-title">
-          Share what you have been building.
-        </h2>
-
-        <p>
-          Send your fiction or artwork to Burnline once you have reviewed the relevant guidelines. If you are unsure whether a project fits, a concise question is welcome.
-        </p>
-
-        <a
-          class="btn"
-          href="mailto:contact@burnlinemag.com?subject=Submission"
-        >
-          Email your submission
-        </a>
-
       </div>
     </section>
 
