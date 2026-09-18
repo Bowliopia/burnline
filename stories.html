@@ -107,27 +107,6 @@
       padding-inline: var(--page-pad);
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .7rem;
-      margin: 0 0 1.25rem;
-      color: var(--forest);
-      font-family: 'Space Mono', monospace;
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      line-height: 1.4;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 4px;
-      background: var(--clay);
-      clip-path: polygon(0 20%, 100% 0, 95% 100%, 5% 78%);
-    }
 
     .announcement {
       position: relative;
@@ -401,13 +380,6 @@
       background: var(--paper);
     }
 
-    .library-heading {
-      margin-bottom: clamp(2.6rem, 5vw, 4rem);
-    }
-
-    .library-heading .eyebrow {
-      margin-bottom: 0;
-    }
 
     .story-grid {
       display: grid;
@@ -637,7 +609,6 @@
       width: 58px;
       margin-bottom: 1.25rem;
       filter: sepia(.15) saturate(.7) hue-rotate(65deg) brightness(1.9);
-      transform: rotate(-4deg);
     }
 
     .footer-column h4 {
@@ -923,22 +894,15 @@
     <section class="stories-hero" aria-labelledby="stories-title">
       <div class="stories-hero-inner wrap">
 
-        <p class="eyebrow">
-          Burnline Magazine · Fiction
-        </p>
-
         <h1 class="stories-title" id="stories-title">
           Featured <em>Stories</em>
         </h1>
 
         <p class="stories-intro">
-          Read editor-selected solarpunk short stories from across Burnline right in your browser.
+          Read editor-selected solarpunk short stories from across Burnline Magazine.
         </p>
 
         <div class="hero-actions">
-          <a href="#story-collection" class="btn">
-            Browse the stories
-          </a>
 
           <a href="submit.html" class="btn secondary">
             Share your work
@@ -950,15 +914,8 @@
     <section
       class="story-library"
       id="story-collection"
-      aria-labelledby="collection-title"
     >
       <div class="wrap">
-
-        <div class="library-heading">
-          <p class="eyebrow" id="collection-title">
-            Read in your browser
-          </p>
-        </div>
 
         <div class="story-grid">
 
@@ -1197,10 +1154,10 @@
         </div>
 
         <div class="collection-note">
-          <h2>Every story begins in an issue.</h2>
+          <h2>Check out full magazine issues</h2>
 
           <p>
-            Browse complete editions to experience each piece alongside the artwork and other fiction it was published with.
+            Each piece of short fiction and artwork also lives within a fully designed issue of Burnline Magazine!
           </p>
 
           <a href="issues.html" class="btn secondary">
