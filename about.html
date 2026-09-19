@@ -268,9 +268,25 @@
     }
 
     .about-title {
+      position: relative;
+      display: inline-block;
       max-width: 900px;
       margin-bottom: 1.5rem;
-      color: var(--forest);
+      color: var(--clay);
+      z-index: 0;
+    }
+
+    .about-title::after {
+      content: "";
+      position: absolute;
+      left: 2%;
+      right: -2%;
+      bottom: .01em;
+      z-index: -1;
+      height: .24em;
+      background: var(--sun-soft);
+      clip-path: polygon(0 28%, 100% 0, 97% 78%, 3% 100%);
+      transform: rotate(-1.5deg);
     }
 
 
@@ -282,7 +298,7 @@
     /* About content */
 
     .about-content {
-      padding: clamp(5rem, 9vw, 8rem) 0;
+      padding: clamp(5rem, 9vw, 8rem) 0 clamp(2.5rem, 5vw, 4rem);
       background: var(--paper);
     }
 
@@ -318,8 +334,12 @@
       break-inside: avoid;
     }
 
+    .editor-column-break {
+      break-before: column;
+    }
+
     .explore-about {
-      padding: clamp(5.5rem, 10vw, 8.5rem) 0;
+      padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(5.5rem, 10vw, 8.5rem);
       background:
         linear-gradient(
           102deg,
@@ -670,6 +690,10 @@
         column-rule: 0;
       }
 
+      .editor-column-break {
+        break-before: auto;
+      }
+
       .about-title em {
         white-space: normal;
       }
@@ -771,7 +795,11 @@
             </p>
 
             <p>
-              You know that feeling you get when you find something that you enjoy so much that you can’t stop thinking about it, until eventually you find yourself scouring the internet for cool phone wallpapers in the style you have in your head? That was the rush I felt during those early solarpunk-consuming days. The only issue was that I ran out of content pretty quickly. There are some excellent pieces of solarpunk media out there for those willing to dig, but there just aren’t that many that really stand out as grade A material. That’s why I made Burnline. I’m hoping this magazine can be a kicking off point for talented, creative people who think technology is cool and a sustainable, happy future is even cooler.
+              You know that feeling you get when you find something that you enjoy so much that you can’t stop thinking about it, until eventually you find yourself scouring the internet for cool phone wallpapers in the style you have in your head? That was the rush I felt during those early solarpunk-consuming days. The only issue was that I ran out of content pretty quickly.
+            </p>
+
+            <p class="editor-column-break">
+              There are some excellent pieces of solarpunk media out there for those willing to dig, but there just aren’t that many that really stand out as grade A material. That’s why I made Burnline. I’m hoping this magazine can be a kicking off point for talented, creative people who think technology is cool and a sustainable, happy future is even cooler.
             </p>
 
             <p>
