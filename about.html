@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#f4efd9" />
   <meta
     name="description"
-    content="Submit solarpunk fiction and visual art to Burnline, an independent digital magazine for brighter, stranger, more livable futures."
+    content="Learn about Burnline, an independent digital magazine publishing solarpunk fiction and art about repair, community, adaptation, and futures worth building."
   />
-  <title>Submit – Burnline</title>
+  <title>About – Burnline</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -191,7 +191,8 @@
     }
 
     .site-nav a:hover::after,
-    .site-nav a:focus-visible::after {
+    .site-nav a:focus-visible::after,
+    .site-nav a[aria-current="page"]::after {
       right: 0;
     }
 
@@ -234,7 +235,9 @@
       background: var(--ink);
     }
 
-    .submit-hero {
+    /* Hero */
+
+    .about-hero {
       position: relative;
       isolation: isolate;
       overflow: hidden;
@@ -255,310 +258,140 @@
       border-bottom: 3px solid var(--ink);
     }
 
-    .submit-hero::before,
-    .submit-hero::after {
+    .about-hero::before,
+    .about-hero::after {
       content: none;
     }
 
-    .submit-hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(270px, .42fr);
-      gap: clamp(2.5rem, 7vw, 6rem);
-      align-items: center;
+    .about-hero-inner {
+      width: min(100%, 980px);
     }
 
-    .submit-title {
-      max-width: 850px;
+    .about-title {
+      max-width: 900px;
       margin-bottom: 1.5rem;
       color: var(--forest);
     }
 
 
-    .submit-lede {
-      max-width: 740px;
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: clamp(1.08rem, 1.8vw, 1.3rem);
-      line-height: 1.78;
-    }
 
-    .status-card {
-      position: relative;
-      padding: clamp(1.6rem, 3vw, 2.1rem);
-      color: var(--paper-soft);
-      background: var(--forest);
-      border: 2px solid var(--ink);
-      box-shadow:
-        8px 8px 0 var(--sun),
-        11px 11px 0 var(--clay);
-      transform: rotate(1deg);
-    }
 
-    .status-card::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      right: 12%;
-      width: 72px;
-      height: 18px;
-      background: rgba(207, 117, 88, .82);
-      border-left: 1px solid rgba(23, 56, 45, .3);
-      border-right: 1px solid rgba(23, 56, 45, .3);
-      transform: rotate(2deg);
-    }
 
-    .status-card .label {
-      display: block;
-      margin-bottom: .9rem;
-      color: var(--sun-soft);
-      font-family: 'Space Mono', monospace;
-      font-size: .67rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
 
-    .status-card h2 {
-      margin-bottom: .75rem;
-      color: var(--paper-soft);
-      font-size: clamp(1.9rem, 4vw, 2.8rem);
-    }
 
-    .status-card p {
-      margin: 0;
-      color: rgba(255, 250, 240, .78);
-      line-height: 1.68;
-    }
+    /* About content */
 
-    .guidelines {
+    .about-content {
       padding: clamp(5rem, 9vw, 8rem) 0;
       background: var(--paper);
     }
 
-
-    .tabs-shell {
-      background: var(--paper-soft);
-      border: 2px solid var(--ink);
-      box-shadow:
-        10px 10px 0 var(--sun-soft),
-        13px 13px 0 var(--ink);
-    }
-
-    .tablist {
-      display: flex;
-      gap: 0;
-      padding: 0;
-      background: var(--paper-deep);
-      border-bottom: 2px solid var(--ink);
-    }
-
-    .tab {
-      appearance: none;
-      flex: 1 1 0;
-      min-height: 58px;
-      padding: .9rem 1.2rem;
-      color: var(--forest);
-      background: transparent;
-      border: 0;
-      border-right: 2px solid var(--ink);
-      cursor: pointer;
-      font-family: 'Space Mono', monospace;
-      font-size: .76rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition:
-        background-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-    }
-
-    .tab:last-child {
-      border-right: 0;
-    }
-
-    .tab:hover {
-      background: var(--sun-soft);
-    }
-
-    .tab[aria-selected="true"] {
-      color: var(--paper-soft);
-      background: var(--forest);
-      box-shadow: inset 0 -5px 0 var(--clay);
-    }
-
-    .tab:focus-visible {
-      outline: 3px solid var(--sun);
-      outline-offset: -5px;
-    }
-
-    .tabpanel {
-      padding: clamp(1.6rem, 5vw, 3.6rem);
-    }
-
-    .tabpanel[hidden] {
-      display: none !important;
-    }
-
-    .panel-heading {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, .38fr);
-      gap: clamp(2rem, 5vw, 4rem);
-      align-items: start;
-      margin-bottom: clamp(2.4rem, 5vw, 3.5rem);
-    }
-
-    .panel-heading h3 {
-      margin-bottom: .85rem;
-      color: var(--forest);
-      font-size: clamp(2.15rem, 4vw, 3.5rem);
-    }
-
-    .panel-heading p {
-      max-width: 680px;
-      margin: 0;
+    .about-intro {
+      max-width: 860px;
+      margin-bottom: clamp(4rem, 7vw, 6rem);
       color: var(--ink-soft);
-      line-height: 1.76;
+      font-size: clamp(1.05rem, 1.7vw, 1.18rem);
+      line-height: 1.8;
     }
 
-    .panel-note {
-      position: relative;
-      padding: 1.35rem 1.45rem;
-      color: var(--forest);
-      background: var(--sun-soft);
-      border: 2px solid var(--ink);
-      box-shadow: 5px 5px 0 var(--clay);
-      transform: rotate(1deg);
-      font-size: .94rem;
-      line-height: 1.65;
-    }
-
-    .panel-note strong {
-      display: block;
-      margin-bottom: .35rem;
-      font-family: 'Space Mono', monospace;
-      font-size: .68rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .looking-for {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem;
-      margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-    }
-
-    .looking-card {
-      min-height: 100%;
-      padding: 1.45rem;
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      box-shadow: 6px 6px 0 var(--clay);
-    }
-
-    .looking-card:nth-child(2) {
-      box-shadow: 6px 6px 0 var(--sky);
-    }
-
-    .looking-card:nth-child(3) {
-      box-shadow: 6px 6px 0 var(--sun);
-    }
-
-
-    .looking-card h4 {
-      margin-bottom: .55rem;
-      color: var(--forest);
-      font-size: 1.04rem;
-    }
-
-    .looking-card p {
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: .94rem;
-      line-height: 1.65;
-    }
-
-    .requirements {
-      display: grid;
-      gap: 0;
-      margin: 0;
+    .editor-note {
+      padding-top: clamp(2rem, 4vw, 3rem);
       border-top: 2px solid var(--ink);
     }
 
-    .requirement {
+    .editor-note h2 {
+      margin-bottom: clamp(2rem, 4vw, 3rem);
+      color: var(--forest);
+    }
+
+    .editor-note-copy {
+      column-count: 2;
+      column-gap: clamp(2.5rem, 6vw, 5rem);
+      column-rule: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 1.04rem;
+      line-height: 1.82;
+    }
+
+    .editor-note-copy p {
+      margin: 0 0 1.4rem;
+      break-inside: avoid;
+    }
+
+    .explore-about {
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0;
+      background:
+        linear-gradient(
+          102deg,
+          transparent 0 72%,
+          rgba(116, 173, 179, .13) 72% 88%,
+          transparent 88%
+        ),
+        var(--paper);
+    }
+
+    .explore-about h2 {
+      margin-bottom: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--forest);
+    }
+
+    .about-links {
       display: grid;
-      grid-template-columns: minmax(150px, .32fr) minmax(0, 1fr);
-      gap: 1.4rem;
-      padding: 1.3rem 0;
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2rem);
     }
 
-    .requirement:last-child {
-      border-bottom: 2px solid var(--ink);
+    .about-link-card {
+      display: flex;
+      min-height: 220px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(1.5rem, 3vw, 2rem);
+      color: var(--ink);
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--clay);
+      text-decoration: none;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
-    .requirement dt {
+    .about-link-card:nth-child(2) {
+      box-shadow: 8px 8px 0 var(--sky);
+    }
+
+    .about-link-card:nth-child(3) {
+      box-shadow: 8px 8px 0 var(--sun);
+    }
+
+    .about-link-card h3 {
+      margin-bottom: .8rem;
+      color: var(--forest);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .about-link-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .about-link-card::after {
+      content: "↗";
+      align-self: flex-end;
+      margin-top: 1.5rem;
       color: var(--forest);
       font-family: 'Space Mono', monospace;
-      font-size: .71rem;
-      font-weight: 700;
-      letter-spacing: .09em;
-      line-height: 1.55;
-      text-transform: uppercase;
-    }
-
-    .requirement dd {
-      margin: 0;
-      color: var(--ink-soft);
-      line-height: 1.72;
-    }
-
-    .requirement a {
-      color: var(--leaf);
+      font-size: 1.2rem;
       font-weight: 700;
     }
 
-    .submission-note {
-      max-width: 860px;
-      margin: 1.8rem 0 0;
-      color: var(--ink-soft);
-      line-height: 1.75;
+    .about-link-card:hover,
+    .about-link-card:focus-visible {
+      transform: translate(-3px, -5px);
+      box-shadow: 12px 13px 0 var(--sun);
     }
 
-    .policy-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
-
-    .policy-card {
-      padding: 1.5rem;
-      background: rgba(154, 183, 91, .13);
-      border: 2px solid var(--forest);
-      box-shadow: 5px 5px 0 var(--sprout);
-    }
-
-    .policy-card:nth-child(2) {
-      background: rgba(116, 173, 179, .13);
-      box-shadow: 5px 5px 0 var(--sky);
-    }
-
-    .policy-card h4 {
-      margin-bottom: .55rem;
-      color: var(--forest);
-      font-size: 1.05rem;
-    }
-
-    .policy-card p {
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: .94rem;
-      line-height: 1.68;
-    }
-
-
+    /* Buttons */
 
     .btn,
     .newsletter-button {
@@ -602,6 +435,27 @@
       box-shadow: 2px 2px 0 var(--clay);
       transform: translate(2px, 2px);
     }
+
+    .btn.secondary {
+      color: var(--forest);
+      background: var(--paper-soft);
+      border: 2px solid var(--forest);
+      box-shadow: 4px 4px 0 var(--sky);
+    }
+
+    .btn.secondary::after {
+      content: "→";
+    }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      color: var(--forest);
+      background: var(--sun-soft);
+      border-color: var(--forest);
+      box-shadow: 2px 2px 0 var(--sky);
+    }
+
+    /* Footer */
 
     footer {
       margin: 0;
@@ -730,6 +584,8 @@
       outline-offset: 4px;
     }
 
+    /* Responsive */
+
     @media (max-width: 960px) {
       .site-header {
         min-height: 72px;
@@ -770,16 +626,8 @@
         display: none;
       }
 
-      .submit-hero-grid,
-      .panel-heading {
-        grid-template-columns: 1fr;
-      }
 
-      .status-card {
-        max-width: 580px;
-      }
-
-      .looking-for {
+      .about-links {
         grid-template-columns: 1fr;
       }
 
@@ -806,55 +654,24 @@
         height: 36px;
       }
 
-      .submit-hero {
+      .about-hero {
         padding-top: 4.5rem;
       }
 
-      .submit-title {
+      .about-title {
         width: 100%;
         max-width: 100%;
         font-size: clamp(3rem, 15vw, 4.4rem);
         overflow-wrap: anywhere;
       }
 
-      .submit-title em {
+      .editor-note-copy {
+        column-count: 1;
+        column-rule: 0;
+      }
+
+      .about-title em {
         white-space: normal;
-      }
-
-      .status-card {
-        transform: none;
-      }
-
-      .tablist {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-
-      .tab {
-        width: 100%;
-        border-right: 0;
-        border-bottom: 2px solid var(--ink);
-      }
-
-      .tab:last-child {
-        border-bottom: 0;
-      }
-
-      .tabpanel {
-        padding: 1.3rem;
-      }
-
-      .panel-note {
-        transform: none;
-      }
-
-      .requirement {
-        grid-template-columns: 1fr;
-        gap: .35rem;
-      }
-
-      .policy-grid {
-        grid-template-columns: 1fr;
       }
 
 
@@ -921,282 +738,80 @@
       <a href="issues.html">Issues</a>
       <a href="stories.html">Stories</a>
       <a href="art.html">Art</a>
-      <a href="about.html">About</a>
-      <a href="submit.html" aria-current="page">Submit</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="submit.html">Submit</a>
     </nav>
   </header>
 
   <main>
 
-    <section class="submit-hero">
-      <div class="submit-hero-grid wrap">
+    <section class="about-hero">
+      <div class="about-hero-inner wrap">
 
-        <div>
+        <h1 class="about-title">
+          About Burnline
+        </h1>
 
-          <h1 class="submit-title">
-            Submit to Burnline
-          </h1>
-
-          <p class="submit-lede">
-            We're looking for any short fiction or art that you'd categorize as "solarpunk." Themes, characters, and plot could range to just about anything, but we prefer settings where we're all living in a more sustainable world.
-          </p>
-        </div>
-
-        <aside
-          class="status-card"
-          aria-label="Current submission status"
-        >
-          <span class="label">
-            Submission status
-          </span>
-
-          <h2>Open</h2>
-
-          <p>
-            We are currently accepting short fiction and visual art for future digital issues of Burnline.
-          </p>
-        </aside>
 
       </div>
     </section>
 
-    <section
-      class="guidelines"
-    >
+    <section class="about-content" aria-labelledby="editor-note-title">
       <div class="wrap">
-
-        <div
-          class="tabs-shell"
-          id="guidelines-tabs"
-        >
-          <div
-            class="tablist"
-            role="tablist"
-            aria-label="Submission guideline categories"
-          >
-            <button
-              class="tab"
-              id="tab-fiction"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="panel-fiction"
-              tabindex="0"
-            >
-              Fiction guidelines
-            </button>
-
-            <button
-              class="tab"
-              id="tab-art"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="panel-art"
-              tabindex="-1"
-            >
-              Art guidelines
-            </button>
-          </div>
-
-          <section
-            id="panel-fiction"
-            class="tabpanel"
-            role="tabpanel"
-            aria-labelledby="tab-fiction"
-            tabindex="0"
-          >
-            <div class="panel-heading">
-
-              <div>
-                <h3>Fiction</h3>
-
-                <p>
-                  Please submit work you would specifically describe as solarpunk or closely aligned ecological speculation.
-                </p>
-              </div>
-
-              <aside class="panel-note">
-                <strong>Selected work</strong>
-                Accepted fiction may appear in a digital issue and in Burnline’s online Stories page, with full creator credit.
-              </aside>
-
-            </div>
-
-            <div
-              class="looking-for"
-              aria-label="What Burnline seeks in fiction"
-            >
-              <article class="looking-card">
-                <h4>Character before concept</h4>
-
-                <p>
-                  We love stories where characters really come through, and we prefer people-focused stories over setting-focus stories (even though we've emphasized setting so much on this page).
-                </p>
-              </article>
-
-              <article class="looking-card">
-                <h4>Futures that feel real</h4>
-
-                <p>
-                  We'd love to read about communities that feel real. A solarpunk future may be closer to utopia, but people are still people and will always have conflict.
-                </p>
-              </article>
-
-              <article class="looking-card">
-                <h4>Hope should feel earned</h4>
-
-                <p>
-                  The world can remain difficult. We are drawn to stories that still leave room for agency and change.
-                </p>
-              </article>
-            </div>
-
-            <dl class="requirements">
-
-              <div class="requirement">
-                <dt>Word limit</dt>
-                <dd>500–10,000 words.</dd>
-              </div>
-
-              <div class="requirement">
-                <dt>Pay rate</dt>
-
-                <dd>
-                  Because Burnline is currently a free magazine without advertising, we cannot offer payment at this time. Our goal is to eventually pay a competitive per-word rate, but we are not there yet. We understand if that makes submission a non-starter for you.
-                </dd>
-              </div>
-
-              <div class="requirement">
-                <dt>How to submit</dt>
-
-                <dd>
-                  Email your story as a <strong>.doc</strong>, <strong>.docx</strong>, or <strong>.pdf</strong> to
-                  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>.
-                  Include the word <strong>“Submission”</strong> in the subject line.
-                </dd>
-              </div>
-
-              <div class="requirement">
-                <dt>Credit</dt>
-
-                <dd>
-                  Selected writers will be fully credited in the magazine and on the site using the name, portfolio link, and profile or social handles they would like included.
-                </dd>
-              </div>
-
-            </dl>
-
-            <div class="policy-grid">
-
-              <article class="policy-card">
-                <h4>Human-created work only</h4>
-
-                <p>
-                  <strong>No AI-generated or AI-assisted work will be accepted.</strong> Burnline is interested in fiction created by people.
-                </p>
-              </article>
-
-              <article class="policy-card">
-                <h4>Simultaneous submissions are welcome</h4>
-
-                <p>
-                  Please submit elsewhere while you wait! Just let us know promptly if another publication accepts the story.
-                </p>
-              </article>
-
-            </div>
-          </section>
-
-          <section
-            id="panel-art"
-            class="tabpanel"
-            role="tabpanel"
-            aria-labelledby="tab-art"
-            tabindex="0"
-            hidden
-          >
-            <div class="panel-heading">
-
-              <div>
-                <h3>Visual art</h3>
-
-                <p>
-                  We are accepting solarpunk-themed visual art for digital publication. Digital, hand-drawn, painted, collage, and mixed-media work are welcome. Photography is not currently being considered.
-                </p>
-              </div>
-
-              <aside class="panel-note">
-                <strong>Selected work</strong>
-                Artwork may appear in a digital issue and in Burnline’s online Art gallery, with full creator credit.
-              </aside>
-
-            </div>
-
-            <dl class="requirements">
-
-              <div class="requirement">
-                <dt>Artwork specs</dt>
-
-                <dd>
-                  Cover art should be portrait-oriented at 8.5 × 11 inches (2550 × 3300 px) and 300 dpi. Please have a PNG or high-quality JPG available if selected. Interior artwork may use any dimensions.
-                </dd>
-              </div>
-
-              <div class="requirement">
-                <dt>Pay rate</dt>
-
-                <dd>
-                  Because Burnline is currently a free magazine without advertising, we cannot offer payment at this time. Our goal is to eventually pay a competitive rate, but we are not there yet. We understand if that makes submission a non-starter for you.
-                </dd>
-              </div>
-
-              <div class="requirement">
-                <dt>How to submit</dt>
-
-                <dd>
-                  Email
-                  <a href="mailto:contact@burnlinemag.com">contact@burnlinemag.com</a>
-                  with a link to the artwork wherever it is hosted, such as a portfolio or public post. Include the word <strong>“Submission”</strong> in the subject line.
-                </dd>
-              </div>
-
-              <div class="requirement">
-                <dt>Credit</dt>
-
-                <dd>
-                  Selected artists will be fully credited in the magazine and on the site using the name, portfolio link, and profile or social handles they would like included.
-                </dd>
-              </div>
-
-            </dl>
-
-            <div class="policy-grid">
-
-              <article class="policy-card">
-                <h4>Human-created work only</h4>
-
-                <p>
-                  <strong>No AI-generated or AI-assisted work will be accepted.</strong>
-                </p>
-              </article>
-
-              <article class="policy-card">
-                <h4>Send a link first</h4>
-
-                <p>
-                  Please do not attach large artwork files to the initial email. A portfolio or hosted-image link is enough for review.
-                </p>
-              </article>
-
-            </div>
-          </section>
-
-        </div>
-
-        <p class="submission-note">
-          Cover letters are not at all necessary because we don't want to create any unneeded barriers to entry for submission. Writing is hard, submitting should be easy. If part of your personal story meaningfully informs the work, we would be glad to hear about it. Otherwise, a brief hello and the essential submission information are plenty!
+        <p class="about-intro">
+          Burnline Magazine is an independent magazine for solarpunk fiction and art where the goal is to help creative people tell stories about an optimistic future. Because Burnline is in its (very) early days, we’re still workshopping exactly what we want this magazine to become. At the moment, it’s our hope to publish 6-12 pieces of short fiction with an accompanying piece of art in a digital issue each month. Will this magazine expand in scope? Will we ever have a print run? We don’t know yet! Let’s find out if this thing has any legs, first.
         </p>
+
+        <div class="editor-note">
+          <h2 id="editor-note-title">A note from the editor</h2>
+
+          <div class="editor-note-copy">
+            <p>
+              My interest in the solarpunk genre started in the same way I’d imagine it begins for many. I have long been a voracious consumer of all things sci-fi, but when the real world started resembling dystopic tales of resource extraction and bleak futures more and more, I started to burnout on the notion that we’re all just fucked. In search of a reprieve, I stumbled upon the solarpunk genre and fell in love with the brighter, more colorful, and more hopeful corner of the broader science fiction genre that I have always loved.
+            </p>
+
+            <p>
+              You know that feeling you get when you find something that you enjoy so much that you can’t stop thinking about it, until eventually you find yourself scouring the internet for cool phone wallpapers in the style you have in your head? That was the rush I felt during those early solarpunk-consuming days. The only issue was that I ran out of content pretty quickly. There are some excellent pieces of solarpunk media out there for those willing to dig, but there just aren’t that many that really stand out as grade A material. That’s why I made Burnline. I’m hoping this magazine can be a kicking off point for talented, creative people who think technology is cool and a sustainable, happy future is even cooler.
+            </p>
+
+            <p>
+              In the future, I’d love to see this subgenre get its own cyberpunk treatment; high budget media projects, blooming popularity, and widespread acknowledgement as a general cool thing. Until then, we’re just going to have to convince people that it’s deserving. Maybe Keanu Reeves will play a gardener in the next original CD Projekt Red IP. Who knows?
+            </p>
+
+            <p>
+              Thanks for checking out Burnline Magazine. I’d love to see what you’re working on, and I hope we can get some cool stuff published for you in return.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explore-about" aria-labelledby="explore-about-title">
+      <div class="wrap">
+        <h2 id="explore-about-title">Explore Burnline</h2>
+
+        <div class="about-links">
+          <a class="about-link-card" href="stories.html">
+            <div>
+              <h3>Stories</h3>
+              <p>Read editor-selected solarpunk short fiction from across Burnline Magazine.</p>
+            </div>
+          </a>
+
+          <a class="about-link-card" href="art.html">
+            <div>
+              <h3>Art</h3>
+              <p>Browse solarpunk artwork and issue covers from Burnline.</p>
+            </div>
+          </a>
+
+          <a class="about-link-card" href="submit.html">
+            <div>
+              <h3>Submit</h3>
+              <p>Send us your solarpunk fiction or artwork for consideration.</p>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -1310,109 +925,10 @@
         });
       }
 
-      const tabs = Array.from(
-        document.querySelectorAll('[role="tab"]')
-      );
-
-      const panels = Array.from(
-        document.querySelectorAll('[role="tabpanel"]')
-      );
-
-      function activateTab(tab, updateHash = true) {
-        tabs.forEach((item) => {
-          const selected = item === tab;
-
-          item.setAttribute(
-            'aria-selected',
-            String(selected)
-          );
-
-          item.setAttribute(
-            'tabindex',
-            selected ? '0' : '-1'
-          );
-        });
-
-        panels.forEach((panel) => {
-          panel.hidden =
-            panel.id !== tab.getAttribute('aria-controls');
-        });
-
-        if (updateHash) {
-          const hash =
-            tab.id === 'tab-art'
-              ? '#art'
-              : '#fiction';
-
-          if (history.replaceState) {
-            history.replaceState(null, '', hash);
-          } else {
-            window.location.hash = hash;
-          }
-        }
-      }
-
-      tabs.forEach((tab, index) => {
-        tab.addEventListener(
-          'click',
-          () => activateTab(tab)
-        );
-
-        tab.addEventListener('keydown', (event) => {
-          let nextIndex = null;
-
-          if (
-            event.key === 'ArrowRight' ||
-            event.key === 'ArrowDown'
-          ) {
-            nextIndex =
-              (index + 1) % tabs.length;
-          } else if (
-            event.key === 'ArrowLeft' ||
-            event.key === 'ArrowUp'
-          ) {
-            nextIndex =
-              (index - 1 + tabs.length) %
-              tabs.length;
-          } else if (event.key === 'Home') {
-            nextIndex = 0;
-          } else if (event.key === 'End') {
-            nextIndex = tabs.length - 1;
-          }
-
-          if (nextIndex !== null) {
-            event.preventDefault();
-
-            tabs[nextIndex].focus();
-            activateTab(tabs[nextIndex]);
-          }
-        });
-      });
-
-      function selectFromHash() {
-        const target =
-          window.location.hash.toLowerCase() === '#art'
-            ? document.getElementById('tab-art')
-            : document.getElementById('tab-fiction');
-
-        if (target) {
-          activateTab(target, false);
-        }
-      }
-
-      window.addEventListener(
-        'hashchange',
-        selectFromHash
-      );
-
-      selectFromHash();
-
-      const year =
-        document.getElementById('copyright-year');
+      const year = document.getElementById('copyright-year');
 
       if (year) {
-        year.textContent =
-          new Date().getFullYear();
+        year.textContent = new Date().getFullYear();
       }
     })();
   </script>
