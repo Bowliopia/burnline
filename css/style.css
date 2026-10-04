@@ -931,3 +931,23 @@ a:focus-visible {
 footer .footer-logo {
   filter: none !important;
 }
+
+
+/* Site-wide square corners for buttons and form controls */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.btn,
+.button,
+.newsletter-button,
+a[role="button"],
+.site-nav a:last-child,
+input,
+textarea,
+select,
+.newsletter-form,
+.newsletter-input,
+.footer-column form:not(.newsletter-form) .newsletter-input {
+  border-radius: 0 !important;
+}
