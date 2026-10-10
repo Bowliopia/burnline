@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
   
@@ -132,8 +132,8 @@ h3 {
   margin-top: 0;
   color: var(--forest);
   background: none;
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 700;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 900;
   letter-spacing: -0.025em;
   line-height: 1.08;
   -webkit-background-clip: initial;
@@ -174,8 +174,8 @@ h4 {
   margin: 0 0 1rem;
   color: var(--forest);
   background: none;
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 700;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 900;
   line-height: 1.15;
   -webkit-background-clip: initial;
   background-clip: initial;
@@ -411,9 +411,9 @@ a.gradient-blue-text:hover,
   gap: 1rem;
   margin: 0;
   color: var(--paper-soft);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: clamp(1.6rem, 2.5vw, 2.25rem);
-  font-weight: 700;
+  font-weight: 900;
   line-height: 1.05;
 }
 
@@ -488,9 +488,9 @@ a.gradient-blue-text:hover,
 }
 
 .logo-title span {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 1.55rem;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.02em;
 }
 
