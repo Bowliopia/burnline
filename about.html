@@ -107,7 +107,6 @@
       padding-inline: var(--page-pad);
     }
 
-
     .announcement {
       position: relative;
       z-index: 20;
@@ -235,13 +234,11 @@
       background: var(--ink);
     }
 
-    /* Hero */
-
     .about-hero {
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+      padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(2rem, 4vw, 3.5rem);
       color: var(--ink);
       background:
         radial-gradient(
@@ -276,7 +273,17 @@
       z-index: 0;
     }
 
-    .about-title::after {
+    .about-title-first {
+      color: var(--forest);
+    }
+
+    .about-title-second {
+      position: relative;
+      color: var(--clay);
+      z-index: 0;
+    }
+
+    .about-title-second::after {
       content: "";
       position: absolute;
       left: 2%;
@@ -289,16 +296,8 @@
       transform: rotate(-1.5deg);
     }
 
-
-
-
-
-
-
-    /* About content */
-
     .about-content {
-      padding: clamp(5rem, 9vw, 8rem) 0 clamp(2.5rem, 5vw, 4rem);
+      padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4rem);
       background: var(--paper);
     }
 
@@ -323,7 +322,7 @@
     .editor-note-copy {
       column-count: 2;
       column-gap: clamp(2.5rem, 6vw, 5rem);
-      column-rule: 1px solid var(--line);
+      column-rule: 0;
       color: var(--ink-soft);
       font-size: 1.04rem;
       line-height: 1.82;
@@ -411,8 +410,6 @@
       box-shadow: 12px 13px 0 var(--sun);
     }
 
-    /* Buttons */
-
     .btn,
     .newsletter-button {
       display: inline-flex;
@@ -474,8 +471,6 @@
       border-color: var(--forest);
       box-shadow: 2px 2px 0 var(--sky);
     }
-
-    /* Footer */
 
     footer {
       margin: 0;
@@ -604,8 +599,6 @@
       outline-offset: 4px;
     }
 
-    /* Responsive */
-
     @media (max-width: 960px) {
       .site-header {
         min-height: 72px;
@@ -645,7 +638,6 @@
       .site-nav a::after {
         display: none;
       }
-
 
       .about-links {
         grid-template-columns: 1fr;
@@ -697,7 +689,6 @@
       .about-title em {
         white-space: normal;
       }
-
 
       .footer-container {
         grid-template-columns: 1fr;
@@ -768,15 +759,12 @@
   </header>
 
   <main>
-
     <section class="about-hero">
       <div class="about-hero-inner wrap">
-
         <h1 class="about-title">
-          About Burnline
+          <span class="about-title-first">About</span>
+          <span class="about-title-second">Burnline</span>
         </h1>
-
-
       </div>
     </section>
 
@@ -842,12 +830,10 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
     <div class="footer-container">
-
       <div class="footer-column">
         <img
           src="Flame logo-1.png.png"
@@ -914,7 +900,6 @@
           </a>
         </p>
       </div>
-
     </div>
 
     <div class="footer-bottom">
