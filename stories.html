@@ -107,7 +107,6 @@
       padding-inline: var(--page-pad);
     }
 
-
     .announcement {
       position: relative;
       z-index: 20;
@@ -235,8 +234,6 @@
       background: var(--ink);
     }
 
-    /* Stories Hero */
-
     .stories-hero {
       position: relative;
       isolation: isolate;
@@ -308,8 +305,6 @@
       gap: .85rem;
     }
 
-    /* Buttons */
-
     .btn,
     .newsletter-button {
       display: inline-flex;
@@ -372,14 +367,11 @@
       content: "→";
     }
 
-    /* Story Library */
-
     .story-library {
       position: relative;
       padding: clamp(5rem, 9vw, 8.5rem) 0;
       background: var(--paper);
     }
-
 
     .story-grid {
       display: grid;
@@ -394,19 +386,19 @@
       text-decoration: none;
     }
 
-.story-card .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 0;
-  overflow: hidden;
-  background: var(--paper-soft);
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  box-shadow: 8px 8px 0 var(--clay);
-  transition: transform .28s ease, box-shadow .28s ease;
-}
+    .story-card .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0;
+      overflow: hidden;
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      box-shadow: 8px 8px 0 var(--clay);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
 
     .story-card:nth-of-type(2n) .card {
       box-shadow: 8px 8px 0 var(--sky);
@@ -534,8 +526,6 @@
       transform: scale(1.065);
     }
 
-    /* Load More */
-
     .load-more {
       grid-column: 1 / -1;
       display: flex;
@@ -552,8 +542,6 @@
     .is-hidden {
       display: none !important;
     }
-
-    /* Collection Note */
 
     .collection-note {
       max-width: 720px;
@@ -582,8 +570,6 @@
     .collection-note .btn.secondary::after {
       content: "→";
     }
-
-    /* Footer */
 
     footer {
       margin: 0;
@@ -711,8 +697,6 @@
       outline: 3px solid var(--sun);
       outline-offset: 4px;
     }
-
-    /* Responsive */
 
     @media (max-width: 980px) {
       .story-grid {
@@ -894,7 +878,6 @@
   <main>
     <section class="stories-hero" aria-labelledby="stories-title">
       <div class="stories-hero-inner wrap">
-
         <h1 class="stories-title" id="stories-title">
           Featured <em>Stories</em>
         </h1>
@@ -904,7 +887,6 @@
         </p>
 
         <div class="hero-actions">
-
           <a href="submit.html" class="btn secondary">
             Share your work
           </a>
@@ -917,7 +899,6 @@
       id="story-collection"
     >
       <div class="wrap">
-
         <div class="story-grid">
 
           <a
@@ -1151,7 +1132,6 @@
               </div>
             </article>
           </a>
-
         </div>
 
         <div class="collection-note">
@@ -1165,14 +1145,12 @@
             Visit the issue library
           </a>
         </div>
-
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-container">
-
       <div class="footer-column">
         <img
           src="Flame logo-1.png.png"
@@ -1180,35 +1158,80 @@
           class="footer-logo"
         >
 
-        <h3>Read more from a better future.</h3>
+        <h3>
+          Read more from a better future.
+        </h3>
 
         <p>
           Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.
         </p>
 
-        <form class="newsletter-form">
-          <label
-            class="sr-only"
-            for="newsletter-email"
-          >
-            Email address
-          </label>
+        <form
+          action="https://app.kit.com/forms/10031824/subscriptions"
+          class="seva-form formkit-form burnline-kit-form"
+          method="post"
+          data-sv-form="10031824"
+          data-uid="02c49745dc"
+          data-format="inline"
+          data-version="5"
+          data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Thanks for subscribing to Burnline Magazine! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}"
+        >
+          <ul
+            class="formkit-alert formkit-alert-error"
+            data-element="errors"
+            data-group="alert"
+          ></ul>
 
-          <input
-            id="newsletter-email"
-            type="email"
-            placeholder="Email address"
-            class="newsletter-input"
-            autocomplete="email"
-            required
-          >
+          <div class="burnline-form-shell">
+            <div
+              class="burnline-form-row formkit-fields"
+              data-element="fields"
+              data-stacked="false"
+            >
+              <div class="formkit-field burnline-form-field">
+                <label
+                  class="sr-only"
+                  for="newsletter-email"
+                >
+                  Email address
+                </label>
 
-          <button
-            type="submit"
-            class="newsletter-button"
+                <input
+                  id="newsletter-email"
+                  name="email_address"
+                  type="email"
+                  aria-label="Email address"
+                  placeholder="Email address"
+                  class="newsletter-input formkit-input"
+                  autocomplete="email"
+                  required
+                >
+              </div>
+
+              <button
+                type="submit"
+                class="newsletter-button formkit-submit"
+                data-element="submit"
+              >
+                <span>Subscribe</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="formkit-powered-by-convertkit-container burnline-kit-credit"
           >
-            Subscribe
-          </button>
+            <a
+              href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic"
+              class="formkit-powered-by-convertkit"
+              data-element="powered-by"
+              data-variant="dark"
+              target="_blank"
+              rel="nofollow noopener"
+            >
+              Built with Kit
+            </a>
+          </div>
         </form>
       </div>
 
@@ -1237,7 +1260,6 @@
           </a>
         </p>
       </div>
-
     </div>
 
     <div class="footer-bottom">
@@ -1246,6 +1268,8 @@
       Burnline Magazine — All rights reserved
     </div>
   </footer>
+
+  <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
 
   <script>
     (function () {
