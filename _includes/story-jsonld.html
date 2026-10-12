@@ -1,0 +1,28 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.story_headline | jsonify }},
+  "description": {{ page.story_schema_description | jsonify }},
+  "image": {{ page.story_image | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ page.story_author | jsonify }}
+  },
+  "editor": {
+    "@type": "Person",
+    "name": {{ page.story_editor | jsonify }}
+  },
+  "datePublished": {{ page.story_date_published | jsonify }},
+  "dateModified": {{ page.story_date_modified | jsonify }},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Burnline",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://burnlinemag.com/Flame%20logo-1.png.png"
+    }
+  },
+  "articleSection": "Fiction"
+}
+</script>
