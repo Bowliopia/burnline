@@ -7,3 +7,24 @@ plugins:
 
 redirect_from:
   json: false
+
+# Keep publication templates and old mock content in the repository without
+# publishing them to burnlinemag.com during the pre-Issue-01 phase.
+exclude:
+  - test.html
+  - test2.html
+  - "Placeholder Mag.pdf"
+  - "Placeholder Art.jpg"
+  - "Placeholder 1.png"
+  - "Placeholder 2.png"
+  - "Placeholder 3.png"
+  - "Placeholder 4.png"
+  - "Placeholder 5.png"
+  - "New Cover.png"
+  - stories/story-1.html
+  - stories/story-2.html
+  - stories/story-3.html
+  - stories/story-4.html
+  - stories/story-5.html
+  - stories/story-6.html
+  - stories/template.html
