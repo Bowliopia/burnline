@@ -25,7 +25,7 @@
 }
 
 .stories-hero-inner {
-  width: min(100%, 920px);
+  width: min(100%, var(--page-max));
 }
 
 .stories-title {
