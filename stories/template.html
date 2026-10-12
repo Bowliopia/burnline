@@ -255,34 +255,7 @@ story_date_modified: "[YYYY-MM-DD]"
               Get new issues, submission calls, and occasional recommendations in your inbox.
             </p>
 
-            <form
-              action="#"
-              method="post"
-              aria-label="Newsletter signup"
-            >
-              <label
-                class="sr-only"
-                for="story-newsletter-email"
-              >
-                Email address
-              </label>
-
-              <input
-                id="story-newsletter-email"
-                name="email"
-                type="email"
-                placeholder="Email address"
-                autocomplete="email"
-                required
-              >
-
-              <button
-                class="newsletter-button"
-                type="submit"
-              >
-                Subscribe
-              </button>
-            </form>
+            {% include story-kit-form.html %}
           </section>
 
         </aside>
