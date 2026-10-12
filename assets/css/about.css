@@ -101,6 +101,37 @@ margin: 0 0 1.4rem;
 break-before: column;
 }
 
+.editor-signoff {
+width: fit-content;
+      margin: clamp(1rem, 2vw, 1.5rem) 0 0 auto;
+      padding-top: .85rem;
+      border-top: 2px solid var(--sun-soft);
+      color: var(--ink);
+}
+
+.editor-signature,
+.editor-role {
+display: block;
+}
+
+.editor-signature {
+margin-bottom: .2rem;
+      color: var(--forest);
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.15;
+}
+
+.editor-role {
+color: var(--ink-soft);
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+}
+
 .explore-about {
 padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(5.5rem, 10vw, 8.5rem);
       background: var(--paper);
@@ -155,6 +186,10 @@ column-count: 1;
 
 .editor-column-break {
 break-before: auto;
+}
+
+.editor-signoff {
+margin-left: 0;
 }
 
 .about-title em {
