@@ -6,6 +6,10 @@
   <meta name="theme-color" content="{{ page.theme_color | default: '#f4efd9' }}" />
   <meta name="description" content="{{ page.description | escape }}" />
   <title>{{ page.title }}</title>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
   {% if page.story_jsonld %}
   {% include story-jsonld.html %}
   {% endif %}
