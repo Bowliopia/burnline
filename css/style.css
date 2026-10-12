@@ -1249,13 +1249,8 @@ footer {
   transition: transform 0.28s ease, box-shadow 0.28s ease;
 }
 
-.home .edge-card:nth-child(1) {
-  transform: rotate(-1deg);
-}
-
 .home .edge-card:nth-child(2) {
   box-shadow: 9px 9px 0 var(--sky);
-  transform: rotate(1.2deg);
 }
 
 .home .edge-card::before,
@@ -1276,11 +1271,6 @@ footer {
   );
 }
 
-.home .edge-card::after {
-  inset: 11px;
-  z-index: 1;
-  border: 1px dashed rgba(255, 250, 240, 0.68);
-}
 
 .home .edge-card img {
   width: 100%;
@@ -1340,7 +1330,7 @@ footer {
 @media (hover: hover) and (pointer: fine) {
   .home .edge-card:hover,
   .home .edge-card:focus-visible {
-    transform: translate(-3px, -5px) rotate(-0.3deg);
+    transform: translate(-3px, -5px);
     box-shadow: 13px 14px 0 var(--sun);
   }
 
