@@ -23,3 +23,95 @@ jobs:
         with:
           source: ./
           destination: ./_site
+
+      - name: Validate rendered output
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f _site/index.html
+          test -f _site/issues.html
+          test -f _site/stories.html
+          test -f _site/art.html
+          test -f _site/about.html
+          test -f _site/submit.html
+          test -f _site/stories/story-1.html
+          test -f _site/stories/story-6.html
+          test -f _site/assets/js/site.js
+          test -f _site/assets/css/story.css
+
+          grep -q 'class="site-header"' _site/index.html
+          grep -q 'app.kit.com/forms/10031824/subscriptions' _site/index.html
+          grep -q 'aria-current="page">Issues</a>' _site/issues.html
+          grep -q 'aria-current="page">Stories</a>' _site/stories/story-1.html
+          grep -q '/assets/css/story.css' _site/stories/story-1.html
+          grep -q 'data-story-number="01"' _site/stories/story-1.html
+          grep -q '"@type": "Article"' _site/stories/story-1.html
+
+          if grep -R -E '\{\{|\{%|%\}|\}\}'             _site/*.html _site/stories/*.html; then
+            echo "Unresolved Liquid syntax found in rendered HTML."
+            exit 1
+          fi
+
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import unquote, urlparse
+
+          site = Path("_site").resolve()
+          html_files = list(site.glob("*.html")) + list((site / "stories").glob("*.html"))
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  for key in ("href", "src"):
+                      value = attrs.get(key)
+                      if value:
+                          self.links.append((tag, key, value))
+
+          failures = []
+
+          for html_file in html_files:
+              parser = LinkParser()
+              parser.feed(html_file.read_text(encoding="utf-8"))
+
+              for tag, attr, value in parser.links:
+                  if value.startswith(("#", "mailto:", "tel:", "javascript:", "data:")):
+                      continue
+
+                  parsed = urlparse(value)
+                  if parsed.scheme or parsed.netloc:
+                      continue
+
+                  clean = unquote(parsed.path)
+                  if not clean:
+                      continue
+
+                  if clean.startswith("/"):
+                      target = site / clean.lstrip("/")
+                  else:
+                      target = html_file.parent / clean
+
+                  target = target.resolve()
+
+                  try:
+                      target.relative_to(site)
+                  except ValueError:
+                      failures.append((html_file, value, "escapes _site"))
+                      continue
+
+                  if not target.exists():
+                      failures.append((html_file, value, str(target.relative_to(site))))
+
+          if failures:
+              print("Broken local links/assets:")
+              for source, value, target in failures:
+                  print(f"- {source.relative_to(site)} -> {value} (expected {target})")
+              raise SystemExit(1)
+
+          print(f"Validated local links/assets across {len(html_files)} rendered HTML files.")
+          PY
