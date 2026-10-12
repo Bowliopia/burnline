@@ -370,6 +370,46 @@ width: 100%;
 color: rgba(255, 250, 240, .52);
 }
 
+.rail-newsletter .story-kit-form .formkit-fields {
+display: grid;
+      gap: .7rem;
+}
+
+.rail-newsletter .story-kit-form .formkit-field {
+min-width: 0;
+}
+
+.rail-newsletter .story-kit-form .formkit-alert {
+margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--sun-soft);
+      font-size: .82rem;
+      line-height: 1.45;
+}
+
+.rail-newsletter .story-kit-form .formkit-alert:empty {
+display: none;
+}
+
+.rail-newsletter .story-kit-credit {
+margin-top: .15rem;
+      text-align: center;
+}
+
+.rail-newsletter .story-kit-credit a {
+color: rgba(255, 250, 240, .58);
+      font-family: 'Space Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .04em;
+      text-decoration: none;
+}
+
+.rail-newsletter .story-kit-credit a:hover,
+    .rail-newsletter .story-kit-credit a:focus-visible {
+color: var(--sun-soft);
+}
+
 .rail-newsletter .newsletter-button {
 width: 100%;
       color: var(--ink);
