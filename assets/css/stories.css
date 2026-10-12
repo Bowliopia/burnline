@@ -250,8 +250,9 @@
 }
 
 .collection-note {
-  max-width: 720px;
-  margin: clamp(4rem, 8vw, 7rem) auto 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: clamp(1.8rem, 4vw, 2.6rem);
   background: var(--paper-soft);
   border: 2px solid var(--ink);
@@ -268,9 +269,13 @@
 }
 
 .collection-note p {
-  max-width: 590px;
-  margin-bottom: 1.5rem;
+  max-width: 760px;
+  margin-bottom: 0;
   color: var(--ink-soft);
+}
+
+.collection-note a {
+  font-weight: 700;
 }
 
 .collection-note .btn.secondary::after {
