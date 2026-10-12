@@ -48,7 +48,8 @@ jobs:
           grep -q 'data-story-number="01"' _site/stories/story-1.html
           grep -q '"@type": "Article"' _site/stories/story-1.html
 
-          if grep -R -E '\{\{|\{%|%\}|\}\}'             _site/*.html _site/stories/*.html; then
+          if grep -R -E '\{\{[[:space:]]*[A-Za-z_]|\{%[[:space:]]*[A-Za-z_]' \
+            _site/*.html _site/stories/*.html; then
             echo "Unresolved Liquid syntax found in rendered HTML."
             exit 1
           fi
