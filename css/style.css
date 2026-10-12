@@ -967,7 +967,7 @@ footer {
 
 .footer-bottom {
   width: min(100%, var(--page-max));
-  margin: 0 auto;
+  margin: 0;
   padding: 1.25rem var(--page-pad) 1.8rem;
   color: rgba(255, 250, 240, 0.48);
   background: transparent;
