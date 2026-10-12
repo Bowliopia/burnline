@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f4efd9" />
+  <meta name="theme-color" content="{{ page.theme_color | default: '#f4efd9' }}" />
   <meta name="description" content="{{ page.description | escape }}" />
   <title>{{ page.title }}</title>
+  {% if page.story_jsonld %}
+  {% include story-jsonld.html %}
+  {% endif %}
 
   <link rel="stylesheet" href="/css/style.css">
   {% if page.extra_css %}
