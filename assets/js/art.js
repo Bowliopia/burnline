@@ -13,6 +13,18 @@ let galleryItems = [];
 let currentIndex = 0;
 let lastFocusedElement = null;
 
+if (
+  !modal ||
+  !modalImage ||
+  !modalTitle ||
+  !modalArtist ||
+  !modalClose ||
+  !previousArt ||
+  !nextArt
+) {
+  return;
+}
+
 function getVisibleGalleryItems() {
   galleryItems = Array.from(
     document.querySelectorAll('.gallery-item:not(.is-hidden)')
