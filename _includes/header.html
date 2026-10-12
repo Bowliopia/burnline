@@ -1,0 +1,31 @@
+<div class="announcement">
+  Independent stories for brighter, stranger, more livable futures
+</div>
+
+<header class="site-header">
+  <a href="/" class="logo-title" aria-label="Burnline home">
+    <img src="/Flame logo-1.png.png" alt="" aria-hidden="true">
+    <span>BURNLINE</span>
+  </a>
+
+  <button
+    id="hamburger"
+    class="hamburger"
+    type="button"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="site-nav"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+    <a href="/issues.html"{% if page.nav_current == "issues" %} aria-current="page"{% endif %}>Issues</a>
+    <a href="/stories.html"{% if page.nav_current == "stories" %} aria-current="page"{% endif %}>Stories</a>
+    <a href="/art.html"{% if page.nav_current == "art" %} aria-current="page"{% endif %}>Art</a>
+    <a href="/about.html"{% if page.nav_current == "about" %} aria-current="page"{% endif %}>About</a>
+    <a href="/submit.html"{% if page.nav_current == "submit" %} aria-current="page"{% endif %}>Submit</a>
+  </nav>
+</header>
