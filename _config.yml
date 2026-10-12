@@ -4,6 +4,7 @@ baseurl: ""
 
 plugins:
   - jekyll-redirect-from
+  - jekyll-sitemap
 
 redirect_from:
   json: false
