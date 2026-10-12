@@ -346,9 +346,9 @@ a.gradient-blue-text:hover,
 }
 
 .logo-title span {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.55rem;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.045em;
   text-shadow: 1px 1px 0 var(--sun-soft);
 }
