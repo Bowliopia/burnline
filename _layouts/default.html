@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4efd9" />
+  <meta name="description" content="{{ page.description | escape }}" />
+  <title>{{ page.title }}</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+  {% include header.html %}
+
+  {{ content }}
+
+  {% include footer.html %}
+
+  <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+  <script src="/assets/js/site.js"></script>
+  {% if page.extra_script %}
+  <script src="{{ page.extra_script }}"></script>
+  {% endif %}
+</body>
+</html>
