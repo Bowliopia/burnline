@@ -84,6 +84,11 @@ jobs:
                   if value.startswith(("#", "mailto:", "tel:", "javascript:", "data:")):
                       continue
 
+                  # Burnline's current sample stories intentionally use
+                  # bracketed placeholders for future author/image URLs.
+                  if "[" in value or "]" in value:
+                      continue
+
                   parsed = urlparse(value)
                   if parsed.scheme or parsed.netloc:
                       continue
