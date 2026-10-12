@@ -328,7 +328,7 @@ a.gradient-blue-text:hover,
 
 .logo-title {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.72rem;
   color: var(--ink);
   text-decoration: none;
@@ -349,6 +349,7 @@ a.gradient-blue-text:hover,
   font-family: 'DM Sans', sans-serif;
   font-size: 1.55rem;
   font-weight: 900;
+  line-height: 1;
   letter-spacing: 0.045em;
   text-shadow: none;
 }
