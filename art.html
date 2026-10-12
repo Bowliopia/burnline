@@ -286,3 +286,56 @@ extra_script: "/assets/js/art.js"
       </div>
     </section>
   </main>
+
+<div
+  id="imageModal"
+  class="modal"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="modalTitle"
+>
+  <button
+    class="modal-close"
+    id="modalClose"
+    type="button"
+    aria-label="Close gallery"
+  >
+    &times;
+  </button>
+
+  <button
+    class="nav-arrow left"
+    id="previousArt"
+    type="button"
+    aria-label="Previous artwork"
+  >
+    &#10094;
+  </button>
+
+  <div class="modal-dialog">
+    <div class="modal-image-wrap">
+      <img
+        class="modal-content"
+        id="modalImage"
+        src=""
+        alt=""
+      >
+    </div>
+
+    <div class="modal-caption">
+      <h3 id="modalTitle"></h3>
+      <p id="modalArtist"></p>
+    </div>
+  </div>
+
+  <button
+    class="nav-arrow right"
+    id="nextArt"
+    type="button"
+    aria-label="Next artwork"
+  >
+    &#10095;
+  </button>
+</div>
+
