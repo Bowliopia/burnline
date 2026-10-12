@@ -1,52 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f4efd9" />
-  <meta
-    name="description"
-    content="Burnline is an independent magazine publishing solarpunk fiction and art about brighter, more livable futures."
-  />
-  <title>Burnline – Solarpunk Fiction &amp; Art</title>
+---
+layout: default
+title: "Burnline – Solarpunk Fiction & Art"
+description: "Burnline is an independent magazine publishing solarpunk fiction and art about brighter, more livable futures."
+body_class: home
+---
 
-  <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body class="home">
-  <div class="announcement">
-    Independent stories for brighter, stranger, more livable futures
-  </div>
-
-  <header class="site-header">
-    <a href="index.html" class="logo-title" aria-label="Burnline home">
-      <img src="Flame logo-1.png.png" alt="" aria-hidden="true">
-      <span>BURNLINE</span>
-    </a>
-
-    <button
-      id="hamburger"
-      class="hamburger"
-      type="button"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="site-nav"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-      <a href="issues.html">Issues</a>
-      <a href="stories.html">Stories</a>
-      <a href="art.html">Art</a>
-      <a href="about.html">About</a>
-      <a href="submit.html">Submit</a>
-    </nav>
-  </header>
-
-  <main>
+<main>
     <section class="hero">
       <div class="hero-inner wrap">
         <div class="issue-cover-wrap">
@@ -57,7 +16,7 @@
             rel="noopener"
           >
             <img
-              src="New Cover.png"
+              src="/New Cover.png"
               alt="Cover of the latest issue of Burnline"
             />
           </a>
@@ -112,7 +71,7 @@
               </a>
 
               <a
-                href="Placeholder Mag.pdf"
+                href="/Placeholder Mag.pdf"
                 download
                 class="btn secondary"
               >
@@ -165,11 +124,11 @@
         <div class="home-cards">
           <a
             class="edge-card"
-            href="issues.html"
+            href="/issues/"
             aria-label="Open the Issue Library"
           >
             <img
-              src="Placeholder Art.jpg"
+              src="/Placeholder Art.jpg"
               alt=""
               loading="lazy"
             >
@@ -187,11 +146,11 @@
 
           <a
             class="edge-card"
-            href="stories.html"
+            href="/stories/"
             aria-label="Open Featured Stories"
           >
             <img
-              src="Placeholder 4.png"
+              src="/Placeholder 4.png"
               alt=""
               loading="lazy"
             >
@@ -210,172 +169,3 @@
       </div>
     </section>
   </main>
-
-  <footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <img
-          src="Flame logo-1.png.png"
-          alt="Burnline Logo"
-          class="footer-logo"
-        >
-
-        <h3>
-          Read more from a better future.
-        </h3>
-
-        <p>
-          Get new issues and submission calls from Burnline. We won't blow up your inbox. We promise.
-        </p>
-
-        <form
-          action="https://app.kit.com/forms/10031824/subscriptions"
-          class="seva-form formkit-form burnline-kit-form"
-          method="post"
-          data-sv-form="10031824"
-          data-uid="02c49745dc"
-          data-format="inline"
-          data-version="5"
-          data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}"
-        >
-          <ul
-            class="formkit-alert formkit-alert-error"
-            data-element="errors"
-            data-group="alert"
-          ></ul>
-
-          <div class="burnline-form-shell">
-            <div
-              class="burnline-form-row formkit-fields"
-              data-element="fields"
-              data-stacked="false"
-            >
-              <div class="formkit-field burnline-form-field">
-                <label
-                  class="sr-only"
-                  for="newsletter-email"
-                >
-                  Email address
-                </label>
-
-                <input
-                  id="newsletter-email"
-                  name="email_address"
-                  type="email"
-                  aria-label="Email address"
-                  placeholder="Email address"
-                  class="newsletter-input formkit-input"
-                  autocomplete="email"
-                  required
-                >
-              </div>
-
-              <button
-                type="submit"
-                class="newsletter-button formkit-submit"
-                data-element="submit"
-              >
-                <span>Subscribe</span>
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="formkit-powered-by-convertkit-container burnline-kit-credit"
-          >
-            <a
-              href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic"
-              class="formkit-powered-by-convertkit"
-              data-element="powered-by"
-              data-variant="dark"
-              target="_blank"
-              rel="nofollow noopener"
-            >
-              Built with Kit
-            </a>
-          </div>
-        </form>
-      </div>
-
-      <div class="footer-column">
-        <h4>Get in touch</h4>
-
-        <p>
-          <a href="mailto:contact@burnlinemag.com">
-            contact@burnlinemag.com
-          </a>
-        </p>
-      </div>
-
-      <div class="footer-column">
-        <h4>Read</h4>
-
-        <p>
-          <a href="issues.html">
-            Issue Library
-          </a>
-        </p>
-
-        <p>
-          <a href="stories.html">
-            Featured Stories
-          </a>
-        </p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      &copy;
-      <span id="copyright-year">2026</span>
-      Burnline Magazine — All rights reserved
-    </div>
-  </footer>
-
-  <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-
-  <script>
-    (function () {
-      const hamburger = document.getElementById('hamburger');
-      const nav = document.getElementById('site-nav');
-
-      if (hamburger && nav) {
-        hamburger.addEventListener('click', () => {
-          const isActive = nav.classList.toggle('active');
-
-          hamburger.setAttribute(
-            'aria-expanded',
-            String(isActive)
-          );
-
-          hamburger.setAttribute(
-            'aria-label',
-            isActive ? 'Close menu' : 'Open menu'
-          );
-        });
-
-        nav.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => {
-            nav.classList.remove('active');
-
-            hamburger.setAttribute(
-              'aria-expanded',
-              'false'
-            );
-
-            hamburger.setAttribute(
-              'aria-label',
-              'Open menu'
-            );
-          });
-        });
-      }
-
-      const year = document.getElementById('copyright-year');
-
-      if (year) {
-        year.textContent = new Date().getFullYear();
-      }
-    })();
-  </script>
-</body>
-</html>
