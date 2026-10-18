@@ -321,7 +321,14 @@ a.gradient-blue-text:hover,
   min-height: 80px;
   padding: 0 max(var(--page-pad), calc((100vw - var(--page-max)) / 2 + var(--page-pad)));
   color: var(--ink);
-  background: rgba(246, 240, 219, 0.97);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 77, 61, 0.98) 0,
+      rgba(35, 77, 61, 0.98) clamp(250px, 28vw, 430px),
+      rgba(246, 240, 219, 0.97) clamp(420px, 46vw, 700px),
+      rgba(246, 240, 219, 0.97) 100%
+    );
   border-bottom: 2px solid var(--ink);
   box-shadow: 0 4px 0 rgba(207, 117, 88, 0.62);
 }
@@ -1950,6 +1957,17 @@ footer {
 @media (max-width: 650px) {
   .announcement {
     font-size: 0.63rem;
+  }
+
+  .site-header {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(35, 77, 61, 0.98) 0,
+        rgba(35, 77, 61, 0.98) 58%,
+        rgba(246, 240, 219, 0.97) 88%,
+        rgba(246, 240, 219, 0.97) 100%
+      );
   }
 
   .logo-title img {
