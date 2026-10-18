@@ -324,8 +324,8 @@ a.gradient-blue-text:hover,
   background:
     linear-gradient(
       90deg,
-      rgba(207, 117, 88, 0.98) 0,
-      rgba(207, 117, 88, 0.98) clamp(250px, 28vw, 430px),
+      rgba(154, 183, 91, 0.98) 0,
+      rgba(154, 183, 91, 0.98) clamp(250px, 28vw, 430px),
       rgba(246, 240, 219, 0.97) clamp(420px, 46vw, 700px),
       rgba(246, 240, 219, 0.97) 100%
     );
@@ -1963,8 +1963,8 @@ footer {
     background:
       linear-gradient(
         90deg,
-        rgba(207, 117, 88, 0.98) 0,
-        rgba(207, 117, 88, 0.98) 58%,
+        rgba(154, 183, 91, 0.98) 0,
+        rgba(154, 183, 91, 0.98) 58%,
         rgba(246, 240, 219, 0.97) 88%,
         rgba(246, 240, 219, 0.97) 100%
       );
