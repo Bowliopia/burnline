@@ -328,8 +328,7 @@ a.gradient-blue-text:hover,
 
 .logo-title {
   display: inline-flex;
-  align-items: flex-end;
-  gap: 0.28rem;
+  align-items: center;
   color: var(--ink);
   text-decoration: none;
 }
@@ -339,19 +338,11 @@ a.gradient-blue-text:hover,
 }
 
 .logo-title img {
-  width: 42px;
+  width: auto;
   height: 42px;
+  max-width: min(250px, 42vw);
   object-fit: contain;
   filter: none !important;
-}
-
-.logo-title span {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.55rem;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  text-shadow: none;
 }
 
 .site-nav {
@@ -1961,13 +1952,10 @@ footer {
     font-size: 0.63rem;
   }
 
-  .logo-title span {
-    font-size: 1.32rem;
-  }
-
   .logo-title img {
-    width: 36px;
+    width: auto;
     height: 36px;
+    max-width: min(220px, 58vw);
   }
 
   .button-row {
