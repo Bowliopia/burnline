@@ -1228,10 +1228,10 @@ footer {
 
 .home .home-cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.25rem, 3vw, 2.5rem);
-  width: min(100%, 900px);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 .home .edge-card {
@@ -1251,6 +1251,10 @@ footer {
 
 .home .edge-card:nth-child(2) {
   box-shadow: 9px 9px 0 var(--sky);
+}
+
+.home .edge-card:nth-child(3) {
+  box-shadow: 9px 9px 0 var(--sun);
 }
 
 .home .edge-card::before,
@@ -1923,7 +1927,7 @@ footer {
   }
 
   .home .home-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .issues .issue-entry {
