@@ -74,13 +74,35 @@ max-width: 860px;
 }
 
 .editor-note {
-padding-top: clamp(2rem, 4vw, 3rem);
-      border-top: 2px solid var(--ink);
+position: relative;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: clamp(1.8rem, 4vw, 2.6rem);
+      background: var(--paper-soft);
+      border: 2px solid var(--ink);
+      box-shadow:
+        8px 8px 0 var(--sun-soft),
+        11px 11px 0 var(--ink);
+}
+
+.editor-note::before {
+content: "";
+      position: absolute;
+      top: -11px;
+      right: 12%;
+      width: 72px;
+      height: 18px;
+      background: rgba(207, 117, 88, 0.82);
+      border-left: 1px solid rgba(23, 56, 45, 0.3);
+      border-right: 1px solid rgba(23, 56, 45, 0.3);
+      transform: rotate(2deg);
 }
 
 .editor-note h2 {
 margin-bottom: clamp(2rem, 4vw, 3rem);
       color: var(--forest);
+      font-size: clamp(2rem, 3.5vw, 3rem);
 }
 
 .editor-note-copy {
@@ -196,6 +218,7 @@ margin-left: 0;
 white-space: normal;
 }
 
+.editor-note,
 .about-note {
 padding: 1.4rem;
 }
